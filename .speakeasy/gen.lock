@@ -1,0 +1,195 @@
+lockVersion: 2.0.0
+id: 75aecebc-40e4-4ee7-93d2-571b70b46324
+management:
+  docChecksum: e79d06fd4001d7925a985c30bf16cab0
+  docVersion: v1
+  speakeasyVersion: 1.584.0
+  generationVersion: 2.660.0
+  releaseVersion: 0.1.2
+  configChecksum: d5eded91d42c10f2dd5d45a1e195ef24
+features:
+  python:
+    additionalDependencies: 1.0.0
+    core: 5.19.4
+    defaultEnabledRetries: 0.2.0
+    devContainers: 3.0.0
+    enumUnions: 0.1.0
+    envVarSecurityUsage: 0.3.2
+    flatRequests: 1.0.1
+    flattening: 3.1.1
+    globalSecurity: 3.0.3
+    globalSecurityCallbacks: 1.0.0
+    globalServerURLs: 3.1.1
+    groups: 3.0.0
+    methodArguments: 1.0.2
+    nameOverrides: 3.0.1
+    responseFormat: 1.0.1
+    retries: 3.0.2
+    sdkHooks: 1.1.0
+generatedFiles:
+  - .devcontainer/README.md
+  - .devcontainer/devcontainer.json
+  - .devcontainer/setup.sh
+  - .gitattributes
+  - .vscode/settings.json
+  - USAGE.md
+  - docs/models/cancelsubscriptionrequest.md
+  - docs/models/createproductfrequencyunit.md
+  - docs/models/createproductplan.md
+  - docs/models/createproductrequest.md
+  - docs/models/createproductresponse.md
+  - docs/models/frequencyunit.md
+  - docs/models/getplansrequest.md
+  - docs/models/getproductrequest.md
+  - docs/models/getsubscriptionrequest.md
+  - docs/models/listproductsresponse.md
+  - docs/models/listsubscriptionordersrequest.md
+  - docs/models/listsubscriptionsrequest.md
+  - docs/models/plan.md
+  - docs/models/postv1subscriptionssubscriptionidpauserequest.md
+  - docs/models/postv1subscriptionssubscriptionidunpauserequest.md
+  - docs/models/product.md
+  - docs/models/security.md
+  - docs/models/subscription.md
+  - docs/models/subscriptionorder.md
+  - docs/models/subscriptionorderstatus.md
+  - docs/models/subscriptionstatus.md
+  - docs/models/success.md
+  - docs/models/utils/retryconfig.md
+  - docs/sdks/bolt/README.md
+  - docs/sdks/orders/README.md
+  - docs/sdks/plans/README.md
+  - docs/sdks/products/README.md
+  - docs/sdks/subscriptions/README.md
+  - poetry.toml
+  - py.typed
+  - pylintrc
+  - pyproject.toml
+  - scripts/publish.sh
+  - src/bolt/__init__.py
+  - src/bolt/_hooks/__init__.py
+  - src/bolt/_hooks/sdkhooks.py
+  - src/bolt/_hooks/types.py
+  - src/bolt/_version.py
+  - src/bolt/basesdk.py
+  - src/bolt/errors/__init__.py
+  - src/bolt/errors/apierror.py
+  - src/bolt/errors/bolterror.py
+  - src/bolt/errors/no_response_error.py
+  - src/bolt/errors/responsevalidationerror.py
+  - src/bolt/httpclient.py
+  - src/bolt/models/__init__.py
+  - src/bolt/models/cancelsubscriptionop.py
+  - src/bolt/models/createproductop.py
+  - src/bolt/models/getplansop.py
+  - src/bolt/models/getproductop.py
+  - src/bolt/models/getsubscriptionop.py
+  - src/bolt/models/listproductsop.py
+  - src/bolt/models/listsubscriptionordersop.py
+  - src/bolt/models/listsubscriptionsop.py
+  - src/bolt/models/plan.py
+  - src/bolt/models/post_v1_subscriptions_subscriptionid_pauseop.py
+  - src/bolt/models/post_v1_subscriptions_subscriptionid_unpauseop.py
+  - src/bolt/models/product.py
+  - src/bolt/models/security.py
+  - src/bolt/models/subscription.py
+  - src/bolt/models/subscriptionorder.py
+  - src/bolt/models/success.py
+  - src/bolt/orders.py
+  - src/bolt/plans.py
+  - src/bolt/products.py
+  - src/bolt/py.typed
+  - src/bolt/sdk.py
+  - src/bolt/sdkconfiguration.py
+  - src/bolt/subscriptions.py
+  - src/bolt/types/__init__.py
+  - src/bolt/types/basemodel.py
+  - src/bolt/utils/__init__.py
+  - src/bolt/utils/annotations.py
+  - src/bolt/utils/datetimes.py
+  - src/bolt/utils/enums.py
+  - src/bolt/utils/eventstreaming.py
+  - src/bolt/utils/forms.py
+  - src/bolt/utils/headers.py
+  - src/bolt/utils/logger.py
+  - src/bolt/utils/metadata.py
+  - src/bolt/utils/queryparams.py
+  - src/bolt/utils/requestbodies.py
+  - src/bolt/utils/retries.py
+  - src/bolt/utils/security.py
+  - src/bolt/utils/serializers.py
+  - src/bolt/utils/unmarshal_json_response.py
+  - src/bolt/utils/url.py
+  - src/bolt/utils/values.py
+examples:
+  createProduct:
+    speakeasy-default-create-product:
+      requestBody:
+        application/json: {"name": "Bolt Subscription Product", "description": "This is a subscription product.", "brand": "Bolt", "sku": "BOLT-12345", "unit_price": 1999, "images": ["https://example.com/image1.jpg", "https://example.com/image2.jpg"], "plans": [{"sku": "BOLT-PLAN-12345", "name": "Monthly Subscription", "frequency": 1, "frequency_unit": "month"}]}
+      responses:
+        "200":
+          application/json: {"product": {"id": "sp_Tlj0Osm0N76T", "name": "Bolt Subscription Product", "description": "This is a subscription product.", "sku": "BOLT-12345", "created_at": "2023-10-01T12:00:00Z", "updated_at": "2023-10-01T12:00:00Z", "plans": [{"id": "spl_ba_PpkW16oIW", "name": "Monthly Subscription", "sku": "BOLT-12345", "created_at": "2023-10-01T12:00:00Z", "updated_at": "2023-10-01T12:00:00Z", "frequency": 1, "product_id": "sp_Tlj0Osm0N76T", "frequency_unit": "month", "checkout_link": "https://your_site.c.bolt.com/g?merchant_product_id=37&merchant_variant_id=67&publishable_key=BQ9PKQksUGtj.Q9LwVLfV3WF4.32122926f7b9651a416a5099dc92dc2b4c87c8b922c114229f83b345d65f1195"}], "images": ["https://example.com/image1.jpg", "https://example.com/image2.jpg"]}}
+  listProducts:
+    speakeasy-default-list-products:
+      responses:
+        "200":
+          application/json: {"products": [{"id": "sp_Tlj0Osm0N76T", "name": "Bolt Subscription Product", "description": "This is a subscription product.", "sku": "BOLT-12345", "created_at": "2023-10-01T12:00:00Z", "updated_at": "2023-10-01T12:00:00Z", "plans": [{"id": "spl_ba_PpkW16oIW", "name": "Monthly Subscription", "sku": "BOLT-12345", "created_at": "2023-10-01T12:00:00Z", "updated_at": "2023-10-01T12:00:00Z", "frequency": 1, "product_id": "sp_Tlj0Osm0N76T", "frequency_unit": "month", "checkout_link": "https://your_site.c.bolt.com/g?merchant_product_id=37&merchant_variant_id=67&publishable_key=BQ9PKQksUGtj.Q9LwVLfV3WF4.32122926f7b9651a416a5099dc92dc2b4c87c8b922c114229f83b345d65f1195"}], "images": ["https://example.com/image1.jpg", "https://example.com/image2.jpg"]}]}
+  getProduct:
+    speakeasy-default-get-product:
+      parameters:
+        path:
+          productId: "681031"
+      responses:
+        "200":
+          application/json: {"id": "sp_Tlj0Osm0N76T", "name": "Bolt Subscription Product", "description": "This is a subscription product.", "sku": "BOLT-12345", "created_at": "2023-10-01T12:00:00Z", "updated_at": "2023-10-01T12:00:00Z", "plans": [{"id": "spl_ba_PpkW16oIW", "name": "Monthly Subscription", "sku": "BOLT-12345", "created_at": "2023-10-01T12:00:00Z", "updated_at": "2023-10-01T12:00:00Z", "frequency": 1, "product_id": "sp_Tlj0Osm0N76T", "frequency_unit": "month", "checkout_link": "https://your_site.c.bolt.com/g?merchant_product_id=37&merchant_variant_id=67&publishable_key=BQ9PKQksUGtj.Q9LwVLfV3WF4.32122926f7b9651a416a5099dc92dc2b4c87c8b922c114229f83b345d65f1195"}], "images": ["https://example.com/image1.jpg", "https://example.com/image2.jpg"]}
+  getPlans:
+    speakeasy-default-get-plans:
+      parameters:
+        query:
+          merchant_product_id: "<id>"
+      responses:
+        "200":
+          application/json: [{"id": "spl_ba_PpkW16oIW", "name": "Monthly Subscription", "sku": "BOLT-12345", "created_at": "2023-10-01T12:00:00Z", "updated_at": "2023-10-01T12:00:00Z", "frequency": 1, "product_id": "sp_Tlj0Osm0N76T", "frequency_unit": "month", "checkout_link": "https://your_site.c.bolt.com/g?merchant_product_id=37&merchant_variant_id=67&publishable_key=BQ9PKQksUGtj.Q9LwVLfV3WF4.32122926f7b9651a416a5099dc92dc2b4c87c8b922c114229f83b345d65f1195"}]
+  post_/v1/subscriptions/{subscriptionId}/pause:
+    speakeasy-default-post-/v1-/subscriptions/{subscription-id}/pause:
+      parameters:
+        path:
+          subscriptionId: "921987"
+      responses:
+        "200":
+          application/json: {}
+  post_/v1/subscriptions/{subscriptionId}/unpause:
+    speakeasy-default-post-/v1-/subscriptions/{subscription-id}/unpause:
+      parameters:
+        path:
+          subscriptionId: 438513
+      responses:
+        "200":
+          application/json: {}
+  cancelSubscription:
+    speakeasy-default-cancel-subscription:
+      parameters:
+        path:
+          subscriptionId: 111224
+      responses:
+        "200":
+          application/json: {}
+  getSubscription:
+    speakeasy-default-get-subscription:
+      parameters:
+        path:
+          subscriptionId: 186713
+      responses:
+        "200":
+          application/json: {"id": "s_1234567890", "subscription_plan_id": "spl_ba_PpkW16oIW", "status": "active", "plan": {"id": "spl_ba_PpkW16oIW", "name": "Monthly Subscription", "sku": "BOLT-12345", "created_at": "2023-10-01T12:00:00Z", "updated_at": "2023-10-01T12:00:00Z", "frequency": 1, "product_id": "sp_Tlj0Osm0N76T", "frequency_unit": "month", "checkout_link": "https://your_site.c.bolt.com/g?merchant_product_id=37&merchant_variant_id=67&publishable_key=BQ9PKQksUGtj.Q9LwVLfV3WF4.32122926f7b9651a416a5099dc92dc2b4c87c8b922c114229f83b345d65f1195"}}
+  listSubscriptions:
+    speakeasy-default-list-subscriptions:
+      responses:
+        "200":
+          application/json: [{"id": "s_1234567890", "subscription_plan_id": "spl_ba_PpkW16oIW", "status": "active", "plan": {"id": "spl_ba_PpkW16oIW", "name": "Monthly Subscription", "sku": "BOLT-12345", "created_at": "2023-10-01T12:00:00Z", "updated_at": "2023-10-01T12:00:00Z", "frequency": 1, "product_id": "sp_Tlj0Osm0N76T", "frequency_unit": "month", "checkout_link": "https://your_site.c.bolt.com/g?merchant_product_id=37&merchant_variant_id=67&publishable_key=BQ9PKQksUGtj.Q9LwVLfV3WF4.32122926f7b9651a416a5099dc92dc2b4c87c8b922c114229f83b345d65f1195"}}]
+  listSubscriptionOrders:
+    speakeasy-default-list-subscription-orders:
+      responses:
+        "200":
+          application/json: [{"id": "so_Vni2CsDCpT0r", "subscription_id": "s_711BJEHgNnGB", "order_id": "sr_1BHyrSbeQiKwdyQ_49_bdw", "status": "active"}]
+examplesVersion: 1.0.2

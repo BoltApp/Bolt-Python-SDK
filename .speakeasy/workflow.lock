@@ -1,0 +1,39 @@
+speakeasyVersion: 1.584.0
+sources:
+    Subscriptions API:
+        sourceNamespace: subscriptions-api
+        sourceRevisionDigest: sha256:5145fe36b6527ae3dd93be65c95f7c2fb139b7d8a943bd61684f48433e3b2ae7
+        sourceBlobDigest: sha256:9420e0f78389d3ddfc1f9b9c1b10cb93828f9d50f80ba740ca1b973e95853e59
+        tags:
+            - latest
+            - v1
+targets:
+    bolt:
+        source: Subscriptions API
+        sourceNamespace: subscriptions-api
+        sourceRevisionDigest: sha256:5145fe36b6527ae3dd93be65c95f7c2fb139b7d8a943bd61684f48433e3b2ae7
+        sourceBlobDigest: sha256:9420e0f78389d3ddfc1f9b9c1b10cb93828f9d50f80ba740ca1b973e95853e59
+        codeSamplesNamespace: subscriptions-api-python-code-samples
+        codeSamplesRevisionDigest: sha256:db15874e3e145fb40413d65d24fa4fdd223d75e5954b12a5d0811b5a6af5f1e8
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        Subscriptions API:
+            inputs:
+                - location: /Users/ntapaswi/Bolt/Bolt-Python-SDK/subscriptions.spec.yml
+            overlays:
+                - location: .speakeasy/speakeasy-modifications-overlay.yaml
+            output: .speakeasy/out.openapi.yaml
+            registry:
+                location: registry.speakeasyapi.dev/bolt/boltpublicapi/subscriptions-api
+    targets:
+        bolt:
+            target: python
+            source: Subscriptions API
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/bolt/boltpublicapi/subscriptions-api-python-code-samples
+                labelOverride:
+                    fixedValue: Python (SDK)
+                blocking: false
