@@ -1,9 +1,9 @@
-speakeasyVersion: 1.584.0
+speakeasyVersion: 1.589.0
 sources:
     Subscriptions API:
         sourceNamespace: subscriptions-api
-        sourceRevisionDigest: sha256:5145fe36b6527ae3dd93be65c95f7c2fb139b7d8a943bd61684f48433e3b2ae7
-        sourceBlobDigest: sha256:9420e0f78389d3ddfc1f9b9c1b10cb93828f9d50f80ba740ca1b973e95853e59
+        sourceRevisionDigest: sha256:33e271622a4846fc722c3c2dfb1a4d0ba7f37e7ee61d6add9005db5963ebd357
+        sourceBlobDigest: sha256:861745d74c991d3891a809d547043d4820bf95c222bf3419baa4343f7e6adb1b
         tags:
             - latest
             - v1
@@ -11,10 +11,10 @@ targets:
     bolt:
         source: Subscriptions API
         sourceNamespace: subscriptions-api
-        sourceRevisionDigest: sha256:5145fe36b6527ae3dd93be65c95f7c2fb139b7d8a943bd61684f48433e3b2ae7
-        sourceBlobDigest: sha256:9420e0f78389d3ddfc1f9b9c1b10cb93828f9d50f80ba740ca1b973e95853e59
+        sourceRevisionDigest: sha256:33e271622a4846fc722c3c2dfb1a4d0ba7f37e7ee61d6add9005db5963ebd357
+        sourceBlobDigest: sha256:861745d74c991d3891a809d547043d4820bf95c222bf3419baa4343f7e6adb1b
         codeSamplesNamespace: subscriptions-api-python-code-samples
-        codeSamplesRevisionDigest: sha256:db15874e3e145fb40413d65d24fa4fdd223d75e5954b12a5d0811b5a6af5f1e8
+        codeSamplesRevisionDigest: sha256:ac6e1a55061937361b0b77a6fded4e57ae60e90ce8bfc37dbab58bceb814edce
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

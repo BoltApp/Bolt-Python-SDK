@@ -17,7 +17,12 @@ if TYPE_CHECKING:
         CreateProductResponse,
         CreateProductResponseTypedDict,
     )
-    from .getplansop import GetPlansRequest, GetPlansRequestTypedDict
+    from .getplansop import (
+        GetPlansRequest,
+        GetPlansRequestTypedDict,
+        GetPlansResponse,
+        GetPlansResponseTypedDict,
+    )
     from .getproductop import GetProductRequest, GetProductRequestTypedDict
     from .getsubscriptionop import (
         GetSubscriptionRequest,
@@ -27,10 +32,14 @@ if TYPE_CHECKING:
     from .listsubscriptionordersop import (
         ListSubscriptionOrdersRequest,
         ListSubscriptionOrdersRequestTypedDict,
+        ListSubscriptionOrdersResponse,
+        ListSubscriptionOrdersResponseTypedDict,
     )
     from .listsubscriptionsop import (
         ListSubscriptionsRequest,
         ListSubscriptionsRequestTypedDict,
+        ListSubscriptionsResponse,
+        ListSubscriptionsResponseTypedDict,
     )
     from .plan import FrequencyUnit, Plan, PlanTypedDict
     from .post_v1_subscriptions_subscriptionid_pauseop import (
@@ -45,6 +54,8 @@ if TYPE_CHECKING:
     from .security import Security, SecurityTypedDict
     from .subscription import Subscription, SubscriptionStatus, SubscriptionTypedDict
     from .subscriptionorder import (
+        OrderID,
+        OrderIDTypedDict,
         SubscriptionOrder,
         SubscriptionOrderStatus,
         SubscriptionOrderTypedDict,
@@ -64,6 +75,8 @@ __all__ = [
     "FrequencyUnit",
     "GetPlansRequest",
     "GetPlansRequestTypedDict",
+    "GetPlansResponse",
+    "GetPlansResponseTypedDict",
     "GetProductRequest",
     "GetProductRequestTypedDict",
     "GetSubscriptionRequest",
@@ -72,8 +85,14 @@ __all__ = [
     "ListProductsResponseTypedDict",
     "ListSubscriptionOrdersRequest",
     "ListSubscriptionOrdersRequestTypedDict",
+    "ListSubscriptionOrdersResponse",
+    "ListSubscriptionOrdersResponseTypedDict",
     "ListSubscriptionsRequest",
     "ListSubscriptionsRequestTypedDict",
+    "ListSubscriptionsResponse",
+    "ListSubscriptionsResponseTypedDict",
+    "OrderID",
+    "OrderIDTypedDict",
     "Plan",
     "PlanTypedDict",
     "PostV1SubscriptionsSubscriptionIDPauseRequest",
@@ -106,6 +125,8 @@ _dynamic_imports: dict[str, str] = {
     "CreateProductResponseTypedDict": ".createproductop",
     "GetPlansRequest": ".getplansop",
     "GetPlansRequestTypedDict": ".getplansop",
+    "GetPlansResponse": ".getplansop",
+    "GetPlansResponseTypedDict": ".getplansop",
     "GetProductRequest": ".getproductop",
     "GetProductRequestTypedDict": ".getproductop",
     "GetSubscriptionRequest": ".getsubscriptionop",
@@ -114,8 +135,12 @@ _dynamic_imports: dict[str, str] = {
     "ListProductsResponseTypedDict": ".listproductsop",
     "ListSubscriptionOrdersRequest": ".listsubscriptionordersop",
     "ListSubscriptionOrdersRequestTypedDict": ".listsubscriptionordersop",
+    "ListSubscriptionOrdersResponse": ".listsubscriptionordersop",
+    "ListSubscriptionOrdersResponseTypedDict": ".listsubscriptionordersop",
     "ListSubscriptionsRequest": ".listsubscriptionsop",
     "ListSubscriptionsRequestTypedDict": ".listsubscriptionsop",
+    "ListSubscriptionsResponse": ".listsubscriptionsop",
+    "ListSubscriptionsResponseTypedDict": ".listsubscriptionsop",
     "FrequencyUnit": ".plan",
     "Plan": ".plan",
     "PlanTypedDict": ".plan",
@@ -130,6 +155,8 @@ _dynamic_imports: dict[str, str] = {
     "Subscription": ".subscription",
     "SubscriptionStatus": ".subscription",
     "SubscriptionTypedDict": ".subscription",
+    "OrderID": ".subscriptionorder",
+    "OrderIDTypedDict": ".subscriptionorder",
     "SubscriptionOrder": ".subscriptionorder",
     "SubscriptionOrderStatus": ".subscriptionorder",
     "SubscriptionOrderTypedDict": ".subscriptionorder",

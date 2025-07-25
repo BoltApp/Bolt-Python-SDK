@@ -16,7 +16,7 @@ with Bolt(
             "sku": "BOLT-PLAN-12345",
             "name": "Monthly Subscription",
             "frequency": 1,
-            "frequency_unit": models.CreateProductFrequencyUnit.MONTH,
+            "frequency_unit": models.CreateProductFrequencyUnit.MONTH_LOWER,
         },
     ], images=[
         "https://example.com/image1.jpg",
@@ -49,7 +49,7 @@ async def main():
                 "sku": "BOLT-PLAN-12345",
                 "name": "Monthly Subscription",
                 "frequency": 1,
-                "frequency_unit": models.CreateProductFrequencyUnit.MONTH,
+                "frequency_unit": models.CreateProductFrequencyUnit.MONTH_LOWER,
             },
         ], images=[
             "https://example.com/image1.jpg",

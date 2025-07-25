@@ -41,7 +41,7 @@ with Bolt(
 
 ### Response
 
-**[List[models.Plan]](../../models/.md)**
+**[models.GetPlansResponse](../../models/getplansresponse.md)**
 
 ### Errors
 

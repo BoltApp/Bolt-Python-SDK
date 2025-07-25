@@ -60,7 +60,7 @@ The SDK can be installed with either *pip* or *poetry* package managers.
 *PIP* is the default package installer for Python, enabling easy installation and management of packages from PyPI via the command line.
 
 ```bash
-pip install git+https://github.com/BoltApp/Bolt-Python-SDK.git@dev
+pip install git+<UNSET>.git
 ```
 
 ### Poetry
@@ -68,7 +68,7 @@ pip install git+https://github.com/BoltApp/Bolt-Python-SDK.git@dev
 *Poetry* is a modern tool that simplifies dependency management and package publishing by using a single `pyproject.toml` file to handle project metadata and dependencies.
 
 ```bash
-poetry add git+https://github.com/BoltApp/Bolt-Python-SDK.git@dev
+poetry add git+<UNSET>.git
 ```
 
 ### Shell and script usage with `uv`
@@ -135,7 +135,7 @@ with Bolt(
             "sku": "BOLT-PLAN-12345",
             "name": "Monthly Subscription",
             "frequency": 1,
-            "frequency_unit": models.CreateProductFrequencyUnit.MONTH,
+            "frequency_unit": models.CreateProductFrequencyUnit.MONTH_LOWER,
         },
     ], images=[
         "https://example.com/image1.jpg",
@@ -168,7 +168,7 @@ async def main():
                 "sku": "BOLT-PLAN-12345",
                 "name": "Monthly Subscription",
                 "frequency": 1,
-                "frequency_unit": models.CreateProductFrequencyUnit.MONTH,
+                "frequency_unit": models.CreateProductFrequencyUnit.MONTH_LOWER,
             },
         ], images=[
             "https://example.com/image1.jpg",
@@ -211,7 +211,7 @@ with Bolt(
             "sku": "BOLT-PLAN-12345",
             "name": "Monthly Subscription",
             "frequency": 1,
-            "frequency_unit": models.CreateProductFrequencyUnit.MONTH,
+            "frequency_unit": models.CreateProductFrequencyUnit.MONTH_LOWER,
         },
     ], images=[
         "https://example.com/image1.jpg",
@@ -279,7 +279,7 @@ with Bolt(
             "sku": "BOLT-PLAN-12345",
             "name": "Monthly Subscription",
             "frequency": 1,
-            "frequency_unit": models.CreateProductFrequencyUnit.MONTH,
+            "frequency_unit": models.CreateProductFrequencyUnit.MONTH_LOWER,
         },
     ], images=[
         "https://example.com/image1.jpg",
@@ -311,7 +311,7 @@ with Bolt(
             "sku": "BOLT-PLAN-12345",
             "name": "Monthly Subscription",
             "frequency": 1,
-            "frequency_unit": models.CreateProductFrequencyUnit.MONTH,
+            "frequency_unit": models.CreateProductFrequencyUnit.MONTH_LOWER,
         },
     ], images=[
         "https://example.com/image1.jpg",
@@ -356,7 +356,7 @@ with Bolt(
                 "sku": "BOLT-PLAN-12345",
                 "name": "Monthly Subscription",
                 "frequency": 1,
-                "frequency_unit": models.CreateProductFrequencyUnit.MONTH,
+                "frequency_unit": models.CreateProductFrequencyUnit.MONTH_LOWER,
             },
         ], images=[
             "https://example.com/image1.jpg",
@@ -429,7 +429,7 @@ with Bolt(
             "sku": "BOLT-PLAN-12345",
             "name": "Monthly Subscription",
             "frequency": 1,
-            "frequency_unit": models.CreateProductFrequencyUnit.MONTH,
+            "frequency_unit": models.CreateProductFrequencyUnit.MONTH_LOWER,
         },
     ], images=[
         "https://example.com/image1.jpg",
@@ -461,7 +461,7 @@ with Bolt(
             "sku": "BOLT-PLAN-12345",
             "name": "Monthly Subscription",
             "frequency": 1,
-            "frequency_unit": models.CreateProductFrequencyUnit.MONTH,
+            "frequency_unit": models.CreateProductFrequencyUnit.MONTH_LOWER,
         },
     ], images=[
         "https://example.com/image1.jpg",

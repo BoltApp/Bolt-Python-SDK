@@ -28,7 +28,7 @@ with Bolt(
     ),
 ) as b_client:
 
-    res = b_client.subscriptions.pause(subscription_id="921987")
+    res = b_client.subscriptions.pause(subscription_id=921987)
 
     # Handle response
     print(res)
@@ -39,7 +39,7 @@ with Bolt(
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `subscription_id`                                                   | *str*                                                               | :heavy_check_mark:                                                  | ID of the subscription to pause.                                    |
+| `subscription_id`                                                   | *int*                                                               | :heavy_check_mark:                                                  | ID of the subscription to pause.                                    |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
@@ -211,7 +211,7 @@ with Bolt(
 
 ### Response
 
-**[List[models.Subscription]](../../models/.md)**
+**[models.ListSubscriptionsResponse](../../models/listsubscriptionsresponse.md)**
 
 ### Errors
 

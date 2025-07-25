@@ -93,10 +93,13 @@ paths:
                       frequency_unit:
                         type: string
                         enum:
+                          - day
                           - week
                           - month
+                          - Month
                           - year
-                        description: Unit of frequency (e.g., hour, week, month).
+                          - one_time
+                        description: Unit of frequency (e.g., day, week, month, Month, year, one_time).
                         example: "month"
       responses:
         '200':
@@ -156,7 +159,7 @@ paths:
         - in: path
           name: productId
           schema:
-            type: string
+            type: integer
           required: true
           description: ID of the product to retrieve.
       responses:
@@ -223,9 +226,14 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Plan'
+                type: object
+                properties:
+                  plans:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Plan'
+                required:
+                  - plans
         '401':
           description: Unauthorized - Invalid or missing publishable key.
       x-speakeasy-group: plans
@@ -241,7 +249,7 @@ paths:
         - in: path
           name: subscriptionId
           schema:
-            type: string
+            type: integer
           required: true
           description: ID of the subscription to pause.
       responses:
@@ -383,9 +391,14 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Subscription'
+                type: object
+                properties:
+                  subscriptions:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Subscription'
+                required:
+                  - subscriptions
         '401':
           description: Unauthorized - Invalid or missing API key.
         '404':
@@ -413,9 +426,14 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SubscriptionOrder'
+                type: object
+                properties:
+                  orders:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SubscriptionOrder'
+                required:
+                  - orders
         '401':
           description: Unauthorized - Invalid or missing API key.
         '404':
@@ -466,11 +484,14 @@ components:
           example: sp_Tlj0Osm0N76T
         frequency_unit:
           type: string
-          description: Unit of frequency (e.g., hour, week, month).
+          description: Unit of frequency (e.g., day, week, month, Month, year, one_time).
           enum:
+            - day
             - week
             - month
+            - Month
             - year
+            - one_time
           example: "month"
         checkout_link:
           type: string
@@ -566,9 +587,14 @@ components:
           description: ID of the subscription associated with the order.
           example: s_711BJEHgNnGB
         order_id:
-          type: string
-          description: ID of the order.
-          example: sr_1BHyrSbeQiKwdyQ_49_bdw
+          oneOf:
+            - type: string
+              description: ID of the order as a string.
+              example: sr_1BHyrSbeQiKwdyQ_49_bdw
+            - type: integer
+              description: ID of the order as an integer.
+              example: 123456789
+          description: ID of the order. Can be a string or integer.
         placement_time:
           type: string
           format: date-time
@@ -578,6 +604,7 @@ components:
             - scheduled
             - active
             - canceled
+            - done
           example: "active"
         created_at:
           type: string

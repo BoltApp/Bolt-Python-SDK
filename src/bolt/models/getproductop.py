@@ -8,13 +8,13 @@ from typing_extensions import Annotated, TypedDict
 
 
 class GetProductRequestTypedDict(TypedDict):
-    product_id: str
+    product_id: int
     r"""ID of the product to retrieve."""
 
 
 class GetProductRequest(BaseModel):
     product_id: Annotated[
-        str,
+        int,
         pydantic.Field(alias="productId"),
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]

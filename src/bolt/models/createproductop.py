@@ -9,11 +9,14 @@ from typing_extensions import NotRequired, TypedDict
 
 
 class CreateProductFrequencyUnit(str, Enum):
-    r"""Unit of frequency (e.g., hour, week, month)."""
+    r"""Unit of frequency (e.g., day, week, month, Month, year, one_time)."""
 
+    DAY = "day"
     WEEK = "week"
-    MONTH = "month"
+    MONTH_LOWER = "month"
+    MONTH_MIXED = "Month"
     YEAR = "year"
+    ONE_TIME = "one_time"
 
 
 class CreateProductPlanTypedDict(TypedDict):
@@ -24,7 +27,7 @@ class CreateProductPlanTypedDict(TypedDict):
     frequency: int
     r"""Frequency of the plan."""
     frequency_unit: CreateProductFrequencyUnit
-    r"""Unit of frequency (e.g., hour, week, month)."""
+    r"""Unit of frequency (e.g., day, week, month, Month, year, one_time)."""
 
 
 class CreateProductPlan(BaseModel):
@@ -38,7 +41,7 @@ class CreateProductPlan(BaseModel):
     r"""Frequency of the plan."""
 
     frequency_unit: CreateProductFrequencyUnit
-    r"""Unit of frequency (e.g., hour, week, month)."""
+    r"""Unit of frequency (e.g., day, week, month, Month, year, one_time)."""
 
 
 class CreateProductRequestTypedDict(TypedDict):

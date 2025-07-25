@@ -3,10 +3,10 @@
 import importlib.metadata
 
 __title__: str = "bolt"
-__version__: str = "0.1.2"
+__version__: str = "0.2.1"
 __openapi_doc_version__: str = "v1"
-__gen_version__: str = "2.660.0"
-__user_agent__: str = "speakeasy-sdk/python 0.1.2 2.660.0 v1 bolt"
+__gen_version__: str = "2.664.0"
+__user_agent__: str = "speakeasy-sdk/python 0.2.1 2.664.0 v1 bolt"
 
 try:
     if __package__ is not None:

@@ -8,13 +8,13 @@ from typing_extensions import Annotated, TypedDict
 
 
 class PostV1SubscriptionsSubscriptionIDPauseRequestTypedDict(TypedDict):
-    subscription_id: str
+    subscription_id: int
     r"""ID of the subscription to pause."""
 
 
 class PostV1SubscriptionsSubscriptionIDPauseRequest(BaseModel):
     subscription_id: Annotated[
-        str,
+        int,
         pydantic.Field(alias="subscriptionId"),
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]

@@ -8,3 +8,4 @@
 | `SCHEDULED` | scheduled   |
 | `ACTIVE`    | active      |
 | `CANCELED`  | canceled    |
+| `DONE`      | done        |

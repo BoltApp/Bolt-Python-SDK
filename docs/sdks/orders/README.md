@@ -40,7 +40,7 @@ with Bolt(
 
 ### Response
 
-**[List[models.SubscriptionOrder]](../../models/.md)**
+**[models.ListSubscriptionOrdersResponse](../../models/listsubscriptionordersresponse.md)**
 
 ### Errors
 

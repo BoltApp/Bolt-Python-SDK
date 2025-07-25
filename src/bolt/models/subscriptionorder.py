@@ -4,14 +4,23 @@ from __future__ import annotations
 from bolt.types import BaseModel
 from datetime import datetime
 from enum import Enum
-from typing import Optional
-from typing_extensions import NotRequired, TypedDict
+from typing import Optional, Union
+from typing_extensions import NotRequired, TypeAliasType, TypedDict
+
+
+OrderIDTypedDict = TypeAliasType("OrderIDTypedDict", Union[str, int])
+r"""ID of the order. Can be a string or integer."""
+
+
+OrderID = TypeAliasType("OrderID", Union[str, int])
+r"""ID of the order. Can be a string or integer."""
 
 
 class SubscriptionOrderStatus(str, Enum):
     SCHEDULED = "scheduled"
     ACTIVE = "active"
     CANCELED = "canceled"
+    DONE = "done"
 
 
 class SubscriptionOrderTypedDict(TypedDict):
@@ -19,8 +28,8 @@ class SubscriptionOrderTypedDict(TypedDict):
     r"""unique identifier for the subscription order."""
     subscription_id: NotRequired[str]
     r"""ID of the subscription associated with the order."""
-    order_id: NotRequired[str]
-    r"""ID of the order."""
+    order_id: NotRequired[OrderIDTypedDict]
+    r"""ID of the order. Can be a string or integer."""
     placement_time: NotRequired[datetime]
     status: NotRequired[SubscriptionOrderStatus]
     created_at: NotRequired[datetime]
@@ -34,8 +43,8 @@ class SubscriptionOrder(BaseModel):
     subscription_id: Optional[str] = None
     r"""ID of the subscription associated with the order."""
 
-    order_id: Optional[str] = None
-    r"""ID of the order."""
+    order_id: Optional[OrderID] = None
+    r"""ID of the order. Can be a string or integer."""
 
     placement_time: Optional[datetime] = None
 

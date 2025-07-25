@@ -6,14 +6,14 @@ from bolt._hooks import HookContext
 from bolt.types import OptionalNullable, UNSET
 from bolt.utils import get_security_from_env
 from bolt.utils.unmarshal_json_response import unmarshal_json_response
-from typing import List, Mapping, Optional
+from typing import Mapping, Optional
 
 
 class Subscriptions(BaseSDK):
     def pause(
         self,
         *,
-        subscription_id: str,
+        subscription_id: int,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -96,7 +96,7 @@ class Subscriptions(BaseSDK):
     async def pause_async(
         self,
         *,
-        subscription_id: str,
+        subscription_id: int,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -685,7 +685,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[models.Subscription]:
+    ) -> models.ListSubscriptionsResponse:
         r"""Get all subscriptions
 
         Retrieves a list of all subscriptions.
@@ -756,7 +756,7 @@ class Subscriptions(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(List[models.Subscription], http_res)
+            return unmarshal_json_response(models.ListSubscriptionsResponse, http_res)
         if utils.match_response(http_res, ["401", "404", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise errors.APIError("API error occurred", http_res, http_res_text)
@@ -777,7 +777,7 @@ class Subscriptions(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> List[models.Subscription]:
+    ) -> models.ListSubscriptionsResponse:
         r"""Get all subscriptions
 
         Retrieves a list of all subscriptions.
@@ -848,7 +848,7 @@ class Subscriptions(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/json"):
-            return unmarshal_json_response(List[models.Subscription], http_res)
+            return unmarshal_json_response(models.ListSubscriptionsResponse, http_res)
         if utils.match_response(http_res, ["401", "404", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.APIError("API error occurred", http_res, http_res_text)

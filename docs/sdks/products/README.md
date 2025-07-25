@@ -31,7 +31,7 @@ with Bolt(
             "sku": "BOLT-PLAN-12345",
             "name": "Monthly Subscription",
             "frequency": 1,
-            "frequency_unit": models.CreateProductFrequencyUnit.MONTH,
+            "frequency_unit": models.CreateProductFrequencyUnit.MONTH_LOWER,
         },
     ], images=[
         "https://example.com/image1.jpg",
@@ -125,7 +125,7 @@ with Bolt(
     ),
 ) as b_client:
 
-    res = b_client.products.get(product_id="681031")
+    res = b_client.products.get(product_id=681031)
 
     # Handle response
     print(res)
@@ -136,7 +136,7 @@ with Bolt(
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `product_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | ID of the product to retrieve.                                      |
+| `product_id`                                                        | *int*                                                               | :heavy_check_mark:                                                  | ID of the product to retrieve.                                      |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
