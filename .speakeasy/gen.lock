@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
-id: 75aecebc-40e4-4ee7-93d2-571b70b46324
+id: 59dcfa56-8330-4162-8246-092811fc63e8
 management:
-  docChecksum: 2e670939de7c53d757b682ab351f0b61
+  docChecksum: 5acdae0a70614cfd93654b83a2258a10
   docVersion: v1
   speakeasyVersion: 1.589.0
   generationVersion: 2.664.0
-  releaseVersion: 0.2.1
-  configChecksum: 20e7f693414768ffb098333bfe661c0d
+  releaseVersion: 0.1.0
+  configChecksum: bf6a7c2dcadbf8a8cfe0964496227b99
 features:
   python:
     additionalDependencies: 1.0.0
@@ -62,70 +62,70 @@ generatedFiles:
   - docs/models/success.md
   - docs/models/utils/retryconfig.md
   - docs/sdks/bolt/README.md
-  - docs/sdks/orders/README.md
   - docs/sdks/plans/README.md
   - docs/sdks/products/README.md
+  - docs/sdks/subscriptionorders/README.md
   - docs/sdks/subscriptions/README.md
   - poetry.toml
   - py.typed
   - pylintrc
   - pyproject.toml
   - scripts/publish.sh
-  - src/bolt/__init__.py
-  - src/bolt/_hooks/__init__.py
-  - src/bolt/_hooks/sdkhooks.py
-  - src/bolt/_hooks/types.py
-  - src/bolt/_version.py
-  - src/bolt/basesdk.py
-  - src/bolt/errors/__init__.py
-  - src/bolt/errors/apierror.py
-  - src/bolt/errors/bolterror.py
-  - src/bolt/errors/no_response_error.py
-  - src/bolt/errors/responsevalidationerror.py
-  - src/bolt/httpclient.py
-  - src/bolt/models/__init__.py
-  - src/bolt/models/cancelsubscriptionop.py
-  - src/bolt/models/createproductop.py
-  - src/bolt/models/getplansop.py
-  - src/bolt/models/getproductop.py
-  - src/bolt/models/getsubscriptionop.py
-  - src/bolt/models/listproductsop.py
-  - src/bolt/models/listsubscriptionordersop.py
-  - src/bolt/models/listsubscriptionsop.py
-  - src/bolt/models/plan.py
-  - src/bolt/models/post_v1_subscriptions_subscriptionid_pauseop.py
-  - src/bolt/models/post_v1_subscriptions_subscriptionid_unpauseop.py
-  - src/bolt/models/product.py
-  - src/bolt/models/security.py
-  - src/bolt/models/subscription.py
-  - src/bolt/models/subscriptionorder.py
-  - src/bolt/models/success.py
-  - src/bolt/orders.py
-  - src/bolt/plans.py
-  - src/bolt/products.py
-  - src/bolt/py.typed
-  - src/bolt/sdk.py
-  - src/bolt/sdkconfiguration.py
-  - src/bolt/subscriptions.py
-  - src/bolt/types/__init__.py
-  - src/bolt/types/basemodel.py
-  - src/bolt/utils/__init__.py
-  - src/bolt/utils/annotations.py
-  - src/bolt/utils/datetimes.py
-  - src/bolt/utils/enums.py
-  - src/bolt/utils/eventstreaming.py
-  - src/bolt/utils/forms.py
-  - src/bolt/utils/headers.py
-  - src/bolt/utils/logger.py
-  - src/bolt/utils/metadata.py
-  - src/bolt/utils/queryparams.py
-  - src/bolt/utils/requestbodies.py
-  - src/bolt/utils/retries.py
-  - src/bolt/utils/security.py
-  - src/bolt/utils/serializers.py
-  - src/bolt/utils/unmarshal_json_response.py
-  - src/bolt/utils/url.py
-  - src/bolt/utils/values.py
+  - src/bolt_api_sdk/__init__.py
+  - src/bolt_api_sdk/_hooks/__init__.py
+  - src/bolt_api_sdk/_hooks/sdkhooks.py
+  - src/bolt_api_sdk/_hooks/types.py
+  - src/bolt_api_sdk/_version.py
+  - src/bolt_api_sdk/basesdk.py
+  - src/bolt_api_sdk/errors/__init__.py
+  - src/bolt_api_sdk/errors/apierror.py
+  - src/bolt_api_sdk/errors/bolterror.py
+  - src/bolt_api_sdk/errors/no_response_error.py
+  - src/bolt_api_sdk/errors/responsevalidationerror.py
+  - src/bolt_api_sdk/httpclient.py
+  - src/bolt_api_sdk/models/__init__.py
+  - src/bolt_api_sdk/models/cancelsubscriptionop.py
+  - src/bolt_api_sdk/models/createproductop.py
+  - src/bolt_api_sdk/models/getplansop.py
+  - src/bolt_api_sdk/models/getproductop.py
+  - src/bolt_api_sdk/models/getsubscriptionop.py
+  - src/bolt_api_sdk/models/listproductsop.py
+  - src/bolt_api_sdk/models/listsubscriptionordersop.py
+  - src/bolt_api_sdk/models/listsubscriptionsop.py
+  - src/bolt_api_sdk/models/plan.py
+  - src/bolt_api_sdk/models/post_v1_subscriptions_subscriptionid_pauseop.py
+  - src/bolt_api_sdk/models/post_v1_subscriptions_subscriptionid_unpauseop.py
+  - src/bolt_api_sdk/models/product.py
+  - src/bolt_api_sdk/models/security.py
+  - src/bolt_api_sdk/models/subscription.py
+  - src/bolt_api_sdk/models/subscriptionorder.py
+  - src/bolt_api_sdk/models/success.py
+  - src/bolt_api_sdk/plans.py
+  - src/bolt_api_sdk/products.py
+  - src/bolt_api_sdk/py.typed
+  - src/bolt_api_sdk/sdk.py
+  - src/bolt_api_sdk/sdkconfiguration.py
+  - src/bolt_api_sdk/subscriptionorders.py
+  - src/bolt_api_sdk/subscriptions.py
+  - src/bolt_api_sdk/types/__init__.py
+  - src/bolt_api_sdk/types/basemodel.py
+  - src/bolt_api_sdk/utils/__init__.py
+  - src/bolt_api_sdk/utils/annotations.py
+  - src/bolt_api_sdk/utils/datetimes.py
+  - src/bolt_api_sdk/utils/enums.py
+  - src/bolt_api_sdk/utils/eventstreaming.py
+  - src/bolt_api_sdk/utils/forms.py
+  - src/bolt_api_sdk/utils/headers.py
+  - src/bolt_api_sdk/utils/logger.py
+  - src/bolt_api_sdk/utils/metadata.py
+  - src/bolt_api_sdk/utils/queryparams.py
+  - src/bolt_api_sdk/utils/requestbodies.py
+  - src/bolt_api_sdk/utils/retries.py
+  - src/bolt_api_sdk/utils/security.py
+  - src/bolt_api_sdk/utils/serializers.py
+  - src/bolt_api_sdk/utils/unmarshal_json_response.py
+  - src/bolt_api_sdk/utils/url.py
+  - src/bolt_api_sdk/utils/values.py
 examples:
   createProduct:
     speakeasy-default-create-product:

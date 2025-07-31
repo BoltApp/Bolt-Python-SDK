@@ -16,7 +16,7 @@ Creates a new product with associated plans.
 ### Example Usage
 
 ```python
-from bolt import Bolt, models
+from bolt_api_sdk import Bolt, models
 import os
 
 
@@ -24,9 +24,9 @@ with Bolt(
     security=models.Security(
         x_api_key=os.getenv("BOLT_X_API_KEY", ""),
     ),
-) as b_client:
+) as bolt:
 
-    res = b_client.products.create(name="Bolt Subscription Product", description="This is a subscription product.", brand="Bolt", sku="BOLT-12345", unit_price=1999, plans=[
+    res = bolt.products.create(name="Bolt Subscription Product", description="This is a subscription product.", brand="Bolt", sku="BOLT-12345", unit_price=1999, plans=[
         {
             "sku": "BOLT-PLAN-12345",
             "name": "Monthly Subscription",
@@ -75,7 +75,7 @@ Retrieves a list of all products.
 ### Example Usage
 
 ```python
-from bolt import Bolt, models
+from bolt_api_sdk import Bolt, models
 import os
 
 
@@ -83,9 +83,9 @@ with Bolt(
     security=models.Security(
         x_api_key=os.getenv("BOLT_X_API_KEY", ""),
     ),
-) as b_client:
+) as bolt:
 
-    res = b_client.products.list()
+    res = bolt.products.list()
 
     # Handle response
     print(res)
@@ -115,7 +115,7 @@ Retrieves a product by its ID.
 ### Example Usage
 
 ```python
-from bolt import Bolt, models
+from bolt_api_sdk import Bolt, models
 import os
 
 
@@ -123,9 +123,9 @@ with Bolt(
     security=models.Security(
         x_api_key=os.getenv("BOLT_X_API_KEY", ""),
     ),
-) as b_client:
+) as bolt:
 
-    res = b_client.products.get(product_id=681031)
+    res = bolt.products.get(product_id=681031)
 
     # Handle response
     print(res)

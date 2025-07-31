@@ -1,7 +1,7 @@
 <!-- Start SDK Example Usage [usage] -->
 ```python
 # Synchronous Example
-from bolt import Bolt, models
+from bolt_api_sdk import Bolt, models
 import os
 
 
@@ -9,9 +9,9 @@ with Bolt(
     security=models.Security(
         x_api_key=os.getenv("BOLT_X_API_KEY", ""),
     ),
-) as b_client:
+) as bolt:
 
-    res = b_client.products.create(name="Bolt Subscription Product", description="This is a subscription product.", brand="Bolt", sku="BOLT-12345", unit_price=1999, plans=[
+    res = bolt.products.create(name="Bolt Subscription Product", description="This is a subscription product.", brand="Bolt", sku="BOLT-12345", unit_price=1999, plans=[
         {
             "sku": "BOLT-PLAN-12345",
             "name": "Monthly Subscription",
@@ -33,7 +33,7 @@ The same SDK client can also be used to make asychronous requests by importing a
 ```python
 # Asynchronous Example
 import asyncio
-from bolt import Bolt, models
+from bolt_api_sdk import Bolt, models
 import os
 
 async def main():
@@ -42,9 +42,9 @@ async def main():
         security=models.Security(
             x_api_key=os.getenv("BOLT_X_API_KEY", ""),
         ),
-    ) as b_client:
+    ) as bolt:
 
-        res = await b_client.products.create_async(name="Bolt Subscription Product", description="This is a subscription product.", brand="Bolt", sku="BOLT-12345", unit_price=1999, plans=[
+        res = await bolt.products.create_async(name="Bolt Subscription Product", description="This is a subscription product.", brand="Bolt", sku="BOLT-12345", unit_price=1999, plans=[
             {
                 "sku": "BOLT-PLAN-12345",
                 "name": "Monthly Subscription",

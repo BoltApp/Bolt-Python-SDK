@@ -1,15 +1,15 @@
-# Plans
-(*plans*)
+# SubscriptionOrders
+(*subscription_orders*)
 
 ## Overview
 
 ### Available Operations
 
-* [list](#list) - Get all subscription plans available for a product
+* [list](#list) - Get all subscription orders
 
 ## list
 
-Retrieves a list of plans
+Retrieves a list of all subscription orders.
 
 ### Example Usage
 
@@ -24,7 +24,7 @@ with Bolt(
     ),
 ) as bolt:
 
-    res = bolt.plans.list(merchant_product_id="<id>")
+    res = bolt.subscription_orders.list()
 
     # Handle response
     print(res)
@@ -35,13 +35,12 @@ with Bolt(
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `merchant_product_id`                                               | *str*                                                               | :heavy_check_mark:                                                  | ID of the product to retrieve plans for.                            |
-| `merchant_variant_id`                                               | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | ID of the product variant to retrieve plans for.                    |
+| `subscription_ids`                                                  | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | Comma-separated list of subscription IDs to filter orders.          |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
 
-**[models.GetPlansResponse](../../models/getplansresponse.md)**
+**[models.ListSubscriptionOrdersResponse](../../models/listsubscriptionordersresponse.md)**
 
 ### Errors
 

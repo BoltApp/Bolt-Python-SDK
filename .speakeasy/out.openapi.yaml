@@ -438,7 +438,7 @@ paths:
           description: Unauthorized - Invalid or missing API key.
         '404':
           description: Orders not found.
-      x-speakeasy-group: orders
+      x-speakeasy-group: subscriptionOrders
       x-speakeasy-name-override: list
 components:
   securitySchemes:

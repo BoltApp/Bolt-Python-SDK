@@ -1,9 +1,9 @@
-# bolt
+# bolt-api-sdk
 
-Developer-friendly & type-safe Python SDK specifically catered to leverage *bolt* API.
+Developer-friendly & type-safe Python SDK specifically catered to leverage *bolt-api-sdk* API.
 
 <div align="left">
-    <a href="https://www.speakeasy.com/?utm_source=bolt&utm_campaign=python"><img src="https://custom-icon-badges.demolab.com/badge/-Built%20By%20Speakeasy-212015?style=for-the-badge&logoColor=FBE331&logo=speakeasy&labelColor=545454" /></a>
+    <a href="https://www.speakeasy.com/?utm_source=bolt-api-sdk&utm_campaign=python"><img src="https://custom-icon-badges.demolab.com/badge/-Built%20By%20Speakeasy-212015?style=for-the-badge&logoColor=FBE331&logo=speakeasy&labelColor=545454" /></a>
     <a href="https://opensource.org/licenses/MIT">
         <img src="https://img.shields.io/badge/License-MIT-blue.svg" style="width: 100px; height: 28px;" />
     </a>
@@ -23,7 +23,7 @@ Subscriptions API: API for managing subscriptions and products.
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
-* [bolt](#bolt)
+* [bolt-api-sdk](#bolt-api-sdk)
   * [SDK Installation](#sdk-installation)
   * [IDE Support](#ide-support)
   * [SDK Example Usage](#sdk-example-usage)
@@ -76,7 +76,7 @@ poetry add git+<UNSET>.git
 You can use this SDK in a Python shell with [uv](https://docs.astral.sh/uv/) and the `uvx` command that comes with it like so:
 
 ```shell
-uvx --from bolt python
+uvx --from bolt-api-sdk python
 ```
 
 It's also possible to write a standalone Python script without needing to set up a whole project like so:
@@ -86,11 +86,11 @@ It's also possible to write a standalone Python script without needing to set up
 # /// script
 # requires-python = ">=3.9"
 # dependencies = [
-#     "bolt",
+#     "bolt-api-sdk",
 # ]
 # ///
 
-from bolt import Bolt
+from bolt_api_sdk import Bolt
 
 sdk = Bolt(
   # SDK arguments
@@ -120,7 +120,7 @@ Generally, the SDK will work well with most IDEs out of the box. However, when u
 
 ```python
 # Synchronous Example
-from bolt import Bolt, models
+from bolt_api_sdk import Bolt, models
 import os
 
 
@@ -128,9 +128,9 @@ with Bolt(
     security=models.Security(
         x_api_key=os.getenv("BOLT_X_API_KEY", ""),
     ),
-) as b_client:
+) as bolt:
 
-    res = b_client.products.create(name="Bolt Subscription Product", description="This is a subscription product.", brand="Bolt", sku="BOLT-12345", unit_price=1999, plans=[
+    res = bolt.products.create(name="Bolt Subscription Product", description="This is a subscription product.", brand="Bolt", sku="BOLT-12345", unit_price=1999, plans=[
         {
             "sku": "BOLT-PLAN-12345",
             "name": "Monthly Subscription",
@@ -152,7 +152,7 @@ The same SDK client can also be used to make asychronous requests by importing a
 ```python
 # Asynchronous Example
 import asyncio
-from bolt import Bolt, models
+from bolt_api_sdk import Bolt, models
 import os
 
 async def main():
@@ -161,9 +161,9 @@ async def main():
         security=models.Security(
             x_api_key=os.getenv("BOLT_X_API_KEY", ""),
         ),
-    ) as b_client:
+    ) as bolt:
 
-        res = await b_client.products.create_async(name="Bolt Subscription Product", description="This is a subscription product.", brand="Bolt", sku="BOLT-12345", unit_price=1999, plans=[
+        res = await bolt.products.create_async(name="Bolt Subscription Product", description="This is a subscription product.", brand="Bolt", sku="BOLT-12345", unit_price=1999, plans=[
             {
                 "sku": "BOLT-PLAN-12345",
                 "name": "Monthly Subscription",
@@ -196,7 +196,7 @@ This SDK supports the following security schemes globally:
 
 You can set the security parameters through the `security` optional parameter when initializing the SDK client instance. The selected scheme will be used by default to authenticate with the API for all operations that support it. For example:
 ```python
-from bolt import Bolt, models
+from bolt_api_sdk import Bolt, models
 import os
 
 
@@ -204,9 +204,9 @@ with Bolt(
     security=models.Security(
         x_api_key=os.getenv("BOLT_X_API_KEY", ""),
     ),
-) as b_client:
+) as bolt:
 
-    res = b_client.products.create(name="Bolt Subscription Product", description="This is a subscription product.", brand="Bolt", sku="BOLT-12345", unit_price=1999, plans=[
+    res = bolt.products.create(name="Bolt Subscription Product", description="This is a subscription product.", brand="Bolt", sku="BOLT-12345", unit_price=1999, plans=[
         {
             "sku": "BOLT-PLAN-12345",
             "name": "Monthly Subscription",
@@ -231,10 +231,6 @@ with Bolt(
 <summary>Available methods</summary>
 
 
-### [orders](docs/sdks/orders/README.md)
-
-* [list](docs/sdks/orders/README.md#list) - Get all subscription orders
-
 ### [plans](docs/sdks/plans/README.md)
 
 * [list](docs/sdks/plans/README.md#list) - Get all subscription plans available for a product
@@ -244,6 +240,10 @@ with Bolt(
 * [create](docs/sdks/products/README.md#create) - Create a product
 * [list](docs/sdks/products/README.md#list) - Get all products
 * [get](docs/sdks/products/README.md#get) - Get a product
+
+### [subscription_orders](docs/sdks/subscriptionorders/README.md)
+
+* [list](docs/sdks/subscriptionorders/README.md#list) - Get all subscription orders
 
 ### [subscriptions](docs/sdks/subscriptions/README.md)
 
@@ -263,8 +263,8 @@ Some of the endpoints in this SDK support retries. If you use the SDK without an
 
 To change the default retry strategy for a single API call, simply provide a `RetryConfig` object to the call:
 ```python
-from bolt import Bolt, models
-from bolt.utils import BackoffStrategy, RetryConfig
+from bolt_api_sdk import Bolt, models
+from bolt_api_sdk.utils import BackoffStrategy, RetryConfig
 import os
 
 
@@ -272,9 +272,9 @@ with Bolt(
     security=models.Security(
         x_api_key=os.getenv("BOLT_X_API_KEY", ""),
     ),
-) as b_client:
+) as bolt:
 
-    res = b_client.products.create(name="Bolt Subscription Product", description="This is a subscription product.", brand="Bolt", sku="BOLT-12345", unit_price=1999, plans=[
+    res = bolt.products.create(name="Bolt Subscription Product", description="This is a subscription product.", brand="Bolt", sku="BOLT-12345", unit_price=1999, plans=[
         {
             "sku": "BOLT-PLAN-12345",
             "name": "Monthly Subscription",
@@ -294,8 +294,8 @@ with Bolt(
 
 If you'd like to override the default retry strategy for all operations that support retries, you can use the `retry_config` optional parameter when initializing the SDK:
 ```python
-from bolt import Bolt, models
-from bolt.utils import BackoffStrategy, RetryConfig
+from bolt_api_sdk import Bolt, models
+from bolt_api_sdk.utils import BackoffStrategy, RetryConfig
 import os
 
 
@@ -304,9 +304,9 @@ with Bolt(
     security=models.Security(
         x_api_key=os.getenv("BOLT_X_API_KEY", ""),
     ),
-) as b_client:
+) as bolt:
 
-    res = b_client.products.create(name="Bolt Subscription Product", description="This is a subscription product.", brand="Bolt", sku="BOLT-12345", unit_price=1999, plans=[
+    res = bolt.products.create(name="Bolt Subscription Product", description="This is a subscription product.", brand="Bolt", sku="BOLT-12345", unit_price=1999, plans=[
         {
             "sku": "BOLT-PLAN-12345",
             "name": "Monthly Subscription",
@@ -327,7 +327,7 @@ with Bolt(
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-[`BoltError`](./src/bolt/errors/bolterror.py) is the base class for all HTTP error responses. It has the following properties:
+[`BoltError`](./src/bolt_api_sdk/errors/bolterror.py) is the base class for all HTTP error responses. It has the following properties:
 
 | Property           | Type             | Description                                            |
 | ------------------ | ---------------- | ------------------------------------------------------ |
@@ -339,7 +339,7 @@ with Bolt(
 
 ### Example
 ```python
-from bolt import Bolt, errors, models
+from bolt_api_sdk import Bolt, errors, models
 import os
 
 
@@ -347,11 +347,11 @@ with Bolt(
     security=models.Security(
         x_api_key=os.getenv("BOLT_X_API_KEY", ""),
     ),
-) as b_client:
+) as bolt:
     res = None
     try:
 
-        res = b_client.products.create(name="Bolt Subscription Product", description="This is a subscription product.", brand="Bolt", sku="BOLT-12345", unit_price=1999, plans=[
+        res = bolt.products.create(name="Bolt Subscription Product", description="This is a subscription product.", brand="Bolt", sku="BOLT-12345", unit_price=1999, plans=[
             {
                 "sku": "BOLT-PLAN-12345",
                 "name": "Monthly Subscription",
@@ -379,7 +379,7 @@ with Bolt(
 
 ### Error Classes
 **Primary error:**
-* [`BoltError`](./src/bolt/errors/bolterror.py): The base class for HTTP error responses.
+* [`BoltError`](./src/bolt_api_sdk/errors/bolterror.py): The base class for HTTP error responses.
 
 <details><summary>Less common errors (5)</summary>
 
@@ -391,8 +391,8 @@ with Bolt(
     * [`httpx.TimeoutException`](https://www.python-httpx.org/exceptions/#httpx.TimeoutException): HTTP request timed out.
 
 
-**Inherit from [`BoltError`](./src/bolt/errors/bolterror.py)**:
-* [`ResponseValidationError`](./src/bolt/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
+**Inherit from [`BoltError`](./src/bolt_api_sdk/errors/bolterror.py)**:
+* [`ResponseValidationError`](./src/bolt_api_sdk/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
 <!-- End Error Handling [errors] -->
@@ -413,7 +413,7 @@ You can override the default server globally by passing a server index to the `s
 #### Example
 
 ```python
-from bolt import Bolt, models
+from bolt_api_sdk import Bolt, models
 import os
 
 
@@ -422,9 +422,9 @@ with Bolt(
     security=models.Security(
         x_api_key=os.getenv("BOLT_X_API_KEY", ""),
     ),
-) as b_client:
+) as bolt:
 
-    res = b_client.products.create(name="Bolt Subscription Product", description="This is a subscription product.", brand="Bolt", sku="BOLT-12345", unit_price=1999, plans=[
+    res = bolt.products.create(name="Bolt Subscription Product", description="This is a subscription product.", brand="Bolt", sku="BOLT-12345", unit_price=1999, plans=[
         {
             "sku": "BOLT-PLAN-12345",
             "name": "Monthly Subscription",
@@ -445,7 +445,7 @@ with Bolt(
 
 The default server can also be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
 ```python
-from bolt import Bolt, models
+from bolt_api_sdk import Bolt, models
 import os
 
 
@@ -454,9 +454,9 @@ with Bolt(
     security=models.Security(
         x_api_key=os.getenv("BOLT_X_API_KEY", ""),
     ),
-) as b_client:
+) as bolt:
 
-    res = b_client.products.create(name="Bolt Subscription Product", description="This is a subscription product.", brand="Bolt", sku="BOLT-12345", unit_price=1999, plans=[
+    res = bolt.products.create(name="Bolt Subscription Product", description="This is a subscription product.", brand="Bolt", sku="BOLT-12345", unit_price=1999, plans=[
         {
             "sku": "BOLT-PLAN-12345",
             "name": "Monthly Subscription",
@@ -483,7 +483,7 @@ This allows you to wrap the client with your own custom logic, such as adding cu
 
 For example, you could specify a header for every request that this sdk makes as follows:
 ```python
-from bolt import Bolt
+from bolt_api_sdk import Bolt
 import httpx
 
 http_client = httpx.Client(headers={"x-custom-header": "someValue"})
@@ -492,8 +492,8 @@ s = Bolt(client=http_client)
 
 or you could wrap the client with your own custom logic:
 ```python
-from bolt import Bolt
-from bolt.httpclient import AsyncHttpClient
+from bolt_api_sdk import Bolt
+from bolt_api_sdk.httpclient import AsyncHttpClient
 import httpx
 
 class CustomClient(AsyncHttpClient):
@@ -563,7 +563,7 @@ The `Bolt` class implements the context manager protocol and registers a finaliz
 [context-manager]: https://docs.python.org/3/reference/datamodel.html#context-managers
 
 ```python
-from bolt import Bolt, models
+from bolt_api_sdk import Bolt, models
 import os
 def main():
 
@@ -571,7 +571,7 @@ def main():
         security=models.Security(
             x_api_key=os.getenv("BOLT_X_API_KEY", ""),
         ),
-    ) as b_client:
+    ) as bolt:
         # Rest of application here...
 
 
@@ -582,7 +582,7 @@ async def amain():
         security=models.Security(
             x_api_key=os.getenv("BOLT_X_API_KEY", ""),
         ),
-    ) as b_client:
+    ) as bolt:
         # Rest of application here...
 ```
 <!-- End Resource Management [resource-management] -->
@@ -594,11 +594,11 @@ You can setup your SDK to emit debug logs for SDK requests and responses.
 
 You can pass your own logger class directly into your SDK.
 ```python
-from bolt import Bolt
+from bolt_api_sdk import Bolt
 import logging
 
 logging.basicConfig(level=logging.DEBUG)
-s = Bolt(debug_logger=logging.getLogger("bolt"))
+s = Bolt(debug_logger=logging.getLogger("bolt_api_sdk"))
 ```
 
 You can also enable a default debug logger by setting an environment variable `BOLT_DEBUG` to true.
@@ -619,4 +619,4 @@ looking for the latest version.
 While we value open-source contributions to this SDK, this library is generated programmatically. Any manual changes added to internal files will be overwritten on the next generation. 
 We look forward to hearing your feedback. Feel free to open a PR or an issue with a proof of concept and we'll do our best to include it in a future release. 
 
-### SDK Created by [Speakeasy](https://www.speakeasy.com/?utm_source=bolt&utm_campaign=python)
+### SDK Created by [Speakeasy](https://www.speakeasy.com/?utm_source=bolt-api-sdk&utm_campaign=python)

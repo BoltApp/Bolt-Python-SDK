@@ -18,7 +18,7 @@ Pauses a subscription by its ID.
 ### Example Usage
 
 ```python
-from bolt import Bolt, models
+from bolt_api_sdk import Bolt, models
 import os
 
 
@@ -26,9 +26,9 @@ with Bolt(
     security=models.Security(
         x_api_key=os.getenv("BOLT_X_API_KEY", ""),
     ),
-) as b_client:
+) as bolt:
 
-    res = b_client.subscriptions.pause(subscription_id=921987)
+    res = bolt.subscriptions.pause(subscription_id=921987)
 
     # Handle response
     print(res)
@@ -59,7 +59,7 @@ Unpauses a subscription by its ID.
 ### Example Usage
 
 ```python
-from bolt import Bolt, models
+from bolt_api_sdk import Bolt, models
 import os
 
 
@@ -67,9 +67,9 @@ with Bolt(
     security=models.Security(
         x_api_key=os.getenv("BOLT_X_API_KEY", ""),
     ),
-) as b_client:
+) as bolt:
 
-    res = b_client.subscriptions.unpause(subscription_id=438513)
+    res = bolt.subscriptions.unpause(subscription_id=438513)
 
     # Handle response
     print(res)
@@ -100,7 +100,7 @@ Cancels a subscription by its ID.
 ### Example Usage
 
 ```python
-from bolt import Bolt, models
+from bolt_api_sdk import Bolt, models
 import os
 
 
@@ -108,9 +108,9 @@ with Bolt(
     security=models.Security(
         x_api_key=os.getenv("BOLT_X_API_KEY", ""),
     ),
-) as b_client:
+) as bolt:
 
-    res = b_client.subscriptions.cancel(subscription_id=111224)
+    res = bolt.subscriptions.cancel(subscription_id=111224)
 
     # Handle response
     print(res)
@@ -141,7 +141,7 @@ Retrieves a subscription by its ID.
 ### Example Usage
 
 ```python
-from bolt import Bolt, models
+from bolt_api_sdk import Bolt, models
 import os
 
 
@@ -149,9 +149,9 @@ with Bolt(
     security=models.Security(
         x_api_key=os.getenv("BOLT_X_API_KEY", ""),
     ),
-) as b_client:
+) as bolt:
 
-    res = b_client.subscriptions.get(subscription_id=186713)
+    res = bolt.subscriptions.get(subscription_id=186713)
 
     # Handle response
     print(res)
@@ -182,7 +182,7 @@ Retrieves a list of all subscriptions.
 ### Example Usage
 
 ```python
-from bolt import Bolt, models
+from bolt_api_sdk import Bolt, models
 import os
 
 
@@ -190,9 +190,9 @@ with Bolt(
     security=models.Security(
         x_api_key=os.getenv("BOLT_X_API_KEY", ""),
     ),
-) as b_client:
+) as bolt:
 
-    res = b_client.subscriptions.list()
+    res = bolt.subscriptions.list()
 
     # Handle response
     print(res)
