@@ -17,6 +17,7 @@ Pauses a subscription by its ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="post_/v1/subscriptions/{subscriptionId}/pause" method="post" path="/v1/subscriptions/{subscriptionId}/pause" -->
 ```python
 from bolt_api_sdk import Bolt, models
 import os
@@ -28,7 +29,7 @@ with Bolt(
     ),
 ) as bolt:
 
-    res = bolt.subscriptions.pause(subscription_id=921987)
+    res = bolt.subscriptions.pause(subscription_id="921987")
 
     # Handle response
     print(res)
@@ -39,7 +40,7 @@ with Bolt(
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `subscription_id`                                                   | *int*                                                               | :heavy_check_mark:                                                  | ID of the subscription to pause.                                    |
+| `subscription_id`                                                   | *str*                                                               | :heavy_check_mark:                                                  | ID of the subscription to pause.                                    |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
@@ -58,6 +59,7 @@ Unpauses a subscription by its ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="post_/v1/subscriptions/{subscriptionId}/unpause" method="post" path="/v1/subscriptions/{subscriptionId}/unpause" -->
 ```python
 from bolt_api_sdk import Bolt, models
 import os
@@ -69,7 +71,7 @@ with Bolt(
     ),
 ) as bolt:
 
-    res = bolt.subscriptions.unpause(subscription_id=438513)
+    res = bolt.subscriptions.unpause(subscription_id="438513")
 
     # Handle response
     print(res)
@@ -80,7 +82,7 @@ with Bolt(
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `subscription_id`                                                   | *int*                                                               | :heavy_check_mark:                                                  | ID of the subscription to unpause.                                  |
+| `subscription_id`                                                   | *str*                                                               | :heavy_check_mark:                                                  | ID of the subscription to unpause.                                  |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
@@ -99,6 +101,7 @@ Cancels a subscription by its ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="cancelSubscription" method="post" path="/v1/subscriptions/{subscriptionId}/cancel" -->
 ```python
 from bolt_api_sdk import Bolt, models
 import os
@@ -110,7 +113,7 @@ with Bolt(
     ),
 ) as bolt:
 
-    res = bolt.subscriptions.cancel(subscription_id=111224)
+    res = bolt.subscriptions.cancel(subscription_id="111224")
 
     # Handle response
     print(res)
@@ -121,7 +124,7 @@ with Bolt(
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `subscription_id`                                                   | *int*                                                               | :heavy_check_mark:                                                  | ID of the subscription to cancel.                                   |
+| `subscription_id`                                                   | *str*                                                               | :heavy_check_mark:                                                  | ID of the subscription to cancel.                                   |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
@@ -140,6 +143,7 @@ Retrieves a subscription by its ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getSubscription" method="get" path="/v1/subscriptions/{subscriptionId}" -->
 ```python
 from bolt_api_sdk import Bolt, models
 import os
@@ -151,7 +155,7 @@ with Bolt(
     ),
 ) as bolt:
 
-    res = bolt.subscriptions.get(subscription_id=186713)
+    res = bolt.subscriptions.get(subscription_id="186713")
 
     # Handle response
     print(res)
@@ -162,7 +166,7 @@ with Bolt(
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `subscription_id`                                                   | *int*                                                               | :heavy_check_mark:                                                  | ID of the subscription to retrieve.                                 |
+| `subscription_id`                                                   | *str*                                                               | :heavy_check_mark:                                                  | ID of the subscription to retrieve.                                 |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
@@ -181,6 +185,7 @@ Retrieves a list of all subscriptions.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listSubscriptions" method="get" path="/v1/subscriptions" -->
 ```python
 from bolt_api_sdk import Bolt, models
 import os

@@ -13,6 +13,7 @@ Retrieves a list of all subscription orders.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="listSubscriptionOrders" method="get" path="/v1/subscriptions/orders" -->
 ```python
 from bolt_api_sdk import Bolt, models
 import os

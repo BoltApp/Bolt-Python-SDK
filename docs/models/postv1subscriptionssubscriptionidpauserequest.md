@@ -5,4 +5,4 @@
 
 | Field                            | Type                             | Required                         | Description                      |
 | -------------------------------- | -------------------------------- | -------------------------------- | -------------------------------- |
-| `subscription_id`                | *int*                            | :heavy_check_mark:               | ID of the subscription to pause. |
+| `subscription_id`                | *str*                            | :heavy_check_mark:               | ID of the subscription to pause. |

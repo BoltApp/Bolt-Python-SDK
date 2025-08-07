@@ -159,7 +159,7 @@ paths:
         - in: path
           name: productId
           schema:
-            type: integer
+            type: string
           required: true
           description: ID of the product to retrieve.
       responses:
@@ -249,7 +249,7 @@ paths:
         - in: path
           name: subscriptionId
           schema:
-            type: integer
+            type: string
           required: true
           description: ID of the subscription to pause.
       responses:
@@ -278,7 +278,7 @@ paths:
         - in: path
           name: subscriptionId
           schema:
-            type: integer
+            type: string
           required: true
           description: ID of the subscription to unpause.
       responses:
@@ -308,7 +308,7 @@ paths:
         - in: path
           name: subscriptionId
           schema:
-            type: integer
+            type: string
           required: true
           description: ID of the subscription to cancel.
       responses:
@@ -336,7 +336,7 @@ paths:
         - in: path
           name: subscriptionId
           schema:
-            type: integer
+            type: string
           required: true
           description: ID of the subscription to retrieve.
       responses:

@@ -13,7 +13,7 @@ class Subscriptions(BaseSDK):
     def pause(
         self,
         *,
-        subscription_id: int,
+        subscription_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -96,7 +96,7 @@ class Subscriptions(BaseSDK):
     async def pause_async(
         self,
         *,
-        subscription_id: int,
+        subscription_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -179,7 +179,7 @@ class Subscriptions(BaseSDK):
     def unpause(
         self,
         *,
-        subscription_id: int,
+        subscription_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -262,7 +262,7 @@ class Subscriptions(BaseSDK):
     async def unpause_async(
         self,
         *,
-        subscription_id: int,
+        subscription_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -345,7 +345,7 @@ class Subscriptions(BaseSDK):
     def cancel(
         self,
         *,
-        subscription_id: int,
+        subscription_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -428,7 +428,7 @@ class Subscriptions(BaseSDK):
     async def cancel_async(
         self,
         *,
-        subscription_id: int,
+        subscription_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -511,7 +511,7 @@ class Subscriptions(BaseSDK):
     def get(
         self,
         *,
-        subscription_id: int,
+        subscription_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -594,7 +594,7 @@ class Subscriptions(BaseSDK):
     async def get_async(
         self,
         *,
-        subscription_id: int,
+        subscription_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,

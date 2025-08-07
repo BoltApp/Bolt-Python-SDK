@@ -389,7 +389,7 @@ class Products(BaseSDK):
     def get(
         self,
         *,
-        product_id: int,
+        product_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -472,7 +472,7 @@ class Products(BaseSDK):
     async def get_async(
         self,
         *,
-        product_id: int,
+        product_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,

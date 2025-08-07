@@ -1,16 +1,16 @@
 lockVersion: 2.0.0
 id: 59dcfa56-8330-4162-8246-092811fc63e8
 management:
-  docChecksum: 5acdae0a70614cfd93654b83a2258a10
+  docChecksum: abec2e5d6ba7e601ebea49216ad818c9
   docVersion: v1
-  speakeasyVersion: 1.589.0
-  generationVersion: 2.664.0
-  releaseVersion: 0.1.0
-  configChecksum: bf6a7c2dcadbf8a8cfe0964496227b99
+  speakeasyVersion: 1.598.3
+  generationVersion: 2.674.3
+  releaseVersion: 0.3.0
+  configChecksum: 18d90df5eabb64218ad1dbfe57905c67
 features:
   python:
     additionalDependencies: 1.0.0
-    core: 5.19.4
+    core: 5.19.7
     defaultEnabledRetries: 0.2.0
     devContainers: 3.0.0
     enumUnions: 0.1.0
@@ -143,7 +143,7 @@ examples:
     speakeasy-default-get-product:
       parameters:
         path:
-          productId: 681031
+          productId: "681031"
       responses:
         "200":
           application/json: {"id": "sp_Tlj0Osm0N76T", "name": "Bolt Subscription Product", "description": "This is a subscription product.", "sku": "BOLT-12345", "created_at": "2023-10-01T12:00:00Z", "updated_at": "2023-10-01T12:00:00Z", "plans": [{"id": "spl_ba_PpkW16oIW", "name": "Monthly Subscription", "sku": "BOLT-12345", "created_at": "2023-10-01T12:00:00Z", "updated_at": "2023-10-01T12:00:00Z", "frequency": 1, "product_id": "sp_Tlj0Osm0N76T", "frequency_unit": "month", "checkout_link": "https://your_site.c.bolt.com/g?merchant_product_id=37&merchant_variant_id=67&publishable_key=BQ9PKQksUGtj.Q9LwVLfV3WF4.32122926f7b9651a416a5099dc92dc2b4c87c8b922c114229f83b345d65f1195"}], "images": ["https://example.com/image1.jpg", "https://example.com/image2.jpg"]}
@@ -159,7 +159,7 @@ examples:
     speakeasy-default-post-/v1-/subscriptions/{subscription-id}/pause:
       parameters:
         path:
-          subscriptionId: 921987
+          subscriptionId: "921987"
       responses:
         "200":
           application/json: {}
@@ -167,7 +167,7 @@ examples:
     speakeasy-default-post-/v1-/subscriptions/{subscription-id}/unpause:
       parameters:
         path:
-          subscriptionId: 438513
+          subscriptionId: "438513"
       responses:
         "200":
           application/json: {}
@@ -175,7 +175,7 @@ examples:
     speakeasy-default-cancel-subscription:
       parameters:
         path:
-          subscriptionId: 111224
+          subscriptionId: "111224"
       responses:
         "200":
           application/json: {}
@@ -183,7 +183,7 @@ examples:
     speakeasy-default-get-subscription:
       parameters:
         path:
-          subscriptionId: 186713
+          subscriptionId: "186713"
       responses:
         "200":
           application/json: {"id": "s_1234567890", "subscription_plan_id": "spl_ba_PpkW16oIW", "status": "active", "plan": {"id": "spl_ba_PpkW16oIW", "name": "Monthly Subscription", "sku": "BOLT-12345", "created_at": "2023-10-01T12:00:00Z", "updated_at": "2023-10-01T12:00:00Z", "frequency": 1, "product_id": "sp_Tlj0Osm0N76T", "frequency_unit": "month", "checkout_link": "https://your_site.c.bolt.com/g?merchant_product_id=37&merchant_variant_id=67&publishable_key=BQ9PKQksUGtj.Q9LwVLfV3WF4.32122926f7b9651a416a5099dc92dc2b4c87c8b922c114229f83b345d65f1195"}}

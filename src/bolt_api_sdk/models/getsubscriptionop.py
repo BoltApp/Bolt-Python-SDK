@@ -8,13 +8,13 @@ from typing_extensions import Annotated, TypedDict
 
 
 class GetSubscriptionRequestTypedDict(TypedDict):
-    subscription_id: int
+    subscription_id: str
     r"""ID of the subscription to retrieve."""
 
 
 class GetSubscriptionRequest(BaseModel):
     subscription_id: Annotated[
-        int,
+        str,
         pydantic.Field(alias="subscriptionId"),
         FieldMetadata(path=PathParamMetadata(style="simple", explode=False)),
     ]

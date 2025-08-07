@@ -13,6 +13,7 @@ Retrieves a list of plans
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="getPlans" method="get" path="/v1/subscriptions/plans" -->
 ```python
 from bolt_api_sdk import Bolt, models
 import os
