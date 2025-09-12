@@ -1,0 +1,11 @@
+# AccountDetails
+
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `addresses`                                                                          | List[[models.AccountDetailsAddressView](../models/accountdetailsaddressview.md)]     | :heavy_minus_sign:                                                                   | A list of all addresses associated to the shopper's account.                         |
+| `has_bolt_account`                                                                   | *Optional[bool]*                                                                     | :heavy_minus_sign:                                                                   | Used to determine whether a Bolt Account exists with this shopper's account details. |
+| `payment_methods`                                                                    | List[[models.PaymentMethod](../models/paymentmethod.md)]                             | :heavy_minus_sign:                                                                   | A list of all payment methods associated to the shopper's account.                   |
+| `profile`                                                                            | [Optional[models.ProfileView]](../models/profileview.md)                             | :heavy_minus_sign:                                                                   | The shopper's account profile.                                                       |

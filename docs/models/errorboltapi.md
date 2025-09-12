@@ -1,0 +1,11 @@
+# ErrorBoltAPI
+
+Error object containing custom error information
+
+
+## Fields
+
+| Field                                                                                                      | Type                                                                                                       | Required                                                                                                   | Description                                                                                                | Example                                                                                                    |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `code`                                                                                                     | *Optional[int]*                                                                                            | :heavy_minus_sign:                                                                                         | Custom-defined Bolt error code. This can be used to programmatically react to specific errors.             | 2001005                                                                                                    |
+| `message`                                                                                                  | *Optional[str]*                                                                                            | :heavy_minus_sign:                                                                                         | Human-readable description of the error for developers. Should not be shown to users and is not localized. | The input is missing a required parameter.                                                                 |

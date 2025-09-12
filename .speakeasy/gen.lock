@@ -1,28 +1,28 @@
 lockVersion: 2.0.0
 id: 59dcfa56-8330-4162-8246-092811fc63e8
 management:
-  docChecksum: abec2e5d6ba7e601ebea49216ad818c9
-  docVersion: v1
-  speakeasyVersion: 1.598.3
-  generationVersion: 2.674.3
-  releaseVersion: 0.3.0
-  configChecksum: 18d90df5eabb64218ad1dbfe57905c67
+  docChecksum: c9c74cf96c7060832077b6bfb6e9d77a
+  docVersion: 1.0.1
+  speakeasyVersion: 1.615.2
+  generationVersion: 2.698.4
+  releaseVersion: 0.4.0
+  configChecksum: 89506d35adf7315f5da7aeafa97a59a5
 features:
   python:
     additionalDependencies: 1.0.0
-    core: 5.19.7
+    core: 5.20.4
     defaultEnabledRetries: 0.2.0
     devContainers: 3.0.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.3.2
     flatRequests: 1.0.1
     flattening: 3.1.1
-    globalSecurity: 3.0.3
+    globalSecurity: 3.0.4
     globalSecurityCallbacks: 1.0.0
     globalServerURLs: 3.1.1
-    groups: 3.0.0
     methodArguments: 1.0.2
-    nameOverrides: 3.0.1
+    methodSecurity: 3.0.1
+    nullables: 1.0.1
     responseFormat: 1.0.1
     retries: 3.0.2
     sdkHooks: 1.1.0
@@ -34,38 +34,330 @@ generatedFiles:
   - .gitattributes
   - .vscode/settings.json
   - USAGE.md
-  - docs/models/cancelsubscriptionrequest.md
-  - docs/models/createproductfrequencyunit.md
-  - docs/models/createproductplan.md
-  - docs/models/createproductrequest.md
-  - docs/models/createproductresponse.md
-  - docs/models/frequencyunit.md
-  - docs/models/getplansrequest.md
-  - docs/models/getplansresponse.md
-  - docs/models/getproductrequest.md
-  - docs/models/getsubscriptionrequest.md
-  - docs/models/listproductsresponse.md
-  - docs/models/listsubscriptionordersrequest.md
-  - docs/models/listsubscriptionordersresponse.md
-  - docs/models/listsubscriptionsrequest.md
-  - docs/models/listsubscriptionsresponse.md
-  - docs/models/orderid.md
-  - docs/models/plan.md
-  - docs/models/postv1subscriptionssubscriptionidpauserequest.md
-  - docs/models/postv1subscriptionssubscriptionidunpauserequest.md
-  - docs/models/product.md
+  - docs/errors/errorsboltapiresponse.md
+  - docs/errors/errorsoauthserverresponse.md
+  - docs/errors/unprocessableentityerror.md
+  - docs/models/accountdetails.md
+  - docs/models/accountdetailsaddressview.md
+  - docs/models/accountdetailsaddressviewpriority.md
+  - docs/models/accountidentifierstatus.md
+  - docs/models/action.md
+  - docs/models/addaddresspriority.md
+  - docs/models/addaddressrequest.md
+  - docs/models/addaddressresponse.md
+  - docs/models/addaddresssecurity.md
+  - docs/models/addpaymentmethodnetwork.md
+  - docs/models/addpaymentmethodpriority.md
+  - docs/models/addpaymentmethodrequest.md
+  - docs/models/addpaymentmethodrequestbody.md
+  - docs/models/addpaymentmethodsecurity.md
+  - docs/models/addpaymentmethodtokentype.md
+  - docs/models/address.md
+  - docs/models/addressaccount.md
+  - docs/models/addresschangerequestmetadataview.md
+  - docs/models/addresschangeview.md
+  - docs/models/addressview.md
+  - docs/models/addressviewpriority.md
+  - docs/models/amounts.md
+  - docs/models/amountview.md
+  - docs/models/authorizationverificationstatus.md
+  - docs/models/authorizetransactionrequest.md
+  - docs/models/authorizetransactionrequestbody.md
+  - docs/models/authorizetransactionsecurity.md
+  - docs/models/authrejectiondetails.md
+  - docs/models/authrejectiondetailsview.md
+  - docs/models/authverificationstatus.md
+  - docs/models/avsresponse.md
+  - docs/models/capturestatus.md
+  - docs/models/capturetransactionrequest.md
+  - docs/models/capturetransactionwithreference.md
+  - docs/models/captureview.md
+  - docs/models/captureviewtype.md
+  - docs/models/carddisplaynetwork.md
+  - docs/models/cardnetwork.md
+  - docs/models/cardstatus.md
+  - docs/models/cardtokentype.md
+  - docs/models/cart.md
+  - docs/models/cartaddon.md
+  - docs/models/cartcreate.md
+  - docs/models/cartdiscount.md
+  - docs/models/cartdiscountdiscountcategory.md
+  - docs/models/cartdiscounttype.md
+  - docs/models/cartfee.md
+  - docs/models/cartitem.md
+  - docs/models/cartitemcustomization.md
+  - docs/models/cartitemgiftoption.md
+  - docs/models/cartitemproperty.md
+  - docs/models/cartitempropertyview.md
+  - docs/models/cartitemshipmenttype.md
+  - docs/models/cartitemtype.md
+  - docs/models/cartloyaltyrewards.md
+  - docs/models/cartloyaltyrewardsview.md
+  - docs/models/cartshipment.md
+  - docs/models/cartshipmenttype.md
+  - docs/models/cartview.md
+  - docs/models/channel.md
+  - docs/models/chargebackdetails.md
+  - docs/models/chargebackdetailsview.md
+  - docs/models/chargebackeventview.md
+  - docs/models/chargebackreasoncode.md
+  - docs/models/chargebackrepresentmentresult.md
+  - docs/models/checkoutsetup.md
+  - docs/models/consumerbillingaddress.md
+  - docs/models/consumermembershipstatus.md
+  - docs/models/consumerselfview.md
+  - docs/models/consumersummaryview.md
+  - docs/models/consumerusermembership.md
+  - docs/models/createaccountinput.md
+  - docs/models/createaccountrequest.md
+  - docs/models/createtestingshopperaccountrequest.md
+  - docs/models/createwebhookrequest.md
+  - docs/models/createwebhookresponse.md
+  - docs/models/credit.md
+  - docs/models/creditcard.md
+  - docs/models/creditcardauthorizationreason.md
+  - docs/models/creditcardauthorizationstatus.md
+  - docs/models/creditcardauthorizationview.md
+  - docs/models/creditcardcaptureview.md
+  - docs/models/creditcardcreditview.md
+  - docs/models/creditcardcreditviewstatus.md
+  - docs/models/creditcardpriority.md
+  - docs/models/creditcardtokentype.md
+  - docs/models/creditcarduser.md
+  - docs/models/creditcardview.md
+  - docs/models/creditcardvoid.md
+  - docs/models/creditcardvoidcause.md
+  - docs/models/creditcardvoidstatus.md
+  - docs/models/creditcardvoidview.md
+  - docs/models/customerliststatus.md
+  - docs/models/customfieldfullresponseview.md
+  - docs/models/customfieldresponseview.md
+  - docs/models/customfields.md
+  - docs/models/customfieldscontext.md
+  - docs/models/customfieldview.md
+  - docs/models/customfieldviewcheckoutstep.md
+  - docs/models/customfieldviewcontext.md
+  - docs/models/customization.md
+  - docs/models/cvvresponse.md
+  - docs/models/decision.md
+  - docs/models/deleteaddressrequest.md
+  - docs/models/deleteaddresssecurity.md
+  - docs/models/deletepaymentmethodrequest.md
+  - docs/models/deletepaymentmethodsecurity.md
+  - docs/models/deletewebhookrequest.md
+  - docs/models/detectaccountrequest.md
+  - docs/models/digitaldelivery.md
+  - docs/models/editaddresspriority.md
+  - docs/models/editaddressrequest.md
+  - docs/models/editaddressresponse.md
+  - docs/models/editaddresssecurity.md
+  - docs/models/eligiblepaymentmethod.md
+  - docs/models/emailpriority.md
+  - docs/models/emails.md
+  - docs/models/emailstatus.md
+  - docs/models/emailview.md
+  - docs/models/error.md
+  - docs/models/errorboltapi.md
+  - docs/models/eventgroupcreatewebhook.md
+  - docs/models/eventsarraycreatewebhook.md
+  - docs/models/frequency.md
+  - docs/models/fulfillment.md
+  - docs/models/fulfillmenttype.md
+  - docs/models/fulfillmentview.md
+  - docs/models/getaccountrequest.md
+  - docs/models/getaccountsecurity.md
+  - docs/models/getmerchantcallbacksrequest.md
+  - docs/models/gettestcreditcardtokenresponse.md
+  - docs/models/gettransactiondetailsrequest.md
+  - docs/models/getwebhookrequest.md
+  - docs/models/giftoptions.md
+  - docs/models/giftoptionview.md
+  - docs/models/hideapm.md
+  - docs/models/hooktype.md
+  - docs/models/iauthorizeresultview.md
+  - docs/models/icartdiscountview.md
+  - docs/models/icartdiscountviewdiscountcategory.md
+  - docs/models/icartfeeview.md
+  - docs/models/icartitemexternalinputs.md
+  - docs/models/icartitemview.md
+  - docs/models/icartitemviewshipmenttype.md
+  - docs/models/icartitemviewtype.md
+  - docs/models/icartshipmentview.md
+  - docs/models/icartshipmentviewpackagedimension.md
+  - docs/models/icartview.md
+  - docs/models/icurrency.md
+  - docs/models/icustomfieldview.md
+  - docs/models/icustomfieldviewcheckoutstep.md
+  - docs/models/icustomfieldviewcontext.md
+  - docs/models/idescriptionpart.md
+  - docs/models/idescriptiontooltip.md
+  - docs/models/ifreeshippingdiscountview.md
+  - docs/models/igiftoptionview.md
+  - docs/models/instorecartshipment.md
+  - docs/models/instorecartshipmentdistanceunit.md
+  - docs/models/instoreshipment.md
+  - docs/models/instoreshipment2.md
+  - docs/models/instoreshipment2distanceunit.md
+  - docs/models/iorderdynamiccontent.md
+  - docs/models/iorderexternaldata.md
+  - docs/models/iordermetadata.md
+  - docs/models/iorderview.md
+  - docs/models/item.md
+  - docs/models/itemproperty.md
+  - docs/models/itemshipmenttype.md
+  - docs/models/iweight.md
+  - docs/models/loginview.md
+  - docs/models/manualdisputes.md
+  - docs/models/manualdisputesstatus.md
+  - docs/models/manualdisputeview.md
+  - docs/models/manualdisputeviewstatus.md
+  - docs/models/marketplacecommissionfee.md
+  - docs/models/merchant.md
+  - docs/models/merchantcallbacksinput.md
+  - docs/models/merchantcallbacksinputcallbackurl.md
+  - docs/models/merchantcallbacksview.md
+  - docs/models/merchantcallbacksviewcallbackurl.md
+  - docs/models/merchantcallbackurltype.md
+  - docs/models/merchantcreditcardauthorization.md
+  - docs/models/merchantcreditcardauthorizationprocessinginitiator.md
+  - docs/models/merchantcreditcardauthorizationrecharge.md
+  - docs/models/merchantcreditcardauthorizationrechargesource.md
+  - docs/models/merchantcreditcardauthorizationsource.md
+  - docs/models/merchantcreditcardreview.md
+  - docs/models/merchantdivision.md
+  - docs/models/merchantdivisionlogoview.md
+  - docs/models/merchantdivisionsidentifiersview.md
+  - docs/models/merchantdivisionsummaryview.md
+  - docs/models/merchantidentifiersview.md
+  - docs/models/merchantlogo.md
+  - docs/models/merchantonboardingstatuscode.md
+  - docs/models/merchantplatform.md
+  - docs/models/merchantstatus.md
+  - docs/models/metadatacomponent.md
+  - docs/models/method.md
+  - docs/models/mocktrackinginput.md
+  - docs/models/mocktrackinginputstatus.md
+  - docs/models/network.md
+  - docs/models/oauthtokeninput.md
+  - docs/models/oauthtokeninputgranttype.md
+  - docs/models/oauthtokeninputrefresh.md
+  - docs/models/oauthtokeninputrefreshgranttype.md
+  - docs/models/oauthtokenrequest.md
+  - docs/models/oauthtokenrequestbody.md
+  - docs/models/oauthtokenresponse.md
+  - docs/models/ordercreate.md
+  - docs/models/orderdecision.md
+  - docs/models/orderdecisiondetailsview.md
+  - docs/models/orderexternaldataview.md
+  - docs/models/ordertrackrequestbody.md
+  - docs/models/ordertrackresponse.md
+  - docs/models/orderview.md
+  - docs/models/packagedimension.md
+  - docs/models/packageweights.md
+  - docs/models/paymentmethod.md
+  - docs/models/paymentmethodaccount.md
+  - docs/models/paymentmethodaccountpriority.md
+  - docs/models/paymentmethodaccounttokentype.md
+  - docs/models/paymentservice.md
+  - docs/models/phonepriority.md
+  - docs/models/phonestatus.md
+  - docs/models/phoneswithcountrycode.md
+  - docs/models/phoneview.md
+  - docs/models/phoneviewpriority.md
+  - docs/models/platformaccountstatus.md
+  - docs/models/priority.md
+  - docs/models/processinginitiator.md
+  - docs/models/processor.md
+  - docs/models/profile.md
+  - docs/models/profileview.md
+  - docs/models/querywebhooksrequest.md
+  - docs/models/querywebhooksresponse.md
+  - docs/models/refundtransactionrequest.md
+  - docs/models/replaceaddresspriority.md
+  - docs/models/replaceaddressrequest.md
+  - docs/models/replaceaddressresponse.md
+  - docs/models/replaceaddresssecurity.md
+  - docs/models/representmentresult.md
+  - docs/models/requestresult.md
+  - docs/models/requeststatus.md
+  - docs/models/response.md
+  - docs/models/result.md
+  - docs/models/reviewticket.md
+  - docs/models/reviewticketview.md
+  - docs/models/reviewtransactionrequest.md
+  - docs/models/riskdecisionfactoryml.md
+  - docs/models/riskinsightsyml.md
+  - docs/models/riskmodelexternalresultview.md
+  - docs/models/riskmodelresulcontributionview.md
+  - docs/models/riskmodelresultview.md
+  - docs/models/riskreviewstatus.md
+  - docs/models/savedcreditcardview.md
+  - docs/models/savedcreditcardviewtype.md
+  - docs/models/savedpaypalaccountview.md
+  - docs/models/savedpaypalaccountviewtype.md
+  - docs/models/scope.md
   - docs/models/security.md
+  - docs/models/sellersplit.md
+  - docs/models/sellersplitamounts.md
+  - docs/models/shoppermetadata.md
+  - docs/models/split.md
+  - docs/models/splitsview.md
+  - docs/models/splitsviewtype.md
+  - docs/models/statementsfiletype.md
+  - docs/models/statementstype.md
+  - docs/models/statementsviewrequestbody.md
+  - docs/models/statementsviewresponse.md
   - docs/models/subscription.md
-  - docs/models/subscriptionorder.md
-  - docs/models/subscriptionorderstatus.md
-  - docs/models/subscriptionstatus.md
-  - docs/models/success.md
+  - docs/models/testingaccountdetails.md
+  - docs/models/testingaccountrequest.md
+  - docs/models/totalweight.md
+  - docs/models/trackingdetail.md
+  - docs/models/trackingdetailstatus.md
+  - docs/models/transactioncredit.md
+  - docs/models/transactiondetails.md
+  - docs/models/transactiondetailsview.md
+  - docs/models/transactiondetailsviewviewstatus.md
+  - docs/models/transactionindemnificationdecision.md
+  - docs/models/transactionindemnificationreason.md
+  - docs/models/transactionoperationalprocessor.md
+  - docs/models/transactionprocessor.md
+  - docs/models/transactionprocessorstatus.md
+  - docs/models/transactionrejectiondetails.md
+  - docs/models/transactionrejectiondetailsview.md
+  - docs/models/transactionreviewview.md
+  - docs/models/transactionsplitsview.md
+  - docs/models/transactionsplitsviewtype.md
+  - docs/models/transactionstatus.md
+  - docs/models/transactiontimelineview.md
+  - docs/models/transactiontimelineviewtype.md
+  - docs/models/transactiontype.md
+  - docs/models/transactionupdateinput.md
+  - docs/models/transactionview.md
+  - docs/models/transactionviewviewstatus.md
+  - docs/models/type.md
+  - docs/models/unit.md
+  - docs/models/updateaccountprofilerequest.md
+  - docs/models/updateaccountprofilesecurity.md
+  - docs/models/updateprofile.md
+  - docs/models/updatetransactionrequest.md
+  - docs/models/useridentifier.md
+  - docs/models/useridentity.md
   - docs/models/utils/retryconfig.md
+  - docs/models/v1accountsview.md
+  - docs/models/voidcause.md
+  - docs/models/voidtransactionrequest.md
+  - docs/models/webhook.md
+  - docs/models/webhookeventgroup.md
+  - docs/models/webhookstype.md
+  - docs/sdks/account/README.md
   - docs/sdks/bolt/README.md
-  - docs/sdks/plans/README.md
-  - docs/sdks/products/README.md
-  - docs/sdks/subscriptionorders/README.md
-  - docs/sdks/subscriptions/README.md
+  - docs/sdks/configuration/README.md
+  - docs/sdks/oauth/README.md
+  - docs/sdks/orders/README.md
+  - docs/sdks/statements/README.md
+  - docs/sdks/testing/README.md
+  - docs/sdks/transactions/README.md
+  - docs/sdks/webhooks/README.md
   - poetry.toml
   - py.typed
   - pylintrc
@@ -76,37 +368,246 @@ generatedFiles:
   - src/bolt_api_sdk/_hooks/sdkhooks.py
   - src/bolt_api_sdk/_hooks/types.py
   - src/bolt_api_sdk/_version.py
+  - src/bolt_api_sdk/account.py
   - src/bolt_api_sdk/basesdk.py
+  - src/bolt_api_sdk/configuration.py
   - src/bolt_api_sdk/errors/__init__.py
   - src/bolt_api_sdk/errors/apierror.py
   - src/bolt_api_sdk/errors/bolterror.py
+  - src/bolt_api_sdk/errors/capturetransactionop.py
+  - src/bolt_api_sdk/errors/errors_bolt_api_response.py
+  - src/bolt_api_sdk/errors/errors_oauth_server_response.py
   - src/bolt_api_sdk/errors/no_response_error.py
   - src/bolt_api_sdk/errors/responsevalidationerror.py
   - src/bolt_api_sdk/httpclient.py
   - src/bolt_api_sdk/models/__init__.py
-  - src/bolt_api_sdk/models/cancelsubscriptionop.py
-  - src/bolt_api_sdk/models/createproductop.py
-  - src/bolt_api_sdk/models/getplansop.py
-  - src/bolt_api_sdk/models/getproductop.py
-  - src/bolt_api_sdk/models/getsubscriptionop.py
-  - src/bolt_api_sdk/models/listproductsop.py
-  - src/bolt_api_sdk/models/listsubscriptionordersop.py
-  - src/bolt_api_sdk/models/listsubscriptionsop.py
-  - src/bolt_api_sdk/models/plan.py
-  - src/bolt_api_sdk/models/post_v1_subscriptions_subscriptionid_pauseop.py
-  - src/bolt_api_sdk/models/post_v1_subscriptions_subscriptionid_unpauseop.py
-  - src/bolt_api_sdk/models/product.py
+  - src/bolt_api_sdk/models/account_details.py
+  - src/bolt_api_sdk/models/account_details_address_view.py
+  - src/bolt_api_sdk/models/account_identifier_status.py
+  - src/bolt_api_sdk/models/addaddressop.py
+  - src/bolt_api_sdk/models/addpaymentmethodop.py
+  - src/bolt_api_sdk/models/address.py
+  - src/bolt_api_sdk/models/address_account.py
+  - src/bolt_api_sdk/models/address_change_request_metadata_view.py
+  - src/bolt_api_sdk/models/address_change_view.py
+  - src/bolt_api_sdk/models/address_view.py
+  - src/bolt_api_sdk/models/amount_view.py
+  - src/bolt_api_sdk/models/amounts.py
+  - src/bolt_api_sdk/models/auth_rejection_details.py
+  - src/bolt_api_sdk/models/auth_rejection_details_view.py
+  - src/bolt_api_sdk/models/authorization_verification_status.py
+  - src/bolt_api_sdk/models/authorizetransactionop.py
+  - src/bolt_api_sdk/models/capture_status.py
+  - src/bolt_api_sdk/models/capture_transaction_with_reference.py
+  - src/bolt_api_sdk/models/capture_view.py
+  - src/bolt_api_sdk/models/capturetransactionop.py
+  - src/bolt_api_sdk/models/card_display_network.py
+  - src/bolt_api_sdk/models/card_network.py
+  - src/bolt_api_sdk/models/card_status.py
+  - src/bolt_api_sdk/models/card_token_type.py
+  - src/bolt_api_sdk/models/cart_add_on.py
+  - src/bolt_api_sdk/models/cart_create.py
+  - src/bolt_api_sdk/models/cart_discount.py
+  - src/bolt_api_sdk/models/cart_fee.py
+  - src/bolt_api_sdk/models/cart_item.py
+  - src/bolt_api_sdk/models/cart_item_customization.py
+  - src/bolt_api_sdk/models/cart_item_gift_option.py
+  - src/bolt_api_sdk/models/cart_item_property.py
+  - src/bolt_api_sdk/models/cart_item_property_view.py
+  - src/bolt_api_sdk/models/cart_loyalty_rewards.py
+  - src/bolt_api_sdk/models/cart_loyalty_rewards_view.py
+  - src/bolt_api_sdk/models/cart_shipment.py
+  - src/bolt_api_sdk/models/cart_shipment_type.py
+  - src/bolt_api_sdk/models/cart_view.py
+  - src/bolt_api_sdk/models/chargeback_details.py
+  - src/bolt_api_sdk/models/chargeback_details_view.py
+  - src/bolt_api_sdk/models/chargeback_event_view.py
+  - src/bolt_api_sdk/models/chargeback_reason_code.py
+  - src/bolt_api_sdk/models/chargeback_representment_result.py
+  - src/bolt_api_sdk/models/consumer_billing_address.py
+  - src/bolt_api_sdk/models/consumer_membership_status.py
+  - src/bolt_api_sdk/models/consumer_self_view.py
+  - src/bolt_api_sdk/models/consumer_summary_view.py
+  - src/bolt_api_sdk/models/consumer_user_membership.py
+  - src/bolt_api_sdk/models/create_account_input.py
+  - src/bolt_api_sdk/models/createaccountop.py
+  - src/bolt_api_sdk/models/createtestingshopperaccountop.py
+  - src/bolt_api_sdk/models/createwebhookop.py
+  - src/bolt_api_sdk/models/credit.py
+  - src/bolt_api_sdk/models/credit_card.py
+  - src/bolt_api_sdk/models/credit_card_authorization_reason.py
+  - src/bolt_api_sdk/models/credit_card_authorization_status.py
+  - src/bolt_api_sdk/models/credit_card_authorization_view.py
+  - src/bolt_api_sdk/models/credit_card_capture_view.py
+  - src/bolt_api_sdk/models/credit_card_credit_view.py
+  - src/bolt_api_sdk/models/credit_card_user.py
+  - src/bolt_api_sdk/models/credit_card_view.py
+  - src/bolt_api_sdk/models/credit_card_void.py
+  - src/bolt_api_sdk/models/credit_card_void_cause.py
+  - src/bolt_api_sdk/models/credit_card_void_status.py
+  - src/bolt_api_sdk/models/credit_card_void_view.py
+  - src/bolt_api_sdk/models/custom_field_full_response_view.py
+  - src/bolt_api_sdk/models/custom_field_response_view.py
+  - src/bolt_api_sdk/models/custom_field_view.py
+  - src/bolt_api_sdk/models/custom_fields.py
+  - src/bolt_api_sdk/models/customer_list_status.py
+  - src/bolt_api_sdk/models/deleteaddressop.py
+  - src/bolt_api_sdk/models/deletepaymentmethodop.py
+  - src/bolt_api_sdk/models/deletewebhookop.py
+  - src/bolt_api_sdk/models/detectaccountop.py
+  - src/bolt_api_sdk/models/digital_delivery.py
+  - src/bolt_api_sdk/models/editaddressop.py
+  - src/bolt_api_sdk/models/eligible_payment_method.py
+  - src/bolt_api_sdk/models/email_priority.py
+  - src/bolt_api_sdk/models/email_status.py
+  - src/bolt_api_sdk/models/email_view.py
+  - src/bolt_api_sdk/models/emails.py
+  - src/bolt_api_sdk/models/error_bolt_api.py
+  - src/bolt_api_sdk/models/event_group_create_webhook.py
+  - src/bolt_api_sdk/models/events_array_create_webhook.py
+  - src/bolt_api_sdk/models/fulfillment.py
+  - src/bolt_api_sdk/models/fulfillment_view.py
+  - src/bolt_api_sdk/models/getaccountop.py
+  - src/bolt_api_sdk/models/getmerchantcallbacksop.py
+  - src/bolt_api_sdk/models/gettestcreditcardtokenop.py
+  - src/bolt_api_sdk/models/gettransactiondetailsop.py
+  - src/bolt_api_sdk/models/getwebhookop.py
+  - src/bolt_api_sdk/models/gift_option_view.py
+  - src/bolt_api_sdk/models/gift_options.py
+  - src/bolt_api_sdk/models/i_authorize_result_view.py
+  - src/bolt_api_sdk/models/i_cart_discount_view.py
+  - src/bolt_api_sdk/models/i_cart_fee_view.py
+  - src/bolt_api_sdk/models/i_cart_item_external_inputs.py
+  - src/bolt_api_sdk/models/i_cart_item_view.py
+  - src/bolt_api_sdk/models/i_cart_shipment_view.py
+  - src/bolt_api_sdk/models/i_cart_view.py
+  - src/bolt_api_sdk/models/i_currency.py
+  - src/bolt_api_sdk/models/i_custom_field_view.py
+  - src/bolt_api_sdk/models/i_description_part.py
+  - src/bolt_api_sdk/models/i_description_tooltip.py
+  - src/bolt_api_sdk/models/i_free_shipping_discount_view.py
+  - src/bolt_api_sdk/models/i_gift_option_view.py
+  - src/bolt_api_sdk/models/i_order_dynamic_content.py
+  - src/bolt_api_sdk/models/i_order_external_data.py
+  - src/bolt_api_sdk/models/i_order_metadata.py
+  - src/bolt_api_sdk/models/i_order_view.py
+  - src/bolt_api_sdk/models/i_weight.py
+  - src/bolt_api_sdk/models/in_store_cart_shipment.py
+  - src/bolt_api_sdk/models/in_store_shipment.py
+  - src/bolt_api_sdk/models/in_store_shipment2.py
+  - src/bolt_api_sdk/models/item.py
+  - src/bolt_api_sdk/models/item_property.py
+  - src/bolt_api_sdk/models/item_shipment_type.py
+  - src/bolt_api_sdk/models/login_view.py
+  - src/bolt_api_sdk/models/manual_dispute_view.py
+  - src/bolt_api_sdk/models/manual_disputes.py
+  - src/bolt_api_sdk/models/marketplace_commission_fee.py
+  - src/bolt_api_sdk/models/merchant.py
+  - src/bolt_api_sdk/models/merchant_callback_url_type.py
+  - src/bolt_api_sdk/models/merchant_callbacks_input.py
+  - src/bolt_api_sdk/models/merchant_callbacks_view.py
+  - src/bolt_api_sdk/models/merchant_credit_card_authorization.py
+  - src/bolt_api_sdk/models/merchant_credit_card_authorization_recharge.py
+  - src/bolt_api_sdk/models/merchant_credit_card_review.py
+  - src/bolt_api_sdk/models/merchant_division.py
+  - src/bolt_api_sdk/models/merchant_division_logo_view.py
+  - src/bolt_api_sdk/models/merchant_division_summary_view.py
+  - src/bolt_api_sdk/models/merchant_divisions_identifiers_view.py
+  - src/bolt_api_sdk/models/merchant_identifiers_view.py
+  - src/bolt_api_sdk/models/merchant_logo.py
+  - src/bolt_api_sdk/models/merchant_onboarding_status_code.py
+  - src/bolt_api_sdk/models/merchant_platform.py
+  - src/bolt_api_sdk/models/merchant_status.py
+  - src/bolt_api_sdk/models/metadata_component.py
+  - src/bolt_api_sdk/models/mock_tracking_input.py
+  - src/bolt_api_sdk/models/o_auth_token_input.py
+  - src/bolt_api_sdk/models/o_auth_token_input_refresh.py
+  - src/bolt_api_sdk/models/o_auth_token_response.py
+  - src/bolt_api_sdk/models/oauthtokenop.py
+  - src/bolt_api_sdk/models/order_create.py
+  - src/bolt_api_sdk/models/order_decision.py
+  - src/bolt_api_sdk/models/order_decision_details_view.py
+  - src/bolt_api_sdk/models/order_external_data_view.py
+  - src/bolt_api_sdk/models/order_track_requestbody.py
+  - src/bolt_api_sdk/models/order_track_response.py
+  - src/bolt_api_sdk/models/order_view.py
+  - src/bolt_api_sdk/models/package_dimension.py
+  - src/bolt_api_sdk/models/package_weights.py
+  - src/bolt_api_sdk/models/payment_method_account.py
+  - src/bolt_api_sdk/models/payment_service.py
+  - src/bolt_api_sdk/models/phone_priority.py
+  - src/bolt_api_sdk/models/phone_status.py
+  - src/bolt_api_sdk/models/phone_view.py
+  - src/bolt_api_sdk/models/phones_with_country_code.py
+  - src/bolt_api_sdk/models/priority.py
+  - src/bolt_api_sdk/models/processing_initiator.py
+  - src/bolt_api_sdk/models/profile.py
+  - src/bolt_api_sdk/models/profile_view.py
+  - src/bolt_api_sdk/models/querywebhooksop.py
+  - src/bolt_api_sdk/models/refundtransactionop.py
+  - src/bolt_api_sdk/models/replaceaddressop.py
+  - src/bolt_api_sdk/models/request_result.py
+  - src/bolt_api_sdk/models/request_status.py
+  - src/bolt_api_sdk/models/review_ticket.py
+  - src/bolt_api_sdk/models/review_ticket_view.py
+  - src/bolt_api_sdk/models/reviewtransactionop.py
+  - src/bolt_api_sdk/models/risk_decision_factor_yml.py
+  - src/bolt_api_sdk/models/risk_insights_yml.py
+  - src/bolt_api_sdk/models/risk_model_external_result_view.py
+  - src/bolt_api_sdk/models/risk_model_resul_contribution_view.py
+  - src/bolt_api_sdk/models/risk_model_result_view.py
+  - src/bolt_api_sdk/models/risk_review_status.py
+  - src/bolt_api_sdk/models/saved_credit_card_view.py
+  - src/bolt_api_sdk/models/saved_paypal_account_view.py
   - src/bolt_api_sdk/models/security.py
+  - src/bolt_api_sdk/models/seller_split.py
+  - src/bolt_api_sdk/models/seller_split_amounts.py
+  - src/bolt_api_sdk/models/shopper_metadata.py
+  - src/bolt_api_sdk/models/splits_view.py
+  - src/bolt_api_sdk/models/statements_file_type.py
+  - src/bolt_api_sdk/models/statements_type.py
+  - src/bolt_api_sdk/models/statements_view_requestbody.py
+  - src/bolt_api_sdk/models/statements_view_response.py
   - src/bolt_api_sdk/models/subscription.py
-  - src/bolt_api_sdk/models/subscriptionorder.py
-  - src/bolt_api_sdk/models/success.py
-  - src/bolt_api_sdk/plans.py
-  - src/bolt_api_sdk/products.py
+  - src/bolt_api_sdk/models/testing_account_details.py
+  - src/bolt_api_sdk/models/testing_account_request.py
+  - src/bolt_api_sdk/models/total_weight.py
+  - src/bolt_api_sdk/models/tracking_detail.py
+  - src/bolt_api_sdk/models/transaction_credit.py
+  - src/bolt_api_sdk/models/transaction_details.py
+  - src/bolt_api_sdk/models/transaction_details_view.py
+  - src/bolt_api_sdk/models/transaction_indemnification_decision.py
+  - src/bolt_api_sdk/models/transaction_indemnification_reason.py
+  - src/bolt_api_sdk/models/transaction_operational_processor.py
+  - src/bolt_api_sdk/models/transaction_processor.py
+  - src/bolt_api_sdk/models/transaction_processor_status.py
+  - src/bolt_api_sdk/models/transaction_rejection_details_view.py
+  - src/bolt_api_sdk/models/transaction_review_view.py
+  - src/bolt_api_sdk/models/transaction_splits_view.py
+  - src/bolt_api_sdk/models/transaction_status.py
+  - src/bolt_api_sdk/models/transaction_timeline_view.py
+  - src/bolt_api_sdk/models/transaction_type.py
+  - src/bolt_api_sdk/models/transaction_update_input.py
+  - src/bolt_api_sdk/models/transaction_view.py
+  - src/bolt_api_sdk/models/type.py
+  - src/bolt_api_sdk/models/update_profile.py
+  - src/bolt_api_sdk/models/updateaccountprofileop.py
+  - src/bolt_api_sdk/models/updatetransactionop.py
+  - src/bolt_api_sdk/models/user_identifier.py
+  - src/bolt_api_sdk/models/user_identity.py
+  - src/bolt_api_sdk/models/v1_accounts_view.py
+  - src/bolt_api_sdk/models/voidtransactionop.py
+  - src/bolt_api_sdk/models/webhook.py
+  - src/bolt_api_sdk/models/webhook_event_group.py
+  - src/bolt_api_sdk/models/webhooks_type.py
+  - src/bolt_api_sdk/oauth.py
+  - src/bolt_api_sdk/orders.py
   - src/bolt_api_sdk/py.typed
   - src/bolt_api_sdk/sdk.py
   - src/bolt_api_sdk/sdkconfiguration.py
-  - src/bolt_api_sdk/subscriptionorders.py
-  - src/bolt_api_sdk/subscriptions.py
+  - src/bolt_api_sdk/statements.py
+  - src/bolt_api_sdk/testing.py
+  - src/bolt_api_sdk/transactions.py
   - src/bolt_api_sdk/types/__init__.py
   - src/bolt_api_sdk/types/basemodel.py
   - src/bolt_api_sdk/utils/__init__.py
@@ -126,6 +627,7 @@ generatedFiles:
   - src/bolt_api_sdk/utils/unmarshal_json_response.py
   - src/bolt_api_sdk/utils/url.py
   - src/bolt_api_sdk/utils/values.py
+  - src/bolt_api_sdk/webhooks.py
 examples:
   createProduct:
     speakeasy-default-create-product:
@@ -197,4 +699,287 @@ examples:
       responses:
         "200":
           application/json: {"orders": [{"id": "so_Vni2CsDCpT0r", "subscription_id": "s_711BJEHgNnGB", "order_id": "sr_1BHyrSbeQiKwdyQ_49_bdw", "status": "active"}]}
+  getAccount:
+    speakeasy-default-get-account:
+      responses:
+        "200":
+          application/json: {"addresses": [{"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B", "metadata": {}}], "payment_methods": [{"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "last4": "4021", "exp_month": 11, "exp_year": 2024, "network": "visa", "metadata": {}}], "profile": {"email": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "metadata": {}, "name": "Alan Watts", "phone": "+12125550199"}}
+  createAccount:
+    speakeasy-default-create-account:
+      requestBody:
+        application/json: {"addresses": [{"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone": "+12125550199", "postal_code": "10044", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B", "metadata": {}}], "payment_methods": [{"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "default": true, "door_code": "123456", "email": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone": "+12125550199", "postal_code": "10044", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "billing_address_id": null, "bin": "411111", "expiration": "2025-11", "last4": "1234", "metadata": {}, "postal_code": "10044", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}], "profile": {"email": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "metadata": {}, "phone": "+12125550199"}}
+      responses:
+        "200":
+          application/json: {"addresses": [{"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B", "metadata": {}}], "payment_methods": [{"metadata": {}}], "profile": {"email": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "metadata": {}, "name": "Alan Watts", "phone": "+12125550199"}}
+  updateAccountProfile:
+    speakeasy-default-update-account-profile:
+      requestBody:
+        application/json: {"first_name": "Alan", "last_name": "Watts", "metadata": {}}
+      responses:
+        "200":
+          application/json: {"email": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "metadata": {}, "name": "Alan Watts", "phone": "+12125550199"}
+  addAddress:
+    speakeasy-default-add-address:
+      requestBody:
+        application/json: {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone": "+12125550199", "postal_code": "10044", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B", "metadata": {}}
+      responses:
+        "200":
+          application/json: {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B", "metadata": {}}
+  deleteAddress:
+    speakeasy-default-delete-address:
+      parameters:
+        path:
+          id: "<id>"
+  replaceAddress:
+    speakeasy-default-replace-address:
+      parameters:
+        path:
+          id: "<id>"
+      requestBody:
+        application/json: {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone": "+12125550199", "postal_code": "10044", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B", "metadata": {}}
+      responses:
+        "200":
+          application/json: {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B", "metadata": {}}
+  editAddress:
+    speakeasy-default-edit-address:
+      parameters:
+        path:
+          id: "<id>"
+      requestBody:
+        application/json: {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone": "+12125550199", "postal_code": "10044", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B", "metadata": {}}
+      responses:
+        "200":
+          application/json: {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B", "metadata": {}}
+  detectAccount:
+    speakeasy-default-detect-account:
+      parameters:
+        header:
+          X-Publishable-Key: "<value>"
+      responses:
+        "200":
+          application/json: {}
+        "422":
+          application/json: {"errors": [{"code": 2001005, "message": "The input is missing a required parameter."}], "result": {"success": false}}
+  addPaymentMethod:
+    speakeasy-default-add-payment-method:
+      requestBody:
+        application/json: {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "default": true, "door_code": "123456", "email": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone": "+12125550199", "postal_code": "10044", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "billing_address_id": null, "bin": "411111", "expiration": "2025-11", "last4": "1234", "metadata": {}, "postal_code": "10044", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt", "currency": "USD"}
+      responses:
+        "200":
+          application/json: {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "last4": "4021", "exp_month": 11, "exp_year": 2024, "network": "visa", "metadata": {}}
+  deletePaymentMethod:
+    speakeasy-default-delete-payment-method:
+      parameters:
+        path:
+          payment_method_id: "<id>"
+      responses:
+        "403":
+          application/json: {"errors": [{"code": 2001005, "message": "The input is missing a required parameter."}], "result": {"success": false}}
+  getMerchantCallbacks:
+    speakeasy-default-get-merchant-callbacks:
+      parameters:
+        query:
+          division_id: "<id>"
+      responses:
+        "200":
+          application/json: {"callback_urls": [{"type": "oauth_redirect", "url": "https://example.com/1"}, {"type": "oauth_logout", "url": "https://example.com/2"}, {"type": "get_account", "url": "https://example.com/3"}]}
+        "400":
+          application/json: {"errors": [{"code": 2001005, "message": "The input is missing a required parameter."}], "result": {"success": false}}
+  setMerchantCallbacks:
+    speakeasy-default-set-merchant-callbacks:
+      requestBody:
+        application/json: {"callback_urls": [{"type": "oauth_redirect", "url": "https://example.com/1"}, {"type": "oauth_logout", "url": "https://example.com/2"}, {"type": "get_account", "url": "https://example.com/3"}], "division_id": "3X9aPQ67-YrB"}
+      responses:
+        "400":
+          application/json: {"errors": [{"code": 2001005, "message": "The input is missing a required parameter."}], "result": {"success": false}}
+  getMerchantIdentifiers:
+    speakeasy-default-get-merchant-identifiers:
+      responses:
+        "200":
+          application/json: {"merchant_divisions": [{"division_id": "IraJdeIgmdsO", "publishable_key": "8fd9diIy59sj.IraJdeIgmdsO.fd233434fg2c616cgo932aa6e1e4fc627a9385045gr395222a127gi93c595rg4"}], "merchant_id": "8fd9diIy59sj", "signing_secret": "xf833434fg2cffos92632aa6e1e4fc627a9385045gdj937fg2a127gi93cgos873"}
+        "403":
+          application/json: {"errors": [{"code": 2001005, "message": "The input is missing a required parameter."}], "result": {"success": false}}
+  createOrderToken:
+    speakeasy-default-create-order-token:
+      requestBody:
+        application/json: {"cart": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "default": true, "door_code": "123456", "email": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone": "+12125550199", "postal_code": "10044", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "discounts": [{"amount": 100, "code": "SUMMER10DISCOUNT", "description": "10% off our summer collection", "details_url": "https://boltswagstore.com/SUMMERSALE", "reference": "DISC-1234", "type": "percentage"}], "fees": [{"reference": "ItemFee", "name": "Item Fee", "description": "Item Fee", "unit_price": 1497.81, "unit_tax_amount": 8125.92, "quantity": 9050.67}], "fulfillments": [{"cart_items": [{"brand": "Bolt", "category": "bags", "collections": ["summer"], "color": "Bolt Blue", "customizations": [{"attributes": {"key1": "value1", "key2": "value2"}, "price": 754}], "description": "Large tote with Bolt logo.", "details_url": "https://boltswagstore.com/products/123456", "gift_option": {"cost": 770, "merchant_product_id": "881", "message": "Happy Anniversary, Smoochy Poo!", "wrap": false}, "image_url": "https://boltswagstore.com/products/123456/images/1.png", "isbn": "9780091347314", "manufacturer": "Bolt Textiles USA", "merchant_product_id": "881", "merchant_variant_id": "888", "name": "Bolt Swag Bag", "options": "Special Edition", "quantity": 1, "reference": "item_100", "shipment": {"carrier": "FedEx", "cost": 770, "discounted_by_membership": false, "estimated_delivery_date": "08-30-2022", "expedited": false, "package_depth": 90, "package_dimension_unit": "cm", "package_height": 103, "package_type": "A big package.", "package_weight_unit": "kg", "package_width": 222, "service": "Option 1", "shipping_address": {"company": "Bolt", "country": "United States", "country_code": "US", "default": true, "door_code": "123456", "email": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone": "+12125550199", "postal_code": "10044", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "shipping_address_id": "address1", "shipping_method": "unknown", "signature": "a1B2s3dC4f5g5D6hj6E7k8F9l0", "tax_amount": 230, "tax_code": "tax-12345", "total_weight": 55, "total_weight_unit": "kg", "type": "door_delivery"}, "size": "Large", "sku": "BOLT-SKU_100", "seller_id": "seller-1234", "tags": "tote, blue, linen, eco-friendly", "tax_amount": 0, "total_amount": 1000, "unit_price": 1000, "uom": "inches", "upc": "0825764603119", "weight": 10, "weight_unit": "pounds"}], "cart_shipment": {"carrier": "FedEx", "cost": 770, "discounted_by_membership": false, "estimated_delivery_date": "08-30-2022", "expedited": false, "package_depth": 90, "package_dimension_unit": "cm", "package_height": 103, "package_type": "A big package.", "package_weight_unit": "kg", "package_width": 222, "service": "Option 1", "shipping_address": {"company": "Bolt", "country": "United States", "country_code": "US", "default": true, "door_code": "123456", "email": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone": "+12125550199", "postal_code": "10044", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "shipping_address_id": "address1", "shipping_method": "unknown", "signature": "a1B2s3dC4f5g5D6hj6E7k8F9l0", "tax_amount": 230, "tax_code": "tax-12345", "total_weight": 55, "total_weight_unit": "kg", "type": "door_delivery"}, "in_store_cart_shipment": {"cart_shipment": {"carrier": "FedEx", "cost": 770, "discounted_by_membership": false, "estimated_delivery_date": "08-30-2022", "expedited": false, "package_depth": 90, "package_dimension_unit": "cm", "package_height": 103, "package_type": "A big package.", "package_weight_unit": "kg", "package_width": 222, "service": "Option 1", "shipping_address": {"company": "Bolt", "country": "United States", "country_code": "US", "default": true, "door_code": "123456", "email": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone": "+12125550199", "postal_code": "10044", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "shipping_address_id": "address1", "shipping_method": "unknown", "signature": "a1B2s3dC4f5g5D6hj6E7k8F9l0", "tax_amount": 230, "tax_code": "tax-12345", "total_weight": 55, "total_weight_unit": "kg", "type": "door_delivery"}, "description": "Pick up in-store at 123 Main St.", "distance": 3, "distance_unit": "mile", "in_store_pickup_address": {"company": "Bolt", "country": "United States", "country_code": "US", "default": true, "door_code": "123456", "email": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone": "+12125550199", "postal_code": "10044", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "store_name": "Bolt Collective"}}], "in_store_cart_shipments": [{"cart_shipment": {"carrier": "FedEx", "cost": 770, "discounted_by_membership": false, "estimated_delivery_date": "08-30-2022", "expedited": false, "package_depth": 90, "package_dimension_unit": "cm", "package_height": 103, "package_type": "A big package.", "package_weight_unit": "kg", "package_width": 222, "service": "Option 1", "shipping_address": {"company": "Bolt", "country": "United States", "country_code": "US", "default": true, "door_code": "123456", "email": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone": "+12125550199", "postal_code": "10044", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "shipping_address_id": "address1", "shipping_method": "unknown", "signature": "a1B2s3dC4f5g5D6hj6E7k8F9l0", "tax_amount": 230, "tax_code": "tax-12345", "total_weight": 55, "total_weight_unit": "kg", "type": "door_delivery"}, "description": "Pick up in-store at 123 Main St.", "distance": 3, "distance_unit": "mile", "in_store_pickup_address": {"company": "Bolt", "country": "United States", "country_code": "US", "default": true, "door_code": "123456", "email": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone": "+12125550199", "postal_code": "10044", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "store_name": "Bolt Collective"}], "items": [{"brand": "Bolt", "category": "bags", "collections": ["summer"], "color": "Bolt Blue", "customizations": [{"attributes": {"key1": "value1", "key2": "value2"}, "price": 754}], "description": "Large tote with Bolt logo.", "details_url": "https://boltswagstore.com/products/123456", "gift_option": {"cost": 770, "merchant_product_id": "881", "message": "Happy Anniversary, Smoochy Poo!", "wrap": false}, "image_url": "https://boltswagstore.com/products/123456/images/1.png", "isbn": "9780091347314", "manufacturer": "Bolt Textiles USA", "merchant_product_id": "881", "merchant_variant_id": "888", "name": "Bolt Swag Bag", "options": "Special Edition", "quantity": 1, "reference": "item_100", "shipment": {"carrier": "FedEx", "cost": 770, "discounted_by_membership": false, "estimated_delivery_date": "08-30-2022", "expedited": false, "package_depth": 90, "package_dimension_unit": "cm", "package_height": 103, "package_type": "A big package.", "package_weight_unit": "kg", "package_width": 222, "service": "Option 1", "shipping_address": {"company": "Bolt", "country": "United States", "country_code": "US", "default": true, "door_code": "123456", "email": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone": "+12125550199", "postal_code": "10044", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "shipping_address_id": "address1", "shipping_method": "unknown", "signature": "a1B2s3dC4f5g5D6hj6E7k8F9l0", "tax_amount": 230, "tax_code": "tax-12345", "total_weight": 55, "total_weight_unit": "kg", "type": "door_delivery"}, "size": "Large", "sku": "BOLT-SKU_100", "seller_id": "seller-1234", "tags": "tote, blue, linen, eco-friendly", "tax_amount": 0, "total_amount": 1000, "unit_price": 1000, "uom": "inches", "upc": "0825764603119", "weight": 10, "weight_unit": "pounds"}], "loyalty_rewards": [{"description": "$5 off (100 Points)", "details": "{\"id\": 123456, \"icon\": \"fa-dollar\", \"name\": \"$15.00 Off\", \"type\": \"Coupon\", \"amount\": 100, \"duration\": \"single_use\", \"cost_text\": \"150 Points\",  \"description\": \"Get $15 off your next purchase for 150 points\", \"discount_type\": \"fixed_amount\", \"unrendered_name\": \"$15.00 Off\",  \"discount_percentage\": null, \"discount_rate_cents\": null, \"discount_value_cents\": null, \"discount_amount_cents\": 1500,  \"unrendered_description\": \"Get $15 off your next purchase for 150 points\", \"applies_to_product_type\": \"ALL\"}"}], "shipments": [{"carrier": "FedEx", "cost": 770, "discounted_by_membership": false, "estimated_delivery_date": "08-30-2022", "expedited": false, "package_depth": 90, "package_dimension_unit": "cm", "package_height": 103, "package_type": "A big package.", "package_weight_unit": "kg", "package_width": 222, "service": "Option 1", "shipping_address": {"company": "Bolt", "country": "United States", "country_code": "US", "default": true, "door_code": "123456", "email": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone": "+12125550199", "postal_code": "10044", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "shipping_address_id": "address1", "shipping_method": "unknown", "signature": "a1B2s3dC4f5g5D6hj6E7k8F9l0", "tax_amount": 230, "tax_code": "tax-12345", "total_weight": 55, "total_weight_unit": "kg", "type": "door_delivery"}], "total_amount": 900, "cart_url": "https://boltswagstore.com/orders/123456765432", "currency": "USD", "display_id": "displayid_100", "metadata": {"key1": "value1", "key2": "value2"}, "order_description": "Order #1234567890", "order_reference": "order_100"}, "channel": "browser", "create_cart_on_merchant_backend": false, "metadata": {"encrypted_user_id": "ID12345678"}, "user_note": "Happy Birthday to my best friend in the whole world. Enjoy!", "seller_splits": [{"seller_id": "seller-1234", "amounts": {"merchant_subtotal": 5000, "discount_total": 500, "shipping_total": 1000, "tax_total": 400, "gross_total": 5900}, "marketplace_commission_fee": {"bps": 250, "flat_cents": 100, "metadata": {"plan_type": "pro", "tier": "premium"}}}]}
+      responses:
+        "200":
+          application/json: {"cart": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "cart_url": "https://boltswagstore.com/orders/123456765432", "currency": {"currency": "USD", "currency_symbol": "$"}, "discount_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "discounts": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "code": "SUMMER10", "description": "10% off our summer collection", "details_url": "https://boltswagstore.com/SUMMERSALE", "reference": "DISC-1234"}], "display_id": "displayid_100", "fee_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "fees": [{"reference": "ItemFee", "name": "Item Fee", "description": "Item Fee", "unit_price": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "unit_tax_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}], "items": [{"category": "bags", "collections": ["summer"], "color": "Bolt Blue", "customizations": [{"attributes": {"key1": "value1", "key2": "value2"}, "price": 754}], "details_url": "https://boltswagstore.com/products/123456", "gift_option": {"hide_gift_message": false, "hide_gift_wrap": false}, "image_url": "https://boltswagstore.com/products/123456/images/1.png", "isbn": "9780091347314", "manufacturer": "Bolt Textiles USA", "msrp": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "quantity": 1, "size": "Large", "sku": "BOLT-SKU_100", "subscription": {"frequency": {"unit": "month", "value": 2}}, "tags": "tote, blue, linen, eco-friendly", "tax_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "total_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "unit_price": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "uom": "inches", "upc": "0825764603119"}], "order_description": "Order #1234567890", "order_reference": "order_100", "shipments": [{"carrier": "USPS", "cost": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "estimated_delivery_date": "2022-04-10 16:12:38.386000+00:00", "gift_options": {"hide_gift_message": false, "hide_gift_wrap": false}, "shipping_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "tax_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}], "shipping_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "subtotal_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "tax_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "total_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "transaction_reference": "6CEA-ZME1-DACE"}}
+        "400":
+          application/json: {"errors": [{"code": 2001005, "message": "The input is missing a required parameter."}], "result": {"success": false}}
+  trackOrder:
+    speakeasy-default-track-order:
+      requestBody:
+        application/json: {"carrier": "UPS", "is_non_bolt_order": false, "items": [], "tracking_number": "EZ1000000001", "transaction_reference": "LBLJ-TWW7-R9VC"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {"errors": [{"code": 2001005, "message": "The input is missing a required parameter."}], "result": {"success": false}}
+  getStatements:
+    speakeasy-default-get-statements:
+      requestBody:
+        application/json: {"date": 1586480400000, "file_type": "csv", "type": "daily_transaction"}
+      responses:
+        "200":
+          application/json: {"url": "https://bolt-statements-production.s3.us-west-2.amazonaws.com/00_daily_transaction_20200410.csv"}
+        "403":
+          application/json: {"errors": [{"code": 2001005, "message": "The input is missing a required parameter."}], "result": {"success": false}}
+  authorizeTransaction:
+    speakeasy-default-authorize-transaction:
+      requestBody:
+        application/json: {"cart": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "default": true, "door_code": "123456", "email": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone": "+12125550199", "postal_code": "10044", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "discounts": [{"amount": 100, "code": "SUMMER10DISCOUNT", "description": "10% off our summer collection", "details_url": "https://boltswagstore.com/SUMMERSALE", "reference": "DISC-1234", "type": "percentage"}], "fees": [{"reference": "ItemFee", "name": "Item Fee", "description": "Item Fee", "unit_price": 1283.86, "unit_tax_amount": 8693.22, "quantity": 1310.83}], "fulfillments": [{"cart_items": [{"brand": "Bolt", "category": "bags", "collections": ["summer"], "color": "Bolt Blue", "customizations": [{"attributes": {"key1": "value1", "key2": "value2"}, "price": 754}], "description": "Large tote with Bolt logo.", "details_url": "https://boltswagstore.com/products/123456", "gift_option": {"cost": 770, "merchant_product_id": "881", "message": "Happy Anniversary, Smoochy Poo!", "wrap": false}, "image_url": "https://boltswagstore.com/products/123456/images/1.png", "isbn": "9780091347314", "manufacturer": "Bolt Textiles USA", "merchant_product_id": "881", "merchant_variant_id": "888", "name": "Bolt Swag Bag", "options": "Special Edition", "quantity": 1, "reference": "item_100", "shipment": {"carrier": "FedEx", "cost": 770, "discounted_by_membership": false, "estimated_delivery_date": "08-30-2022", "expedited": false, "package_depth": 90, "package_dimension_unit": "cm", "package_height": 103, "package_type": "A big package.", "package_weight_unit": "kg", "package_width": 222, "service": "Option 1", "shipping_address": {"company": "Bolt", "country": "United States", "country_code": "US", "default": true, "door_code": "123456", "email": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone": "+12125550199", "postal_code": "10044", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "shipping_address_id": "address1", "shipping_method": "unknown", "signature": "a1B2s3dC4f5g5D6hj6E7k8F9l0", "tax_amount": 230, "tax_code": "tax-12345", "total_weight": 55, "total_weight_unit": "kg", "type": "door_delivery"}, "size": "Large", "sku": "BOLT-SKU_100", "seller_id": "seller-1234", "tags": "tote, blue, linen, eco-friendly", "tax_amount": 0, "total_amount": 1000, "unit_price": 1000, "uom": "inches", "upc": "0825764603119", "weight": 10, "weight_unit": "pounds"}], "cart_shipment": {"carrier": "FedEx", "cost": 770, "discounted_by_membership": false, "estimated_delivery_date": "08-30-2022", "expedited": false, "package_depth": 90, "package_dimension_unit": "cm", "package_height": 103, "package_type": "A big package.", "package_weight_unit": "kg", "package_width": 222, "service": "Option 1", "shipping_address": {"company": "Bolt", "country": "United States", "country_code": "US", "default": true, "door_code": "123456", "email": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone": "+12125550199", "postal_code": "10044", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "shipping_address_id": "address1", "shipping_method": "unknown", "signature": "a1B2s3dC4f5g5D6hj6E7k8F9l0", "tax_amount": 230, "tax_code": "tax-12345", "total_weight": 55, "total_weight_unit": "kg", "type": "door_delivery"}, "in_store_cart_shipment": {"cart_shipment": {"carrier": "FedEx", "cost": 770, "discounted_by_membership": false, "estimated_delivery_date": "08-30-2022", "expedited": false, "package_depth": 90, "package_dimension_unit": "cm", "package_height": 103, "package_type": "A big package.", "package_weight_unit": "kg", "package_width": 222, "service": "Option 1", "shipping_address": {"company": "Bolt", "country": "United States", "country_code": "US", "default": true, "door_code": "123456", "email": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone": "+12125550199", "postal_code": "10044", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "shipping_address_id": "address1", "shipping_method": "unknown", "signature": "a1B2s3dC4f5g5D6hj6E7k8F9l0", "tax_amount": 230, "tax_code": "tax-12345", "total_weight": 55, "total_weight_unit": "kg", "type": "door_delivery"}, "description": "Pick up in-store at 123 Main St.", "distance": 3, "distance_unit": "mile", "in_store_pickup_address": {"company": "Bolt", "country": "United States", "country_code": "US", "default": true, "door_code": "123456", "email": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone": "+12125550199", "postal_code": "10044", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "store_name": "Bolt Collective"}}], "in_store_cart_shipments": [{"cart_shipment": {"carrier": "FedEx", "cost": 770, "discounted_by_membership": false, "estimated_delivery_date": "08-30-2022", "expedited": false, "package_depth": 90, "package_dimension_unit": "cm", "package_height": 103, "package_type": "A big package.", "package_weight_unit": "kg", "package_width": 222, "service": "Option 1", "shipping_address": {"company": "Bolt", "country": "United States", "country_code": "US", "default": true, "door_code": "123456", "email": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone": "+12125550199", "postal_code": "10044", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "shipping_address_id": "address1", "shipping_method": "unknown", "signature": "a1B2s3dC4f5g5D6hj6E7k8F9l0", "tax_amount": 230, "tax_code": "tax-12345", "total_weight": 55, "total_weight_unit": "kg", "type": "door_delivery"}, "description": "Pick up in-store at 123 Main St.", "distance": 3, "distance_unit": "mile", "in_store_pickup_address": {"company": "Bolt", "country": "United States", "country_code": "US", "default": true, "door_code": "123456", "email": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone": "+12125550199", "postal_code": "10044", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "store_name": "Bolt Collective"}], "items": [{"brand": "Bolt", "category": "bags", "collections": ["summer"], "color": "Bolt Blue", "customizations": [{"attributes": {"key1": "value1", "key2": "value2"}, "price": 754}], "description": "Large tote with Bolt logo.", "details_url": "https://boltswagstore.com/products/123456", "gift_option": {"cost": 770, "merchant_product_id": "881", "message": "Happy Anniversary, Smoochy Poo!", "wrap": false}, "image_url": "https://boltswagstore.com/products/123456/images/1.png", "isbn": "9780091347314", "manufacturer": "Bolt Textiles USA", "merchant_product_id": "881", "merchant_variant_id": "888", "name": "Bolt Swag Bag", "options": "Special Edition", "quantity": 1, "reference": "item_100", "shipment": {"carrier": "FedEx", "cost": 770, "discounted_by_membership": false, "estimated_delivery_date": "08-30-2022", "expedited": false, "package_depth": 90, "package_dimension_unit": "cm", "package_height": 103, "package_type": "A big package.", "package_weight_unit": "kg", "package_width": 222, "service": "Option 1", "shipping_address": {"company": "Bolt", "country": "United States", "country_code": "US", "default": true, "door_code": "123456", "email": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone": "+12125550199", "postal_code": "10044", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "shipping_address_id": "address1", "shipping_method": "unknown", "signature": "a1B2s3dC4f5g5D6hj6E7k8F9l0", "tax_amount": 230, "tax_code": "tax-12345", "total_weight": 55, "total_weight_unit": "kg", "type": "door_delivery"}, "size": "Large", "sku": "BOLT-SKU_100", "seller_id": "seller-1234", "tags": "tote, blue, linen, eco-friendly", "tax_amount": 0, "total_amount": 1000, "unit_price": 1000, "uom": "inches", "upc": "0825764603119", "weight": 10, "weight_unit": "pounds"}], "loyalty_rewards": [{"description": "$5 off (100 Points)", "details": "{\"id\": 123456, \"icon\": \"fa-dollar\", \"name\": \"$15.00 Off\", \"type\": \"Coupon\", \"amount\": 100, \"duration\": \"single_use\", \"cost_text\": \"150 Points\",  \"description\": \"Get $15 off your next purchase for 150 points\", \"discount_type\": \"fixed_amount\", \"unrendered_name\": \"$15.00 Off\",  \"discount_percentage\": null, \"discount_rate_cents\": null, \"discount_value_cents\": null, \"discount_amount_cents\": 1500,  \"unrendered_description\": \"Get $15 off your next purchase for 150 points\", \"applies_to_product_type\": \"ALL\"}"}], "shipments": [{"carrier": "FedEx", "cost": 770, "discounted_by_membership": false, "estimated_delivery_date": "08-30-2022", "expedited": false, "package_depth": 90, "package_dimension_unit": "cm", "package_height": 103, "package_type": "A big package.", "package_weight_unit": "kg", "package_width": 222, "service": "Option 1", "shipping_address": {"company": "Bolt", "country": "United States", "country_code": "US", "default": true, "door_code": "123456", "email": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone": "+12125550199", "postal_code": "10044", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "shipping_address_id": "address1", "shipping_method": "unknown", "signature": "a1B2s3dC4f5g5D6hj6E7k8F9l0", "tax_amount": 230, "tax_code": "tax-12345", "total_weight": 55, "total_weight_unit": "kg", "type": "door_delivery"}], "total_amount": 900, "cart_url": "https://boltswagstore.com/orders/123456765432", "currency": "USD", "display_id": "displayid_100", "metadata": {"key1": "value1", "key2": "value2"}, "order_description": "Order #1234567890", "order_reference": "order_100"}, "create_bolt_account": true, "credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "default": true, "door_code": "123456", "email": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone": "+12125550199", "postal_code": "10044", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "411111", "expiration": "2025-11", "last4": "1234", "postal_code": "10044", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "division_id": "3X9aPQ67-YrB", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "previous_transaction_id": null, "shipping_address": {"company": "Bolt", "country": "United States", "country_code": "US", "default": true, "door_code": "123456", "email": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone": "+12125550199", "postal_code": "10044", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "source": "direct_payments", "user_identifier": {"artifact": "<value>", "email": "alan.watts@example.com", "email_id": "<id>", "phone": "+12125550199", "phone_id": "<id>"}, "user_identity": {"first_name": "Charlotte", "last_name": "Charles"}}
+      responses:
+        "200":
+          application/json: {"transaction": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "authorization": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded"}, "capture": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "type": "processing_fee"}], "status": "succeeded"}, "captures": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "metadata": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key1": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key2": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "splits": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}, "status": "succeeded"}], "credit": {"status": "succeeded", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567"}, "date": 1615407159447, "from_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "from_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "id": "T1c3p4yBuVYJ9", "indemnification_decision": "indemnified", "indemnification_reason": "merchant_force_approved", "last4": "4021", "merchant_division": {"merchant_password_login_url": "https://www.example.com/login"}, "processor": "adyen_gateway", "reference": "LBLJ-TWW7-R9VC", "risk_insights": {"payment_instrument_factors": {"key": "{\"factor1\":\"factor1\",\"factor2\":\"factor2\"}", "key1": "{\"factor1\":\"factor1\",\"factor2\":\"factor2\"}"}}, "risk_review_status": "reviewed", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}], "status": "cancelled", "to_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "to_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "transaction_properties": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "type": "cc_payment", "void": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded", "void": "123456"}}}
+  captureTransaction:
+    speakeasy-default-capture-transaction:
+      requestBody:
+        application/json: {"amount": 754, "currency": "USD", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "skip_hook_notification": false, "transaction_reference": "LBLJ-TWW7-R9VC"}
+      responses:
+        "200":
+          application/json: {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "authorization": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded"}, "capture": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "type": "processing_fee"}], "status": "succeeded"}, "captures": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "metadata": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key1": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "splits": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}, "status": "succeeded"}], "credit": {"status": "succeeded", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567"}, "date": 1615407159447, "from_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "from_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "id": "T1c3p4yBuVYJ9", "indemnification_decision": "indemnified", "indemnification_reason": "merchant_force_approved", "last4": "4021", "merchant_division": {"merchant_password_login_url": "https://www.example.com/login"}, "processor": "adyen_gateway", "reference": "LBLJ-TWW7-R9VC", "risk_insights": {"payment_instrument_factors": {"key": "{\"factor1\":\"factor1\",\"factor2\":\"factor2\"}", "key1": "{\"factor1\":\"factor1\",\"factor2\":\"factor2\"}"}}, "risk_review_status": "reviewed", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}], "status": "cancelled", "to_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "to_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "transaction_properties": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "type": "cc_payment", "void": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded", "void": "123456"}}
+        "403":
+          application/json: {"errors": [{"code": 2001005, "message": "The input is missing a required parameter."}], "result": {"success": false}}
+        "422":
+          application/json: {"errors": [{"code": 1000001, "field": "transaction_id", "message": "`TA8hLkJh4db4JJ` must be a valid public id of type transaction"}]}
+  refundTransaction:
+    speakeasy-default-refund-transaction:
+      requestBody:
+        application/json: {"amount": 754, "currency": "USD", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "skip_hook_notification": false, "transaction_reference": "LBLJ-TWW7-R9VC"}
+      responses:
+        "200":
+          application/json: {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "authorization": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded"}, "capture": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "type": "processing_fee"}], "status": "succeeded"}, "captures": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "metadata": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "splits": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}, "status": "succeeded"}], "credit": {"status": "succeeded", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567"}, "date": 1615407159447, "from_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "from_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "id": "T1c3p4yBuVYJ9", "indemnification_decision": "indemnified", "indemnification_reason": "merchant_force_approved", "last4": "4021", "merchant_division": {"merchant_password_login_url": "https://www.example.com/login"}, "processor": "adyen_gateway", "reference": "LBLJ-TWW7-R9VC", "risk_insights": {"payment_instrument_factors": {"key": "{\"factor1\":\"factor1\",\"factor2\":\"factor2\"}", "key1": "{\"factor1\":\"factor1\",\"factor2\":\"factor2\"}"}}, "risk_review_status": "reviewed", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}], "status": "cancelled", "to_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "to_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "transaction_properties": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key1": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key2": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "type": "cc_payment", "void": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded", "void": "123456"}}
+        "422":
+          application/json: {"errors": [{"code": 2001005, "message": "The input is missing a required parameter."}], "result": {"success": false}}
+  reviewTransaction:
+    speakeasy-default-review-transaction:
+      requestBody:
+        application/json: {"decision": "approve", "transaction_reference": "LBLJ-TWW7-R9VC"}
+      responses:
+        "200":
+          application/json: {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "authorization": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded"}, "capture": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "type": "processing_fee"}], "status": "succeeded"}, "captures": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "metadata": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "splits": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}, "status": "succeeded"}], "credit": {"status": "succeeded", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567"}, "date": 1615407159447, "from_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "from_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "id": "T1c3p4yBuVYJ9", "indemnification_decision": "indemnified", "indemnification_reason": "merchant_force_approved", "last4": "4021", "merchant_division": {"merchant_password_login_url": "https://www.example.com/login"}, "processor": "adyen_gateway", "reference": "LBLJ-TWW7-R9VC", "risk_insights": {"payment_instrument_factors": {"key": "{\"factor1\":\"factor1\",\"factor2\":\"factor2\"}", "key1": "{\"factor1\":\"factor1\",\"factor2\":\"factor2\"}", "key2": "{\"factor1\":\"factor1\",\"factor2\":\"factor2\"}"}}, "risk_review_status": "reviewed", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}], "status": "cancelled", "to_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "to_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "transaction_properties": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "type": "cc_payment", "void": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded", "void": "123456"}, "adjust_transactions": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "authorization": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded"}, "capture": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "type": "processing_fee"}], "status": "succeeded"}, "captures": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "metadata": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "splits": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}, "status": "succeeded"}], "credit": {"status": "succeeded", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567"}, "date": 1615407159447, "from_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "from_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "id": "T1c3p4yBuVYJ9", "indemnification_decision": "indemnified", "indemnification_reason": "merchant_force_approved", "last4": "4021", "merchant_division": {"merchant_password_login_url": "https://www.example.com/login"}, "processor": "adyen_gateway", "reference": "LBLJ-TWW7-R9VC", "risk_insights": {"payment_instrument_factors": {"key": "{\"factor1\":\"factor1\",\"factor2\":\"factor2\"}", "key1": "{\"factor1\":\"factor1\",\"factor2\":\"factor2\"}", "key2": "{\"factor1\":\"factor1\",\"factor2\":\"factor2\"}"}}, "risk_review_status": "reviewed", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}], "status": "cancelled", "to_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "to_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "transaction_properties": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key1": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "type": "cc_payment", "void": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded", "void": "123456"}}], "auth_verification_status": "new", "chargeback_details": {"amt_won": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "chargeback_amt": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "chargeback_fee": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "net_amt": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}, "manual_disputes": [{"currency": "USD"}], "order": {"cart": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "cart_url": "https://boltswagstore.com/orders/123456765432", "currency": {"currency": "USD", "currency_symbol": "$"}, "discount_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "discounts": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "code": "SUMMER10", "description": "10% off our summer collection", "details_url": "https://boltswagstore.com/SUMMERSALE", "reference": "DISC-1234"}], "display_id": "displayid_100", "fee_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "fees": [{"category": "bags", "collections": ["summer"], "color": "Bolt Blue", "customizations": [{"attributes": {"key1": "value1", "key2": "value2"}, "price": 754}], "details_url": "https://boltswagstore.com/products/123456", "gift_option": {"hide_gift_message": false, "hide_gift_wrap": false}, "image_url": "https://boltswagstore.com/products/123456/images/1.png", "isbn": "9780091347314", "manufacturer": "Bolt Textiles USA", "msrp": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "quantity": 1, "size": "Large", "sku": "BOLT-SKU_100", "subscription": {"frequency": {"unit": "month", "value": 2}}, "tags": "tote, blue, linen, eco-friendly", "tax_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "total_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "unit_price": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "uom": "inches", "upc": "0825764603119"}], "fulfillments": [{"cart_shipment": {"carrier": "USPS", "cost": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "estimated_delivery_date": "2022-04-10 16:12:38.386000+00:00", "gift_options": {"hide_gift_message": false, "hide_gift_wrap": false}, "shipping_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "tax_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}, "in_store_cart_shipment": {"address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "distance": 1.2, "shipment": {"carrier": "FedEx", "cost": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "default": false, "estimated_delivery_date": "08-30-2022", "expedited": false, "gift_options": {"message": "Happy Anniversary, Smoochy Poo!", "wrap": false}, "id": "address1", "package_dimension": {"depth": 90, "height": 103, "unit": "cm", "width": 222}, "package_type": "A big package.", "package_weights": {"unit": "kg", "weight": 22}, "reference": "1123", "service": "Option 1", "shipping_address": {"company": "ACME Corp.", "country": "Canada", "country_code": "US", "email_address": "alan.watts@example.com", "first_name": "Charlotte", "id": "address-1", "last_name": "Charles", "locality": "Wayne County", "name": "Charlotte Charles", "phone_number": "+12125550199", "postal_code": "11209", "region": "Quebec", "street_address1": "42 Wallaby Way", "street_address2": "42 Wallaby Way", "street_address3": "42 Wallaby Way", "street_address4": "42 Wallaby Way"}, "shipping_method": "unknown", "signature": "a1B2s3dC4f5g5D6hj6E7k8F9l0", "tax_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "total_weight": {"unit": "kg", "weight": 22}}, "store_name": "My Store"}, "items": [{"category": "bags", "collections": ["summer"], "color": "Bolt Blue", "customizations": [{"attributes": {"key1": "value1", "key2": "value2"}, "price": 754}], "details_url": "https://boltswagstore.com/products/123456", "gift_option": {"hide_gift_message": false, "hide_gift_wrap": false}, "image_url": "https://boltswagstore.com/products/123456/images/1.png", "isbn": "9780091347314", "manufacturer": "Bolt Textiles USA", "msrp": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "quantity": 1, "size": "Large", "sku": "BOLT-SKU_100", "subscription": {"frequency": {"unit": "month", "value": 2}}, "tags": "tote, blue, linen, eco-friendly", "tax_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "total_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "unit_price": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "uom": "inches", "upc": "0825764603119"}]}], "in_store_shipments": {"address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "distance": 1.2, "shipment": {"carrier": "FedEx", "cost": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "default": false, "estimated_delivery_date": "08-30-2022", "expedited": false, "gift_options": {"message": "Happy Anniversary, Smoochy Poo!", "wrap": false}, "id": "address1", "package_dimension": {"depth": 90, "height": 103, "unit": "cm", "width": 222}, "package_type": "A big package.", "package_weights": {"unit": "kg", "weight": 22}, "reference": "1123", "service": "Option 1", "shipping_address": {"company": "ACME Corp.", "country": "Canada", "country_code": "US", "email_address": "alan.watts@example.com", "first_name": "Charlotte", "id": "address-1", "last_name": "Charles", "locality": "Wayne County", "name": "Charlotte Charles", "phone_number": "+12125550199", "postal_code": "11209", "region": "Quebec", "street_address1": "42 Wallaby Way", "street_address2": "42 Wallaby Way", "street_address3": "42 Wallaby Way", "street_address4": "42 Wallaby Way"}, "shipping_method": "unknown", "signature": "a1B2s3dC4f5g5D6hj6E7k8F9l0", "tax_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "total_weight": {"unit": "kg", "weight": 22}}, "store_name": "My Store"}, "items": [{"category": "bags", "collections": ["summer"], "color": "Bolt Blue", "customizations": [{"attributes": {"key1": "value1", "key2": "value2"}, "price": 754}], "details_url": "https://boltswagstore.com/products/123456", "gift_option": {"hide_gift_message": false, "hide_gift_wrap": false}, "image_url": "https://boltswagstore.com/products/123456/images/1.png", "isbn": "9780091347314", "manufacturer": "Bolt Textiles USA", "msrp": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "quantity": 1, "size": "Large", "sku": "BOLT-SKU_100", "subscription": {"frequency": {"unit": "month", "value": 2}}, "tags": "tote, blue, linen, eco-friendly", "tax_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "total_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "unit_price": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "uom": "inches", "upc": "0825764603119"}], "loyalty_rewards": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}], "loyalty_rewards_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "msrp": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "order_description": "Order #1234567890", "order_reference": "order_100", "shipments": [{"carrier": "USPS", "cost": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "estimated_delivery_date": "2022-04-10 16:12:38.386000+00:00", "gift_options": {"hide_gift_message": false, "hide_gift_wrap": false}, "shipping_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "tax_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}], "shipping_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "subtotal_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "tax_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "total_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "transaction_reference": "6CEA-ZME1-DACE"}}, "refund_transactions": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "authorization": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded"}, "capture": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "type": "processing_fee"}], "status": "succeeded"}, "captures": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "metadata": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "splits": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}, "status": "succeeded"}], "credit": {"status": "succeeded", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567"}, "date": 1615407159447, "from_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "from_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "id": "T1c3p4yBuVYJ9", "indemnification_decision": "indemnified", "indemnification_reason": "merchant_force_approved", "last4": "4021", "merchant_division": {"merchant_password_login_url": "https://www.example.com/login"}, "processor": "adyen_gateway", "reference": "LBLJ-TWW7-R9VC", "risk_insights": {"payment_instrument_factors": {"key": "{\"factor1\":\"factor1\",\"factor2\":\"factor2\"}", "key1": "{\"factor1\":\"factor1\",\"factor2\":\"factor2\"}", "key2": "{\"factor1\":\"factor1\",\"factor2\":\"factor2\"}"}}, "risk_review_status": "reviewed", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}], "status": "cancelled", "to_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "to_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "transaction_properties": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key1": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "type": "cc_payment", "void": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded", "void": "123456"}}], "refunded_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "source_transaction": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "authorization": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded"}, "capture": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "type": "processing_fee"}], "status": "succeeded"}, "captures": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "metadata": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "splits": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}, "status": "succeeded"}], "credit": {"status": "succeeded", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567"}, "date": 1615407159447, "from_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "from_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "id": "T1c3p4yBuVYJ9", "indemnification_decision": "indemnified", "indemnification_reason": "merchant_force_approved", "last4": "4021", "merchant_division": {"merchant_password_login_url": "https://www.example.com/login"}, "processor": "adyen_gateway", "reference": "LBLJ-TWW7-R9VC", "risk_insights": {"payment_instrument_factors": {"key": "{\"factor1\":\"factor1\",\"factor2\":\"factor2\"}", "key1": "{\"factor1\":\"factor1\",\"factor2\":\"factor2\"}", "key2": "{\"factor1\":\"factor1\",\"factor2\":\"factor2\"}"}}, "risk_review_status": "reviewed", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}], "status": "cancelled", "to_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "to_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "transaction_properties": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key1": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key2": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "type": "cc_payment", "void": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded", "void": "123456"}}, "timeline": [{"address_change": {"from_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "to_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}}, "amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "consumer": {"first_name": "Alan", "last_name": "Watts"}, "transaction": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "authorization": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded"}, "capture": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "type": "processing_fee"}], "status": "succeeded"}, "captures": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "metadata": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "splits": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}, "status": "succeeded"}], "credit": {"status": "succeeded", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567"}, "date": 1615407159447, "from_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "from_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "id": "T1c3p4yBuVYJ9", "indemnification_decision": "indemnified", "indemnification_reason": "merchant_force_approved", "last4": "4021", "merchant_division": {"merchant_password_login_url": "https://www.example.com/login"}, "processor": "adyen_gateway", "reference": "LBLJ-TWW7-R9VC", "risk_insights": {"payment_instrument_factors": {"key": "{\"factor1\":\"factor1\",\"factor2\":\"factor2\"}", "key1": "{\"factor1\":\"factor1\",\"factor2\":\"factor2\"}", "key2": "{\"factor1\":\"factor1\",\"factor2\":\"factor2\"}"}}, "risk_review_status": "reviewed", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}], "status": "cancelled", "to_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "to_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "transaction_properties": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key1": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key2": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "type": "cc_payment", "void": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded", "void": "123456"}}}], "void_cause": "irreversible_reject"}
+        "403":
+          application/json: {"errors": [{"code": 2001005, "message": "The input is missing a required parameter."}], "result": {"success": false}}
+  voidTransaction:
+    speakeasy-default-void-transaction:
+      requestBody:
+        application/json: {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "skip_hook_notification": false, "transaction_reference": "LBLJ-TWW7-R9VC"}
+      responses:
+        "200":
+          application/json: {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "authorization": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded"}, "capture": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "type": "processing_fee"}], "status": "succeeded"}, "captures": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "metadata": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "splits": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}, "status": "succeeded"}], "credit": {"status": "succeeded", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567"}, "date": 1615407159447, "from_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "from_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "id": "T1c3p4yBuVYJ9", "indemnification_decision": "indemnified", "indemnification_reason": "merchant_force_approved", "last4": "4021", "merchant_division": {"merchant_password_login_url": "https://www.example.com/login"}, "processor": "adyen_gateway", "reference": "LBLJ-TWW7-R9VC", "risk_insights": {"payment_instrument_factors": {"key": "{\"factor1\":\"factor1\",\"factor2\":\"factor2\"}"}}, "risk_review_status": "reviewed", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}], "status": "cancelled", "to_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "to_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "transaction_properties": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key1": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "type": "cc_payment", "void": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded", "void": "123456"}}
+        "403":
+          application/json: {"errors": [{"code": 2001005, "message": "The input is missing a required parameter."}], "result": {"success": false}}
+  getTransactionDetails:
+    speakeasy-default-get-transaction-details:
+      parameters:
+        path:
+          REFERENCE: "<value>"
+      responses:
+        "200":
+          application/json: {"adjust_transactions": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "authorization": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded"}, "capture": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "type": "processing_fee"}], "status": "succeeded"}, "captures": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "metadata": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key1": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key2": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "splits": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}, "status": "succeeded"}], "credit": {"status": "succeeded", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567"}, "date": 1615407159447, "from_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "from_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "id": "T1c3p4yBuVYJ9", "indemnification_decision": "indemnified", "indemnification_reason": "merchant_force_approved", "last4": "4021", "merchant_division": {"merchant_password_login_url": "https://www.example.com/login"}, "processor": "adyen_gateway", "reference": "LBLJ-TWW7-R9VC", "risk_insights": {"payment_instrument_factors": {"key": "{\"factor1\":\"factor1\",\"factor2\":\"factor2\"}"}}, "risk_review_status": "reviewed", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}], "status": "cancelled", "to_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "to_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "transaction_properties": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key1": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key2": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "type": "cc_payment", "void": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded", "void": "123456"}}], "amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "auth_verification_status": "new", "authorization": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded"}, "authorization_id": "T1c3p4yBuVYJ9", "capture": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "type": "processing_fee"}], "status": "succeeded"}, "captures": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "type": "processing_fee"}], "status": "succeeded"}], "chargeback_details": {"amt_won": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "chargeback_amt": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "chargeback_fee": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "chargeback_id": "a3ad4d56fd7", "net_amt": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "reason": "string", "reason_code": "product_not_received", "representment_reply_by_date": 1485997169003, "representment_result": "won"}, "credit": {"status": "succeeded"}, "custom_fields": {"checkout_setup": "shipping_step", "dynamic": false, "context": "CHECKOUT", "external_id": "123456", "field_setup": "string", "label": "Special Field", "position": 1, "public_id": "i-123456", "required": true, "subscribe_to_newsletter": false}, "date": 1615407159447, "from_consumer": {"emails": [{"address": "alan.watts@example.com", "id": "123", "priority": "primary", "status": "active"}], "first_name": "Charlotte", "id": "b2vghjk2v4c5fgdh3jak", "last_name": "Charles", "phones": [{"country_code": "1", "id": "123", "number": "+12125550199", "priority": "primary", "status": "active"}]}, "from_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "id": "T1c3p4yBuVYJ9", "indemnification_decision": "indemnified", "indemnification_reason": "merchant_force_approved", "last_viewed_utc": 1485997169003, "last4": "4021", "manual_disputes": {"amount": 754, "currency": "USD", "delivery_evidence": "Delivery Evidence", "delivery_link": "https://example.com/delivery/234563245", "dispute_evidence": "Dispute Evidence", "dispute_link": "https://example.com/receipts/234563245", "other_evidence": "Other Evidence", "other_link": "https://example.com/other/234563245", "reason": "string", "status": "pending"}, "merchant": {"created_at": 1485997169003, "description": "Brand Name Here.", "operational_processors": [{"processor": "adyen_gateway", "status": "primary"}], "processor": "adyen_gateway", "public_id": "zSrbabI3MFe8", "time_zone": "America/Los_Angeles"}, "merchant_division": {"account_page_url": "https://example.com/account", "api_base_domain_url": "https://apibasedomainurl.com", "create_order_url": "https://example.com/api/v1/create_order", "debug_url": "https://example.com/v1/debug", "description": "Storefront for employees only.", "get_account_url": "https://example.com/api/v1/account_get", "shopper_custom_fields_updated_url": "https://example.com/api/v1/shopper_custom_fields_updated", "hook_type": "pending", "hook_url": "https://example.com/api/v1/hooks", "id": "3X9aPQ67-YrB", "is_universal_merchant_api": true, "is_webhooks_v2": true, "logo": {"domain": "mystore-staging.boltapp.com", "resource": "division-logo.png"}, "merchant_id": "3X9aPQ67-YrB", "oauth_logout_url": "https://example.com/api/v1/oauth_logout", "oauth_redirect_url": "https://example.com/api/v1/oauth_redirect", "platform": "big_commerce", "plugin_config_url": "https://example.com/api/v1/plugin_config", "privacy_policy_url": "https://example.com/api/v1/privacy", "product_info_url": "https://example.com/api/v1/product_details", "public_id": "3X9aPQ67-YrB", "shipping_and_tax_url": "https://example.com/api/v1/shipping_and_tax", "shipping_url": "https://example.com/api/v1/shipping", "tax_url": "https://example.com/api/v1/tax", "terms_of_service_url": "https://example.com/api/v1/terms", "universal_merchant_api_url": "https://example.com/api/bolt_universal", "update_cart_url": "https://example.com/api/v1/cart_update", "validate_additional_account_data_url": "https://example.com/api/v1/account_validate"}, "merchant_order_number": "O-1234567", "order": {"cart": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "cart_url": "https://boltswagstore.com/orders/123456765432", "currency": {"currency": "USD", "currency_symbol": "$"}, "discount_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "discounts": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "code": "SUMMER10", "description": "10% off our summer collection", "details_url": "https://boltswagstore.com/SUMMERSALE", "reference": "DISC-1234"}], "display_id": "displayid_100", "fee_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "fees": [{"category": "bags", "collections": ["summer"], "color": "Bolt Blue", "customizations": [{"attributes": {"key1": "value1", "key2": "value2"}, "price": 754}], "details_url": "https://boltswagstore.com/products/123456", "gift_option": {"hide_gift_message": false, "hide_gift_wrap": false}, "image_url": "https://boltswagstore.com/products/123456/images/1.png", "isbn": "9780091347314", "manufacturer": "Bolt Textiles USA", "msrp": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "quantity": 1, "size": "Large", "sku": "BOLT-SKU_100", "subscription": {"frequency": {"unit": "month", "value": 2}}, "tags": "tote, blue, linen, eco-friendly", "tax_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "total_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "unit_price": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "uom": "inches", "upc": "0825764603119"}], "fulfillments": [{"cart_shipment": {"carrier": "USPS", "cost": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "estimated_delivery_date": "2022-04-10 16:12:38.386000+00:00", "gift_options": {"hide_gift_message": false, "hide_gift_wrap": false}, "shipping_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "tax_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}, "in_store_cart_shipment": {"address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "distance": 1.2, "shipment": {"carrier": "FedEx", "cost": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "default": false, "estimated_delivery_date": "08-30-2022", "expedited": false, "gift_options": {"message": "Happy Anniversary, Smoochy Poo!", "wrap": false}, "id": "address1", "package_dimension": {"depth": 90, "height": 103, "unit": "cm", "width": 222}, "package_type": "A big package.", "package_weights": {"unit": "kg", "weight": 22}, "reference": "1123", "service": "Option 1", "shipping_address": {"company": "ACME Corp.", "country": "Canada", "country_code": "US", "email_address": "alan.watts@example.com", "first_name": "Charlotte", "id": "address-1", "last_name": "Charles", "locality": "Wayne County", "name": "Charlotte Charles", "phone_number": "+12125550199", "postal_code": "11209", "region": "Quebec", "street_address1": "42 Wallaby Way", "street_address2": "42 Wallaby Way", "street_address3": "42 Wallaby Way", "street_address4": "42 Wallaby Way"}, "shipping_method": "unknown", "signature": "a1B2s3dC4f5g5D6hj6E7k8F9l0", "tax_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "total_weight": {"unit": "kg", "weight": 22}}, "store_name": "My Store"}, "items": [{"category": "bags", "collections": ["summer"], "color": "Bolt Blue", "customizations": [{"attributes": {"key1": "value1", "key2": "value2"}, "price": 754}], "details_url": "https://boltswagstore.com/products/123456", "gift_option": {"hide_gift_message": false, "hide_gift_wrap": false}, "image_url": "https://boltswagstore.com/products/123456/images/1.png", "isbn": "9780091347314", "manufacturer": "Bolt Textiles USA", "msrp": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "quantity": 1, "size": "Large", "sku": "BOLT-SKU_100", "subscription": {"frequency": {"unit": "month", "value": 2}}, "tags": "tote, blue, linen, eco-friendly", "tax_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "total_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "unit_price": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "uom": "inches", "upc": "0825764603119"}]}], "in_store_shipments": {"address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "distance": 1.2, "shipment": {"carrier": "FedEx", "cost": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "default": false, "estimated_delivery_date": "08-30-2022", "expedited": false, "gift_options": {"message": "Happy Anniversary, Smoochy Poo!", "wrap": false}, "id": "address1", "package_dimension": {"depth": 90, "height": 103, "unit": "cm", "width": 222}, "package_type": "A big package.", "package_weights": {"unit": "kg", "weight": 22}, "reference": "1123", "service": "Option 1", "shipping_address": {"company": "ACME Corp.", "country": "Canada", "country_code": "US", "email_address": "alan.watts@example.com", "first_name": "Charlotte", "id": "address-1", "last_name": "Charles", "locality": "Wayne County", "name": "Charlotte Charles", "phone_number": "+12125550199", "postal_code": "11209", "region": "Quebec", "street_address1": "42 Wallaby Way", "street_address2": "42 Wallaby Way", "street_address3": "42 Wallaby Way", "street_address4": "42 Wallaby Way"}, "shipping_method": "unknown", "signature": "a1B2s3dC4f5g5D6hj6E7k8F9l0", "tax_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "total_weight": {"unit": "kg", "weight": 22}}, "store_name": "My Store"}, "items": [{"category": "bags", "collections": ["summer"], "color": "Bolt Blue", "customizations": [{"attributes": {"key1": "value1", "key2": "value2"}, "price": 754}], "details_url": "https://boltswagstore.com/products/123456", "gift_option": {"hide_gift_message": false, "hide_gift_wrap": false}, "image_url": "https://boltswagstore.com/products/123456/images/1.png", "isbn": "9780091347314", "manufacturer": "Bolt Textiles USA", "msrp": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "quantity": 1, "size": "Large", "sku": "BOLT-SKU_100", "subscription": {"frequency": {"unit": "month", "value": 2}}, "tags": "tote, blue, linen, eco-friendly", "tax_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "total_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "unit_price": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "uom": "inches", "upc": "0825764603119"}], "loyalty_rewards": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}], "loyalty_rewards_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "msrp": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "order_description": "Order #1234567890", "order_reference": "order_100", "shipments": [{"carrier": "USPS", "cost": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "estimated_delivery_date": "2022-04-10 16:12:38.386000+00:00", "gift_options": {"hide_gift_message": false, "hide_gift_wrap": false}, "shipping_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "tax_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}], "shipping_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "subtotal_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "tax_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "total_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "transaction_reference": "6CEA-ZME1-DACE"}}, "order_decision": {"decision_factors": ["checkout_behavior"], "score": 680}, "processor": "adyen_gateway", "reference": "LBLJ-TWW7-R9VC", "refund_transaction_ids": ["T1c3p4yBuVYJ9"], "refund_transactions": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "authorization": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded"}, "capture": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "type": "processing_fee"}], "status": "succeeded"}, "captures": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "metadata": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key1": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key2": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "splits": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}, "status": "succeeded"}], "credit": {"status": "succeeded", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567"}, "date": 1615407159447, "from_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "from_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "id": "T1c3p4yBuVYJ9", "indemnification_decision": "indemnified", "indemnification_reason": "merchant_force_approved", "last4": "4021", "merchant_division": {"merchant_password_login_url": "https://www.example.com/login"}, "processor": "adyen_gateway", "reference": "LBLJ-TWW7-R9VC", "risk_insights": {"payment_instrument_factors": {"key": "{\"factor1\":\"factor1\",\"factor2\":\"factor2\"}"}}, "risk_review_status": "reviewed", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}], "status": "cancelled", "to_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "to_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "transaction_properties": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key1": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "type": "cc_payment", "void": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded", "void": "123456"}}], "refunded_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "review_ticket": {"id": "2d34a56", "request_deadline": 1627955971268}, "risk_insights": {"available": true, "decision_factors": ["checkout_behavior"], "fraud_probability": 943}, "risk_review_status": "reviewed", "source_transaction": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "authorization": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded"}, "capture": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "type": "processing_fee"}], "status": "succeeded"}, "captures": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "metadata": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key1": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key2": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "splits": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}, "status": "succeeded"}], "credit": {"status": "succeeded", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567"}, "date": 1615407159447, "from_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "from_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "id": "T1c3p4yBuVYJ9", "indemnification_decision": "indemnified", "indemnification_reason": "merchant_force_approved", "last4": "4021", "merchant_division": {"merchant_password_login_url": "https://www.example.com/login"}, "processor": "adyen_gateway", "reference": "LBLJ-TWW7-R9VC", "risk_insights": {"payment_instrument_factors": {"key": "{\"factor1\":\"factor1\",\"factor2\":\"factor2\"}"}}, "risk_review_status": "reviewed", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}], "status": "cancelled", "to_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "to_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "transaction_properties": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key1": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key2": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "type": "cc_payment", "void": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded", "void": "123456"}}, "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "type": "processing_fee"}], "status": "cancelled", "timeline": {"address_change": {"from_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "to_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}}, "amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "consumer": {"first_name": "Alan", "last_name": "Watts"}, "transaction": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "authorization": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded"}, "capture": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "type": "processing_fee"}], "status": "succeeded"}, "captures": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "metadata": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key1": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key2": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "splits": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}, "status": "succeeded"}], "credit": {"status": "succeeded", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567"}, "date": 1615407159447, "from_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "from_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "id": "T1c3p4yBuVYJ9", "indemnification_decision": "indemnified", "indemnification_reason": "merchant_force_approved", "last4": "4021", "merchant_division": {"merchant_password_login_url": "https://www.example.com/login"}, "processor": "adyen_gateway", "reference": "LBLJ-TWW7-R9VC", "risk_insights": {"payment_instrument_factors": {"key": "{\"factor1\":\"factor1\",\"factor2\":\"factor2\"}"}}, "risk_review_status": "reviewed", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}], "status": "cancelled", "to_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "to_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "transaction_properties": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key1": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "type": "cc_payment", "void": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded", "void": "123456"}}}, "to_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "to_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "type": "cc_payment", "void": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded", "void": "123456"}}
+        "403":
+          application/json: {"errors": [{"code": 2001005, "message": "The input is missing a required parameter."}], "result": {"success": false}}
+  updateTransaction:
+    speakeasy-default-update-transaction:
+      parameters:
+        path:
+          REFERENCE: "<value>"
+      requestBody:
+        application/json: {"display_id": "order-123", "metadata": {"key1": "value1", "key2": "value2"}}
+      responses:
+        "200":
+          application/json: {"adjust_transactions": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "authorization": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded"}, "capture": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "type": "processing_fee"}], "status": "succeeded"}, "captures": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "metadata": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key1": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key2": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "splits": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}, "status": "succeeded"}], "credit": {"status": "succeeded", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567"}, "date": 1615407159447, "from_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "from_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "id": "T1c3p4yBuVYJ9", "indemnification_decision": "indemnified", "indemnification_reason": "merchant_force_approved", "last4": "4021", "merchant_division": {"merchant_password_login_url": "https://www.example.com/login"}, "processor": "adyen_gateway", "reference": "LBLJ-TWW7-R9VC", "risk_insights": {"payment_instrument_factors": {"key": "{\"factor1\":\"factor1\",\"factor2\":\"factor2\"}"}}, "risk_review_status": "reviewed", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}], "status": "cancelled", "to_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "to_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "transaction_properties": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key1": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key2": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "type": "cc_payment", "void": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded", "void": "123456"}}], "amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "auth_verification_status": "new", "authorization": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded"}, "authorization_id": "T1c3p4yBuVYJ9", "capture": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "type": "processing_fee"}], "status": "succeeded"}, "captures": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "type": "processing_fee"}], "status": "succeeded"}], "chargeback_details": {"amt_won": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "chargeback_amt": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "chargeback_fee": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "chargeback_id": "a3ad4d56fd7", "net_amt": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "reason": "string", "reason_code": "product_not_received", "representment_reply_by_date": 1485997169003, "representment_result": "won"}, "credit": {"status": "succeeded"}, "custom_fields": {"checkout_setup": "shipping_step", "dynamic": false, "context": "CHECKOUT", "external_id": "123456", "field_setup": "string", "label": "Special Field", "position": 1, "public_id": "i-123456", "required": true, "subscribe_to_newsletter": false}, "date": 1615407159447, "from_consumer": {"emails": [{"address": "alan.watts@example.com", "id": "123", "priority": "primary", "status": "active"}], "first_name": "Charlotte", "id": "b2vghjk2v4c5fgdh3jak", "last_name": "Charles", "phones": [{"country_code": "1", "id": "123", "number": "+12125550199", "priority": "primary", "status": "active"}]}, "from_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "id": "T1c3p4yBuVYJ9", "indemnification_decision": "indemnified", "indemnification_reason": "merchant_force_approved", "last_viewed_utc": 1485997169003, "last4": "4021", "manual_disputes": {"amount": 754, "currency": "USD", "delivery_evidence": "Delivery Evidence", "delivery_link": "https://example.com/delivery/234563245", "dispute_evidence": "Dispute Evidence", "dispute_link": "https://example.com/receipts/234563245", "other_evidence": "Other Evidence", "other_link": "https://example.com/other/234563245", "reason": "string", "status": "pending"}, "merchant": {"created_at": 1485997169003, "description": "Brand Name Here.", "operational_processors": [{"processor": "adyen_gateway", "status": "primary"}], "processor": "adyen_gateway", "public_id": "zSrbabI3MFe8", "time_zone": "America/Los_Angeles"}, "merchant_division": {"account_page_url": "https://example.com/account", "api_base_domain_url": "https://apibasedomainurl.com", "create_order_url": "https://example.com/api/v1/create_order", "debug_url": "https://example.com/v1/debug", "description": "Storefront for employees only.", "get_account_url": "https://example.com/api/v1/account_get", "shopper_custom_fields_updated_url": "https://example.com/api/v1/shopper_custom_fields_updated", "hook_type": "pending", "hook_url": "https://example.com/api/v1/hooks", "id": "3X9aPQ67-YrB", "is_universal_merchant_api": true, "is_webhooks_v2": true, "logo": {"domain": "mystore-staging.boltapp.com", "resource": "division-logo.png"}, "merchant_id": "3X9aPQ67-YrB", "oauth_logout_url": "https://example.com/api/v1/oauth_logout", "oauth_redirect_url": "https://example.com/api/v1/oauth_redirect", "platform": "big_commerce", "plugin_config_url": "https://example.com/api/v1/plugin_config", "privacy_policy_url": "https://example.com/api/v1/privacy", "product_info_url": "https://example.com/api/v1/product_details", "public_id": "3X9aPQ67-YrB", "shipping_and_tax_url": "https://example.com/api/v1/shipping_and_tax", "shipping_url": "https://example.com/api/v1/shipping", "tax_url": "https://example.com/api/v1/tax", "terms_of_service_url": "https://example.com/api/v1/terms", "universal_merchant_api_url": "https://example.com/api/bolt_universal", "update_cart_url": "https://example.com/api/v1/cart_update", "validate_additional_account_data_url": "https://example.com/api/v1/account_validate"}, "merchant_order_number": "O-1234567", "order": {"cart": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "cart_url": "https://boltswagstore.com/orders/123456765432", "currency": {"currency": "USD", "currency_symbol": "$"}, "discount_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "discounts": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "code": "SUMMER10", "description": "10% off our summer collection", "details_url": "https://boltswagstore.com/SUMMERSALE", "reference": "DISC-1234"}], "display_id": "displayid_100", "fee_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "fees": [{"category": "bags", "collections": ["summer"], "color": "Bolt Blue", "customizations": [{"attributes": {"key1": "value1", "key2": "value2"}, "price": 754}], "details_url": "https://boltswagstore.com/products/123456", "gift_option": {"hide_gift_message": false, "hide_gift_wrap": false}, "image_url": "https://boltswagstore.com/products/123456/images/1.png", "isbn": "9780091347314", "manufacturer": "Bolt Textiles USA", "msrp": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "quantity": 1, "size": "Large", "sku": "BOLT-SKU_100", "subscription": {"frequency": {"unit": "month", "value": 2}}, "tags": "tote, blue, linen, eco-friendly", "tax_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "total_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "unit_price": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "uom": "inches", "upc": "0825764603119"}], "fulfillments": [{"cart_shipment": {"carrier": "USPS", "cost": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "estimated_delivery_date": "2022-04-10 16:12:38.386000+00:00", "gift_options": {"hide_gift_message": false, "hide_gift_wrap": false}, "shipping_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "tax_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}, "in_store_cart_shipment": {"address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "distance": 1.2, "shipment": {"carrier": "FedEx", "cost": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "default": false, "estimated_delivery_date": "08-30-2022", "expedited": false, "gift_options": {"message": "Happy Anniversary, Smoochy Poo!", "wrap": false}, "id": "address1", "package_dimension": {"depth": 90, "height": 103, "unit": "cm", "width": 222}, "package_type": "A big package.", "package_weights": {"unit": "kg", "weight": 22}, "reference": "1123", "service": "Option 1", "shipping_address": {"company": "ACME Corp.", "country": "Canada", "country_code": "US", "email_address": "alan.watts@example.com", "first_name": "Charlotte", "id": "address-1", "last_name": "Charles", "locality": "Wayne County", "name": "Charlotte Charles", "phone_number": "+12125550199", "postal_code": "11209", "region": "Quebec", "street_address1": "42 Wallaby Way", "street_address2": "42 Wallaby Way", "street_address3": "42 Wallaby Way", "street_address4": "42 Wallaby Way"}, "shipping_method": "unknown", "signature": "a1B2s3dC4f5g5D6hj6E7k8F9l0", "tax_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "total_weight": {"unit": "kg", "weight": 22}}, "store_name": "My Store"}, "items": [{"category": "bags", "collections": ["summer"], "color": "Bolt Blue", "customizations": [{"attributes": {"key1": "value1", "key2": "value2"}, "price": 754}], "details_url": "https://boltswagstore.com/products/123456", "gift_option": {"hide_gift_message": false, "hide_gift_wrap": false}, "image_url": "https://boltswagstore.com/products/123456/images/1.png", "isbn": "9780091347314", "manufacturer": "Bolt Textiles USA", "msrp": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "quantity": 1, "size": "Large", "sku": "BOLT-SKU_100", "subscription": {"frequency": {"unit": "month", "value": 2}}, "tags": "tote, blue, linen, eco-friendly", "tax_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "total_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "unit_price": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "uom": "inches", "upc": "0825764603119"}]}], "in_store_shipments": {"address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "distance": 1.2, "shipment": {"carrier": "FedEx", "cost": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "default": false, "estimated_delivery_date": "08-30-2022", "expedited": false, "gift_options": {"message": "Happy Anniversary, Smoochy Poo!", "wrap": false}, "id": "address1", "package_dimension": {"depth": 90, "height": 103, "unit": "cm", "width": 222}, "package_type": "A big package.", "package_weights": {"unit": "kg", "weight": 22}, "reference": "1123", "service": "Option 1", "shipping_address": {"company": "ACME Corp.", "country": "Canada", "country_code": "US", "email_address": "alan.watts@example.com", "first_name": "Charlotte", "id": "address-1", "last_name": "Charles", "locality": "Wayne County", "name": "Charlotte Charles", "phone_number": "+12125550199", "postal_code": "11209", "region": "Quebec", "street_address1": "42 Wallaby Way", "street_address2": "42 Wallaby Way", "street_address3": "42 Wallaby Way", "street_address4": "42 Wallaby Way"}, "shipping_method": "unknown", "signature": "a1B2s3dC4f5g5D6hj6E7k8F9l0", "tax_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "total_weight": {"unit": "kg", "weight": 22}}, "store_name": "My Store"}, "items": [{"category": "bags", "collections": ["summer"], "color": "Bolt Blue", "customizations": [{"attributes": {"key1": "value1", "key2": "value2"}, "price": 754}], "details_url": "https://boltswagstore.com/products/123456", "gift_option": {"hide_gift_message": false, "hide_gift_wrap": false}, "image_url": "https://boltswagstore.com/products/123456/images/1.png", "isbn": "9780091347314", "manufacturer": "Bolt Textiles USA", "msrp": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "quantity": 1, "size": "Large", "sku": "BOLT-SKU_100", "subscription": {"frequency": {"unit": "month", "value": 2}}, "tags": "tote, blue, linen, eco-friendly", "tax_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "total_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "unit_price": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "uom": "inches", "upc": "0825764603119"}], "loyalty_rewards": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}], "loyalty_rewards_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "msrp": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "order_description": "Order #1234567890", "order_reference": "order_100", "shipments": [{"carrier": "USPS", "cost": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "estimated_delivery_date": "2022-04-10 16:12:38.386000+00:00", "gift_options": {"hide_gift_message": false, "hide_gift_wrap": false}, "shipping_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "tax_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}], "shipping_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "subtotal_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "tax_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "total_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "transaction_reference": "6CEA-ZME1-DACE"}}, "order_decision": {"decision_factors": ["checkout_behavior"], "score": 680}, "processor": "adyen_gateway", "reference": "LBLJ-TWW7-R9VC", "refund_transaction_ids": ["T1c3p4yBuVYJ9"], "refund_transactions": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "authorization": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded"}, "capture": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "type": "processing_fee"}], "status": "succeeded"}, "captures": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "metadata": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key1": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key2": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "splits": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}, "status": "succeeded"}], "credit": {"status": "succeeded", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567"}, "date": 1615407159447, "from_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "from_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "id": "T1c3p4yBuVYJ9", "indemnification_decision": "indemnified", "indemnification_reason": "merchant_force_approved", "last4": "4021", "merchant_division": {"merchant_password_login_url": "https://www.example.com/login"}, "processor": "adyen_gateway", "reference": "LBLJ-TWW7-R9VC", "risk_insights": {"payment_instrument_factors": {"key": "{\"factor1\":\"factor1\",\"factor2\":\"factor2\"}"}}, "risk_review_status": "reviewed", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}], "status": "cancelled", "to_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "to_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "transaction_properties": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "type": "cc_payment", "void": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded", "void": "123456"}}], "refunded_amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "review_ticket": {"id": "2d34a56", "request_deadline": 1627955971268}, "risk_insights": {"available": true, "decision_factors": ["checkout_behavior"], "fraud_probability": 943}, "risk_review_status": "reviewed", "source_transaction": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "authorization": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded"}, "capture": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "type": "processing_fee"}], "status": "succeeded"}, "captures": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "metadata": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key1": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key2": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "splits": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}, "status": "succeeded"}], "credit": {"status": "succeeded", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567"}, "date": 1615407159447, "from_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "from_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "id": "T1c3p4yBuVYJ9", "indemnification_decision": "indemnified", "indemnification_reason": "merchant_force_approved", "last4": "4021", "merchant_division": {"merchant_password_login_url": "https://www.example.com/login"}, "processor": "adyen_gateway", "reference": "LBLJ-TWW7-R9VC", "risk_insights": {"payment_instrument_factors": {"key": "{\"factor1\":\"factor1\",\"factor2\":\"factor2\"}"}}, "risk_review_status": "reviewed", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}], "status": "cancelled", "to_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "to_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "transaction_properties": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key1": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key2": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "type": "cc_payment", "void": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded", "void": "123456"}}, "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "type": "processing_fee"}], "status": "cancelled", "timeline": {"address_change": {"from_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "to_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}}, "amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "consumer": {"first_name": "Alan", "last_name": "Watts"}, "transaction": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "authorization": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded"}, "capture": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "type": "processing_fee"}], "status": "succeeded"}, "captures": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}, "id": "BcDE4fafd2a4", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "metadata": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key1": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key2": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "splits": {"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}, "status": "succeeded"}], "credit": {"status": "succeeded", "merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567"}, "date": 1615407159447, "from_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "from_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "id": "T1c3p4yBuVYJ9", "indemnification_decision": "indemnified", "indemnification_reason": "merchant_force_approved", "last4": "4021", "merchant_division": {"merchant_password_login_url": "https://www.example.com/login"}, "processor": "adyen_gateway", "reference": "LBLJ-TWW7-R9VC", "risk_insights": {"payment_instrument_factors": {"key": "{\"factor1\":\"factor1\",\"factor2\":\"factor2\"}"}}, "risk_review_status": "reviewed", "splits": [{"amount": {"amount": 754, "currency": "USD", "currency_symbol": "$"}}], "status": "cancelled", "to_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "to_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "transaction_properties": {"key": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key1": "{\"key1\":\"value1\",\"key2\":\"value2\"}", "key2": "{\"key1\":\"value1\",\"key2\":\"value2\"}"}, "type": "cc_payment", "void": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded", "void": "123456"}}}, "to_consumer": {"emails": [{"priority": "primary"}], "phones": [{"country_code": "US"}]}, "to_credit_card": {"billing_address": {"company": "Bolt", "country": "United States", "country_code": "US", "door_code": "123456", "email_address": "alan.watts@example.com", "first_name": "Alan", "last_name": "Watts", "locality": "Brooklyn", "name": "Alan Watts", "phone_number": "+12125550199", "postal_code": "10044", "priority": "primary", "region": "NY", "region_code": "NY", "street_address1": "888 main street", "street_address2": "apt 3021", "street_address3": "c/o Alicia Watts", "street_address4": "Bridge Street Apartment Building B"}, "bin": "402201", "display_network": "Visa", "expiration": 1654041600000, "icon_asset_path": "img/issuer-logos/visa.png", "id": "AB3rJKam5DhYE", "last4": "4021", "network": "visa", "priority": "primary", "status": "active", "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0", "token_type": "bolt"}, "type": "cc_payment", "void": {"merchant_event_id": "dbe0cd5d-3261-41d9-ba61-49e5b9d07567", "status": "succeeded", "void": "123456"}}
+        "403":
+          application/json: {"errors": [{"code": 2001005, "message": "The input is missing a required parameter."}], "result": {"success": false}}
+  OAuthToken:
+    authorization_code_request:
+      requestBody:
+        application/x-www-form-urlencoded: {"client_id": "<id>", "client_secret": "<value>", "code": "<value>", "grant_type": "authorization_code", "scope": "bolt.account.view"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+    refresh_token_request:
+      requestBody:
+        application/x-www-form-urlencoded: {"client_id": "PUBLISHABLE_KEY_PLACEHOLDER", "client_secret": "API_KEY_PLACEHOLDER", "grant_type": "refresh_token", "refresh_token": "REFRESH_TOKEN_PLACEHOLDER", "scope": "bolt.account.view"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+    authorization_code_response:
+      responses:
+        "200":
+          application/json: {"access_token": "$ACCESS_TOKEN", "expires_in": 3600, "id_token": "$ID_TOKEN", "refresh_token": "$REFRESH_TOKEN", "refresh_token_scope": "bolt.account.view", "scope": "bolt.account.manage", "token_type": "bearer"}
+    refresh_token_response:
+      responses:
+        "200":
+          application/json: {"access_token": "$NEW_ACCESS_TOKEN", "expires_in": 3600, "refresh_token": "$NEW_REFRESH_TOKEN", "refresh_token_scope": "bolt.account.view", "scope": "bolt.account.view", "token_type": "bearer"}
+    invalid_request:
+      responses:
+        "400":
+          application/json: {"error": "invalid_request", "error_description": "The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed."}
+    invalid_scope:
+      responses:
+        "400":
+          application/json: {"error": "invalid_scope", "error_description": "The request scope is invalid, unknown, or malformed."}
+  testShipping:
+    speakeasy-default-test-shipping:
+      requestBody:
+        application/json: {"delivery_estimate": "<value>", "status": "failure", "tracking_detail": [{"city": "New York", "country": "USA", "datetime": "2017-07-21T17:32:28Z", "message": "BILLING INFORMATION RECEIVED", "state": "New York", "status": "in_transit", "zip": "10044"}], "tracking_number": "MockBolt1234"}
+      responses:
+        "400":
+          application/json: {"errors": [{"code": 2001005, "message": "The input is missing a required parameter."}], "result": {"success": false}}
+  createTestingShopperAccount:
+    speakeasy-default-create-testing-shopper-account:
+      requestBody:
+        application/json: {"deactivate_in_days": 30, "email_state": "verified", "phone_state": "verified"}
+      responses:
+        "200":
+          application/json: {"email": "alan.watts@example.com", "email_state": "verified", "phone": "+12125550199", "phone_state": "verified", "otp_code": "123456", "migrated_merchant_owner_id": "addvfRR_bp_7", "will_deactivate_at": "2023-06-01T23:16:07Z", "oauth_code": "7GSjMRSHs6Ak7C_zvVW6P2IhZOHxMK7HZKW1fMX85ms.-DUXvwr1Yg-bfvqXUlMaz49fPn7OdiPa3TwVBlUI-wc"}
+  getTestCreditCardToken:
+    speakeasy-default-get-test-credit-card-token:
+      responses:
+        "200":
+          application/json: {"token": "7i8322df93jsor663bsf02be798e672afd9360a81d203rc97778ff4bddedertg", "expiry": 1671140825305, "last4": "1004", "bin": "411111", "network": "visa"}
+  queryWebhooks:
+    speakeasy-default-query-webhooks:
+      parameters:
+        query:
+          division_id: "<id>"
+      responses:
+        "200":
+          application/json: {"webhooks": [{"created_at": 1485997169003, "events": ["pending"], "url": "https://eva-nerv.shop.com/path/to/hook", "webhook_id": "wh_za7VbYcSQU2zRgGQXQAm-g"}]}
+        "400":
+          application/json: {"errors": [{"code": 2001005, "message": "The input is missing a required parameter."}], "result": {"success": false}}
+  createWebhook:
+    speakeasy-default-create-webhook:
+      requestBody:
+        application/json: {"division_id": "3X9aPQ67-YrB", "url": "https://eva-nerv.shop.com/path/to/hook"}
+      responses:
+        "200":
+          application/json: {"webhook_id": "wh_za7VbYcSQU2zRgGQXQAm-g"}
+        "400":
+          application/json: {"errors": [{"code": 2001005, "message": "The input is missing a required parameter."}], "result": {"success": false}}
+  deleteWebhook:
+    speakeasy-default-delete-webhook:
+      parameters:
+        path:
+          webhook_id: "wh_za7VbYcSQU2zRgGQXQAm-g"
+      responses:
+        "400":
+          application/json: {"errors": [{"code": 2001005, "message": "The input is missing a required parameter."}], "result": {"success": false}}
+  getWebhook:
+    speakeasy-default-get-webhook:
+      parameters:
+        path:
+          webhook_id: "wh_za7VbYcSQU2zRgGQXQAm-g"
+      responses:
+        "200":
+          application/json: {"created_at": 1485997169003, "events": ["pending"], "url": "https://eva-nerv.shop.com/path/to/hook", "webhook_id": "wh_za7VbYcSQU2zRgGQXQAm-g"}
+        "400":
+          application/json: {"errors": [{"code": 2001005, "message": "The input is missing a required parameter."}], "result": {"success": false}}
 examplesVersion: 1.0.2

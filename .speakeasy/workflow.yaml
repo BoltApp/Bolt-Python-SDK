@@ -1,21 +1,21 @@
 workflowVersion: 1.0.0
 speakeasyVersion: latest
 sources:
-    Subscriptions API:
+    bolt-python-api:
         inputs:
-            - location: /Users/ntapaswi/Bolt/Bolt-Python-SDK/subscriptions.spec.yml
+            - location: https://assets.bolt.com/external-api-references/bolt.yml
         overlays:
             - location: .speakeasy/speakeasy-modifications-overlay.yaml
         output: .speakeasy/out.openapi.yaml
         registry:
-            location: registry.speakeasyapi.dev/bolt/boltpublicapi/subscriptions-api
+            location: registry.speakeasyapi.dev/bolt/boltpublicapi/bolt-python-api
 targets:
-    bolt:
+    bolt-sdk:
         target: python
-        source: Subscriptions API
+        source: bolt-python-api
         codeSamples:
             registry:
-                location: registry.speakeasyapi.dev/bolt/boltpublicapi/subscriptions-api-python-code-samples
+                location: registry.speakeasyapi.dev/bolt/boltpublicapi/bolt-python-api-code-samples
             labelOverride:
                 fixedValue: Python (SDK)
             blocking: false

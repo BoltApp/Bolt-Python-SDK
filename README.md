@@ -17,13 +17,21 @@ Developer-friendly & type-safe Python SDK specifically catered to leverage *bolt
 <!-- Start Summary [summary] -->
 ## Summary
 
-Subscriptions API: API for managing subscriptions and products.
+Bolt API Reference: Postman Collection:
+
+[![](https://run.pstmn.io/button.svg)](https://god.gw.postman.com/run-collection/9136127-55d2bde1-a248-473f-95b5-64cfd02fb445?action=collection%2Ffork&collection-url=entityId%3D9136127-55d2bde1-a248-473f-95b5-64cfd02fb445%26entityType%3Dcollection%26workspaceId%3D78beee89-4238-4c5f-bd1f-7e98978744b4#?env%5BBolt%20Sandbox%20Environment%5D=W3sia2V5IjoiYXBpX2Jhc2VfdXJsIiwidmFsdWUiOiJodHRwczovL2FwaS1zYW5kYm94LmJvbHQuY29tIiwidHlwZSI6ImRlZmF1bHQiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6InRrX2Jhc2UiLCJ2YWx1ZSI6Imh0dHBzOi8vc2FuZGJveC5ib2x0dGsuY29tIiwidHlwZSI6ImRlZmF1bHQiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6ImFwaV9rZXkiLCJ2YWx1ZSI6IjxyZXBsYWNlIHdpdGggeW91ciBCb2x0IFNhbmRib3ggQVBJIGtleT4iLCJ0eXBlIjoic2VjcmV0IiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJwdWJsaXNoYWJsZV9rZXkiLCJ2YWx1ZSI6IjxyZXBsYWNlIHdpdGggeW91ciBCb2x0IFNhbmRib3ggcHVibGlzaGFibGUga2V5PiIsInR5cGUiOiJkZWZhdWx0IiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJkaXZpc2lvbl9pZCIsInZhbHVlIjoiPHJlcGxhY2Ugd2l0aCB5b3VyIEJvbHQgU2FuZGJveCBwdWJsaWMgZGl2aXNpb24gSUQ+IiwidHlwZSI6ImRlZmF1bHQiLCJlbmFibGVkIjp0cnVlfV0=)
+
+## About
+ A comprehensive Bolt API reference for interacting with Transactions, Orders, Product Catalog, Configuration, Testing, and much more.
+
+ Note: You must also reference the [Merchant Callback API](/api-merchant) when building a managed checkout custom cart integration
 <!-- End Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
 * [bolt-api-sdk](#bolt-api-sdk)
+  * [About](#about)
   * [SDK Installation](#sdk-installation)
   * [IDE Support](#ide-support)
   * [SDK Example Usage](#sdk-example-usage)
@@ -53,7 +61,15 @@ Subscriptions API: API for managing subscriptions and products.
 >
 > Once a Python version reaches its [official end of life date](https://devguide.python.org/versions/), a 3-month grace period is provided for users to upgrade. Following this grace period, the minimum python version supported in the SDK will be updated.
 
-The SDK can be installed with either *pip* or *poetry* package managers.
+The SDK can be installed with *uv*, *pip*, or *poetry* package managers.
+
+### uv
+
+*uv* is a fast Python package installer and resolver, designed as a drop-in replacement for pip and pip-tools. It's recommended for its speed and modern Python tooling capabilities.
+
+```bash
+uv add git+<UNSET>.git
+```
 
 ### PIP
 
@@ -124,23 +140,12 @@ from bolt_api_sdk import Bolt, models
 import os
 
 
-with Bolt(
-    security=models.Security(
-        x_api_key=os.getenv("BOLT_X_API_KEY", ""),
-    ),
-) as bolt:
+with Bolt() as bolt:
 
-    res = bolt.products.create(name="Bolt Subscription Product", description="This is a subscription product.", brand="Bolt", sku="BOLT-12345", unit_price=1999, plans=[
-        {
-            "sku": "BOLT-PLAN-12345",
-            "name": "Monthly Subscription",
-            "frequency": 1,
-            "frequency_unit": models.CreateProductFrequencyUnit.MONTH_LOWER,
-        },
-    ], images=[
-        "https://example.com/image1.jpg",
-        "https://example.com/image2.jpg",
-    ])
+    res = bolt.account.get_account(security=models.GetAccountSecurity(
+        o_auth=os.getenv("BOLT_O_AUTH", ""),
+        x_api_key=os.getenv("BOLT_X_API_KEY", ""),
+    ))
 
     # Handle response
     print(res)
@@ -148,7 +153,7 @@ with Bolt(
 
 </br>
 
-The same SDK client can also be used to make asychronous requests by importing asyncio.
+The same SDK client can also be used to make asynchronous requests by importing asyncio.
 ```python
 # Asynchronous Example
 import asyncio
@@ -157,23 +162,12 @@ import os
 
 async def main():
 
-    async with Bolt(
-        security=models.Security(
-            x_api_key=os.getenv("BOLT_X_API_KEY", ""),
-        ),
-    ) as bolt:
+    async with Bolt() as bolt:
 
-        res = await bolt.products.create_async(name="Bolt Subscription Product", description="This is a subscription product.", brand="Bolt", sku="BOLT-12345", unit_price=1999, plans=[
-            {
-                "sku": "BOLT-PLAN-12345",
-                "name": "Monthly Subscription",
-                "frequency": 1,
-                "frequency_unit": models.CreateProductFrequencyUnit.MONTH_LOWER,
-            },
-        ], images=[
-            "https://example.com/image1.jpg",
-            "https://example.com/image2.jpg",
-        ])
+        res = await bolt.account.get_account_async(security=models.GetAccountSecurity(
+            o_auth=os.getenv("BOLT_O_AUTH", ""),
+            x_api_key=os.getenv("BOLT_X_API_KEY", ""),
+        ))
 
         # Handle response
         print(res)
@@ -189,10 +183,10 @@ asyncio.run(main())
 
 This SDK supports the following security schemes globally:
 
-| Name                | Type   | Scheme  | Environment Variable     |
-| ------------------- | ------ | ------- | ------------------------ |
-| `x_api_key`         | apiKey | API key | `BOLT_X_API_KEY`         |
-| `x_publishable_key` | apiKey | API key | `BOLT_X_PUBLISHABLE_KEY` |
+| Name        | Type   | Scheme       | Environment Variable |
+| ----------- | ------ | ------------ | -------------------- |
+| `x_api_key` | apiKey | API key      | `BOLT_X_API_KEY`     |
+| `o_auth`    | oauth2 | OAuth2 token | `BOLT_O_AUTH`        |
 
 You can set the security parameters through the `security` optional parameter when initializing the SDK client instance. The selected scheme will be used by default to authenticate with the API for all operations that support it. For example:
 ```python
@@ -206,17 +200,89 @@ with Bolt(
     ),
 ) as bolt:
 
-    res = bolt.products.create(name="Bolt Subscription Product", description="This is a subscription product.", brand="Bolt", sku="BOLT-12345", unit_price=1999, plans=[
-        {
-            "sku": "BOLT-PLAN-12345",
-            "name": "Monthly Subscription",
-            "frequency": 1,
-            "frequency_unit": models.CreateProductFrequencyUnit.MONTH_LOWER,
+    res = bolt.account.create_account(create_account_input={
+        "addresses": [
+            {
+                "company": "Bolt",
+                "country": "United States",
+                "country_code": "US",
+                "door_code": "123456",
+                "email": "alan.watts@example.com",
+                "first_name": "Alan",
+                "last_name": "Watts",
+                "locality": "Brooklyn",
+                "name": "Alan Watts",
+                "phone": "+12125550199",
+                "postal_code": "10044",
+                "region": "NY",
+                "region_code": "NY",
+                "street_address1": "888 main street",
+                "street_address2": "apt 3021",
+                "street_address3": "c/o Alicia Watts",
+                "street_address4": "Bridge Street Apartment Building B",
+                "metadata": {},
+            },
+        ],
+        "payment_methods": [
+            {
+                "billing_address": {
+                    "company": "Bolt",
+                    "country": "United States",
+                    "country_code": "US",
+                    "default": True,
+                    "door_code": "123456",
+                    "email": "alan.watts@example.com",
+                    "first_name": "Alan",
+                    "last_name": "Watts",
+                    "locality": "Brooklyn",
+                    "name": "Alan Watts",
+                    "phone": "+12125550199",
+                    "postal_code": "10044",
+                    "region": "NY",
+                    "region_code": "NY",
+                    "street_address1": "888 main street",
+                    "street_address2": "apt 3021",
+                    "street_address3": "c/o Alicia Watts",
+                    "street_address4": "Bridge Street Apartment Building B",
+                },
+                "billing_address_id": None,
+                "bin": "411111",
+                "expiration": "2025-11",
+                "last4": "1234",
+                "metadata": {},
+                "postal_code": "10044",
+                "token": "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0",
+                "token_type": models.PaymentMethodAccountTokenType.BOLT,
+            },
+        ],
+        "profile": {
+            "email": "alan.watts@example.com",
+            "first_name": "Alan",
+            "last_name": "Watts",
+            "metadata": {},
+            "phone": "+12125550199",
         },
-    ], images=[
-        "https://example.com/image1.jpg",
-        "https://example.com/image2.jpg",
-    ])
+    })
+
+    # Handle response
+    print(res)
+
+```
+
+### Per-Operation Security Schemes
+
+Some operations in this SDK require the security scheme to be specified at the request level. For example:
+```python
+from bolt_api_sdk import Bolt, models
+import os
+
+
+with Bolt() as bolt:
+
+    res = bolt.account.get_account(security=models.GetAccountSecurity(
+        o_auth=os.getenv("BOLT_O_AUTH", ""),
+        x_api_key=os.getenv("BOLT_X_API_KEY", ""),
+    ))
 
     # Handle response
     print(res)
@@ -230,28 +296,61 @@ with Bolt(
 <details open>
 <summary>Available methods</summary>
 
+### [account](docs/sdks/account/README.md)
 
-### [plans](docs/sdks/plans/README.md)
+* [get_account](docs/sdks/account/README.md#get_account) - Get Account Details
+* [create_account](docs/sdks/account/README.md#create_account) - Create Bolt Account
+* [update_account_profile](docs/sdks/account/README.md#update_account_profile) - Update Profile
+* [add_address](docs/sdks/account/README.md#add_address) - Add Address
+* [delete_address](docs/sdks/account/README.md#delete_address) - Delete Address
+* [replace_address](docs/sdks/account/README.md#replace_address) - Replace Address
+* [edit_address](docs/sdks/account/README.md#edit_address) - Edit Address
+* [detect_account](docs/sdks/account/README.md#detect_account) - Detect Account
+* [add_payment_method](docs/sdks/account/README.md#add_payment_method) - Add Payment Method
+* [delete_payment_method](docs/sdks/account/README.md#delete_payment_method) - Delete Payment Method
 
-* [list](docs/sdks/plans/README.md#list) - Get all subscription plans available for a product
 
-### [products](docs/sdks/products/README.md)
+### [configuration](docs/sdks/configuration/README.md)
 
-* [create](docs/sdks/products/README.md#create) - Create a product
-* [list](docs/sdks/products/README.md#list) - Get all products
-* [get](docs/sdks/products/README.md#get) - Get a product
+* [get_merchant_callbacks](docs/sdks/configuration/README.md#get_merchant_callbacks) - Get Callback URLs
+* [set_merchant_callbacks](docs/sdks/configuration/README.md#set_merchant_callbacks) - Set Callback URLs
+* [get_merchant_identifiers](docs/sdks/configuration/README.md#get_merchant_identifiers) - Get Merchant Identifiers
 
-### [subscription_orders](docs/sdks/subscriptionorders/README.md)
+### [o_auth](docs/sdks/oauth/README.md)
 
-* [list](docs/sdks/subscriptionorders/README.md#list) - Get all subscription orders
+* [o_auth_token](docs/sdks/oauth/README.md#o_auth_token) - OAuth Token Endpoint
 
-### [subscriptions](docs/sdks/subscriptions/README.md)
+### [orders](docs/sdks/orders/README.md)
 
-* [pause](docs/sdks/subscriptions/README.md#pause) - Pause a subscription
-* [unpause](docs/sdks/subscriptions/README.md#unpause) - Unpause a subscription
-* [cancel](docs/sdks/subscriptions/README.md#cancel) - Cancel a subscription
-* [get](docs/sdks/subscriptions/README.md#get) - Get a subscription
-* [list](docs/sdks/subscriptions/README.md#list) - Get all subscriptions
+* [create_order_token](docs/sdks/orders/README.md#create_order_token) - Create Order Token
+* [track_order](docs/sdks/orders/README.md#track_order) - Send order tracking details
+
+### [statements](docs/sdks/statements/README.md)
+
+* [get_statements](docs/sdks/statements/README.md#get_statements) - Fetch a Statement
+
+### [testing](docs/sdks/testing/README.md)
+
+* [test_shipping](docs/sdks/testing/README.md#test_shipping) - Test Shipping
+* [create_testing_shopper_account](docs/sdks/testing/README.md#create_testing_shopper_account) - Create Testing Shopper Account
+* [get_test_credit_card_token](docs/sdks/testing/README.md#get_test_credit_card_token) - Fetch a Test Credit Card Token
+
+### [transactions](docs/sdks/transactions/README.md)
+
+* [authorize_transaction](docs/sdks/transactions/README.md#authorize_transaction) - Authorize a Card
+* [capture_transaction](docs/sdks/transactions/README.md#capture_transaction) - Capture a Transaction
+* [refund_transaction](docs/sdks/transactions/README.md#refund_transaction) - Refund a Transaction
+* [review_transaction](docs/sdks/transactions/README.md#review_transaction) - Review Transaction
+* [void_transaction](docs/sdks/transactions/README.md#void_transaction) - Void a Transaction
+* [get_transaction_details](docs/sdks/transactions/README.md#get_transaction_details) - Transaction Details
+* [update_transaction](docs/sdks/transactions/README.md#update_transaction) - Update a Transaction
+
+### [webhooks](docs/sdks/webhooks/README.md)
+
+* [query_webhooks](docs/sdks/webhooks/README.md#query_webhooks) - Query Webhooks
+* [create_webhook](docs/sdks/webhooks/README.md#create_webhook) - Create Bolt Webhook
+* [delete_webhook](docs/sdks/webhooks/README.md#delete_webhook) - Delete a Bolt Webhook
+* [get_webhook](docs/sdks/webhooks/README.md#get_webhook) - Get Webhook
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -268,23 +367,12 @@ from bolt_api_sdk.utils import BackoffStrategy, RetryConfig
 import os
 
 
-with Bolt(
-    security=models.Security(
+with Bolt() as bolt:
+
+    res = bolt.account.get_account(security=models.GetAccountSecurity(
+        o_auth=os.getenv("BOLT_O_AUTH", ""),
         x_api_key=os.getenv("BOLT_X_API_KEY", ""),
     ),
-) as bolt:
-
-    res = bolt.products.create(name="Bolt Subscription Product", description="This is a subscription product.", brand="Bolt", sku="BOLT-12345", unit_price=1999, plans=[
-        {
-            "sku": "BOLT-PLAN-12345",
-            "name": "Monthly Subscription",
-            "frequency": 1,
-            "frequency_unit": models.CreateProductFrequencyUnit.MONTH_LOWER,
-        },
-    ], images=[
-        "https://example.com/image1.jpg",
-        "https://example.com/image2.jpg",
-    ],
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
     # Handle response
@@ -301,22 +389,12 @@ import os
 
 with Bolt(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
-    security=models.Security(
-        x_api_key=os.getenv("BOLT_X_API_KEY", ""),
-    ),
 ) as bolt:
 
-    res = bolt.products.create(name="Bolt Subscription Product", description="This is a subscription product.", brand="Bolt", sku="BOLT-12345", unit_price=1999, plans=[
-        {
-            "sku": "BOLT-PLAN-12345",
-            "name": "Monthly Subscription",
-            "frequency": 1,
-            "frequency_unit": models.CreateProductFrequencyUnit.MONTH_LOWER,
-        },
-    ], images=[
-        "https://example.com/image1.jpg",
-        "https://example.com/image2.jpg",
-    ])
+    res = bolt.account.get_account(security=models.GetAccountSecurity(
+        o_auth=os.getenv("BOLT_O_AUTH", ""),
+        x_api_key=os.getenv("BOLT_X_API_KEY", ""),
+    ))
 
     # Handle response
     print(res)
@@ -329,39 +407,25 @@ with Bolt(
 
 [`BoltError`](./src/bolt_api_sdk/errors/bolterror.py) is the base class for all HTTP error responses. It has the following properties:
 
-| Property           | Type             | Description                                            |
-| ------------------ | ---------------- | ------------------------------------------------------ |
-| `err.message`      | `str`            | Error message                                          |
-| `err.status_code`  | `int`            | HTTP response status code eg `404`                     |
-| `err.headers`      | `httpx.Headers`  | HTTP response headers                                  |
-| `err.body`         | `str`            | HTTP body. Can be empty string if no body is returned. |
-| `err.raw_response` | `httpx.Response` | Raw HTTP response                                      |
+| Property           | Type             | Description                                                                             |
+| ------------------ | ---------------- | --------------------------------------------------------------------------------------- |
+| `err.message`      | `str`            | Error message                                                                           |
+| `err.status_code`  | `int`            | HTTP response status code eg `404`                                                      |
+| `err.headers`      | `httpx.Headers`  | HTTP response headers                                                                   |
+| `err.body`         | `str`            | HTTP body. Can be empty string if no body is returned.                                  |
+| `err.raw_response` | `httpx.Response` | Raw HTTP response                                                                       |
+| `err.data`         |                  | Optional. Some errors may contain structured data. [See Error Classes](#error-classes). |
 
 ### Example
 ```python
-from bolt_api_sdk import Bolt, errors, models
-import os
+from bolt_api_sdk import Bolt, errors
 
 
-with Bolt(
-    security=models.Security(
-        x_api_key=os.getenv("BOLT_X_API_KEY", ""),
-    ),
-) as bolt:
+with Bolt() as bolt:
     res = None
     try:
 
-        res = bolt.products.create(name="Bolt Subscription Product", description="This is a subscription product.", brand="Bolt", sku="BOLT-12345", unit_price=1999, plans=[
-            {
-                "sku": "BOLT-PLAN-12345",
-                "name": "Monthly Subscription",
-                "frequency": 1,
-                "frequency_unit": models.CreateProductFrequencyUnit.MONTH_LOWER,
-            },
-        ], images=[
-            "https://example.com/image1.jpg",
-            "https://example.com/image2.jpg",
-        ])
+        res = bolt.account.detect_account(x_publishable_key="<value>")
 
         # Handle response
         print(res)
@@ -375,13 +439,17 @@ with Bolt(
         print(e.headers)
         print(e.raw_response)
 
+        # Depending on the method different errors may be thrown
+        if isinstance(e, errors.ErrorsBoltAPIResponse):
+            print(e.data.errors)  # Optional[List[models.ErrorBoltAPI]]
+            print(e.data.result)  # Optional[models.RequestResult]
 ```
 
 ### Error Classes
 **Primary error:**
 * [`BoltError`](./src/bolt_api_sdk/errors/bolterror.py): The base class for HTTP error responses.
 
-<details><summary>Less common errors (5)</summary>
+<details><summary>Less common errors (8)</summary>
 
 <br />
 
@@ -392,9 +460,14 @@ with Bolt(
 
 
 **Inherit from [`BoltError`](./src/bolt_api_sdk/errors/bolterror.py)**:
+* [`ErrorsBoltAPIResponse`](./src/bolt_api_sdk/errors/errorsboltapiresponse.py): Applicable to 19 of 31 methods.*
+* [`ErrorsOauthServerResponse`](./src/bolt_api_sdk/errors/errorsoauthserverresponse.py): Invalid request to OAuth Token. Applicable to 1 of 31 methods.*
+* [`UnprocessableEntityError`](./src/bolt_api_sdk/errors/unprocessableentityerror.py): Unprocessable Entity. Status code `422`. Applicable to 1 of 31 methods.*
 * [`ResponseValidationError`](./src/bolt_api_sdk/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
+
+\* Check [the method documentation](#available-resources-and-operations) to see if the error is applicable.
 <!-- End Error Handling [errors] -->
 
 <!-- Start Server Selection [server] -->
@@ -419,22 +492,12 @@ import os
 
 with Bolt(
     server_idx=2,
-    security=models.Security(
-        x_api_key=os.getenv("BOLT_X_API_KEY", ""),
-    ),
 ) as bolt:
 
-    res = bolt.products.create(name="Bolt Subscription Product", description="This is a subscription product.", brand="Bolt", sku="BOLT-12345", unit_price=1999, plans=[
-        {
-            "sku": "BOLT-PLAN-12345",
-            "name": "Monthly Subscription",
-            "frequency": 1,
-            "frequency_unit": models.CreateProductFrequencyUnit.MONTH_LOWER,
-        },
-    ], images=[
-        "https://example.com/image1.jpg",
-        "https://example.com/image2.jpg",
-    ])
+    res = bolt.account.get_account(security=models.GetAccountSecurity(
+        o_auth=os.getenv("BOLT_O_AUTH", ""),
+        x_api_key=os.getenv("BOLT_X_API_KEY", ""),
+    ))
 
     # Handle response
     print(res)
@@ -451,22 +514,12 @@ import os
 
 with Bolt(
     server_url="https://api-staging.bolt.com",
-    security=models.Security(
-        x_api_key=os.getenv("BOLT_X_API_KEY", ""),
-    ),
 ) as bolt:
 
-    res = bolt.products.create(name="Bolt Subscription Product", description="This is a subscription product.", brand="Bolt", sku="BOLT-12345", unit_price=1999, plans=[
-        {
-            "sku": "BOLT-PLAN-12345",
-            "name": "Monthly Subscription",
-            "frequency": 1,
-            "frequency_unit": models.CreateProductFrequencyUnit.MONTH_LOWER,
-        },
-    ], images=[
-        "https://example.com/image1.jpg",
-        "https://example.com/image2.jpg",
-    ])
+    res = bolt.account.get_account(security=models.GetAccountSecurity(
+        o_auth=os.getenv("BOLT_O_AUTH", ""),
+        x_api_key=os.getenv("BOLT_X_API_KEY", ""),
+    ))
 
     # Handle response
     print(res)
@@ -563,26 +616,17 @@ The `Bolt` class implements the context manager protocol and registers a finaliz
 [context-manager]: https://docs.python.org/3/reference/datamodel.html#context-managers
 
 ```python
-from bolt_api_sdk import Bolt, models
-import os
+from bolt_api_sdk import Bolt
 def main():
 
-    with Bolt(
-        security=models.Security(
-            x_api_key=os.getenv("BOLT_X_API_KEY", ""),
-        ),
-    ) as bolt:
+    with Bolt() as bolt:
         # Rest of application here...
 
 
 # Or when using async:
 async def amain():
 
-    async with Bolt(
-        security=models.Security(
-            x_api_key=os.getenv("BOLT_X_API_KEY", ""),
-        ),
-    ) as bolt:
+    async with Bolt() as bolt:
         # Rest of application here...
 ```
 <!-- End Resource Management [resource-management] -->

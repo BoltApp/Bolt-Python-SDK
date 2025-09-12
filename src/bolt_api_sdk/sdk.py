@@ -10,31 +10,74 @@ from bolt_api_sdk._hooks import SDKHooks
 from bolt_api_sdk.types import OptionalNullable, UNSET
 import httpx
 import importlib
+import sys
 from typing import Callable, Dict, Optional, TYPE_CHECKING, Union, cast
 import weakref
 
 if TYPE_CHECKING:
-    from bolt_api_sdk.plans import Plans
-    from bolt_api_sdk.products import Products
-    from bolt_api_sdk.subscriptionorders import SubscriptionOrders
-    from bolt_api_sdk.subscriptions import Subscriptions
+    from bolt_api_sdk.account import Account
+    from bolt_api_sdk.configuration import Configuration
+    from bolt_api_sdk.oauth import OAuth
+    from bolt_api_sdk.orders import Orders
+    from bolt_api_sdk.statements import Statements
+    from bolt_api_sdk.testing import Testing
+    from bolt_api_sdk.transactions import Transactions
+    from bolt_api_sdk.webhooks import Webhooks
 
 
 class Bolt(BaseSDK):
-    r"""Subscriptions API: API for managing subscriptions and products."""
+    r"""Bolt API Reference: Postman Collection:
 
-    products: "Products"
-    plans: "Plans"
-    subscriptions: "Subscriptions"
-    subscription_orders: "SubscriptionOrders"
+    [![](https://run.pstmn.io/button.svg)](https://god.gw.postman.com/run-collection/9136127-55d2bde1-a248-473f-95b5-64cfd02fb445?action=collection%2Ffork&collection-url=entityId%3D9136127-55d2bde1-a248-473f-95b5-64cfd02fb445%26entityType%3Dcollection%26workspaceId%3D78beee89-4238-4c5f-bd1f-7e98978744b4#?env%5BBolt%20Sandbox%20Environment%5D=W3sia2V5IjoiYXBpX2Jhc2VfdXJsIiwidmFsdWUiOiJodHRwczovL2FwaS1zYW5kYm94LmJvbHQuY29tIiwidHlwZSI6ImRlZmF1bHQiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6InRrX2Jhc2UiLCJ2YWx1ZSI6Imh0dHBzOi8vc2FuZGJveC5ib2x0dGsuY29tIiwidHlwZSI6ImRlZmF1bHQiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6ImFwaV9rZXkiLCJ2YWx1ZSI6IjxyZXBsYWNlIHdpdGggeW91ciBCb2x0IFNhbmRib3ggQVBJIGtleT4iLCJ0eXBlIjoic2VjcmV0IiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJwdWJsaXNoYWJsZV9rZXkiLCJ2YWx1ZSI6IjxyZXBsYWNlIHdpdGggeW91ciBCb2x0IFNhbmRib3ggcHVibGlzaGFibGUga2V5PiIsInR5cGUiOiJkZWZhdWx0IiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJkaXZpc2lvbl9pZCIsInZhbHVlIjoiPHJlcGxhY2Ugd2l0aCB5b3VyIEJvbHQgU2FuZGJveCBwdWJsaWMgZGl2aXNpb24gSUQ+IiwidHlwZSI6ImRlZmF1bHQiLCJlbmFibGVkIjp0cnVlfV0=)
+
+    ## About
+    A comprehensive Bolt API reference for interacting with Transactions, Orders, Product Catalog, Configuration, Testing, and much more.
+
+    Note: You must also reference the [Merchant Callback API](/api-merchant) when building a managed checkout custom cart integration
+
+    """
+
+    account: "Account"
+    r"""Use the Account endpoint to view and manage customer accounts. Perform actions such as creating an account, updating an address, or adding a payment method. This endpoint is for merchants using the Accounts Package. See our related guide on [Bolt OAuth](https://help.bolt.com/developers/bolt-oauth/).
+
+    """
+    configuration: "Configuration"
+    r"""Use this resource to retrieve and set Merchant Callback URLs. Bolt uses these URLs to exchange information with your commerce server. See our related guide [About the Merchant Callback API](https://help.bolt.com/products/checkout/how-to-integrate/merchant-api-new/).
+
+    """
+    orders: "Orders"
+    r"""Use the Orders API to interact with the customer's cart throughout the checkout process. Pre-checkout, perform actions such as validating inventory, verifying discounts, and calculating taxes. Post-checkout, share shipping information so your customer can track their order. You'll interact with the [Merchant API](https://help.bolt.com/api-merchant/) to keep the servers in sync with any changes the customer makes to their cart. See our related guide [Create a Bolt Order Token](https://help.bolt.com/products/checkout/how-to-integrate/create-bolt-order-token-new/).
+
+    """
+    statements: "Statements"
+    r"""[Statements](/merchants/references/financials/statements/) are available in the Merchant Dashboard for merchants who use Bolt Payments as their processor. Merchants using other processors do not receive these statements.
+
+    """
+    transactions: "Transactions"
+    r"""Use the Transactions endpoint to authorize payments when the shopper checks out and handle post authorization actions such as captures and refunds. You can use a shopper's existing saved payment information or tokenize new payment information with the [Bolt Tokenizer](https://help.bolt.com/api-tokenizer/). Bolt Authorize Transaction types fall into one of three categories: a logged-in shopper checking out with a saved payment method, any type of shopper checking out with a new payment method, and a logged-in shopper checking out with a new payment method. The new payment method will be saved to the shopper's account.
+
+    """
+    o_auth: "OAuth"
+    r"""Use this endpoint to retrieve an OAuth token. Use the token to allow your ecommerce server to make calls to the Account endpoint and create a one-click checkout experience for shoppers. See related guide [Fetch OAuth Token](https://help.bolt.com/products/ignite/api-implementation/endpoints/oauth-guide/).
+
+    """
+    testing: "Testing"
+    r"""The testing endpoint allows you to test various functionality within Bolt. Create a test credit card to process a test payment in your store. You can also simulate tracking an order’s shipment and programmatically create customer accounts to use as dummy data. See our related guide on [Testing](https://help.bolt.com/developers/production-readiness-guides/test-cards/).
+
+    """
+    webhooks: "Webhooks"
+    r"""Set up webhooks to notify your backend of events within Bolt. These webhooks can communicate with your OMS or other systems to keep them up to date with Bolt. See our related guide on [Webhooks](https://help.bolt.com/get-started/during-checkout/webhooks/).
+
+    """
     _sub_sdk_map = {
-        "products": ("bolt_api_sdk.products", "Products"),
-        "plans": ("bolt_api_sdk.plans", "Plans"),
-        "subscriptions": ("bolt_api_sdk.subscriptions", "Subscriptions"),
-        "subscription_orders": (
-            "bolt_api_sdk.subscriptionorders",
-            "SubscriptionOrders",
-        ),
+        "account": ("bolt_api_sdk.account", "Account"),
+        "configuration": ("bolt_api_sdk.configuration", "Configuration"),
+        "orders": ("bolt_api_sdk.orders", "Orders"),
+        "statements": ("bolt_api_sdk.statements", "Statements"),
+        "transactions": ("bolt_api_sdk.transactions", "Transactions"),
+        "o_auth": ("bolt_api_sdk.oauth", "OAuth"),
+        "testing": ("bolt_api_sdk.testing", "Testing"),
+        "webhooks": ("bolt_api_sdk.webhooks", "Webhooks"),
     }
 
     def __init__(
@@ -101,6 +144,7 @@ class Bolt(BaseSDK):
                 timeout_ms=timeout_ms,
                 debug_logger=debug_logger,
             ),
+            parent_ref=self,
         )
 
         hooks = SDKHooks()
@@ -120,13 +164,24 @@ class Bolt(BaseSDK):
             self.sdk_configuration.async_client_supplied,
         )
 
+    def dynamic_import(self, modname, retries=3):
+        for attempt in range(retries):
+            try:
+                return importlib.import_module(modname)
+            except KeyError:
+                # Clear any half-initialized module and retry
+                sys.modules.pop(modname, None)
+                if attempt == retries - 1:
+                    break
+        raise KeyError(f"Failed to import module '{modname}' after {retries} attempts")
+
     def __getattr__(self, name: str):
         if name in self._sub_sdk_map:
             module_path, class_name = self._sub_sdk_map[name]
             try:
-                module = importlib.import_module(module_path)
+                module = self.dynamic_import(module_path)
                 klass = getattr(module, class_name)
-                instance = klass(self.sdk_configuration)
+                instance = klass(self.sdk_configuration, parent_ref=self)
                 setattr(self, name, instance)
                 return instance
             except ImportError as e:

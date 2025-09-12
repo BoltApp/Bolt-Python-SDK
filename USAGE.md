@@ -5,23 +5,12 @@ from bolt_api_sdk import Bolt, models
 import os
 
 
-with Bolt(
-    security=models.Security(
-        x_api_key=os.getenv("BOLT_X_API_KEY", ""),
-    ),
-) as bolt:
+with Bolt() as bolt:
 
-    res = bolt.products.create(name="Bolt Subscription Product", description="This is a subscription product.", brand="Bolt", sku="BOLT-12345", unit_price=1999, plans=[
-        {
-            "sku": "BOLT-PLAN-12345",
-            "name": "Monthly Subscription",
-            "frequency": 1,
-            "frequency_unit": models.CreateProductFrequencyUnit.MONTH_LOWER,
-        },
-    ], images=[
-        "https://example.com/image1.jpg",
-        "https://example.com/image2.jpg",
-    ])
+    res = bolt.account.get_account(security=models.GetAccountSecurity(
+        o_auth=os.getenv("BOLT_O_AUTH", ""),
+        x_api_key=os.getenv("BOLT_X_API_KEY", ""),
+    ))
 
     # Handle response
     print(res)
@@ -29,7 +18,7 @@ with Bolt(
 
 </br>
 
-The same SDK client can also be used to make asychronous requests by importing asyncio.
+The same SDK client can also be used to make asynchronous requests by importing asyncio.
 ```python
 # Asynchronous Example
 import asyncio
@@ -38,23 +27,12 @@ import os
 
 async def main():
 
-    async with Bolt(
-        security=models.Security(
-            x_api_key=os.getenv("BOLT_X_API_KEY", ""),
-        ),
-    ) as bolt:
+    async with Bolt() as bolt:
 
-        res = await bolt.products.create_async(name="Bolt Subscription Product", description="This is a subscription product.", brand="Bolt", sku="BOLT-12345", unit_price=1999, plans=[
-            {
-                "sku": "BOLT-PLAN-12345",
-                "name": "Monthly Subscription",
-                "frequency": 1,
-                "frequency_unit": models.CreateProductFrequencyUnit.MONTH_LOWER,
-            },
-        ], images=[
-            "https://example.com/image1.jpg",
-            "https://example.com/image2.jpg",
-        ])
+        res = await bolt.account.get_account_async(security=models.GetAccountSecurity(
+            o_auth=os.getenv("BOLT_O_AUTH", ""),
+            x_api_key=os.getenv("BOLT_X_API_KEY", ""),
+        ))
 
         # Handle response
         print(res)

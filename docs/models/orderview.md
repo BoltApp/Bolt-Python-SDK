@@ -1,0 +1,14 @@
+# OrderView
+
+
+## Fields
+
+| Field                                                                         | Type                                                                          | Required                                                                      | Description                                                                   |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `cart`                                                                        | [Optional[models.CartView]](../models/cartview.md)                            | :heavy_minus_sign:                                                            | This is the cart object returned in a successful response.                    |
+| `dynamic_content`                                                             | [Optional[models.IOrderDynamicContent]](../models/iorderdynamiccontent.md)    | :heavy_minus_sign:                                                            | N/A                                                                           |
+| `external_data`                                                               | [Optional[models.OrderExternalDataView]](../models/orderexternaldataview.md)  | :heavy_minus_sign:                                                            | N/A                                                                           |
+| `platform_user_id`                                                            | *Optional[str]*                                                               | :heavy_minus_sign:                                                            | N/A                                                                           |
+| `requires_action`                                                             | *Optional[str]*                                                               | :heavy_minus_sign:                                                            | N/A                                                                           |
+| `token`                                                                       | *Optional[str]*                                                               | :heavy_minus_sign:                                                            | N/A                                                                           |
+| `user_note`                                                                   | *Optional[str]*                                                               | :heavy_minus_sign:                                                            | Used by shoppers to make extra requests or provide details for gift messages. |

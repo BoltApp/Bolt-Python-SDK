@@ -9,7 +9,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class SecurityTypedDict(TypedDict):
     x_api_key: NotRequired[str]
-    x_publishable_key: NotRequired[str]
+    o_auth: NotRequired[str]
 
 
 class Security(BaseModel):
@@ -25,14 +25,11 @@ class Security(BaseModel):
         ),
     ] = None
 
-    x_publishable_key: Annotated[
+    o_auth: Annotated[
         Optional[str],
         FieldMetadata(
             security=SecurityMetadata(
-                scheme=True,
-                scheme_type="apiKey",
-                sub_type="header",
-                field_name="X-Publishable-Key",
+                scheme=True, scheme_type="oauth2", field_name="Authorization"
             )
         ),
     ] = None

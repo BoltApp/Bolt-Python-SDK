@@ -67,8 +67,8 @@ def get_security_from_env(security: Any, security_class: Any) -> Optional[BaseMo
     if os.getenv("BOLT_X_API_KEY"):
         security_dict["x_api_key"] = os.getenv("BOLT_X_API_KEY")
 
-    if os.getenv("BOLT_X_PUBLISHABLE_KEY"):
-        security_dict["x_publishable_key"] = os.getenv("BOLT_X_PUBLISHABLE_KEY")
+    if os.getenv("BOLT_O_AUTH"):
+        security_dict["o_auth"] = os.getenv("BOLT_O_AUTH")
 
     return security_class(**security_dict) if security_dict else None
 
