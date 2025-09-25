@@ -1,9 +1,0 @@
-# MerchantDivisionsIdentifiersView
-
-
-## Fields
-
-| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                | Example                                                                                    |
-| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `division_id`                                                                              | *Optional[str]*                                                                            | :heavy_minus_sign:                                                                         | The public ID of this division.                                                            | IraJdeIgmdsO                                                                               |
-| `publishable_key`                                                                          | *Optional[str]*                                                                            | :heavy_minus_sign:                                                                         | The publishable key tied to this division.                                                 | 8fd9diIy59sj.IraJdeIgmdsO.fd233434fg2c616cgo932aa6e1e4fc627a9385045gr395222a127gi93c595rg4 |
