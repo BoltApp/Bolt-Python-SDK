@@ -25,14 +25,17 @@ generation:
     generateTests: false
     generateNewTests: true
     skipResponseBodyAssertions: false
+  compile:
+    enabled: false
 python:
-  version: 0.4.0
+  version: 0.5.5
   additionalDependencies:
     dev: {}
     main: {}
   allowedRedefinedBuiltins:
     - id
     - object
+  asyncMode: both
   authors:
     - Speakeasy
   baseErrorName: BoltError
@@ -43,6 +46,8 @@ python:
   enumFormat: enum
   envVarPrefix: BOLT
   fixFlags:
+    disableTypeChecking: true
+    nameResolutionFeb2025: true
     responseRequiredSep2024: true
   flattenGlobalSecurity: true
   flattenRequests: true
@@ -56,6 +61,7 @@ python:
       shared: ""
       webhooks: ""
   inputModelSuffix: input
+  legacyPyright: false
   maxMethodParams: 999
   methodArguments: infer-optional-args
   moduleName: ""

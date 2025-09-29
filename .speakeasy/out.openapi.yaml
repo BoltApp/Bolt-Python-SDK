@@ -16,7 +16,8 @@ tags:
     description: |
       Use the Account endpoint to view and manage customer accounts. Perform actions such as creating an account, updating an address, or adding a payment method. This endpoint is for merchants using the Accounts Package. See our related guide on [Bolt OAuth](https://help.bolt.com/developers/bolt-oauth/).
   - name: Configuration
-    description: "Use this resource to retrieve and set Merchant Callback URLs. Bolt uses these URLs to exchange information with your commerce server. See our related guide [About the Merchant Callback API](https://help.bolt.com/products/checkout/how-to-integrate/merchant-api-new/).   \n"
+    description: |
+      Use this resource to retrieve and set Merchant Callback URLs. Bolt uses these URLs to exchange information with your commerce server. See our related guide [About the Merchant Callback API](https://help.bolt.com/products/checkout/how-to-integrate/merchant-api-new/).   
   - name: OAuth
     description: |
       Use this endpoint to retrieve an OAuth token. Use the token to allow your ecommerce server to make calls to the Account endpoint and create a one-click checkout experience for shoppers. See related guide [Fetch OAuth Token](https://help.bolt.com/products/ignite/api-implementation/endpoints/oauth-guide/).
@@ -2281,7 +2282,11 @@ components:
       example: csv
       type: string
     statements_type:
-      description: "The time period and statement type: \n  * [Funding details statement](https://help.bolt.com/operations/financials/export-funding-detail-statements/) with transactional events: Use `daily_transaction` or `monthly_transaction`\n  * [Bank transfer statement](https://help.bolt.com/operations/financials/export-bank-transfer-statements/) with settlement and funding events: Use `daily_funding`\n  * [Dispute statement](https://help.bolt.com/operations/disputes/dispute-statements/#how-to-read-dispute-statements): Use `monthly_dispute`\n"
+      description: |
+        The time period and statement type: 
+          * [Funding details statement](https://help.bolt.com/operations/financials/export-funding-detail-statements/) with transactional events: Use `daily_transaction` or `monthly_transaction`
+          * [Bank transfer statement](https://help.bolt.com/operations/financials/export-bank-transfer-statements/) with settlement and funding events: Use `daily_funding`
+          * [Dispute statement](https://help.bolt.com/operations/disputes/dispute-statements/#how-to-read-dispute-statements): Use `monthly_dispute`
       enum:
         - daily_transaction
         - monthly_transaction
@@ -4955,7 +4960,10 @@ components:
           description: Fetched value using OTP value from the Authorization Modal.
           type: string
         grant_type:
-          description: "The type of OAuth 2.0 grant being utilized. \n\nThe value will always be `authorization_code` when exchanging an authorization code for an access token.\n"
+          description: |
+            The type of OAuth 2.0 grant being utilized. 
+
+            The value will always be `authorization_code` when exchanging an authorization code for an access token.
           enum:
             - authorization_code
           type: string
@@ -4986,7 +4994,10 @@ components:
           description: Your Bolt API Key.
           type: string
         grant_type:
-          description: "The type of OAuth 2.0 grant being utilized. \n\nThe value will always be `refresh_token` when exchanging a refresh token for an access token.\n"
+          description: |
+            The type of OAuth 2.0 grant being utilized. 
+
+            The value will always be `refresh_token` when exchanging a refresh token for an access token.
           enum:
             - refresh_token
           type: string
@@ -9341,7 +9352,12 @@ paths:
         - Transactions
   /v1/oauth/token:
     post:
-      description: "Endpoint for receiving access, ID, and refresh tokens from Bolt's OAuth server. \n\nTo use this endpoint, first use the Authorization Code Request flow by using the `authorization_code` Grant Type (`grant_type`). Then, in the event that you would need a second or subsequent code, use the `refresh_token` value returned from a successful request as the `refresh_token` input value in your subsequent `refresh_token` Grant Type (`grant_type`) request.\n\n **Reminder - the Content-Type of this request must be application/x-www-form-urlencoded**\n"
+      description: |
+        Endpoint for receiving access, ID, and refresh tokens from Bolt's OAuth server. 
+
+        To use this endpoint, first use the Authorization Code Request flow by using the `authorization_code` Grant Type (`grant_type`). Then, in the event that you would need a second or subsequent code, use the `refresh_token` value returned from a successful request as the `refresh_token` input value in your subsequent `refresh_token` Grant Type (`grant_type`) request.
+
+         **Reminder - the Content-Type of this request must be application/x-www-form-urlencoded**
       operationId: OAuthToken
       parameters:
         - $ref: '#/components/parameters/x-publishable-key'

@@ -4,8 +4,6 @@ sources:
     bolt-python-api:
         inputs:
             - location: https://assets.bolt.com/external-api-references/bolt.yml
-        overlays:
-            - location: .speakeasy/speakeasy-modifications-overlay.yaml
         output: .speakeasy/out.openapi.yaml
         registry:
             location: registry.speakeasyapi.dev/bolt/boltpublicapi/bolt-python-api

@@ -1,0 +1,9 @@
+# TransactionOperationalProcessor
+
+
+## Fields
+
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  | Example                                                                      |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `processor`                                                                  | [models.TransactionProcessor](../models/transactionprocessor.md)             | :heavy_check_mark:                                                           | The processor used. **Nullable** for Transactions Details.                   | adyen_gateway                                                                |
+| `status`                                                                     | [models.TransactionProcessorStatus](../models/transactionprocessorstatus.md) | :heavy_check_mark:                                                           | The processor's status. Only `primary` and `active` processor are displayed. | primary                                                                      |

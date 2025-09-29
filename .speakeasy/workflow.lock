@@ -1,34 +1,20 @@
-speakeasyVersion: 1.615.2
+speakeasyVersion: 1.631.4
 sources:
-    Subscriptions API:
-        sourceNamespace: subscriptions-api
-        sourceRevisionDigest: sha256:e617088551fc0371a95717d18f22b8fd2bf499cd2e7fe055e5d4e7f4e74d5f8e
-        sourceBlobDigest: sha256:4bad90deedeb8a2e0a48ebd5446f1056436f1c18bb4c88b8cd3735d075f95510
-        tags:
-            - latest
-            - v1
     bolt-python-api:
         sourceNamespace: bolt-python-api
-        sourceRevisionDigest: sha256:1c68ff1445a2b985a64ae5d030696a1505122d2bb127f3243b55be2b6385995c
-        sourceBlobDigest: sha256:24a83ba3da522ad9ee6859fd8741f87f17bd061c01b0a1eea9713011388a4d42
+        sourceRevisionDigest: sha256:979591ab54418fcfcf6bb36ba4aa4748231411d7d9612b3d60aec41003fde169
+        sourceBlobDigest: sha256:0af17f076ed8196f10613e2f3081b45456c15f67bc75ca7a2f569bf55d9bca8a
         tags:
             - latest
             - 1.0.1
 targets:
-    bolt:
-        source: Subscriptions API
-        sourceNamespace: subscriptions-api
-        sourceRevisionDigest: sha256:e617088551fc0371a95717d18f22b8fd2bf499cd2e7fe055e5d4e7f4e74d5f8e
-        sourceBlobDigest: sha256:4bad90deedeb8a2e0a48ebd5446f1056436f1c18bb4c88b8cd3735d075f95510
-        codeSamplesNamespace: subscriptions-api-python-code-samples
-        codeSamplesRevisionDigest: sha256:09ecade3c1374fe1e0e44e0a6ab5b448fc0968c20e9e079d5d8c75998d4a090a
     bolt-sdk:
         source: bolt-python-api
         sourceNamespace: bolt-python-api
-        sourceRevisionDigest: sha256:1c68ff1445a2b985a64ae5d030696a1505122d2bb127f3243b55be2b6385995c
-        sourceBlobDigest: sha256:24a83ba3da522ad9ee6859fd8741f87f17bd061c01b0a1eea9713011388a4d42
+        sourceRevisionDigest: sha256:979591ab54418fcfcf6bb36ba4aa4748231411d7d9612b3d60aec41003fde169
+        sourceBlobDigest: sha256:0af17f076ed8196f10613e2f3081b45456c15f67bc75ca7a2f569bf55d9bca8a
         codeSamplesNamespace: bolt-python-api-code-samples
-        codeSamplesRevisionDigest: sha256:e6364b702acc10dd71f3e0f75f711ab04e8b2b520536dc8c4d906d81dec043c1
+        codeSamplesRevisionDigest: sha256:36b7d722795affd99bfba79792072019359acf6ba365167f7b2614d2643a0516
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -36,8 +22,6 @@ workflow:
         bolt-python-api:
             inputs:
                 - location: https://assets.bolt.com/external-api-references/bolt.yml
-            overlays:
-                - location: .speakeasy/speakeasy-modifications-overlay.yaml
             output: .speakeasy/out.openapi.yaml
             registry:
                 location: registry.speakeasyapi.dev/bolt/boltpublicapi/bolt-python-api

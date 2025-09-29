@@ -1,0 +1,14 @@
+# SellerSplitAmounts
+
+Defines the financial breakdown for a seller split, including subtotals, discounts, shipping, taxes, and the final gross amount.
+
+
+## Fields
+
+| Field                                                                 | Type                                                                  | Required                                                              | Description                                                           | Example                                                               |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `merchant_subtotal`                                                   | *float*                                                               | :heavy_check_mark:                                                    | The subtotal amount for the merchant's items in this split, in cents. | 5000                                                                  |
+| `discount_total`                                                      | *float*                                                               | :heavy_check_mark:                                                    | The total discount amount applied to this seller split, in cents.     | 500                                                                   |
+| `shipping_total`                                                      | *float*                                                               | :heavy_check_mark:                                                    | The total shipping amount for this seller split, in cents.            | 1000                                                                  |
+| `tax_total`                                                           | *float*                                                               | :heavy_check_mark:                                                    | The total tax amount for this seller split, in cents.                 | 400                                                                   |
+| `gross_total`                                                         | *float*                                                               | :heavy_check_mark:                                                    | The gross total amount for this seller split, in cents.               | 5900                                                                  |

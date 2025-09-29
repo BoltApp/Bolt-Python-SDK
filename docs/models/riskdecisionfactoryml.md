@@ -1,0 +1,22 @@
+# RiskDecisionFactorYml
+
+One of the main contributing factors to the fraud decision and score.
+
+
+## Values
+
+| Name                       | Value                      |
+| -------------------------- | -------------------------- |
+| `ADDRESS_DETAILS`          | address_details            |
+| `AUTH_DECLINE_STOLEN_CARD` | auth_decline_stolen_card   |
+| `CARD_INFORMATION`         | card_information           |
+| `CART_DETAILS`             | cart_details               |
+| `CHECKOUT_BEHAVIOR`        | checkout_behavior          |
+| `DEVICE_SPECIFICATIONS`    | device_specifications      |
+| `EMAIL_DETAILS`            | email_details              |
+| `FRAUDULENT_CHARGEBACK`    | fraudulent_chargeback      |
+| `IP_DETAILS`               | ip_details                 |
+| `PHONE_DETAILS`            | phone_details              |
+| `SHIPPING_DETAILS`         | shipping_details           |
+| `TOO_MANY_ATTEMPTS`        | too_many_attempts          |
+| `USER_HISTORY`             | user_history               |

@@ -1,16 +1,16 @@
 lockVersion: 2.0.0
 id: 59dcfa56-8330-4162-8246-092811fc63e8
 management:
-  docChecksum: c9c74cf96c7060832077b6bfb6e9d77a
+  docChecksum: eb9c846a65c4ee77004d8294d5b023b0
   docVersion: 1.0.1
-  speakeasyVersion: 1.615.2
-  generationVersion: 2.698.4
-  releaseVersion: 0.4.0
-  configChecksum: 89506d35adf7315f5da7aeafa97a59a5
+  speakeasyVersion: 1.631.4
+  generationVersion: 2.716.16
+  releaseVersion: 0.5.5
+  configChecksum: c272fd869c7b4456e9a143187eebe8be
 features:
   python:
     additionalDependencies: 1.0.0
-    core: 5.20.4
+    core: 5.22.0
     defaultEnabledRetries: 0.2.0
     devContainers: 3.0.0
     enumUnions: 0.1.0
@@ -26,7 +26,7 @@ features:
     responseFormat: 1.0.1
     retries: 3.0.2
     sdkHooks: 1.1.0
-    unions: 3.0.4
+    unions: 3.0.5
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json

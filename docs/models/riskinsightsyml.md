@@ -1,0 +1,14 @@
+# RiskInsightsYml
+
+Displays fraud decisioning insights based on key factors. This information can either be forwarded via a `risk_insights` transaction webhook type or be polled by sending a `GET` request to Bolt's [transactions endpoint](/api-bolt/#operation/transaction-details).
+
+
+
+## Fields
+
+| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           | Example                                                                               |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `available`                                                                           | *Optional[bool]*                                                                      | :heavy_minus_sign:                                                                    | Must be set to `true` to receive fraud insights.                                      | true                                                                                  |
+| `decision_factors`                                                                    | List[[models.RiskDecisionFactorYml](../models/riskdecisionfactoryml.md)]              | :heavy_minus_sign:                                                                    | The top 5 factors of the fraud decision.                                              |                                                                                       |
+| `fraud_probability`                                                                   | *Optional[int]*                                                                       | :heavy_minus_sign:                                                                    | The total [fraud score](/merchants/references/policies/fraud-review/#fraud-scoring).<br/> | 943                                                                                   |
+| `payment_instrument_factors`                                                          | Dict[str, *str*]                                                                      | :heavy_minus_sign:                                                                    | N/A                                                                                   |                                                                                       |

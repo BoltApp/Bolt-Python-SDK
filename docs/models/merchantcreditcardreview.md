@@ -1,0 +1,9 @@
+# MerchantCreditCardReview
+
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          | Example                                                                              |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `decision`                                                                           | [models.Decision](../models/decision.md)                                             | :heavy_check_mark:                                                                   | N/A                                                                                  |                                                                                      |
+| `transaction_reference`                                                              | *str*                                                                                | :heavy_check_mark:                                                                   | The transaction's 12-digit Bolt reference ID. **Nullable** for Transactions Details. | LBLJ-TWW7-R9VC                                                                       |
