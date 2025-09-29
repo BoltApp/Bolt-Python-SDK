@@ -11,6 +11,9 @@ targets:
     bolt-sdk:
         target: python
         source: bolt-python-api
+        publish:
+            pypi:
+                token: $pypi_token
         codeSamples:
             registry:
                 location: registry.speakeasyapi.dev/bolt/boltpublicapi/bolt-python-api-code-samples
