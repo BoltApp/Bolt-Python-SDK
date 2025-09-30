@@ -14,7 +14,7 @@ targets:
         sourceRevisionDigest: sha256:979591ab54418fcfcf6bb36ba4aa4748231411d7d9612b3d60aec41003fde169
         sourceBlobDigest: sha256:0af17f076ed8196f10613e2f3081b45456c15f67bc75ca7a2f569bf55d9bca8a
         codeSamplesNamespace: bolt-python-api-code-samples
-        codeSamplesRevisionDigest: sha256:36b7d722795affd99bfba79792072019359acf6ba365167f7b2614d2643a0516
+        codeSamplesRevisionDigest: sha256:b2ae1de49eb37e75145bff16bf80714605249cc212a90f5402b20b5ec9aafb86
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -29,6 +29,9 @@ workflow:
         bolt-sdk:
             target: python
             source: bolt-python-api
+            publish:
+                pypi:
+                    token: $pypi_token
             codeSamples:
                 registry:
                     location: registry.speakeasyapi.dev/bolt/boltpublicapi/bolt-python-api-code-samples
