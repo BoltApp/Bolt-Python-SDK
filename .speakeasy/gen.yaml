@@ -28,7 +28,7 @@ generation:
   compile:
     enabled: false
 python:
-  version: 0.5.6
+  version: 0.6.0
   additionalDependencies:
     dev: {}
     main: {}
