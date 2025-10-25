@@ -257,7 +257,7 @@ class Account(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createAccount",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -357,7 +357,7 @@ class Account(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createAccount",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1676,7 +1676,7 @@ class Account(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="detectAccount",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=None,
             ),
             request=req,
@@ -1771,7 +1771,7 @@ class Account(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="detectAccount",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=None,
             ),
             request=req,
