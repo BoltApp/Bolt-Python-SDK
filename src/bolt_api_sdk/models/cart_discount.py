@@ -17,6 +17,7 @@ class CartDiscountDiscountCategory(str, Enum):
     MEMBERSHIP_GIFTCARD = "membership_giftcard"
     SUBSCRIPTION_DISCOUNT = "subscription_discount"
     REWARDS_DISCOUNT = "rewards_discount"
+    SHIPPING_DISCOUNT = "shipping_discount"
     UNKNOWN = "unknown"
 
 

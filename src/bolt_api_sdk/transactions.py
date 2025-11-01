@@ -319,7 +319,7 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="captureTransaction",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -434,7 +434,7 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="captureTransaction",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -542,7 +542,7 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="refundTransaction",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -645,7 +645,7 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="refundTransaction",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -751,7 +751,7 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="reviewTransaction",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -857,7 +857,7 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="reviewTransaction",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -963,7 +963,7 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="voidTransaction",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1069,7 +1069,7 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="voidTransaction",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1161,7 +1161,7 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getTransactionDetails",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1253,7 +1253,7 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getTransactionDetails",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1360,7 +1360,7 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="updateTransaction",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1467,7 +1467,7 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="updateTransaction",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),

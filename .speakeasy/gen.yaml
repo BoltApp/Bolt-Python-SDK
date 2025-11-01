@@ -21,6 +21,8 @@ generation:
     oAuth2PasswordEnabled: false
     hoistGlobalSecurity: true
   sdkHooksConfigAccess: true
+  schemas:
+    allOfMergeStrategy: shallowMerge
   tests:
     generateTests: false
     generateNewTests: true
@@ -28,7 +30,7 @@ generation:
   compile:
     enabled: false
 python:
-  version: 0.5.6
+  version: 0.6.0
   additionalDependencies:
     dev: {}
     main: {}

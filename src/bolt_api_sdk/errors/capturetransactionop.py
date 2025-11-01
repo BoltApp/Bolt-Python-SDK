@@ -15,7 +15,7 @@ class UnprocessableEntityErrorData(BaseModel):
     result: Optional[models_capturetransactionop.Result] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class UnprocessableEntityError(BoltError):
     r"""Unprocessable Entity"""
 

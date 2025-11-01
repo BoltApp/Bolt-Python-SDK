@@ -74,7 +74,7 @@ class Configuration(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getMerchantCallbacks",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -163,7 +163,7 @@ class Configuration(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getMerchantCallbacks",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -257,7 +257,7 @@ class Configuration(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="setMerchantCallbacks",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -351,7 +351,7 @@ class Configuration(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="setMerchantCallbacks",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -433,7 +433,7 @@ class Configuration(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getMerchantIdentifiers",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -515,7 +515,7 @@ class Configuration(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getMerchantIdentifiers",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),

@@ -1,17 +1,19 @@
 lockVersion: 2.0.0
 id: 59dcfa56-8330-4162-8246-092811fc63e8
 management:
-  docChecksum: eb9c846a65c4ee77004d8294d5b023b0
+  docChecksum: e4e324e012554274042fefddab9462cf
   docVersion: 1.0.1
-  speakeasyVersion: 1.631.4
-  generationVersion: 2.716.16
-  releaseVersion: 0.5.6
-  configChecksum: 5c3946002697625b2cb1ae3a4dfce9af
+  speakeasyVersion: 1.645.1
+  generationVersion: 2.735.1
+  releaseVersion: 0.6.0
+  configChecksum: 051faa66d281de891a6e5d781bdb1903
+  repoURL: https://github.com/BoltApp/Bolt-Python-SDK.git
+  installationURL: https://github.com/BoltApp/Bolt-Python-SDK.git
   published: true
 features:
   python:
     additionalDependencies: 1.0.0
-    core: 5.22.0
+    core: 5.23.2
     defaultEnabledRetries: 0.2.0
     devContainers: 3.0.0
     enumUnions: 0.1.0
@@ -20,14 +22,14 @@ features:
     flattening: 3.1.1
     globalSecurity: 3.0.4
     globalSecurityCallbacks: 1.0.0
-    globalServerURLs: 3.1.1
+    globalServerURLs: 3.2.0
     methodArguments: 1.0.2
     methodSecurity: 3.0.1
     nullables: 1.0.1
     responseFormat: 1.0.1
     retries: 3.0.2
     sdkHooks: 1.1.0
-    unions: 3.0.5
+    unions: 3.1.0
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
@@ -351,7 +353,6 @@ generatedFiles:
   - docs/models/webhookeventgroup.md
   - docs/models/webhookstype.md
   - docs/sdks/account/README.md
-  - docs/sdks/bolt/README.md
   - docs/sdks/configuration/README.md
   - docs/sdks/oauth/README.md
   - docs/sdks/orders/README.md
@@ -363,6 +364,7 @@ generatedFiles:
   - py.typed
   - pylintrc
   - pyproject.toml
+  - scripts/prepare_readme.py
   - scripts/publish.sh
   - src/bolt_api_sdk/__init__.py
   - src/bolt_api_sdk/_hooks/__init__.py
