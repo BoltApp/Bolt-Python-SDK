@@ -79,7 +79,7 @@ class Orders(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createOrderToken",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -173,7 +173,7 @@ class Orders(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createOrderToken",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -268,7 +268,7 @@ class Orders(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="trackOrder",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -363,7 +363,7 @@ class Orders(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="trackOrder",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),

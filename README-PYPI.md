@@ -19,28 +19,28 @@ Bolt API Reference: Postman Collection:
 ## About
  A comprehensive Bolt API reference for interacting with Transactions, Orders, Product Catalog, Configuration, Testing, and much more.
 
- Note: You must also reference the [Merchant Callback API](/api-merchant) when building a managed checkout custom cart integration
+ Note: You must also reference the [Merchant Callback API](https://github.com/BoltApp/Bolt-Python-SDK/blob/master//api-merchant) when building a managed checkout custom cart integration
 <!-- End Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
-* [bolt-api-sdk](#bolt-api-sdk)
-  * [About](#about)
-  * [SDK Installation](#sdk-installation)
-  * [IDE Support](#ide-support)
-  * [SDK Example Usage](#sdk-example-usage)
-  * [Authentication](#authentication)
-  * [Available Resources and Operations](#available-resources-and-operations)
-  * [Retries](#retries)
-  * [Error Handling](#error-handling)
-  * [Server Selection](#server-selection)
-  * [Custom HTTP Client](#custom-http-client)
-  * [Resource Management](#resource-management)
-  * [Debugging](#debugging)
-* [Development](#development)
-  * [Maturity](#maturity)
-  * [Contributions](#contributions)
+* [bolt-api-sdk](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/#bolt-api-sdk)
+  * [About](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/#about)
+  * [SDK Installation](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/#sdk-installation)
+  * [IDE Support](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/#ide-support)
+  * [SDK Example Usage](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/#sdk-example-usage)
+  * [Authentication](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/#authentication)
+  * [Available Resources and Operations](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/#available-resources-and-operations)
+  * [Retries](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/#retries)
+  * [Error Handling](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/#error-handling)
+  * [Server Selection](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/#server-selection)
+  * [Custom HTTP Client](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/#custom-http-client)
+  * [Resource Management](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/#resource-management)
+  * [Debugging](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/#debugging)
+* [Development](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/#development)
+  * [Maturity](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/#maturity)
+  * [Contributions](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/#contributions)
 
 <!-- End Table of Contents [toc] -->
 
@@ -288,60 +288,60 @@ with Bolt() as bolt:
 <details open>
 <summary>Available methods</summary>
 
-### [account](docs/sdks/account/README.md)
+### [account](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/account/README.md)
 
-* [get_account](docs/sdks/account/README.md#get_account) - Get Account Details
-* [create_account](docs/sdks/account/README.md#create_account) - Create Bolt Account
-* [update_account_profile](docs/sdks/account/README.md#update_account_profile) - Update Profile
-* [add_address](docs/sdks/account/README.md#add_address) - Add Address
-* [delete_address](docs/sdks/account/README.md#delete_address) - Delete Address
-* [replace_address](docs/sdks/account/README.md#replace_address) - Replace Address
-* [edit_address](docs/sdks/account/README.md#edit_address) - Edit Address
-* [detect_account](docs/sdks/account/README.md#detect_account) - Detect Account
-* [add_payment_method](docs/sdks/account/README.md#add_payment_method) - Add Payment Method
-* [delete_payment_method](docs/sdks/account/README.md#delete_payment_method) - Delete Payment Method
+* [get_account](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/account/README.md#get_account) - Get Account Details
+* [create_account](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/account/README.md#create_account) - Create Bolt Account
+* [update_account_profile](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/account/README.md#update_account_profile) - Update Profile
+* [add_address](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/account/README.md#add_address) - Add Address
+* [delete_address](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/account/README.md#delete_address) - Delete Address
+* [replace_address](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/account/README.md#replace_address) - Replace Address
+* [edit_address](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/account/README.md#edit_address) - Edit Address
+* [detect_account](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/account/README.md#detect_account) - Detect Account
+* [add_payment_method](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/account/README.md#add_payment_method) - Add Payment Method
+* [delete_payment_method](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/account/README.md#delete_payment_method) - Delete Payment Method
 
-### [configuration](docs/sdks/configuration/README.md)
+### [configuration](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/configuration/README.md)
 
-* [get_merchant_callbacks](docs/sdks/configuration/README.md#get_merchant_callbacks) - Get Callback URLs
-* [set_merchant_callbacks](docs/sdks/configuration/README.md#set_merchant_callbacks) - Set Callback URLs
-* [get_merchant_identifiers](docs/sdks/configuration/README.md#get_merchant_identifiers) - Get Merchant Identifiers
+* [get_merchant_callbacks](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/configuration/README.md#get_merchant_callbacks) - Get Callback URLs
+* [set_merchant_callbacks](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/configuration/README.md#set_merchant_callbacks) - Set Callback URLs
+* [get_merchant_identifiers](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/configuration/README.md#get_merchant_identifiers) - Get Merchant Identifiers
 
-### [o_auth](docs/sdks/oauth/README.md)
+### [o_auth](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/oauth/README.md)
 
-* [o_auth_token](docs/sdks/oauth/README.md#o_auth_token) - OAuth Token Endpoint
+* [o_auth_token](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/oauth/README.md#o_auth_token) - OAuth Token Endpoint
 
-### [orders](docs/sdks/orders/README.md)
+### [orders](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/orders/README.md)
 
-* [create_order_token](docs/sdks/orders/README.md#create_order_token) - Create Order Token
-* [track_order](docs/sdks/orders/README.md#track_order) - Send order tracking details
+* [create_order_token](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/orders/README.md#create_order_token) - Create Order Token
+* [track_order](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/orders/README.md#track_order) - Send order tracking details
 
-### [statements](docs/sdks/statements/README.md)
+### [statements](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/statements/README.md)
 
-* [get_statements](docs/sdks/statements/README.md#get_statements) - Fetch a Statement
+* [get_statements](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/statements/README.md#get_statements) - Fetch a Statement
 
-### [testing](docs/sdks/testing/README.md)
+### [testing](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/testing/README.md)
 
-* [test_shipping](docs/sdks/testing/README.md#test_shipping) - Test Shipping
-* [create_testing_shopper_account](docs/sdks/testing/README.md#create_testing_shopper_account) - Create Testing Shopper Account
-* [get_test_credit_card_token](docs/sdks/testing/README.md#get_test_credit_card_token) - Fetch a Test Credit Card Token
+* [test_shipping](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/testing/README.md#test_shipping) - Test Shipping
+* [create_testing_shopper_account](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/testing/README.md#create_testing_shopper_account) - Create Testing Shopper Account
+* [get_test_credit_card_token](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/testing/README.md#get_test_credit_card_token) - Fetch a Test Credit Card Token
 
-### [transactions](docs/sdks/transactions/README.md)
+### [transactions](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/transactions/README.md)
 
-* [authorize_transaction](docs/sdks/transactions/README.md#authorize_transaction) - Authorize a Card
-* [capture_transaction](docs/sdks/transactions/README.md#capture_transaction) - Capture a Transaction
-* [refund_transaction](docs/sdks/transactions/README.md#refund_transaction) - Refund a Transaction
-* [review_transaction](docs/sdks/transactions/README.md#review_transaction) - Review Transaction
-* [void_transaction](docs/sdks/transactions/README.md#void_transaction) - Void a Transaction
-* [get_transaction_details](docs/sdks/transactions/README.md#get_transaction_details) - Transaction Details
-* [update_transaction](docs/sdks/transactions/README.md#update_transaction) - Update a Transaction
+* [authorize_transaction](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/transactions/README.md#authorize_transaction) - Authorize a Card
+* [capture_transaction](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/transactions/README.md#capture_transaction) - Capture a Transaction
+* [refund_transaction](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/transactions/README.md#refund_transaction) - Refund a Transaction
+* [review_transaction](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/transactions/README.md#review_transaction) - Review Transaction
+* [void_transaction](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/transactions/README.md#void_transaction) - Void a Transaction
+* [get_transaction_details](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/transactions/README.md#get_transaction_details) - Transaction Details
+* [update_transaction](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/transactions/README.md#update_transaction) - Update a Transaction
 
-### [webhooks](docs/sdks/webhooks/README.md)
+### [webhooks](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/webhooks/README.md)
 
-* [query_webhooks](docs/sdks/webhooks/README.md#query_webhooks) - Query Webhooks
-* [create_webhook](docs/sdks/webhooks/README.md#create_webhook) - Create Bolt Webhook
-* [delete_webhook](docs/sdks/webhooks/README.md#delete_webhook) - Delete a Bolt Webhook
-* [get_webhook](docs/sdks/webhooks/README.md#get_webhook) - Get Webhook
+* [query_webhooks](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/webhooks/README.md#query_webhooks) - Query Webhooks
+* [create_webhook](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/webhooks/README.md#create_webhook) - Create Bolt Webhook
+* [delete_webhook](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/webhooks/README.md#delete_webhook) - Delete a Bolt Webhook
+* [get_webhook](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/docs/sdks/webhooks/README.md#get_webhook) - Get Webhook
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -396,7 +396,7 @@ with Bolt(
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-[`BoltError`](./src/bolt_api_sdk/errors/bolterror.py) is the base class for all HTTP error responses. It has the following properties:
+[`BoltError`](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/./src/bolt_api_sdk/errors/bolterror.py) is the base class for all HTTP error responses. It has the following properties:
 
 | Property           | Type             | Description                                                                             |
 | ------------------ | ---------------- | --------------------------------------------------------------------------------------- |
@@ -405,7 +405,7 @@ with Bolt(
 | `err.headers`      | `httpx.Headers`  | HTTP response headers                                                                   |
 | `err.body`         | `str`            | HTTP body. Can be empty string if no body is returned.                                  |
 | `err.raw_response` | `httpx.Response` | Raw HTTP response                                                                       |
-| `err.data`         |                  | Optional. Some errors may contain structured data. [See Error Classes](#error-classes). |
+| `err.data`         |                  | Optional. Some errors may contain structured data. [See Error Classes](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/#error-classes). |
 
 ### Example
 ```python
@@ -438,7 +438,7 @@ with Bolt() as bolt:
 
 ### Error Classes
 **Primary error:**
-* [`BoltError`](./src/bolt_api_sdk/errors/bolterror.py): The base class for HTTP error responses.
+* [`BoltError`](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/./src/bolt_api_sdk/errors/bolterror.py): The base class for HTTP error responses.
 
 <details><summary>Less common errors (8)</summary>
 
@@ -450,15 +450,15 @@ with Bolt() as bolt:
     * [`httpx.TimeoutException`](https://www.python-httpx.org/exceptions/#httpx.TimeoutException): HTTP request timed out.
 
 
-**Inherit from [`BoltError`](./src/bolt_api_sdk/errors/bolterror.py)**:
-* [`ErrorsBoltAPIResponse`](./src/bolt_api_sdk/errors/errorsboltapiresponse.py): Applicable to 19 of 31 methods.*
-* [`ErrorsOauthServerResponse`](./src/bolt_api_sdk/errors/errorsoauthserverresponse.py): Invalid request to OAuth Token. Applicable to 1 of 31 methods.*
-* [`UnprocessableEntityError`](./src/bolt_api_sdk/errors/unprocessableentityerror.py): Unprocessable Entity. Status code `422`. Applicable to 1 of 31 methods.*
-* [`ResponseValidationError`](./src/bolt_api_sdk/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
+**Inherit from [`BoltError`](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/./src/bolt_api_sdk/errors/bolterror.py)**:
+* [`ErrorsBoltAPIResponse`](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/./src/bolt_api_sdk/errors/errorsboltapiresponse.py): Applicable to 19 of 31 methods.*
+* [`ErrorsOauthServerResponse`](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/./src/bolt_api_sdk/errors/errorsoauthserverresponse.py): Invalid request to OAuth Token. Applicable to 1 of 31 methods.*
+* [`UnprocessableEntityError`](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/./src/bolt_api_sdk/errors/unprocessableentityerror.py): Unprocessable Entity. Status code `422`. Applicable to 1 of 31 methods.*
+* [`ResponseValidationError`](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/./src/bolt_api_sdk/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
 
-\* Check [the method documentation](#available-resources-and-operations) to see if the error is applicable.
+\* Check [the method documentation](https://github.com/BoltApp/Bolt-Python-SDK/blob/master/#available-resources-and-operations) to see if the error is applicable.
 <!-- End Error Handling [errors] -->
 
 <!-- Start Server Selection [server] -->

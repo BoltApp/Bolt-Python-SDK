@@ -19,7 +19,7 @@ class ErrorsBoltAPIResponseData(BaseModel):
     r"""Custom-defined Bolt result object."""
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class ErrorsBoltAPIResponse(BoltError):
     data: ErrorsBoltAPIResponseData = field(hash=False)
 
