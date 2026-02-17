@@ -1,5 +1,4 @@
 # Testing
-(*testing*)
 
 ## Overview
 

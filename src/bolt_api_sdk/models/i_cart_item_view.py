@@ -187,70 +187,67 @@ class ICartItemView(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "bolt_product_id",
-            "brand",
-            "category",
-            "collections",
-            "color",
-            "customizations",
-            "description",
-            "details_url",
-            "gift_option",
-            "hide",
-            "image_url",
-            "isbn",
-            "item_group",
-            "manufacturer",
-            "merchant_product_id",
-            "merchant_variant_id",
-            "msrp",
-            "name",
-            "options",
-            "properties",
-            "quantity",
-            "reference",
-            "shipment_id",
-            "shipment_type",
-            "shopify_line_item_reference",
-            "shopify_product_reference",
-            "shopify_product_variant_reference",
-            "size",
-            "sku",
-            "subscription",
-            "tags",
-            "tax_amount",
-            "taxable",
-            "total_amount",
-            "type",
-            "unit_price",
-            "uom",
-            "upc",
-            "weight",
-        ]
-        nullable_fields = ["category", "isbn", "manufacturer", "sku", "uom", "upc"]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "bolt_product_id",
+                "brand",
+                "category",
+                "collections",
+                "color",
+                "customizations",
+                "description",
+                "details_url",
+                "gift_option",
+                "hide",
+                "image_url",
+                "isbn",
+                "item_group",
+                "manufacturer",
+                "merchant_product_id",
+                "merchant_variant_id",
+                "msrp",
+                "name",
+                "options",
+                "properties",
+                "quantity",
+                "reference",
+                "shipment_id",
+                "shipment_type",
+                "shopify_line_item_reference",
+                "shopify_product_reference",
+                "shopify_product_variant_reference",
+                "size",
+                "sku",
+                "subscription",
+                "tags",
+                "tax_amount",
+                "taxable",
+                "total_amount",
+                "type",
+                "unit_price",
+                "uom",
+                "upc",
+                "weight",
+            ]
+        )
+        nullable_fields = set(["category", "isbn", "manufacturer", "sku", "uom", "upc"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m

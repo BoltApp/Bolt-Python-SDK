@@ -1,5 +1,4 @@
 # Configuration
-(*configuration*)
 
 ## Overview
 

@@ -77,6 +77,7 @@ class OAuth(BaseSDK):
                 "form",
                 Optional[models.OAuthTokenRequestBody],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -93,7 +94,7 @@ class OAuth(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="OAuthToken",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -185,6 +186,7 @@ class OAuth(BaseSDK):
                 "form",
                 Optional[models.OAuthTokenRequestBody],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -201,7 +203,7 @@ class OAuth(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="OAuthToken",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),

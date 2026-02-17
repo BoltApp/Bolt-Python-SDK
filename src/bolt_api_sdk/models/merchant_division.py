@@ -4,7 +4,8 @@ from __future__ import annotations
 from .merchant_logo import MerchantLogo, MerchantLogoTypedDict
 from .merchant_platform import MerchantPlatform
 from .webhooks_type import WebhooksType
-from bolt_api_sdk.types import BaseModel
+from bolt_api_sdk.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -152,3 +153,44 @@ class MerchantDivision(BaseModel):
 
     validate_additional_account_data_url: Optional[str] = None
     r"""The endpoint URL provided by the merchant for validating additional account data."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "account_page_url",
+                "api_base_domain_url",
+                "create_order_url",
+                "debug_url",
+                "get_account_url",
+                "shopper_custom_fields_updated_url",
+                "hook_type",
+                "hook_url",
+                "id",
+                "logo",
+                "oauth_logout_url",
+                "oauth_redirect_url",
+                "platform",
+                "plugin_config_url",
+                "privacy_policy_url",
+                "product_info_url",
+                "public_id",
+                "shipping_and_tax_url",
+                "terms_of_service_url",
+                "universal_merchant_api_url",
+                "update_cart_url",
+                "validate_additional_account_data_url",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

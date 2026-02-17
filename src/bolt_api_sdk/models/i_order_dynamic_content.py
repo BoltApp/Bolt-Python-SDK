@@ -7,8 +7,9 @@ from .eligible_payment_method import (
 )
 from .i_custom_field_view import ICustomFieldView, ICustomFieldViewTypedDict
 from .i_gift_option_view import IGiftOptionView, IGiftOptionViewTypedDict
-from bolt_api_sdk.types import BaseModel
+from bolt_api_sdk.types import BaseModel, UNSET_SENTINEL
 from enum import Enum
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -53,3 +54,30 @@ class IOrderDynamicContent(BaseModel):
     shipping_info_notice: Optional[str] = None
 
     shipping_notice: Optional[str] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "custom_fields",
+                "eligible_payment_methods",
+                "gift_option_view",
+                "hide_apm",
+                "order_notice",
+                "payment_notice",
+                "shipping_info_notice",
+                "shipping_notice",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

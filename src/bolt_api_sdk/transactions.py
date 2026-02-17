@@ -43,7 +43,11 @@ class Transactions(BaseSDK):
         :param security:
         :param x_publishable_key: The publicly viewable identifier used to identify a merchant division. This key is found in the Developer > API section of the Bolt Merchant Dashboard [RECOMMENDED].
         :param idempotency_key: A key created by merchants that ensures `POST` and `PATCH` requests are only performed once. [Read more about Idempotent Requests here](/developers/references/idempotency/).
-        :param request_body: **Authorize a Transaction** * • `merchant_credit_card_authorization`: For authorizing with a new, unsaved card. This can be for a guest checkout flow, one-time payment, or an existing Bolt shopper. * • `merchant_credit_card_authorization_recharge`: For authorizing a card using a shoppers saved payment methods. * • **Anytime the shopper is paying while logged-in attach their OAuth `access_token` to the request.**
+        :param request_body: **Authorize a Transaction**
+            * • `merchant_credit_card_authorization`: For authorizing with a new, unsaved card. This can be for a guest checkout flow, one-time payment, or an existing Bolt shopper.
+            * • `merchant_credit_card_authorization_recharge`: For authorizing a card using a shoppers saved payment methods.
+            * • **Anytime the shopper is paying while logged-in attach their OAuth `access_token` to the request.**
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -89,6 +93,7 @@ class Transactions(BaseSDK):
                 "json",
                 Optional[models.AuthorizeTransactionRequestBody],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -155,7 +160,11 @@ class Transactions(BaseSDK):
         :param security:
         :param x_publishable_key: The publicly viewable identifier used to identify a merchant division. This key is found in the Developer > API section of the Bolt Merchant Dashboard [RECOMMENDED].
         :param idempotency_key: A key created by merchants that ensures `POST` and `PATCH` requests are only performed once. [Read more about Idempotent Requests here](/developers/references/idempotency/).
-        :param request_body: **Authorize a Transaction** * • `merchant_credit_card_authorization`: For authorizing with a new, unsaved card. This can be for a guest checkout flow, one-time payment, or an existing Bolt shopper. * • `merchant_credit_card_authorization_recharge`: For authorizing a card using a shoppers saved payment methods. * • **Anytime the shopper is paying while logged-in attach their OAuth `access_token` to the request.**
+        :param request_body: **Authorize a Transaction**
+            * • `merchant_credit_card_authorization`: For authorizing with a new, unsaved card. This can be for a guest checkout flow, one-time payment, or an existing Bolt shopper.
+            * • `merchant_credit_card_authorization_recharge`: For authorizing a card using a shoppers saved payment methods.
+            * • **Anytime the shopper is paying while logged-in attach their OAuth `access_token` to the request.**
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -201,6 +210,7 @@ class Transactions(BaseSDK):
                 "json",
                 Optional[models.AuthorizeTransactionRequestBody],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -303,6 +313,7 @@ class Transactions(BaseSDK):
                 "json",
                 Optional[models.CaptureTransactionWithReference],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -319,7 +330,7 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="captureTransaction",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -418,6 +429,7 @@ class Transactions(BaseSDK):
                 "json",
                 Optional[models.CaptureTransactionWithReference],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -434,7 +446,7 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="captureTransaction",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -526,6 +538,7 @@ class Transactions(BaseSDK):
                 "json",
                 Optional[models.TransactionCredit],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -542,7 +555,7 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="refundTransaction",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -629,6 +642,7 @@ class Transactions(BaseSDK):
                 "json",
                 Optional[models.TransactionCredit],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -645,7 +659,7 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="refundTransaction",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -735,6 +749,7 @@ class Transactions(BaseSDK):
                 "json",
                 Optional[models.MerchantCreditCardReview],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -751,7 +766,7 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="reviewTransaction",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -841,6 +856,7 @@ class Transactions(BaseSDK):
                 "json",
                 Optional[models.MerchantCreditCardReview],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -857,7 +873,7 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="reviewTransaction",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -947,6 +963,7 @@ class Transactions(BaseSDK):
                 "json",
                 Optional[models.CreditCardVoid],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -963,7 +980,7 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="voidTransaction",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1053,6 +1070,7 @@ class Transactions(BaseSDK):
                 "json",
                 Optional[models.CreditCardVoid],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1069,7 +1087,7 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="voidTransaction",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1145,6 +1163,7 @@ class Transactions(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1161,7 +1180,7 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getTransactionDetails",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1237,6 +1256,7 @@ class Transactions(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1253,7 +1273,7 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getTransactionDetails",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1344,6 +1364,7 @@ class Transactions(BaseSDK):
                 "json",
                 Optional[models.TransactionUpdateInput],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1360,7 +1381,7 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="updateTransaction",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
@@ -1451,6 +1472,7 @@ class Transactions(BaseSDK):
                 "json",
                 Optional[models.TransactionUpdateInput],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1467,7 +1489,7 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="updateTransaction",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),

@@ -13,7 +13,8 @@ from .i_cart_item_view import ICartItemView, ICartItemViewTypedDict
 from .i_cart_shipment_view import ICartShipmentView, ICartShipmentViewTypedDict
 from .i_currency import ICurrency, ICurrencyTypedDict
 from .in_store_shipment2 import InStoreShipment2, InStoreShipment2TypedDict
-from bolt_api_sdk.types import BaseModel
+from bolt_api_sdk.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -109,3 +110,46 @@ class CartView(BaseModel):
 
     transaction_reference: Optional[str] = None
     r"""The 12 digit reference ID associated to a given transaction webhook for an order."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "billing_address",
+                "cart_url",
+                "currency",
+                "discount_amount",
+                "discounts",
+                "display_id",
+                "fee_amount",
+                "fees",
+                "fulfillments",
+                "in_store_shipments",
+                "items",
+                "loyalty_rewards",
+                "loyalty_rewards_amount",
+                "merchant_order_url",
+                "metadata",
+                "msrp",
+                "order_description",
+                "order_reference",
+                "shipments",
+                "shipping_amount",
+                "subtotal_amount",
+                "tax_amount",
+                "total_amount",
+                "transaction_reference",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

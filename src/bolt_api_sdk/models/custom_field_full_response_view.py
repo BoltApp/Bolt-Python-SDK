@@ -6,7 +6,8 @@ from .custom_field_response_view import (
     CustomFieldResponseViewTypedDict,
 )
 from .custom_field_view import CustomFieldView, CustomFieldViewTypedDict
-from bolt_api_sdk.types import BaseModel
+from bolt_api_sdk.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -20,3 +21,19 @@ class CustomFieldFullResponseView(BaseModel):
     field: Optional[CustomFieldView] = None
 
     response: Optional[CustomFieldResponseView] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["field", "response"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

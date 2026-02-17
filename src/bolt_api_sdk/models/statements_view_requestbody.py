@@ -40,3 +40,9 @@ class StatementsViewRequestBody(BaseModel):
     * [Dispute statement](https://help.bolt.com/operations/disputes/dispute-statements/#how-to-read-dispute-statements): Use `monthly_dispute`
 
     """
+
+
+try:
+    StatementsViewRequestBody.model_rebuild()
+except NameError:
+    pass

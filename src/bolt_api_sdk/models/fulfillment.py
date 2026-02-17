@@ -5,8 +5,9 @@ from .cart_item import CartItem, CartItemTypedDict
 from .cart_shipment import CartShipment, CartShipmentTypedDict
 from .digital_delivery import DigitalDelivery, DigitalDeliveryTypedDict
 from .in_store_cart_shipment import InStoreCartShipment, InStoreCartShipmentTypedDict
-from bolt_api_sdk.types import BaseModel
+from bolt_api_sdk.types import BaseModel, UNSET_SENTINEL
 from enum import Enum
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -43,3 +44,27 @@ class Fulfillment(BaseModel):
     in_store_cart_shipment: Optional[InStoreCartShipment] = None
 
     type: Optional[FulfillmentType] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "cart_items",
+                "cart_shipment",
+                "digital_delivery",
+                "in_store_cart_shipment",
+                "type",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

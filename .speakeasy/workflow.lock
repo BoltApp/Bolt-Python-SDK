@@ -1,20 +1,21 @@
-speakeasyVersion: 1.631.4
+speakeasyVersion: 1.719.0
 sources:
     bolt-python-api:
         sourceNamespace: bolt-python-api
-        sourceRevisionDigest: sha256:979591ab54418fcfcf6bb36ba4aa4748231411d7d9612b3d60aec41003fde169
-        sourceBlobDigest: sha256:0af17f076ed8196f10613e2f3081b45456c15f67bc75ca7a2f569bf55d9bca8a
+        sourceRevisionDigest: sha256:a33901a15d30702921858d37c1b8c45b6b895b598e1bf88eb664d8b0d2497bb7
+        sourceBlobDigest: sha256:c35f0d64a1964018f0f2123463b666bfcdac398ab586686f1264edba49fa7fb0
         tags:
             - latest
+            - speakeasy-sdk-regen-1759140059
             - 1.0.1
 targets:
     bolt-sdk:
         source: bolt-python-api
         sourceNamespace: bolt-python-api
-        sourceRevisionDigest: sha256:979591ab54418fcfcf6bb36ba4aa4748231411d7d9612b3d60aec41003fde169
-        sourceBlobDigest: sha256:0af17f076ed8196f10613e2f3081b45456c15f67bc75ca7a2f569bf55d9bca8a
+        sourceRevisionDigest: sha256:a33901a15d30702921858d37c1b8c45b6b895b598e1bf88eb664d8b0d2497bb7
+        sourceBlobDigest: sha256:c35f0d64a1964018f0f2123463b666bfcdac398ab586686f1264edba49fa7fb0
         codeSamplesNamespace: bolt-python-api-code-samples
-        codeSamplesRevisionDigest: sha256:b2ae1de49eb37e75145bff16bf80714605249cc212a90f5402b20b5ec9aafb86
+        codeSamplesRevisionDigest: sha256:e0182b1dc98ee47b9d7df949f0460b372dafa1d6bd7fe86dd058bd37cf61cf4b
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
