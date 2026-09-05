@@ -1,9 +1,8 @@
 # Transactions
-(*transactions*)
 
 ## Overview
 
-Use the Transactions endpoint to authorize payments when the shopper checks out and handle post authorization actions such as captures and refunds. You can use a shopper's existing saved payment information or tokenize new payment information with the [Bolt Tokenizer](https://help.bolt.com/api-tokenizer/). Bolt Authorize Transaction types fall into one of three categories: a logged-in shopper checking out with a saved payment method, any type of shopper checking out with a new payment method, and a logged-in shopper checking out with a new payment method. The new payment method will be saved to the shopper's account.
+Use the Transactions endpoint to authorize payments when the shopper checks out and handle post authorization actions such as captures and refunds. You can use a shopper's existing saved payment information or tokenize new payment information with the [Bolt Tokenizer](https://help.boltapp.com/api-tokenizer/). Bolt Authorize Transaction types fall into one of three categories: a logged-in shopper checking out with a saved payment method, any type of shopper checking out with a new payment method, and a logged-in shopper checking out with a new payment method. The new payment method will be saved to the shopper's account.
 
 
 ### Available Operations

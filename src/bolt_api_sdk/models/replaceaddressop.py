@@ -34,7 +34,10 @@ class ReplaceAddressSecurity(BaseModel):
         str,
         FieldMetadata(
             security=SecurityMetadata(
-                scheme=True, scheme_type="oauth2", field_name="Authorization"
+                scheme=True,
+                scheme_type="oauth2",
+                composite=True,
+                field_name="Authorization",
             )
         ),
     ]
@@ -46,6 +49,7 @@ class ReplaceAddressSecurity(BaseModel):
                 scheme=True,
                 scheme_type="apiKey",
                 sub_type="header",
+                composite=True,
                 field_name="X-API-Key",
             )
         ),
@@ -86,6 +90,24 @@ class ReplaceAddressRequest(BaseModel):
         Optional[AddressAccount],
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["X-Publishable-Key", "Idempotency-Key", "address_account"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class ReplaceAddressPriority(str, Enum):
@@ -137,7 +159,7 @@ class ReplaceAddressResponseTypedDict(TypedDict):
     street_address4: NotRequired[Nullable[str]]
     r"""Any additional street address details."""
     metadata: NotRequired[Nullable[ShopperMetadataTypedDict]]
-    r"""A key-value pair object that allows users to store arbitrary information associated with an object.  For any individual account object, we allow up to 50 keys. Keys can be up to 40 characters long and values can be up to 500 characters long.  Metadata should not contain any sensitive customer information, like PII (Personally Identifiable Information). For more information about metadata, see our [documentation](https://help.bolt.com/developers/references/embedded-metadata/).
+    r"""A key-value pair object that allows users to store arbitrary information associated with an object. For any individual account object, we allow up to 50 keys. Keys can be up to 40 characters long and values can be up to 500 characters long. Metadata should not contain any sensitive customer information, like PII (Personally Identifiable Information). For more information about metadata, see our [documentation](https://help.boltapp.com/developers/references/embedded-metadata/).
 
     """
     default: NotRequired[bool]
@@ -204,7 +226,7 @@ class ReplaceAddressResponse(BaseModel):
     r"""Any additional street address details."""
 
     metadata: OptionalNullable[ShopperMetadata] = UNSET
-    r"""A key-value pair object that allows users to store arbitrary information associated with an object.  For any individual account object, we allow up to 50 keys. Keys can be up to 40 characters long and values can be up to 500 characters long.  Metadata should not contain any sensitive customer information, like PII (Personally Identifiable Information). For more information about metadata, see our [documentation](https://help.bolt.com/developers/references/embedded-metadata/).
+    r"""A key-value pair object that allows users to store arbitrary information associated with an object. For any individual account object, we allow up to 50 keys. Keys can be up to 40 characters long and values can be up to 500 characters long. Metadata should not contain any sensitive customer information, like PII (Personally Identifiable Information). For more information about metadata, see our [documentation](https://help.boltapp.com/developers/references/embedded-metadata/).
 
     """
 
@@ -212,59 +234,58 @@ class ReplaceAddressResponse(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "company",
-            "country",
-            "country_code",
-            "door_code",
-            "email_address",
-            "first_name",
-            "id",
-            "last_name",
-            "locality",
-            "name",
-            "phone_number",
-            "postal_code",
-            "priority",
-            "region",
-            "region_code",
-            "street_address1",
-            "street_address2",
-            "street_address3",
-            "street_address4",
-            "metadata",
-            "default",
-        ]
-        nullable_fields = [
-            "door_code",
-            "priority",
-            "region_code",
-            "street_address3",
-            "street_address4",
-            "metadata",
-        ]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "company",
+                "country",
+                "country_code",
+                "door_code",
+                "email_address",
+                "first_name",
+                "id",
+                "last_name",
+                "locality",
+                "name",
+                "phone_number",
+                "postal_code",
+                "priority",
+                "region",
+                "region_code",
+                "street_address1",
+                "street_address2",
+                "street_address3",
+                "street_address4",
+                "metadata",
+                "default",
+            ]
+        )
+        nullable_fields = set(
+            [
+                "door_code",
+                "priority",
+                "region_code",
+                "street_address3",
+                "street_address4",
+                "metadata",
+            ]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
-            serialized.pop(k, None)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m

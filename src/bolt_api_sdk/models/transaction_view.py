@@ -38,9 +38,10 @@ from .transaction_splits_view import (
 )
 from .transaction_status import TransactionStatus
 from .transaction_type import TransactionType
-from bolt_api_sdk.types import BaseModel
+from bolt_api_sdk.types import BaseModel, UNSET_SENTINEL
 from enum import Enum
 import pydantic
+from pydantic import model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -178,3 +179,58 @@ class TransactionView(BaseModel):
     void: Optional[CreditCardVoidView] = None
 
     view_status: Optional[TransactionViewViewStatus] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "amount",
+                "authorization",
+                "capture",
+                "captures",
+                "credit",
+                "date",
+                "from_consumer",
+                "from_credit_card",
+                "id",
+                "indemnification_decision",
+                "indemnification_reason",
+                "last4",
+                "last_viewed_utc",
+                "merchant_division",
+                "merchant_order_number",
+                "order_decision",
+                "processor",
+                "reference",
+                "review_ticket",
+                "risk_insights",
+                "risk_review_status",
+                "risk_score",
+                "splits",
+                "status",
+                "to_consumer",
+                "to_credit_card",
+                "transaction_properties",
+                "type",
+                "void",
+                "view_status",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+try:
+    TransactionView.model_rebuild()
+except NameError:
+    pass

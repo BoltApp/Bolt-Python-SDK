@@ -2,6 +2,14 @@
 
 The type corresponding to this shipment, if applicable.
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import CartShipmentType
+
+value = CartShipmentType.DOOR_DELIVERY
+```
+
 
 ## Values
 

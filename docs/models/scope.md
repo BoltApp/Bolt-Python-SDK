@@ -1,6 +1,14 @@
 # Scope
 
-The scope issued to the merchant when receiving an authorization code. Options include `bolt.account.manage`, `bolt.account.view`, `openid`. You can find more information on these options in our [OAuth scope documentation](https://help.bolt.com/developers/references/bolt-oauth/#scopes).
+The scope issued to the merchant when receiving an authorization code. Options include `bolt.account.manage`, `bolt.account.view`, `openid`. You can find more information on these options in our [OAuth scope documentation](https://help.boltapp.com/developers/references/bolt-oauth/#scopes).
+
+## Example Usage
+
+```python
+from bolt_api_sdk.models import Scope
+
+value = Scope.BOLT_ACCOUNT_MANAGE
+```
 
 
 ## Values

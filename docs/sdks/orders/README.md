@@ -1,9 +1,8 @@
 # Orders
-(*orders*)
 
 ## Overview
 
-Use the Orders API to interact with the customer's cart throughout the checkout process. Pre-checkout, perform actions such as validating inventory, verifying discounts, and calculating taxes. Post-checkout, share shipping information so your customer can track their order. You'll interact with the [Merchant API](https://help.bolt.com/api-merchant/) to keep the servers in sync with any changes the customer makes to their cart. See our related guide [Create a Bolt Order Token](https://help.bolt.com/products/checkout/how-to-integrate/create-bolt-order-token-new/).
+Use the Orders API to interact with the customer's cart throughout the checkout process. Pre-checkout, perform actions such as validating inventory, verifying discounts, and calculating taxes. Post-checkout, share shipping information so your customer can track their order. You'll interact with the [Merchant API](https://help.boltapp.com/api-merchant/) to keep the servers in sync with any changes the customer makes to their cart. See our related guide [Create a Bolt Order Token](https://help.boltapp.com/products/checkout/how-to-integrate/create-bolt-order-token-new/).
 
 
 ### Available Operations

@@ -16,11 +16,11 @@ from typing import Callable, Dict, Optional, Tuple, Union
 
 
 SERVERS = [
-    "https://api.bolt.com",
+    "https://api.boltapp.com",
     # The Production URL (Live Data).
-    "https://api-sandbox.bolt.com",
+    "https://api-sandbox.boltapp.com",
     # The Sandbox URL (Test Data).
-    "https://api-staging.bolt.com",
+    "https://api-staging.boltapp.com",
     # The Staging URL (Staged Data).
 ]
 """Contains the list of servers available to the SDK"""

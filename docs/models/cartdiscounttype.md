@@ -2,6 +2,14 @@
 
 The type of discount.
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import CartDiscountType
+
+value = CartDiscountType.FIXED_AMOUNT
+```
+
 
 ## Values
 
