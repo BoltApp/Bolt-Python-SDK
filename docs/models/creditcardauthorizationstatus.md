@@ -6,6 +6,14 @@ The status of the authorization request.
   * `3` - error
 
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import CreditCardAuthorizationStatus
+
+value = CreditCardAuthorizationStatus.SUCCEEDED
+```
+
 
 ## Values
 

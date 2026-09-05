@@ -3,6 +3,14 @@
 Fee type options. **Nullable** for Transactions Details.
 
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import CaptureViewType
+
+value = CaptureViewType.NET
+```
+
 
 ## Values
 

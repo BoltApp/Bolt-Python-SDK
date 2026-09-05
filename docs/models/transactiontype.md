@@ -2,6 +2,14 @@
 
 The type of transaction.
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import TransactionType
+
+value = TransactionType.CC_PAYMENT
+```
+
 
 ## Values
 

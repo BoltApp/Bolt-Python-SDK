@@ -5,7 +5,7 @@ from enum import Enum
 
 
 class ChargebackReasonCode(str, Enum):
-    r"""Bolt's [standardized reason codes](https://help.bolt.com/merchants/references/policies/disputes/dispute-codes/)."""
+    r"""Bolt's [standardized reason codes](https://help.boltapp.com/merchants/references/policies/disputes/dispute-codes/)."""
 
     AUTHORIZATION_FAILED = "authorization_failed"
     CANCELLED_RECURRING = "cancelled_recurring"

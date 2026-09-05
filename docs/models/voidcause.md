@@ -2,6 +2,14 @@
 
 Determines why the transaction was voided.
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import VoidCause
+
+value = VoidCause.MERCHANT_ACTION
+```
+
 
 ## Values
 

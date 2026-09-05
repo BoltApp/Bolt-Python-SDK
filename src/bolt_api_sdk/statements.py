@@ -30,6 +30,8 @@ class Statements(BaseSDK):
 
         Get a pre-signed URL for the requested statement file.
 
+        If set, this operation will use `x_api_key` from the global security.
+
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -68,6 +70,8 @@ class Statements(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, True, "json", Optional[models.StatementsViewRequestBody]
             ),
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -84,13 +88,15 @@ class Statements(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getStatements",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Statements"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["403", "404", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -128,6 +134,8 @@ class Statements(BaseSDK):
         r"""Fetch a Statement
 
         Get a pre-signed URL for the requested statement file.
+
+        If set, this operation will use `x_api_key` from the global security.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -167,6 +175,8 @@ class Statements(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, True, "json", Optional[models.StatementsViewRequestBody]
             ),
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -183,13 +193,15 @@ class Statements(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getStatements",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Statements"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["403", "404", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 

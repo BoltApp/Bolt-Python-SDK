@@ -10,7 +10,7 @@ from typing import Any, Mapping, Optional, Union, cast
 
 
 class Testing(BaseSDK):
-    r"""The testing endpoint allows you to test various functionality within Bolt. Create a test credit card to process a test payment in your store. You can also simulate tracking an order’s shipment and programmatically create customer accounts to use as dummy data. See our related guide on [Testing](https://help.bolt.com/developers/production-readiness-guides/test-cards/)."""
+    r"""The testing endpoint allows you to test various functionality within Bolt. Create a test credit card to process a test payment in your store. You can also simulate tracking an order’s shipment and programmatically create customer accounts to use as dummy data. See our related guide on [Testing](https://help.boltapp.com/developers/production-readiness-guides/test-cards/)."""
 
     def test_shipping(
         self,
@@ -26,6 +26,8 @@ class Testing(BaseSDK):
         r"""Test Shipping
 
         This endpoint simulates tracking an order's shipment and is for testing purposes only.
+
+        If set, this operation will use `x_api_key` from the global security.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -63,6 +65,8 @@ class Testing(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, True, "json", Optional[models.MockTrackingInput]
             ),
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -79,13 +83,15 @@ class Testing(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="testShipping",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Testing"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -121,6 +127,8 @@ class Testing(BaseSDK):
 
         This endpoint simulates tracking an order's shipment and is for testing purposes only.
 
+        If set, this operation will use `x_api_key` from the global security.
+
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -157,6 +165,8 @@ class Testing(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, True, "json", Optional[models.MockTrackingInput]
             ),
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -173,13 +183,15 @@ class Testing(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="testShipping",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Testing"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -214,7 +226,9 @@ class Testing(BaseSDK):
     ) -> models.TestingAccountDetails:
         r"""Create Testing Shopper Account
 
-        Create a Bolt shopper account for testing purposes. Available for sandbox use only and the created  account will be recycled after a certain time.
+        Create a Bolt shopper account for testing purposes. Available for sandbox use only and the created account will be recycled after a certain time.
+
+        If set, this operation will use `x_api_key` from the global security.
 
         :param x_publishable_key: The publicly viewable identifier used to identify a merchant division. This key is found in the Developer > API section of the Bolt Merchant Dashboard [RECOMMENDED].
         :param testing_account_request:
@@ -254,12 +268,14 @@ class Testing(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.testing_account_request,
+                request.testing_account_request if request is not None else None,
                 False,
                 True,
                 "json",
                 Optional[models.TestingAccountRequest],
             ),
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -276,13 +292,15 @@ class Testing(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createTestingShopperAccount",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Testing"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -311,7 +329,9 @@ class Testing(BaseSDK):
     ) -> models.TestingAccountDetails:
         r"""Create Testing Shopper Account
 
-        Create a Bolt shopper account for testing purposes. Available for sandbox use only and the created  account will be recycled after a certain time.
+        Create a Bolt shopper account for testing purposes. Available for sandbox use only and the created account will be recycled after a certain time.
+
+        If set, this operation will use `x_api_key` from the global security.
 
         :param x_publishable_key: The publicly viewable identifier used to identify a merchant division. This key is found in the Developer > API section of the Bolt Merchant Dashboard [RECOMMENDED].
         :param testing_account_request:
@@ -351,12 +371,14 @@ class Testing(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.testing_account_request,
+                request.testing_account_request if request is not None else None,
                 False,
                 True,
                 "json",
                 Optional[models.TestingAccountRequest],
             ),
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -373,13 +395,15 @@ class Testing(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createTestingShopperAccount",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Testing"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -405,6 +429,8 @@ class Testing(BaseSDK):
         r"""Fetch a Test Credit Card Token
 
         This endpoint fetches a new credit card token for Bolt's universal test credit card number `4111 1111 1111 1004`. This is for testing and is available only in sandbox.
+
+        If set, this operation will use `x_api_key` from the global security.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -433,6 +459,8 @@ class Testing(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -449,13 +477,15 @@ class Testing(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getTestCreditCardToken",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Testing"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -484,6 +514,8 @@ class Testing(BaseSDK):
 
         This endpoint fetches a new credit card token for Bolt's universal test credit card number `4111 1111 1111 1004`. This is for testing and is available only in sandbox.
 
+        If set, this operation will use `x_api_key` from the global security.
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -511,6 +543,8 @@ class Testing(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -527,13 +561,15 @@ class Testing(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getTestCreditCardToken",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Testing"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 

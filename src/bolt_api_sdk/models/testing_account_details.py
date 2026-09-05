@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 from .account_identifier_status import AccountIdentifierStatus
-from bolt_api_sdk.types import BaseModel
+from bolt_api_sdk.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -54,3 +55,30 @@ class TestingAccountDetails(BaseModel):
 
     oauth_code: Optional[str] = None
     r"""OAuth code that is associated with this account and can be used to exchange for an access token"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "email",
+                "email_state",
+                "phone",
+                "phone_state",
+                "otp_code",
+                "migrated_merchant_owner_id",
+                "will_deactivate_at",
+                "oauth_code",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

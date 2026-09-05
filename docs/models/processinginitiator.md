@@ -2,6 +2,14 @@
 
 Defines which payment method was used to initiate the transaction.
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import ProcessingInitiator
+
+value = ProcessingInitiator.INITIAL_CARD_ON_FILE
+```
+
 
 ## Values
 

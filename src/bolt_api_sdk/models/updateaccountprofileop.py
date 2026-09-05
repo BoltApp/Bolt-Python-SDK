@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 from .update_profile import UpdateProfile, UpdateProfileTypedDict
-from bolt_api_sdk.types import BaseModel
+from bolt_api_sdk.types import BaseModel, UNSET_SENTINEL
 from bolt_api_sdk.utils import (
     FieldMetadata,
     HeaderMetadata,
@@ -10,6 +10,7 @@ from bolt_api_sdk.utils import (
     SecurityMetadata,
 )
 import pydantic
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -24,7 +25,10 @@ class UpdateAccountProfileSecurity(BaseModel):
         str,
         FieldMetadata(
             security=SecurityMetadata(
-                scheme=True, scheme_type="oauth2", field_name="Authorization"
+                scheme=True,
+                scheme_type="oauth2",
+                composite=True,
+                field_name="Authorization",
             )
         ),
     ]
@@ -36,6 +40,7 @@ class UpdateAccountProfileSecurity(BaseModel):
                 scheme=True,
                 scheme_type="apiKey",
                 sub_type="header",
+                composite=True,
                 field_name="X-API-Key",
             )
         ),
@@ -60,3 +65,19 @@ class UpdateAccountProfileRequest(BaseModel):
         Optional[UpdateProfile],
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["X-Publishable-Key", "update_profile"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

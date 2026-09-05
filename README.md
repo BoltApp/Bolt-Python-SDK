@@ -91,7 +91,7 @@ It's also possible to write a standalone Python script without needing to set up
 ```python
 #!/usr/bin/env -S uv run --script
 # /// script
-# requires-python = ">=3.9"
+# requires-python = ">=3.10"
 # dependencies = [
 #     "bolt-api-sdk",
 # ]
@@ -288,7 +288,7 @@ with Bolt() as bolt:
 <details open>
 <summary>Available methods</summary>
 
-### [account](docs/sdks/account/README.md)
+### [Account](docs/sdks/account/README.md)
 
 * [get_account](docs/sdks/account/README.md#get_account) - Get Account Details
 * [create_account](docs/sdks/account/README.md#create_account) - Create Bolt Account
@@ -301,33 +301,43 @@ with Bolt() as bolt:
 * [add_payment_method](docs/sdks/account/README.md#add_payment_method) - Add Payment Method
 * [delete_payment_method](docs/sdks/account/README.md#delete_payment_method) - Delete Payment Method
 
-
-### [configuration](docs/sdks/configuration/README.md)
+### [Configuration](docs/sdks/configuration/README.md)
 
 * [get_merchant_callbacks](docs/sdks/configuration/README.md#get_merchant_callbacks) - Get Callback URLs
 * [set_merchant_callbacks](docs/sdks/configuration/README.md#set_merchant_callbacks) - Set Callback URLs
 * [get_merchant_identifiers](docs/sdks/configuration/README.md#get_merchant_identifiers) - Get Merchant Identifiers
 
-### [o_auth](docs/sdks/oauth/README.md)
+### [OAuth](docs/sdks/oauth/README.md)
 
 * [o_auth_token](docs/sdks/oauth/README.md#o_auth_token) - OAuth Token Endpoint
 
-### [orders](docs/sdks/orders/README.md)
+### [Orders](docs/sdks/orders/README.md)
 
 * [create_order_token](docs/sdks/orders/README.md#create_order_token) - Create Order Token
 * [track_order](docs/sdks/orders/README.md#track_order) - Send order tracking details
 
-### [statements](docs/sdks/statements/README.md)
+### [Statements](docs/sdks/statements/README.md)
 
 * [get_statements](docs/sdks/statements/README.md#get_statements) - Fetch a Statement
 
-### [testing](docs/sdks/testing/README.md)
+### [Subscriptions](docs/sdks/subscriptions/README.md)
+
+* [get_subscriptions](docs/sdks/subscriptions/README.md#get_subscriptions) - Get Subscriptions
+* [get_subscription](docs/sdks/subscriptions/README.md#get_subscription) - Get Subscription
+* [cancel_subscription](docs/sdks/subscriptions/README.md#cancel_subscription) - Cancel Subscription
+* [pause_subscription](docs/sdks/subscriptions/README.md#pause_subscription) - Pause Subscription
+* [unpause_subscription](docs/sdks/subscriptions/README.md#unpause_subscription) - Unpause Subscription
+* [get_subscription_orders](docs/sdks/subscriptions/README.md#get_subscription_orders) - Get Subscription Orders
+* [get_dunning_settings](docs/sdks/subscriptions/README.md#get_dunning_settings) - Get Dunning Settings
+* [update_dunning_settings](docs/sdks/subscriptions/README.md#update_dunning_settings) - Update Dunning Settings
+
+### [Testing](docs/sdks/testing/README.md)
 
 * [test_shipping](docs/sdks/testing/README.md#test_shipping) - Test Shipping
 * [create_testing_shopper_account](docs/sdks/testing/README.md#create_testing_shopper_account) - Create Testing Shopper Account
 * [get_test_credit_card_token](docs/sdks/testing/README.md#get_test_credit_card_token) - Fetch a Test Credit Card Token
 
-### [transactions](docs/sdks/transactions/README.md)
+### [Transactions](docs/sdks/transactions/README.md)
 
 * [authorize_transaction](docs/sdks/transactions/README.md#authorize_transaction) - Authorize a Card
 * [capture_transaction](docs/sdks/transactions/README.md#capture_transaction) - Capture a Transaction
@@ -337,7 +347,7 @@ with Bolt() as bolt:
 * [get_transaction_details](docs/sdks/transactions/README.md#get_transaction_details) - Transaction Details
 * [update_transaction](docs/sdks/transactions/README.md#update_transaction) - Update a Transaction
 
-### [webhooks](docs/sdks/webhooks/README.md)
+### [Webhooks](docs/sdks/webhooks/README.md)
 
 * [query_webhooks](docs/sdks/webhooks/README.md#query_webhooks) - Query Webhooks
 * [create_webhook](docs/sdks/webhooks/README.md#create_webhook) - Create Bolt Webhook
@@ -452,9 +462,9 @@ with Bolt() as bolt:
 
 
 **Inherit from [`BoltError`](./src/bolt_api_sdk/errors/bolterror.py)**:
-* [`ErrorsBoltAPIResponse`](./src/bolt_api_sdk/errors/errorsboltapiresponse.py): Applicable to 19 of 31 methods.*
-* [`ErrorsOauthServerResponse`](./src/bolt_api_sdk/errors/errorsoauthserverresponse.py): Invalid request to OAuth Token. Applicable to 1 of 31 methods.*
-* [`UnprocessableEntityError`](./src/bolt_api_sdk/errors/unprocessableentityerror.py): Unprocessable Entity. Status code `422`. Applicable to 1 of 31 methods.*
+* [`ErrorsBoltAPIResponse`](./src/bolt_api_sdk/errors/errorsboltapiresponse.py): Applicable to 27 of 39 methods.*
+* [`ErrorsOauthServerResponse`](./src/bolt_api_sdk/errors/errorsoauthserverresponse.py): Invalid request to OAuth Token. Applicable to 1 of 39 methods.*
+* [`UnprocessableEntityError`](./src/bolt_api_sdk/errors/unprocessableentityerror.py): Unprocessable Entity. Status code `422`. Applicable to 1 of 39 methods.*
 * [`ResponseValidationError`](./src/bolt_api_sdk/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
@@ -469,11 +479,11 @@ with Bolt() as bolt:
 
 You can override the default server globally by passing a server index to the `server_idx: int` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
 
-| #   | Server                         | Description                     |
-| --- | ------------------------------ | ------------------------------- |
-| 0   | `https://api.bolt.com`         | The Production URL (Live Data). |
-| 1   | `https://api-sandbox.bolt.com` | The Sandbox URL (Test Data).    |
-| 2   | `https://api-staging.bolt.com` | The Staging URL (Staged Data).  |
+| #   | Server                            | Description                     |
+| --- | --------------------------------- | ------------------------------- |
+| 0   | `https://api.boltapp.com`         | The Production URL (Live Data). |
+| 1   | `https://api-sandbox.boltapp.com` | The Sandbox URL (Test Data).    |
+| 2   | `https://api-staging.boltapp.com` | The Staging URL (Staged Data).  |
 
 #### Example
 
@@ -483,7 +493,7 @@ import os
 
 
 with Bolt(
-    server_idx=2,
+    server_idx=0,
 ) as bolt:
 
     res = bolt.account.get_account(security=models.GetAccountSecurity(
@@ -505,7 +515,7 @@ import os
 
 
 with Bolt(
-    server_url="https://api-staging.bolt.com",
+    server_url="https://api-staging.boltapp.com",
 ) as bolt:
 
     res = bolt.account.get_account(security=models.GetAccountSecurity(
@@ -598,6 +608,20 @@ class CustomClient(AsyncHttpClient):
 
 s = Bolt(async_client=CustomClient(httpx.AsyncClient()))
 ```
+### httpx2 (Pydantic's httpx fork)
+
+[httpx2](https://httpx2.pydantic.dev/) is Pydantic's maintained fork of `httpx`. To run this SDK on httpx2, call `alias_httpx()` at your program's entry point, before importing the SDK, so every `import httpx` — including the ones inside the SDK — resolves to `httpx2`:
+```python
+import httpx2
+
+httpx2.alias_httpx()
+
+from bolt_api_sdk import Bolt
+
+s = Bolt()
+```
+
+An SDK can also be generated against httpx2 directly, so it depends on the fork instead of `httpx`, by setting `python.httpClientLibrary: httpx2` in `gen.yaml`.
 <!-- End Custom HTTP Client [http-client] -->
 
 <!-- Start Resource Management [resource-management] -->
