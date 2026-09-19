@@ -1,5 +1,13 @@
 # CartItemType
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import CartItemType
+
+value = CartItemType.UNKNOWN
+```
+
 
 ## Values
 

@@ -6,9 +6,15 @@ from .o_auth_token_input_refresh import (
     OAuthTokenInputRefresh,
     OAuthTokenInputRefreshTypedDict,
 )
-from bolt_api_sdk.types import BaseModel
-from bolt_api_sdk.utils import FieldMetadata, HeaderMetadata, RequestMetadata
+from bolt_api_sdk.types import BaseModel, UNSET_SENTINEL
+from bolt_api_sdk.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    RequestMetadata,
+    get_discriminator,
+)
 import pydantic
+from pydantic import Discriminator, Tag, model_serializer
 from typing import Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -19,9 +25,13 @@ OAuthTokenRequestBodyTypedDict = TypeAliasType(
 )
 
 
-OAuthTokenRequestBody = TypeAliasType(
-    "OAuthTokenRequestBody", Union[OAuthTokenInput, OAuthTokenInputRefresh]
-)
+OAuthTokenRequestBody = Annotated[
+    Union[
+        Annotated[OAuthTokenInput, Tag("authorization_code")],
+        Annotated[OAuthTokenInputRefresh, Tag("refresh_token")],
+    ],
+    Discriminator(lambda m: get_discriminator(m, "grant_type", "grant_type")),
+]
 
 
 class OAuthTokenRequestTypedDict(TypedDict):
@@ -44,3 +54,19 @@ class OAuthTokenRequest(BaseModel):
             request=RequestMetadata(media_type="application/x-www-form-urlencoded")
         ),
     ] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["X-Publishable-Key", "RequestBody"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

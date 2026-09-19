@@ -1,5 +1,13 @@
 # HideApm
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import HideApm
+
+value = HideApm.PAYPAL
+```
+
 
 ## Values
 

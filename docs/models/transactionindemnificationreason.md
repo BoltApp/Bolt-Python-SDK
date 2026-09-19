@@ -3,6 +3,14 @@
 Describes the reason that the transaction is or is not indemnified by Bolt for fraud.
 
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import TransactionIndemnificationReason
+
+value = TransactionIndemnificationReason.UNKNOWN
+```
+
 
 ## Values
 
