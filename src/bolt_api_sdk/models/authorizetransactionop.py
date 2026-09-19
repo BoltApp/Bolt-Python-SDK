@@ -9,7 +9,7 @@ from .merchant_credit_card_authorization_recharge import (
     MerchantCreditCardAuthorizationRecharge,
     MerchantCreditCardAuthorizationRechargeTypedDict,
 )
-from bolt_api_sdk.types import BaseModel
+from bolt_api_sdk.types import BaseModel, UNSET_SENTINEL
 from bolt_api_sdk.utils import (
     FieldMetadata,
     HeaderMetadata,
@@ -17,6 +17,7 @@ from bolt_api_sdk.utils import (
     SecurityMetadata,
 )
 import pydantic
+from pydantic import model_serializer
 from typing import Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
 
@@ -31,7 +32,10 @@ class AuthorizeTransactionSecurity(BaseModel):
         str,
         FieldMetadata(
             security=SecurityMetadata(
-                scheme=True, scheme_type="oauth2", field_name="Authorization"
+                scheme=True,
+                scheme_type="oauth2",
+                composite=True,
+                field_name="Authorization",
             )
         ),
     ]
@@ -43,6 +47,7 @@ class AuthorizeTransactionSecurity(BaseModel):
                 scheme=True,
                 scheme_type="apiKey",
                 sub_type="header",
+                composite=True,
                 field_name="X-API-Key",
             )
         ),
@@ -115,3 +120,19 @@ class AuthorizeTransactionRequest(BaseModel):
     * • **Anytime the shopper is paying while logged-in attach their OAuth `access_token` to the request.**
 
     """
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["X-Publishable-Key", "Idempotency-Key", "RequestBody"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

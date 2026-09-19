@@ -5,7 +5,8 @@ from .amount_view import AmountView, AmountViewTypedDict
 from .chargeback_event_view import ChargebackEventView, ChargebackEventViewTypedDict
 from .chargeback_reason_code import ChargebackReasonCode
 from .chargeback_representment_result import ChargebackRepresentmentResult
-from bolt_api_sdk.types import BaseModel
+from bolt_api_sdk.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -21,7 +22,7 @@ class ChargebackDetailsTypedDict(TypedDict):
     reason: NotRequired[str]
     r"""The reason for the chargeback."""
     reason_code: NotRequired[ChargebackReasonCode]
-    r"""Bolt's [standardized reason codes](https://help.bolt.com/merchants/references/policies/disputes/dispute-codes/)."""
+    r"""Bolt's [standardized reason codes](https://help.boltapp.com/merchants/references/policies/disputes/dispute-codes/)."""
     representment_reply_by_date: NotRequired[int]
     r"""The date of the chargeback."""
     representment_result: NotRequired[ChargebackRepresentmentResult]
@@ -46,10 +47,39 @@ class ChargebackDetails(BaseModel):
     r"""The reason for the chargeback."""
 
     reason_code: Optional[ChargebackReasonCode] = None
-    r"""Bolt's [standardized reason codes](https://help.bolt.com/merchants/references/policies/disputes/dispute-codes/)."""
+    r"""Bolt's [standardized reason codes](https://help.boltapp.com/merchants/references/policies/disputes/dispute-codes/)."""
 
     representment_reply_by_date: Optional[int] = None
     r"""The date of the chargeback."""
 
     representment_result: Optional[ChargebackRepresentmentResult] = None
     r"""The result of the chargeback representment."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "amt_won",
+                "chargeback_amt",
+                "chargeback_fee",
+                "chargeback_id",
+                "event_views",
+                "net_amt",
+                "reason",
+                "reason_code",
+                "representment_reply_by_date",
+                "representment_result",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

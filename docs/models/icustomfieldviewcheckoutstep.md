@@ -1,5 +1,13 @@
 # ICustomFieldViewCheckoutStep
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import ICustomFieldViewCheckoutStep
+
+value = ICustomFieldViewCheckoutStep.SHIPPING_STEP
+```
+
 
 ## Values
 

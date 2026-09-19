@@ -1,9 +1,8 @@
 # Transactions
-(*transactions*)
 
 ## Overview
 
-Use the Transactions endpoint to authorize payments when the shopper checks out and handle post authorization actions such as captures and refunds. You can use a shopper's existing saved payment information or tokenize new payment information with the [Bolt Tokenizer](https://help.bolt.com/api-tokenizer/). Bolt Authorize Transaction types fall into one of three categories: a logged-in shopper checking out with a saved payment method, any type of shopper checking out with a new payment method, and a logged-in shopper checking out with a new payment method. The new payment method will be saved to the shopper's account.
+Use the Transactions endpoint to authorize payments when the shopper checks out and handle post authorization actions such as captures and refunds. You can use a shopper's existing saved payment information or tokenize new payment information with the [Bolt Tokenizer](https://help.boltapp.com/api-tokenizer/). Bolt Authorize Transaction types fall into one of three categories: a logged-in shopper checking out with a saved payment method, any type of shopper checking out with a new payment method, and a logged-in shopper checking out with a new payment method. The new payment method will be saved to the shopper's account.
 
 
 ### Available Operations
@@ -61,7 +60,7 @@ with Bolt() as bolt:
             ),
             discounts=[
                 models.CartDiscount(
-                    amount=100,
+                    amount=100.0,
                     code="SUMMER10DISCOUNT",
                     description="10% off our summer collection",
                     details_url="https://boltswagstore.com/SUMMERSALE",
@@ -95,7 +94,7 @@ with Bolt() as bolt:
                                         "key1": "value1",
                                         "key2": "value2",
                                     },
-                                    price=754,
+                                    price=754.0,
                                 ),
                             ],
                             description="Large tote with Bolt logo.",
@@ -113,7 +112,7 @@ with Bolt() as bolt:
                             merchant_variant_id="888",
                             name="Bolt Swag Bag",
                             options="Special Edition",
-                            quantity=1,
+                            quantity=1.0,
                             reference="item_100",
                             shipment=models.CartShipment(
                                 carrier="FedEx",
@@ -161,12 +160,12 @@ with Bolt() as bolt:
                             sku="BOLT-SKU_100",
                             seller_id="seller-1234",
                             tags="tote, blue, linen, eco-friendly",
-                            tax_amount=0,
-                            total_amount=1000,
-                            unit_price=1000,
+                            tax_amount=0.0,
+                            total_amount=1000.0,
+                            unit_price=1000.0,
                             uom="inches",
                             upc="0825764603119",
-                            weight=10,
+                            weight=10.0,
                             weight_unit="pounds",
                         ),
                     ],
@@ -256,7 +255,7 @@ with Bolt() as bolt:
                             type=models.CartShipmentType.DOOR_DELIVERY,
                         ),
                         description="Pick up in-store at 123 Main St.",
-                        distance=3,
+                        distance=3.0,
                         distance_unit=models.InStoreCartShipmentDistanceUnit.MILE,
                         in_store_pickup_address=models.Address(
                             company="Bolt",
@@ -327,7 +326,7 @@ with Bolt() as bolt:
                         type=models.CartShipmentType.DOOR_DELIVERY,
                     ),
                     description="Pick up in-store at 123 Main St.",
-                    distance=3,
+                    distance=3.0,
                     distance_unit=models.InStoreCartShipmentDistanceUnit.MILE,
                     in_store_pickup_address=models.Address(
                         company="Bolt",
@@ -366,7 +365,7 @@ with Bolt() as bolt:
                                 "key1": "value1",
                                 "key2": "value2",
                             },
-                            price=754,
+                            price=754.0,
                         ),
                     ],
                     description="Large tote with Bolt logo.",
@@ -384,7 +383,7 @@ with Bolt() as bolt:
                     merchant_variant_id="888",
                     name="Bolt Swag Bag",
                     options="Special Edition",
-                    quantity=1,
+                    quantity=1.0,
                     reference="item_100",
                     shipment=models.CartShipment(
                         carrier="FedEx",
@@ -432,12 +431,12 @@ with Bolt() as bolt:
                     sku="BOLT-SKU_100",
                     seller_id="seller-1234",
                     tags="tote, blue, linen, eco-friendly",
-                    tax_amount=0,
-                    total_amount=1000,
-                    unit_price=1000,
+                    tax_amount=0.0,
+                    total_amount=1000.0,
+                    unit_price=1000.0,
                     uom="inches",
                     upc="0825764603119",
-                    weight=10,
+                    weight=10.0,
                     weight_unit="pounds",
                 ),
             ],
@@ -491,7 +490,7 @@ with Bolt() as bolt:
                     type=models.CartShipmentType.DOOR_DELIVERY,
                 ),
             ],
-            total_amount=900,
+            total_amount=900.0,
             cart_url="https://boltswagstore.com/orders/123456765432",
             currency="USD",
             display_id="displayid_100",

@@ -10,7 +10,7 @@ from typing import Any, Mapping, Optional, Union
 
 
 class OAuth(BaseSDK):
-    r"""Use this endpoint to retrieve an OAuth token. Use the token to allow your ecommerce server to make calls to the Account endpoint and create a one-click checkout experience for shoppers. See related guide [Fetch OAuth Token](https://help.bolt.com/products/ignite/api-implementation/endpoints/oauth-guide/)."""
+    r"""Use this endpoint to retrieve an OAuth token. Use the token to allow your ecommerce server to make calls to the Account endpoint and create a one-click checkout experience for shoppers. See related guide [Fetch OAuth Token](https://help.boltapp.com/products/ignite/api-implementation/endpoints/oauth-guide/)."""
 
     def o_auth_token(
         self,
@@ -71,12 +71,13 @@ class OAuth(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.request_body,
+                request.request_body if request is not None else None,
                 False,
                 True,
                 "form",
                 Optional[models.OAuthTokenRequestBody],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -93,13 +94,15 @@ class OAuth(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="OAuthToken",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["OAuth"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "403", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -179,12 +182,13 @@ class OAuth(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.request_body,
+                request.request_body if request is not None else None,
                 False,
                 True,
                 "form",
                 Optional[models.OAuthTokenRequestBody],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -201,13 +205,15 @@ class OAuth(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="OAuthToken",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["OAuth"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "403", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 

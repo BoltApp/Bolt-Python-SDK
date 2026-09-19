@@ -1,9 +1,8 @@
 # OAuth
-(*o_auth*)
 
 ## Overview
 
-Use this endpoint to retrieve an OAuth token. Use the token to allow your ecommerce server to make calls to the Account endpoint and create a one-click checkout experience for shoppers. See related guide [Fetch OAuth Token](https://help.bolt.com/products/ignite/api-implementation/endpoints/oauth-guide/).
+Use this endpoint to retrieve an OAuth token. Use the token to allow your ecommerce server to make calls to the Account endpoint and create a one-click checkout experience for shoppers. See related guide [Fetch OAuth Token](https://help.boltapp.com/products/ignite/api-implementation/endpoints/oauth-guide/).
 
 
 ### Available Operations
@@ -19,9 +18,9 @@ To use this endpoint, first use the Authorization Code Request flow by using the
  **Reminder - the Content-Type of this request must be application/x-www-form-urlencoded**
 
 
-### Example Usage
+### Example Usage: authorization_code_request
 
-<!-- UsageSnippet language="python" operationID="OAuthToken" method="post" path="/v1/oauth/token" -->
+<!-- UsageSnippet language="python" operationID="OAuthToken" method="post" path="/v1/oauth/token" example="authorization_code_request" -->
 ```python
 from bolt_api_sdk import Bolt, models
 import os
@@ -34,12 +33,78 @@ with Bolt(
 ) as bolt:
 
     res = bolt.o_auth.o_auth_token(request_body={
-        "client_id": "<id>",
-        "client_secret": "<value>",
-        "code": "<value>",
+        "client_id": "PUBLISHABLE_KEY_PLACEHOLDER",
+        "client_secret": "API_KEY_PLACEHOLDER",
+        "code": "AUTH_CODE_PLACEHOLDER",
         "grant_type": models.OAuthTokenInputGrantType.AUTHORIZATION_CODE,
         "scope": models.Scope.BOLT_ACCOUNT_VIEW,
     })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: authorization_code_response
+
+<!-- UsageSnippet language="python" operationID="OAuthToken" method="post" path="/v1/oauth/token" example="authorization_code_response" -->
+```python
+from bolt_api_sdk import Bolt, models
+import os
+
+
+with Bolt(
+    security=models.Security(
+        x_api_key=os.getenv("BOLT_X_API_KEY", ""),
+    ),
+) as bolt:
+
+    res = bolt.o_auth.o_auth_token()
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: refresh_token_request
+
+<!-- UsageSnippet language="python" operationID="OAuthToken" method="post" path="/v1/oauth/token" example="refresh_token_request" -->
+```python
+from bolt_api_sdk import Bolt, models
+import os
+
+
+with Bolt(
+    security=models.Security(
+        x_api_key=os.getenv("BOLT_X_API_KEY", ""),
+    ),
+) as bolt:
+
+    res = bolt.o_auth.o_auth_token(request_body={
+        "client_id": "PUBLISHABLE_KEY_PLACEHOLDER",
+        "client_secret": "API_KEY_PLACEHOLDER",
+        "grant_type": models.OAuthTokenInputRefreshGrantType.REFRESH_TOKEN,
+        "refresh_token": "REFRESH_TOKEN_PLACEHOLDER",
+        "scope": "bolt.account.view",
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: refresh_token_response
+
+<!-- UsageSnippet language="python" operationID="OAuthToken" method="post" path="/v1/oauth/token" example="refresh_token_response" -->
+```python
+from bolt_api_sdk import Bolt, models
+import os
+
+
+with Bolt(
+    security=models.Security(
+        x_api_key=os.getenv("BOLT_X_API_KEY", ""),
+    ),
+) as bolt:
+
+    res = bolt.o_auth.o_auth_token()
 
     # Handle response
     print(res)

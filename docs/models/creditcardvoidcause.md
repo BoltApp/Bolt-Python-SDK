@@ -2,6 +2,14 @@
 
 Specifies why this particular transaction is voided.
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import CreditCardVoidCause
+
+value = CreditCardVoidCause.MERCHANT_ACTION
+```
+
 
 ## Values
 
