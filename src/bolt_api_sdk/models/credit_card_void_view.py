@@ -3,7 +3,8 @@
 from __future__ import annotations
 from .credit_card_void_cause import CreditCardVoidCause
 from .credit_card_void_status import CreditCardVoidStatus
-from bolt_api_sdk.types import BaseModel
+from bolt_api_sdk.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -31,3 +32,19 @@ class CreditCardVoidView(BaseModel):
 
     void: Optional[str] = None
     r"""The void ID returned from the payment processor."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["cause", "merchant_event_id", "status", "void"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

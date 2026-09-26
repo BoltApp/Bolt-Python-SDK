@@ -1,5 +1,13 @@
 # Method
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import Method
+
+value = Method.CODE
+```
+
 
 ## Values
 

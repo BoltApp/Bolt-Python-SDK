@@ -4,7 +4,8 @@ from __future__ import annotations
 from .merchant_logo import MerchantLogo, MerchantLogoTypedDict
 from .merchant_platform import MerchantPlatform
 from .webhooks_type import WebhooksType
-from bolt_api_sdk.types import BaseModel
+from bolt_api_sdk.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -34,7 +35,16 @@ class MerchantDivisionTypedDict(TypedDict):
     shopper_custom_fields_updated_url: NotRequired[str]
     r"""The endpoint URL provided by the merchant to be notified whenever shopper respond to the custom fields for creating merchant platform account."""
     hook_type: NotRequired[WebhooksType]
-    r"""[Webhook events](https://help.bolt.com/developers/guides/webhooks/#transaction-hook-types) that trigger a notification to the URL.  **Note**:`newsletter_subscription` is only for merchant use cases.
+    r"""[Webhook events](https://help.boltapp.com/developers/guides/webhooks/#transaction-hook-types) that trigger a notification to the URL.  **Note**:`newsletter_subscription` is only for merchant use cases.
+
+    Subscription events:
+    * `subscription_created` - A subscription was created from a successful initial transaction.
+    * `subscription_renewed` - A recurring subscription order was placed successfully and the next order was scheduled.
+    * `subscription_canceled` - A subscription was canceled, by the merchant, by the shopper, or automatically (e.g. once its dunning retry schedule is exhausted). Also sent alongside `subscription_ended` when the subscription's configured final dunning action is cancellation.
+    * `subscription_payment_failed` - A scheduled subscription order's payment attempt failed.
+    * `subscription_paused` - A subscription was paused, by the merchant, by the shopper, or automatically once its dunning retry schedule is exhausted (when the configured final dunning action is pausing).
+    * `subscription_unpaused` - A paused subscription was resumed, by the merchant or by the shopper.
+    * `subscription_ended` - A subscription was permanently ended after its dunning retry schedule was exhausted. Sent alongside `subscription_canceled` for this case.
 
     """
     hook_url: NotRequired[str]
@@ -105,7 +115,16 @@ class MerchantDivision(BaseModel):
     r"""The endpoint URL provided by the merchant to be notified whenever shopper respond to the custom fields for creating merchant platform account."""
 
     hook_type: Optional[WebhooksType] = None
-    r"""[Webhook events](https://help.bolt.com/developers/guides/webhooks/#transaction-hook-types) that trigger a notification to the URL.  **Note**:`newsletter_subscription` is only for merchant use cases.
+    r"""[Webhook events](https://help.boltapp.com/developers/guides/webhooks/#transaction-hook-types) that trigger a notification to the URL.  **Note**:`newsletter_subscription` is only for merchant use cases.
+
+    Subscription events:
+    * `subscription_created` - A subscription was created from a successful initial transaction.
+    * `subscription_renewed` - A recurring subscription order was placed successfully and the next order was scheduled.
+    * `subscription_canceled` - A subscription was canceled, by the merchant, by the shopper, or automatically (e.g. once its dunning retry schedule is exhausted). Also sent alongside `subscription_ended` when the subscription's configured final dunning action is cancellation.
+    * `subscription_payment_failed` - A scheduled subscription order's payment attempt failed.
+    * `subscription_paused` - A subscription was paused, by the merchant, by the shopper, or automatically once its dunning retry schedule is exhausted (when the configured final dunning action is pausing).
+    * `subscription_unpaused` - A paused subscription was resumed, by the merchant or by the shopper.
+    * `subscription_ended` - A subscription was permanently ended after its dunning retry schedule was exhausted. Sent alongside `subscription_canceled` for this case.
 
     """
 
@@ -152,3 +171,44 @@ class MerchantDivision(BaseModel):
 
     validate_additional_account_data_url: Optional[str] = None
     r"""The endpoint URL provided by the merchant for validating additional account data."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "account_page_url",
+                "api_base_domain_url",
+                "create_order_url",
+                "debug_url",
+                "get_account_url",
+                "shopper_custom_fields_updated_url",
+                "hook_type",
+                "hook_url",
+                "id",
+                "logo",
+                "oauth_logout_url",
+                "oauth_redirect_url",
+                "platform",
+                "plugin_config_url",
+                "privacy_policy_url",
+                "product_info_url",
+                "public_id",
+                "shipping_and_tax_url",
+                "terms_of_service_url",
+                "universal_merchant_api_url",
+                "update_cart_url",
+                "validate_additional_account_data_url",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

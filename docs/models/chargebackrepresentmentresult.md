@@ -2,6 +2,14 @@
 
 The result of the chargeback representment.
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import ChargebackRepresentmentResult
+
+value = ChargebackRepresentmentResult.NONE
+```
+
 
 ## Values
 
