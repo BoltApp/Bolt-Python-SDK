@@ -11,6 +11,14 @@ Determines who initiated the transaction (e.g. shopper, merchant) and how they d
 * `recurring` - Any time a card is used to pay for a recurring charge (for example, a subscription). Only use this value when you don’t know if it’s the first recurring charge.
 
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import MerchantCreditCardAuthorizationProcessingInitiator
+
+value = MerchantCreditCardAuthorizationProcessingInitiator.INITIAL_CARD_ON_FILE
+```
+
 
 ## Values
 

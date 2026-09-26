@@ -11,38 +11,1358 @@ info:
      A comprehensive Bolt API reference for interacting with Transactions, Orders, Product Catalog, Configuration, Testing, and much more.
 
      Note: You must also reference the [Merchant Callback API](/api-merchant) when building a managed checkout custom cart integration
+servers:
+  - url: https://api.boltapp.com
+    description: The Production URL (Live Data).
+  - url: https://api-sandbox.boltapp.com
+    description: The Sandbox URL (Test Data).
+  - url: https://api-staging.boltapp.com
+    description: The Staging URL (Staged Data).
+security:
+  - X-API-Key: []
+  - OAuth:
+      - bolt.account.manage
+      - bolt.account.view
 tags:
   - name: Account
     description: |
-      Use the Account endpoint to view and manage customer accounts. Perform actions such as creating an account, updating an address, or adding a payment method. This endpoint is for merchants using the Accounts Package. See our related guide on [Bolt OAuth](https://help.bolt.com/developers/bolt-oauth/).
+      Use the Account endpoint to view and manage customer accounts. Perform actions such as creating an account, updating an address, or adding a payment method. This endpoint is for merchants using the Accounts Package. See our related guide on [Bolt OAuth](https://help.boltapp.com/developers/bolt-oauth/).
   - name: Configuration
     description: |
-      Use this resource to retrieve and set Merchant Callback URLs. Bolt uses these URLs to exchange information with your commerce server. See our related guide [About the Merchant Callback API](https://help.bolt.com/products/checkout/how-to-integrate/merchant-api-new/).   
+      Use this resource to retrieve and set Merchant Callback URLs. Bolt uses these URLs to exchange information with your commerce server. See our related guide [About the Merchant Callback API](https://help.boltapp.com/products/checkout/how-to-integrate/merchant-api-new/).   
   - name: OAuth
     description: |
-      Use this endpoint to retrieve an OAuth token. Use the token to allow your ecommerce server to make calls to the Account endpoint and create a one-click checkout experience for shoppers. See related guide [Fetch OAuth Token](https://help.bolt.com/products/ignite/api-implementation/endpoints/oauth-guide/).
+      Use this endpoint to retrieve an OAuth token. Use the token to allow your ecommerce server to make calls to the Account endpoint and create a one-click checkout experience for shoppers. See related guide [Fetch OAuth Token](https://help.boltapp.com/products/ignite/api-implementation/endpoints/oauth-guide/).
   - name: Orders
     description: |
-      Use the Orders API to interact with the customer's cart throughout the checkout process. Pre-checkout, perform actions such as validating inventory, verifying discounts, and calculating taxes. Post-checkout, share shipping information so your customer can track their order. You'll interact with the [Merchant API](https://help.bolt.com/api-merchant/) to keep the servers in sync with any changes the customer makes to their cart. See our related guide [Create a Bolt Order Token](https://help.bolt.com/products/checkout/how-to-integrate/create-bolt-order-token-new/).
+      Use the Orders API to interact with the customer's cart throughout the checkout process. Pre-checkout, perform actions such as validating inventory, verifying discounts, and calculating taxes. Post-checkout, share shipping information so your customer can track their order. You'll interact with the [Merchant API](https://help.boltapp.com/api-merchant/) to keep the servers in sync with any changes the customer makes to their cart. See our related guide [Create a Bolt Order Token](https://help.boltapp.com/products/checkout/how-to-integrate/create-bolt-order-token-new/).
   - name: Statements
     description: |
       [Statements](/merchants/references/financials/statements/) are available in the Merchant Dashboard for merchants who use Bolt Payments as their processor. Merchants using other processors do not receive these statements.
+  - name: Subscriptions
+    description: |
+      Use the Subscriptions endpoint to manage merchant-side recurring subscriptions created through Bolt Charge: list and retrieve subscriptions, cancel or pause/unpause them, view generated orders, and configure dunning (failed payment recovery) settings for a division.
   - name: Testing
     description: |
-      The testing endpoint allows you to test various functionality within Bolt. Create a test credit card to process a test payment in your store. You can also simulate tracking an order’s shipment and programmatically create customer accounts to use as dummy data. See our related guide on [Testing](https://help.bolt.com/developers/production-readiness-guides/test-cards/).
+      The testing endpoint allows you to test various functionality within Bolt. Create a test credit card to process a test payment in your store. You can also simulate tracking an order’s shipment and programmatically create customer accounts to use as dummy data. See our related guide on [Testing](https://help.boltapp.com/developers/production-readiness-guides/test-cards/).
   - name: Transactions
     description: |
-      Use the Transactions endpoint to authorize payments when the shopper checks out and handle post authorization actions such as captures and refunds. You can use a shopper's existing saved payment information or tokenize new payment information with the [Bolt Tokenizer](https://help.bolt.com/api-tokenizer/). Bolt Authorize Transaction types fall into one of three categories: a logged-in shopper checking out with a saved payment method, any type of shopper checking out with a new payment method, and a logged-in shopper checking out with a new payment method. The new payment method will be saved to the shopper's account.
+      Use the Transactions endpoint to authorize payments when the shopper checks out and handle post authorization actions such as captures and refunds. You can use a shopper's existing saved payment information or tokenize new payment information with the [Bolt Tokenizer](https://help.boltapp.com/api-tokenizer/). Bolt Authorize Transaction types fall into one of three categories: a logged-in shopper checking out with a saved payment method, any type of shopper checking out with a new payment method, and a logged-in shopper checking out with a new payment method. The new payment method will be saved to the shopper's account.
   - name: Webhooks
     description: |
-      Set up webhooks to notify your backend of events within Bolt. These webhooks can communicate with your OMS or other systems to keep them up to date with Bolt. See our related guide on [Webhooks](https://help.bolt.com/get-started/during-checkout/webhooks/).
-servers:
-  - url: https://api.bolt.com
-    description: The Production URL (Live Data).
-  - url: https://api-sandbox.bolt.com
-    description: The Sandbox URL (Test Data).
-  - url: https://api-staging.bolt.com
-    description: The Staging URL (Staged Data).
+      Set up webhooks to notify your backend of events within Bolt. These webhooks can communicate with your OMS or other systems to keep them up to date with Bolt. See our related guide on [Webhooks](https://help.boltapp.com/get-started/during-checkout/webhooks/).
+paths:
+  /v1/account:
+    get:
+      description: Fetch a shopper's account details to pre-fill checkout fields. This request must come from your backend for security purposes, as it requires the use of your private key to authenticate. For PCI compliance, only limited information is returned for each credit card available in the shopper’s wallet.
+      operationId: getAccount
+      parameters:
+        - $ref: '#/components/parameters/x-publishable-key'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account_details'
+          description: Account Details Fetched
+      security:
+        - OAuth:
+            - bolt.account.manage
+            - bolt.account.view
+          X-API-Key: []
+      summary: Get Account Details
+      tags:
+        - Account
+    post:
+      description: Create a Bolt shopping account.
+      operationId: createAccount
+      parameters:
+        - $ref: '#/components/parameters/x-publishable-key'
+        - $ref: '#/components/parameters/idempotency_key'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create_account_input'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account_details'
+          description: Account Created
+      security:
+        - X-API-Key: []
+      summary: Create Bolt Account
+      tags:
+        - Account
+  /v1/account/profile:
+    patch:
+      description: Update the identifiers for a shopper's profile (first name or last name).
+      operationId: updateAccountProfile
+      parameters:
+        - $ref: '#/components/parameters/x-publishable-key'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/update_profile'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile_view'
+          description: Profile Updated
+      security:
+        - OAuth:
+            - bolt.account.manage
+          X-API-Key: []
+      summary: Update Profile
+      tags:
+        - Account
+  /v1/account/addresses:
+    post:
+      description: Add an address to a shopper's account address book.
+      operationId: addAddress
+      parameters:
+        - $ref: '#/components/parameters/x-publishable-key'
+        - $ref: '#/components/parameters/idempotency_key'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/address_account'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/address_view_account'
+                  - properties:
+                      default:
+                        type: boolean
+                    type: object
+          description: Address Added Successfully
+      security:
+        - OAuth:
+            - bolt.account.manage
+          X-API-Key: []
+      summary: Add Address
+      tags:
+        - Account
+  /v1/account/addresses/{id}:
+    delete:
+      description: |
+        Deletes an existing address in a shopper's address book.
+      operationId: deleteAddress
+      parameters:
+        - $ref: '#/components/parameters/shopper_address_id_path_param'
+        - $ref: '#/components/parameters/x-publishable-key'
+      responses:
+        '200':
+          description: Address Successfully Deleted
+      security:
+        - OAuth:
+            - bolt.account.manage
+          X-API-Key: []
+      summary: Delete Address
+      tags:
+        - Account
+    post:
+      description: |
+        Replace an existing address in a shopper's address book.
+        These changes delete the existing address and create a new one.
+      operationId: replaceAddress
+      parameters:
+        - $ref: '#/components/parameters/shopper_address_id_path_param'
+        - $ref: '#/components/parameters/x-publishable-key'
+        - $ref: '#/components/parameters/idempotency_key'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/address_account'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/address_view_account'
+                  - properties:
+                      default:
+                        type: boolean
+                    type: object
+          description: Address Updated Successfully
+      security:
+        - OAuth:
+            - bolt.account.manage
+          X-API-Key: []
+      summary: Replace Address
+      tags:
+        - Account
+    put:
+      description: |
+        Edit an existing address in a shopper's address book.
+        This endpoint fully replaces the information for an existing address while retaining the same address ID.
+      operationId: editAddress
+      parameters:
+        - $ref: '#/components/parameters/shopper_address_id_path_param'
+        - $ref: '#/components/parameters/x-publishable-key'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/address_account'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/address_view_account'
+                  - properties:
+                      default:
+                        type: boolean
+                    type: object
+          description: Address Updated Successfully
+      security:
+        - OAuth:
+            - bolt.account.manage
+          X-API-Key: []
+      summary: Edit Address
+      tags:
+        - Account
+  /v1/account/exists:
+    get:
+      description: Check whether an account exists using one of `email`, `phone`, or `sha256_email` as the unique identifier.
+      operationId: detectAccount
+      parameters:
+        - $ref: '#/components/parameters/email'
+        - $ref: '#/components/parameters/sha256_email'
+        - $ref: '#/components/parameters/phone'
+        - $ref: '#/components/parameters/x_publishable_key_required'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1_accounts_view'
+          description: Has Bolt Account
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: Missing Query Parameter
+      summary: Detect Account
+      tags:
+        - Account
+      security: []
+  /v1/account/payment_methods:
+    post:
+      description: |
+        Add a payment method to a shopper's Bolt account Wallet. For security purposes, this request must come from your backend because authentication requires the use of your private key.
+
+        **Note**: Before using this API, the credit card details must be tokenized using Bolt's JavaScript library function, which is documented in [Install the Bolt Tokenizer](https://help.boltapp.com/developers/references/bolt-tokenizer).
+      operationId: addPaymentMethod
+      parameters:
+        - $ref: '#/components/parameters/x-publishable-key'
+        - $ref: '#/components/parameters/idempotency_key'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/credit_card_account'
+                - properties:
+                    currency:
+                      description: This can be left empty. A 3-digit ISO code for currency that will be used in the credit card authorization.
+                      type: string
+                      example: USD
+                  type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/saved_credit_card_view'
+          description: Payment Method Added
+      security:
+        - OAuth:
+            - bolt.account.manage
+          X-API-Key: []
+      summary: Add Payment Method
+      tags:
+        - Account
+  /v1/account/payment_methods/{payment_method_id}:
+    delete:
+      description: Delete a saved payment method from a shopper's Bolt account Wallet.
+      operationId: deletePaymentMethod
+      parameters:
+        - $ref: '#/components/parameters/shopper_payment_method_id_path_param'
+        - $ref: '#/components/parameters/x-publishable-key'
+      responses:
+        '200':
+          description: Success
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: Not Found
+      security:
+        - OAuth:
+            - bolt.account.manage
+          X-API-Key: []
+      summary: Delete Payment Method
+      tags:
+        - Account
+  /v1/merchant/callbacks:
+    get:
+      description: Retrieves callbacks URLs for a Bolt merchant division.
+      operationId: getMerchantCallbacks
+      parameters:
+        - $ref: '#/components/parameters/division_id'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/merchant_callbacks_view'
+          description: Merchant Callbacks Retrieved
+        '400':
+          $ref: '#/components/responses/merchant_callbacks_error_400'
+        '403':
+          $ref: '#/components/responses/merchant_callbacks_error_403'
+      security:
+        - X-API-Key: []
+      summary: Get Callback URLs
+      tags:
+        - Configuration
+    post:
+      description: Configure callbacks URLs for a Bolt merchant division. This will store or override only the callback URLs that are specified in the request. Operations are fully transactional.
+      operationId: setMerchantCallbacks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/merchant_callbacks_input'
+      responses:
+        '200':
+          description: Successfully sets callback URLs. No JSON schema is expected.
+        '400':
+          $ref: '#/components/responses/merchant_callbacks_error_400'
+        '403':
+          $ref: '#/components/responses/merchant_callbacks_error_403'
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: Request did not pass input validation. Check required fields are populated & meet input requirements.
+      security:
+        - X-API-Key: []
+      summary: Set Callback URLs
+      tags:
+        - Configuration
+  /v1/merchant/identifiers:
+    get:
+      description: This endpoint returns the merchant's public ID and the [publishable key](https://help.boltapp.com/developers/tools/api-keys/) related to the merchant division.
+      operationId: getMerchantIdentifiers
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/merchant_identifiers_view'
+          description: Merchant Identifiers Retrieved
+        '403':
+          $ref: '#/components/responses/merchant_identifier_error_403'
+      security:
+        - X-API-Key: []
+      summary: Get Merchant Identifiers
+      tags:
+        - Configuration
+  /v1/merchant/orders:
+    post:
+      description: Make a request to this endpoint to create a Bolt order, generate a Bolt order token, and initiate the checkout process. A Bolt order token is required for Bolt orders; see Non-Bolt orders for alternative use cases.
+      operationId: createOrderToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/order_create'
+        description: Generate Order Token
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/i_order_view'
+          description: Token Generation Successful
+        '400':
+          $ref: '#/components/responses/order_generate_error_400'
+        '403':
+          $ref: '#/components/responses/order_generate_error_403'
+        '422':
+          $ref: '#/components/responses/order_generate_error_422'
+      security:
+        - X-API-Key: []
+      summary: Create Order Token
+      tags:
+        - Orders
+  /v1/merchant/statement:
+    post:
+      description: Get a pre-signed URL for the requested statement file.
+      operationId: getStatements
+      requestBody:
+        $ref: '#/components/requestBodies/statements_view'
+      responses:
+        '200':
+          $ref: '#/components/responses/statements_view'
+        '403':
+          $ref: '#/components/responses/statements_view_error_403'
+        '404':
+          $ref: '#/components/responses/statements_view_error_404'
+        '422':
+          $ref: '#/components/responses/statements_view_error_422'
+      security:
+        - X-API-Key:
+            - X-API-Key
+      summary: Fetch a Statement
+      tags:
+        - Statements
+  /v1/merchant/track_shipment:
+    post:
+      description: |
+        Send the carrier and order tracking number to Bolt (after a label has been printed). Bolt then uses EasyPost to forward ongoing tracking event updates to the shopper. This request must include **all** items included in the shipment; their references must also match those found in the original cart generation.
+      operationId: trackOrder
+      requestBody:
+        $ref: '#/components/requestBodies/order_track'
+      responses:
+        '200':
+          $ref: '#/components/responses/order_track'
+        '400':
+          $ref: '#/components/responses/order_track_error_400'
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: Generic Error Schema
+      security:
+        - X-API-Key:
+            - X-API-Key
+      summary: Send order tracking details
+      tags:
+        - Orders
+  /v1/merchant/transactions/authorize:
+    post:
+      description: |
+        This endpoint authorizes card payments and has three main use cases:
+        * • Authorize a payment using an unsaved payment method for a guest or logged-in shopper.
+        * • Authorize a payment using a saved payment method for a logged-in shopper.
+        *  • Re-charge a previous transaction using the `credit_card_id` of the transaction.
+      operationId: authorizeTransaction
+      parameters:
+        - $ref: '#/components/parameters/x-publishable-key'
+        - $ref: '#/components/parameters/idempotency_key'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/merchant_credit_card_authorization'
+                - $ref: '#/components/schemas/merchant_credit_card_authorization_recharge'
+        description: |
+          **Authorize a Transaction**
+          * • `merchant_credit_card_authorization`: For authorizing with a new, unsaved card. This can be for a guest checkout flow, one-time payment, or an existing Bolt shopper.
+          * • `merchant_credit_card_authorization_recharge`: For authorizing a card using a shoppers saved payment methods.
+          * • **Anytime the shopper is paying while logged-in attach their OAuth `access_token` to the request.**
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/i_authorize_result_view'
+          description: Authorization Successful
+      security:
+        - OAuth: []
+          X-API-Key: []
+      summary: Authorize a Card
+      tags:
+        - Transactions
+  /v1/merchant/transactions/capture:
+    post:
+      description: |
+        This captures funds for the designated transaction. A capture can be done for any partial amount or for the total authorized amount.
+
+        Although the response returns the standard `transaction_view` object, only `captures` and either `id` or `reference` are needed.
+      operationId: captureTransaction
+      parameters:
+        - $ref: '#/components/parameters/idempotency_key'
+      requestBody:
+        $ref: '#/components/requestBodies/capture_transaction'
+        description: Capture a Transaction
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transaction_view'
+          description: Capture Successful
+        '403':
+          $ref: '#/components/responses/transaction_capture_error_403'
+        '404':
+          $ref: '#/components/responses/transaction_capture_error_404'
+        '422':
+          content:
+            application/json:
+              schema:
+                properties:
+                  errors:
+                    items:
+                      properties:
+                        code:
+                          example: 1000001
+                          type: number
+                        field:
+                          example: transaction_id
+                          type: string
+                        message:
+                          example: '`TA8hLkJh4db4JJ` must be a valid public id of type transaction'
+                          type: string
+                      type: object
+                    type: array
+                  result:
+                    type: object
+                type: object
+          description: Unprocessable Entity
+      security:
+        - X-API-Key: []
+      summary: Capture a Transaction
+      tags:
+        - Transactions
+  /v1/merchant/transactions/credit:
+    post:
+      description: This refunds a captured transaction. Refunds can be done for any partial amount or for the total authorized amount. These refunds are processed synchronously and return information about the refunded transaction in the standard `transaction_view` object.
+      operationId: refundTransaction
+      parameters:
+        - $ref: '#/components/parameters/idempotency_key'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/transaction_credit'
+        description: Refund a Transaction
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transaction_view'
+          description: Refund Successful
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: Generic Error Schema
+      security:
+        - X-API-Key: []
+      summary: Refund a Transaction
+      tags:
+        - Transactions
+  /v1/merchant/transactions/review:
+    post:
+      description: This endpoint is used to manually approve or reject orders for a specified transaction.
+      operationId: reviewTransaction
+      parameters:
+        - $ref: '#/components/parameters/idempotency_key'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/merchant_credit_card_review'
+        description: Review a Transaction
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transaction_details_view'
+          description: Transaction Details Received
+        '403':
+          $ref: '#/components/responses/transaction_review_error_403'
+        '404':
+          $ref: '#/components/responses/transaction_review_error_404'
+        '422':
+          $ref: '#/components/responses/transaction_review_error_422'
+      security:
+        - X-API-Key: []
+      summary: Review Transaction
+      tags:
+        - Transactions
+  /v1/merchant/transactions/void:
+    post:
+      description: |
+        This voids the authorization for a given transaction. Voids must be completed before the authorization is captured.
+        In the request, either `transaction_id` or `transaction_reference` is required.
+        Although the response returns the standard `transaction_view` object, only `status` and either `id` or `reference` are needed.
+      operationId: voidTransaction
+      parameters:
+        - $ref: '#/components/parameters/idempotency_key'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/credit_card_void'
+        description: Void a Transaction
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transaction_view'
+          description: Void Successful
+        '403':
+          $ref: '#/components/responses/transaction_void_error_403'
+        '404':
+          $ref: '#/components/responses/transaction_void_error_404'
+      security:
+        - X-API-Key: []
+      summary: Void a Transaction
+      tags:
+        - Transactions
+  /v1/merchant/transactions/{REFERENCE}:
+    get:
+      description: |
+        This allows you to pull the full transaction details for a given transaction.
+
+         **Note**: All objects and fields marked `required` in the Transaction Details response are also **nullable**. This includes any sub-components (objects or fields) also marked `required`.
+      operationId: getTransactionDetails
+      parameters:
+        - $ref: '#/components/parameters/transaction_reference_path_param'
+      responses:
+        '200':
+          $ref: '#/components/responses/transaction_details'
+        '403':
+          $ref: '#/components/responses/transaction_details_error_403'
+        '422':
+          $ref: '#/components/responses/transaction_details_error_422'
+      security:
+        - X-API-Key: []
+      summary: Transaction Details
+      tags:
+        - Transactions
+    patch:
+      description: This allows you to update certain transaction properties post-authorization.
+      operationId: updateTransaction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/transaction_update_input'
+              description: Update a Transaction
+      parameters:
+        - $ref: '#/components/parameters/transaction_reference_path_param'
+        - $ref: '#/components/parameters/idempotency_key'
+      responses:
+        '200':
+          $ref: '#/components/responses/transaction_details'
+        '403':
+          $ref: '#/components/responses/transaction_details_error_403'
+        '404':
+          $ref: '#/components/responses/transaction_details_error_404'
+      security:
+        - X-API-Key: []
+      summary: Update a Transaction
+      tags:
+        - Transactions
+  /v1/oauth/token:
+    post:
+      description: |
+        Endpoint for receiving access, ID, and refresh tokens from Bolt's OAuth server. 
+
+        To use this endpoint, first use the Authorization Code Request flow by using the `authorization_code` Grant Type (`grant_type`). Then, in the event that you would need a second or subsequent code, use the `refresh_token` value returned from a successful request as the `refresh_token` input value in your subsequent `refresh_token` Grant Type (`grant_type`) request.
+
+         **Reminder - the Content-Type of this request must be application/x-www-form-urlencoded**
+      operationId: OAuthToken
+      parameters:
+        - $ref: '#/components/parameters/x-publishable-key'
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            examples:
+              authorization_code_request:
+                value:
+                  client_id: PUBLISHABLE_KEY_PLACEHOLDER
+                  client_secret: API_KEY_PLACEHOLDER
+                  code: AUTH_CODE_PLACEHOLDER
+                  grant_type: authorization_code
+                  scope: bolt.account.manage+openid
+              refresh_token_request:
+                value:
+                  client_id: PUBLISHABLE_KEY_PLACEHOLDER
+                  client_secret: API_KEY_PLACEHOLDER
+                  grant_type: refresh_token
+                  refresh_token: REFRESH_TOKEN_PLACEHOLDER
+                  scope: bolt.account.view
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/o_auth_token_input'
+                - $ref: '#/components/schemas/o_auth_token_input_refresh'
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                authorization_code_response:
+                  value:
+                    access_token: $ACCESS_TOKEN
+                    expires_in: 3600
+                    id_token: $ID_TOKEN
+                    refresh_token: $REFRESH_TOKEN
+                    refresh_token_scope: bolt.account.view
+                    scope: bolt.account.manage
+                    token_type: bearer
+                refresh_token_response:
+                  value:
+                    access_token: $NEW_ACCESS_TOKEN
+                    expires_in: 3600
+                    refresh_token: $NEW_REFRESH_TOKEN
+                    refresh_token_scope: bolt.account.view
+                    scope: bolt.account.view
+                    token_type: bearer
+              schema:
+                $ref: '#/components/schemas/o_auth_token_response'
+          description: OAuth token response.
+        '400':
+          $ref: '#/components/responses/oauth_400'
+        '403':
+          $ref: '#/components/responses/oauth_403'
+        '422':
+          $ref: '#/components/responses/oauth_422'
+      summary: OAuth Token Endpoint
+      tags:
+        - OAuth
+  /v1/shipments/mock_bolt_shipping:
+    post:
+      description: This endpoint simulates tracking an order's shipment and is for testing purposes only.
+      operationId: testShipping
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/mock_tracking_input'
+      responses:
+        '200':
+          description: Success - No Details
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: OrderTrackingTesting Generic Failure
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: Unprocessable Entity
+      security:
+        - X-API-Key: []
+      summary: Test Shipping
+      tags:
+        - Testing
+  /v1/webhooks:
+    get:
+      description: Find webhook configurations belonging to a merchant division. Results are limited to only show webhooks authorized by the X-API-Key.
+      operationId: queryWebhooks
+      parameters:
+        - $ref: '#/components/parameters/division_id'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  webhooks:
+                    items:
+                      $ref: '#/components/schemas/webhook'
+                    type: array
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: BAD REQUEST. Request is malformed or invalid values are detected.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: FORBIDDEN. Not authorized to query webhook for this entity.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: NOT FOUND. Unable to find webhook.
+      security:
+        - X-API-Key: []
+      summary: Query Webhooks
+      tags:
+        - Webhooks
+    post:
+      description: |
+        Create a new webhook to receive notifications from Bolt about various events, such as transaction status. Webhooks must have unique configuration.
+
+        **Transaction & account events**:
+        * `pending` - The payment pre-authorization was successful, and the transaction is now pending fraud review.
+        * `failed_payment` - The payment failed pre-authorization.
+        * `payment` - An automatic capture transaction passed authorization and fraud review, and the system captured the funds.
+        * `auth` - A manual capture transaction passed authorization and fraud review, and you can begin the capture process.
+        * `rejected_irreversible` - The transaction failed fraud review, with no appeal option available.
+        * `rejected_reversible` - The transaction was flagged during fraud review; a re-review can be requested.
+        * `capture` - A manual capture was successful.
+        * `credit` - The system successfully processed a refund or credit.
+        * `void` - The system successfully voided the transaction.
+        * `newsletter_subscription` - The customer subscribed to the merchant's newsletter.
+        * `risk_insights` - Information about the transaction's risk is available from the fraud review.
+        * `credit_card_deleted` - A customer removed a saved credit card from their account.
+
+        **Subscription events**:
+        * `subscription_created` - A subscription was created from a successful initial transaction.
+        * `subscription_renewed` - A recurring subscription order was placed successfully and the next order was scheduled.
+        * `subscription_canceled` - A subscription was canceled, by the merchant, by the shopper, or automatically (e.g. once its dunning retry schedule is exhausted). Also sent alongside `subscription_ended` when the subscription's configured final dunning action is cancellation.
+        * `subscription_payment_failed` - A scheduled subscription order's payment attempt failed.
+        * `subscription_paused` - A subscription was paused, by the merchant, by the shopper, or automatically once its dunning retry schedule is exhausted (when the configured final dunning action is pausing).
+        * `subscription_unpaused` - A paused subscription was resumed, by the merchant or by the shopper.
+        * `subscription_ended` - A subscription was permanently ended after its dunning retry schedule was exhausted. Sent alongside `subscription_canceled` for this case.
+      operationId: createWebhook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/event_group_create_webhook'
+                - $ref: '#/components/schemas/events_array_create_webhook'
+        description: Webhook that receives notifications.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  webhook_id:
+                    $ref: '#/components/schemas/webhook_id'
+                required:
+                  - webhook_id
+                type: object
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: BAD REQUEST. Request is malformed or invalid values are detected.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: FORBIDDEN. Not authorized to create a webhook for this entity.
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: UNPROCESSABLE ENTITY. Not allowed to receive duplicate notifications. This is to safeguard a webhook listener from receiving duplicate events. Use GET /v1/webhooks and DELETE /v1/webhooks to check for and delete duplicate webhooks.
+      security:
+        - X-API-Key: []
+      summary: Create Bolt Webhook
+      tags:
+        - Webhooks
+  /v1/webhooks/{webhook_id}:
+    delete:
+      description: Delete a Bolt webhook. Provide an authorized X-API-Key to perform this action.
+      operationId: deleteWebhook
+      parameters:
+        - description: Webhook ID
+          in: path
+          name: webhook_id
+          required: true
+          schema:
+            $ref: '#/components/schemas/webhook_id'
+      responses:
+        '200':
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: BAD REQUEST. Request is malformed or invalid values are detected.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: FORBIDDEN. Not authorized to perform the operation on this resource.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: NOT FOUND. Unable to find webhook.
+      security:
+        - X-API-Key: []
+      summary: Delete a Bolt Webhook
+      tags:
+        - Webhooks
+    get:
+      description: Get Webhook information by its Webhook ID. Results only include webhooks authorized by the X-API-Key.
+      operationId: getWebhook
+      parameters:
+        - description: Webhook ID
+          in: path
+          name: webhook_id
+          required: true
+          schema:
+            $ref: '#/components/schemas/webhook_id'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/webhook'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: BAD REQUEST. Request is malformed or invalid values are detected.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: FORBIDDEN. Not authorized to perform the operation on this resource.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: NOT FOUND. Unable to find webhook.
+      security:
+        - X-API-Key: []
+      summary: Get Webhook
+      tags:
+        - Webhooks
+  /v1/subscriptions:
+    get:
+      description: List subscriptions belonging to the authenticated merchant division. Results are limited to only show subscriptions authorized by the X-API-Key and X-Publishable-Key.
+      operationId: getSubscriptions
+      parameters:
+        - $ref: '#/components/parameters/x_publishable_key_required'
+        - $ref: '#/components/parameters/bolt_connect_seller_id_header'
+        - $ref: '#/components/parameters/bolt_connect_seller_id_query'
+        - description: Filter to subscriptions for these subscription product IDs. Comma-separated.
+          in: query
+          name: product_ids
+          required: false
+          schema:
+            type: string
+        - description: Filter to subscriptions on these plan IDs. Comma-separated.
+          in: query
+          name: plan_ids
+          required: false
+          schema:
+            type: string
+        - description: Filter to subscriptions for these shopper emails. Comma-separated.
+          in: query
+          name: emails
+          required: false
+          schema:
+            type: string
+        - description: Filter to subscriptions with these statuses. Comma-separated.
+          in: query
+          name: statuses
+          required: false
+          schema:
+            items:
+              $ref: '#/components/schemas/subscription_v2_status'
+            type: array
+        - description: The page number to retrieve, starting at 1.
+          in: query
+          name: page
+          required: false
+          schema:
+            default: 1
+            minimum: 1
+            type: integer
+        - description: The number of subscriptions to return per page.
+          in: query
+          name: page_size
+          required: false
+          schema:
+            default: 400
+            maximum: 400
+            minimum: 1
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/subscription_v2_list'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: BAD REQUEST. Request is malformed or invalid values are detected.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: UNAUTHORIZED. Missing or invalid X-API-Key or X-Publishable-Key.
+      security:
+        - X-API-Key: []
+      summary: Get Subscriptions
+      tags:
+        - Subscriptions
+  /v1/subscriptions/{subscription_id}:
+    get:
+      description: Get a single subscription by its ID. Results are limited to only show subscriptions authorized by the X-API-Key and X-Publishable-Key.
+      operationId: getSubscription
+      parameters:
+        - $ref: '#/components/parameters/subscription_v2_id_path'
+        - $ref: '#/components/parameters/x_publishable_key_required'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/subscription_v2'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: BAD REQUEST. Request is malformed or invalid values are detected.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: UNAUTHORIZED. Missing or invalid X-API-Key or X-Publishable-Key.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: NOT FOUND. Unable to find a subscription with this ID for this merchant division.
+      security:
+        - X-API-Key: []
+      summary: Get Subscription
+      tags:
+        - Subscriptions
+  /v1/subscriptions/{subscription_id}/cancel:
+    post:
+      description: Cancel a subscription. This cancels any of the subscription's orders that are currently `scheduled`, `paused`, or `payment_failed`; no further orders will be placed.
+      operationId: cancelSubscription
+      parameters:
+        - $ref: '#/components/parameters/subscription_v2_id_path'
+        - $ref: '#/components/parameters/x_publishable_key_required'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/subscription_v2_success'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: BAD REQUEST. Request is malformed, or the subscription is not in a cancellable state.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: UNAUTHORIZED. Missing or invalid X-API-Key or X-Publishable-Key.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: NOT FOUND. Unable to find a subscription with this ID for this merchant division.
+      security:
+        - X-API-Key: []
+      summary: Cancel Subscription
+      tags:
+        - Subscriptions
+  /v1/subscriptions/{subscription_id}/pause:
+    post:
+      description: Pause a subscription. This transitions the subscription's next `scheduled` order to `paused`, skipping its next billing cycle. Returns an error if the subscription is already paused.
+      operationId: pauseSubscription
+      parameters:
+        - $ref: '#/components/parameters/subscription_v2_id_path'
+        - $ref: '#/components/parameters/x_publishable_key_required'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/subscription_v2'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: BAD REQUEST. Request is malformed, or the subscription is already paused.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: UNAUTHORIZED. Missing or invalid X-API-Key or X-Publishable-Key.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: NOT FOUND. Unable to find a subscription with this ID for this merchant division.
+      security:
+        - X-API-Key: []
+      summary: Pause Subscription
+      tags:
+        - Subscriptions
+  /v1/subscriptions/{subscription_id}/unpause:
+    post:
+      description: Unpause a previously paused subscription. This computes the next billing date from the plan's frequency and reschedules the subscription's order. Returns an error if the subscription is not currently paused.
+      operationId: unpauseSubscription
+      parameters:
+        - $ref: '#/components/parameters/subscription_v2_id_path'
+        - $ref: '#/components/parameters/x_publishable_key_required'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/subscription_v2'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: BAD REQUEST. Request is malformed, or the subscription is not currently paused.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: UNAUTHORIZED. Missing or invalid X-API-Key or X-Publishable-Key.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: NOT FOUND. Unable to find a subscription with this ID for this merchant division.
+      security:
+        - X-API-Key: []
+      summary: Unpause Subscription
+      tags:
+        - Subscriptions
+  /v1/subscriptions/orders:
+    get:
+      description: List subscription orders (billing cycles) for the authenticated merchant division.
+      operationId: getSubscriptionOrders
+      parameters:
+        - $ref: '#/components/parameters/x_publishable_key_required'
+        - $ref: '#/components/parameters/bolt_connect_seller_id_header'
+        - $ref: '#/components/parameters/bolt_connect_seller_id_query'
+        - description: Filter to orders for these subscription IDs. Comma-separated.
+          in: query
+          name: subscription_ids
+          required: false
+          schema:
+            type: string
+        - description: Filter to orders for these Bolt order IDs. Comma-separated.
+          in: query
+          name: order_ids
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/subscription_v2_order_list'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: BAD REQUEST. Request is malformed, such as a non-numeric value in `order_ids`.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: UNAUTHORIZED. Missing or invalid X-API-Key or X-Publishable-Key.
+      security:
+        - X-API-Key: []
+      summary: Get Subscription Orders
+      tags:
+        - Subscriptions
+  /v1/subscriptions/dunning_settings:
+    get:
+      description: Get the merchant division's dunning (failed payment recovery) settings. If the division has never configured these settings, Bolt's defaults are returned.
+      operationId: getDunningSettings
+      parameters:
+        - $ref: '#/components/parameters/x_publishable_key_required'
+        - $ref: '#/components/parameters/bolt_connect_seller_id_header'
+        - $ref: '#/components/parameters/bolt_connect_seller_id_query'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/subscription_v2_dunning_settings'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: UNAUTHORIZED. Missing or invalid X-API-Key or X-Publishable-Key.
+      security:
+        - X-API-Key: []
+      summary: Get Dunning Settings
+      tags:
+        - Subscriptions
+    put:
+      description: Update the merchant division's dunning (failed payment recovery) settings. This replaces the full configuration; omitted fields are not merged with the previous settings.
+      operationId: updateDunningSettings
+      parameters:
+        - $ref: '#/components/parameters/x_publishable_key_required'
+        - $ref: '#/components/parameters/bolt_connect_seller_id_header'
+        - $ref: '#/components/parameters/bolt_connect_seller_id_query'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/subscription_v2_dunning_settings'
+        description: Dunning Settings
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/subscription_v2_dunning_settings'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: BAD REQUEST. Request is malformed or fails validation, e.g. `final_action` is not one of `cancel`/`pause`, `retry_schedule_hours` is not strictly increasing, or `reminder_lead_days` has more than 10 entries.
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors_bolt_api_response'
+          description: UNAUTHORIZED. Missing or invalid X-API-Key or X-Publishable-Key.
+      security:
+        - X-API-Key: []
+      summary: Update Dunning Settings
+      tags:
+        - Subscriptions
+  /v1/testing/shopper/create:
+    post:
+      description: Create a Bolt shopper account for testing purposes. Available for sandbox use only and the created account will be recycled after a certain time.
+      operationId: createTestingShopperAccount
+      parameters:
+        - $ref: '#/components/parameters/x-publishable-key'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/testing_account_request'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/testing_account_details'
+          description: Testing Account Created
+      security:
+        - X-API-Key: []
+      summary: Create Testing Shopper Account
+      tags:
+        - Testing
+  /v1/testing/card_token:
+    get:
+      description: This endpoint fetches a new credit card token for Bolt's universal test credit card number `4111 1111 1111 1004`. This is for testing and is available only in sandbox.
+      operationId: getTestCreditCardToken
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    description: The newly generated credit card token.
+                    type: string
+                    example: 7i8322df93jsor663bsf02be798e672afd9360a81d203rc97778ff4bddedertg
+                  expiry:
+                    description: The date at which the token expires. A token must be used within 15 minutes of creation.
+                    type: integer
+                    example: 1671140825305
+                  last4:
+                    description: The last 4 digits of the card number.
+                    type: string
+                    example: '1004'
+                  bin:
+                    description: The credit card bin.
+                    type: string
+                    example: '411111'
+                  network:
+                    description: The credit card network.
+                    type: string
+                    example: visa
+          description: Successfully Fetched Credit Card Token
+      security:
+        - X-API-Key: []
+      summary: Fetch a Test Credit Card Token
+      tags:
+        - Testing
 components:
   parameters:
     x-publishable-key:
@@ -115,6 +1435,27 @@ components:
       required: true
       schema:
         type: string
+    bolt_connect_seller_id_header:
+      description: For Bolt Connect marketplace integrations, the seller's external ID. When provided, the request acts on the seller's division rather than the caller's own division. Ignored if the `seller_id` query parameter is also set.
+      in: header
+      name: X-Bolt-Connect-Seller-Id
+      required: false
+      schema:
+        type: string
+    bolt_connect_seller_id_query:
+      description: For Bolt Connect marketplace integrations, the seller's external ID. When provided, the request acts on the seller's division rather than the caller's own division. Takes precedence over the `X-Bolt-Connect-Seller-Id` header if both are set.
+      in: query
+      name: seller_id
+      required: false
+      schema:
+        type: string
+    subscription_v2_id_path:
+      description: The unique ID for the subscription.
+      in: path
+      name: subscription_id
+      required: true
+      schema:
+        $ref: '#/components/schemas/subscription_v2_id'
     bolt-consumer-shopper-login-device-token:
       description: The Shopper's OAuth Token from their current active session.
       in: header
@@ -350,7 +1691,7 @@ components:
       type: object
     shopper_metadata:
       description: |
-        A key-value pair object that allows users to store arbitrary information associated with an object.  For any individual account object, we allow up to 50 keys. Keys can be up to 40 characters long and values can be up to 500 characters long.  Metadata should not contain any sensitive customer information, like PII (Personally Identifiable Information). For more information about metadata, see our [documentation](https://help.bolt.com/developers/references/embedded-metadata/).
+        A key-value pair object that allows users to store arbitrary information associated with an object. For any individual account object, we allow up to 50 keys. Keys can be up to 40 characters long and values can be up to 500 characters long. Metadata should not contain any sensitive customer information, like PII (Personally Identifiable Information). For more information about metadata, see our [documentation](https://help.boltapp.com/developers/references/embedded-metadata/).
       nullable: true
       example:
         customer_id: 234
@@ -674,7 +2015,7 @@ components:
           type: string
         token_type:
           description: |
-            Used to define which payment processor generated the token for this credit card.  For those using Bolt's tokenizer, the value must be `bolt`.
+            Used to define which payment processor generated the token for this credit card. For those using Bolt's tokenizer, the value must be `bolt`.
           enum:
             - vantiv
             - applepay
@@ -967,6 +2308,7 @@ components:
             - membership_giftcard
             - subscription_discount
             - rewards_discount
+            - shipping_discount
             - unknown
           type: string
         reference:
@@ -1490,9 +2832,9 @@ components:
           type: string
           example: $5 off (100 Points)
         details:
-          description: Internal-facing metadata for the Loyalty Rewards. Ideal for adding any other identifying information about the reward,  including a duplication of the original loyalty reward json response from the loyalty provider as shown in the example provided. If you choose to use this field  to hold json, enclose the content in single quotes to force a string value.
+          description: Internal-facing metadata for the Loyalty Rewards. Ideal for adding any other identifying information about the reward, including a duplication of the original loyalty reward json response from the loyalty provider as shown in the example provided. If you choose to use this field to hold json, enclose the content in single quotes to force a string value.
           type: string
-          example: '{"id": 123456, "icon": "fa-dollar", "name": "$15.00 Off", "type": "Coupon", "amount": 100, "duration": "single_use", "cost_text": "150 Points",  "description": "Get $15 off your next purchase for 150 points", "discount_type": "fixed_amount", "unrendered_name": "$15.00 Off",  "discount_percentage": null, "discount_rate_cents": null, "discount_value_cents": null, "discount_amount_cents": 1500,  "unrendered_description": "Get $15 off your next purchase for 150 points", "applies_to_product_type": "ALL"}'
+          example: '{"id": 123456, "icon": "fa-dollar", "name": "$15.00 Off", "type": "Coupon", "amount": 100, "duration": "single_use", "cost_text": "150 Points", "description": "Get $15 off your next purchase for 150 points", "discount_type": "fixed_amount", "unrendered_name": "$15.00 Off", "discount_percentage": null, "discount_rate_cents": null, "discount_value_cents": null, "discount_amount_cents": 1500, "unrendered_description": "Get $15 off your next purchase for 150 points", "applies_to_product_type": "ALL"}'
         points:
           description: The number of points needed for this reward.
           format: int64
@@ -1772,6 +3114,7 @@ components:
             - membership_giftcard
             - subscription_discount
             - rewards_discount
+            - shipping_discount
             - unknown
           type: string
         free_shipping:
@@ -2284,9 +3627,9 @@ components:
     statements_type:
       description: |
         The time period and statement type: 
-          * [Funding details statement](https://help.bolt.com/operations/financials/export-funding-detail-statements/) with transactional events: Use `daily_transaction` or `monthly_transaction`
-          * [Bank transfer statement](https://help.bolt.com/operations/financials/export-bank-transfer-statements/) with settlement and funding events: Use `daily_funding`
-          * [Dispute statement](https://help.bolt.com/operations/disputes/dispute-statements/#how-to-read-dispute-statements): Use `monthly_dispute`
+          * [Funding details statement](https://help.boltapp.com/operations/financials/export-funding-detail-statements/) with transactional events: Use `daily_transaction` or `monthly_transaction`
+          * [Bank transfer statement](https://help.boltapp.com/operations/financials/export-bank-transfer-statements/) with settlement and funding events: Use `daily_funding`
+          * [Dispute statement](https://help.boltapp.com/operations/disputes/dispute-statements/#how-to-read-dispute-statements): Use `monthly_dispute`
       enum:
         - daily_transaction
         - monthly_transaction
@@ -2599,6 +3942,11 @@ components:
           enum:
             - bolt
           example: bolt
+          type: string
+        affirm_vcn_token:
+          description: The checkout token associated with Affirm VCN credit cards.
+          example: a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0
+          nullable: true
           type: string
       required:
         - token
@@ -4265,7 +5613,7 @@ components:
       example: string
       type: string
     chargeback_reason_code:
-      description: Bolt's [standardized reason codes](https://help.bolt.com/merchants/references/policies/disputes/dispute-codes/).
+      description: Bolt's [standardized reason codes](https://help.boltapp.com/merchants/references/policies/disputes/dispute-codes/).
       enum:
         - authorization_failed
         - cancelled_recurring
@@ -4631,7 +5979,16 @@ components:
       type: string
     webhooks_type:
       description: |
-        [Webhook events](https://help.bolt.com/developers/guides/webhooks/#transaction-hook-types) that trigger a notification to the URL.  **Note**:`newsletter_subscription` is only for merchant use cases.
+        [Webhook events](https://help.boltapp.com/developers/guides/webhooks/#transaction-hook-types) that trigger a notification to the URL.  **Note**:`newsletter_subscription` is only for merchant use cases.
+
+        Subscription events:
+        * `subscription_created` - A subscription was created from a successful initial transaction.
+        * `subscription_renewed` - A recurring subscription order was placed successfully and the next order was scheduled.
+        * `subscription_canceled` - A subscription was canceled, by the merchant, by the shopper, or automatically (e.g. once its dunning retry schedule is exhausted). Also sent alongside `subscription_ended` when the subscription's configured final dunning action is cancellation.
+        * `subscription_payment_failed` - A scheduled subscription order's payment attempt failed.
+        * `subscription_paused` - A subscription was paused, by the merchant, by the shopper, or automatically once its dunning retry schedule is exhausted (when the configured final dunning action is pausing).
+        * `subscription_unpaused` - A paused subscription was resumed, by the merchant or by the shopper.
+        * `subscription_ended` - A subscription was permanently ended after its dunning retry schedule was exhausted. Sent alongside `subscription_canceled` for this case.
       enum:
         - payment
         - credit
@@ -4645,6 +6002,13 @@ components:
         - newsletter_subscription
         - risk_insights
         - credit_card_deleted
+        - subscription_created
+        - subscription_renewed
+        - subscription_canceled
+        - subscription_payment_failed
+        - subscription_paused
+        - subscription_unpaused
+        - subscription_ended
       example: pending
       type: string
     merchant_hook_url:
@@ -4968,7 +6332,7 @@ components:
             - authorization_code
           type: string
         scope:
-          description: The scope issued to the merchant when receiving an authorization code. Options include `bolt.account.manage`, `bolt.account.view`, `openid`. You can find more information on these options in our [OAuth scope documentation](https://help.bolt.com/developers/references/bolt-oauth/#scopes).
+          description: The scope issued to the merchant when receiving an authorization code. Options include `bolt.account.manage`, `bolt.account.view`, `openid`. You can find more information on these options in our [OAuth scope documentation](https://help.boltapp.com/developers/references/bolt-oauth/#scopes).
           enum:
             - bolt.account.manage
             - bolt.account.view
@@ -5192,6 +6556,345 @@ components:
           items:
             $ref: '#/components/schemas/webhooks_type'
           type: array
+    subscription_v2_status:
+      description: The current status of the subscription.
+      enum:
+        - active
+        - paused
+        - canceled
+        - payment_failed
+      example: active
+      title: Subscription Status
+      type: string
+    subscription_v2_id:
+      description: The unique ID for a Bolt subscription.
+      example: sub_1a2b3c4d5e
+      title: Subscription ID
+      type: string
+    subscription_v2_status_details:
+      description: Details about the subscription's current status.
+      properties:
+        type:
+          $ref: '#/components/schemas/subscription_v2_status'
+        reason:
+          description: Additional context for the current status, when available.
+          example: payment_failed
+          type: string
+      required:
+        - type
+      title: Subscription Status Details
+      type: object
+    subscription_v2_payment_method:
+      description: The card currently used to pay for this subscription.
+      properties:
+        card_last_4:
+          description: The last 4 digits of the card number.
+          example: '4242'
+          type: string
+        card_network:
+          description: The card network (e.g. Visa, Mastercard).
+          example: visa
+          type: string
+      required:
+        - card_last_4
+        - card_network
+      title: Subscription Payment Method
+      type: object
+    subscription_v2_initial_period:
+      description: An initial billing period, such as a trial or introductory offer, that differs from the plan's regular frequency.
+      properties:
+        frequency:
+          description: The number of `frequency_unit`s in the initial period.
+          example: 14
+          type: integer
+        frequency_unit:
+          description: The unit of time for the initial period's frequency.
+          enum:
+            - day
+            - week
+            - month
+            - year
+          example: day
+          type: string
+      required:
+        - frequency
+        - frequency_unit
+      title: Subscription Initial Period
+      type: object
+    subscription_v2_plan:
+      description: The billing plan the subscription is enrolled in.
+      properties:
+        id:
+          description: The unique ID for the subscription plan.
+          example: plan_9f8e7d6c5b
+          type: string
+        name:
+          description: The display name of the plan.
+          example: Monthly
+          type: string
+        sku:
+          description: The merchant-defined SKU for the plan.
+          example: SUB-MONTHLY-001
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+        frequency:
+          description: The number of `frequency_unit`s between each billing cycle.
+          example: 1
+          type: integer
+        frequency_unit:
+          description: The unit of time between billing cycles.
+          enum:
+            - day
+            - week
+            - month
+            - year
+          example: month
+          type: string
+        product_id:
+          description: The unique ID of the subscription product this plan belongs to.
+          example: prod_3c2b1a0f9e
+          type: string
+        checkout_link:
+          description: A hosted checkout link for this plan, when available.
+          example: https://subscribe.boltapp.com/plans/plan_9f8e7d6c5b
+          type: string
+        initial_period:
+          $ref: '#/components/schemas/subscription_v2_initial_period'
+      required:
+        - id
+        - name
+        - sku
+        - created_at
+        - updated_at
+        - frequency
+        - frequency_unit
+        - product_id
+      title: Subscription Plan
+      type: object
+    subscription_v2:
+      description: A Bolt subscription.
+      properties:
+        id:
+          $ref: '#/components/schemas/subscription_v2_id'
+        created_at:
+          format: date-time
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+        merchant_name:
+          description: The name of the merchant this subscription belongs to.
+          example: Bolt Swag Store
+          type: string
+        email:
+          description: The email address of the shopper who owns this subscription. Nullable.
+          example: shopper@example.com
+          nullable: true
+          type: string
+        status_details:
+          $ref: '#/components/schemas/subscription_v2_status_details'
+        payment_method:
+          $ref: '#/components/schemas/subscription_v2_payment_method'
+        next_renewal_date:
+          description: The date of the next scheduled renewal, if any.
+          format: date-time
+          nullable: true
+          type: string
+        next_payment_retry_date:
+          description: The date of the next scheduled payment retry, if the subscription currently has a failed payment.
+          format: date-time
+          nullable: true
+          type: string
+        canceled_date:
+          format: date-time
+          nullable: true
+          type: string
+        paused_date:
+          format: date-time
+          nullable: true
+          type: string
+        plan:
+          $ref: '#/components/schemas/subscription_v2_plan'
+        product_names:
+          items:
+            type: string
+          type: array
+        total_amount:
+          $ref: '#/components/schemas/amounts'
+        metadata:
+          additionalProperties:
+            type: string
+          description: Merchant-defined custom metadata.
+          type: object
+      required:
+        - id
+        - created_at
+        - updated_at
+        - merchant_name
+        - email
+        - status_details
+        - plan
+        - product_names
+        - total_amount
+        - metadata
+      title: Subscription
+      type: object
+    subscription_v2_pagination:
+      description: Pagination details for a list response.
+      properties:
+        page_size:
+          example: 25
+          type: integer
+        total_count:
+          example: 132
+          type: integer
+      required:
+        - page_size
+        - total_count
+      title: Pagination
+      type: object
+    subscription_v2_list:
+      description: A paginated list of subscriptions.
+      properties:
+        subscriptions:
+          items:
+            $ref: '#/components/schemas/subscription_v2'
+          type: array
+        pagination:
+          $ref: '#/components/schemas/subscription_v2_pagination'
+      required:
+        - subscriptions
+        - pagination
+      title: Subscription List
+      type: object
+    subscription_v2_success:
+      description: A generic confirmation response.
+      properties:
+        success:
+          example: true
+          type: boolean
+      required:
+        - success
+      title: Success
+      type: object
+    subscription_v2_order_status:
+      description: The status of a subscription order.
+      enum:
+        - scheduled
+        - done
+        - paused
+        - payment_failed
+        - canceled
+      example: scheduled
+      title: Subscription Order Status
+      type: string
+    subscription_v2_order:
+      description: A single billing cycle (order) generated by a subscription.
+      properties:
+        id:
+          description: The unique ID for the subscription order.
+          example: sorder_5d4c3b2a19
+          type: string
+        subscription_id:
+          $ref: '#/components/schemas/subscription_v2_id'
+        order_id:
+          description: The associated Bolt order ID, once the order has been placed.
+          example: 123456789
+          type: integer
+        transaction_reference:
+          description: The transaction reference for this order's payment attempt.
+          example: 6CEA-ZME1-DACE
+          type: string
+        placement_time:
+          description: The scheduled or actual placement time of this order.
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/subscription_v2_order_status'
+        cancel_reason:
+          deprecated: true
+          description: Deprecated.
+          nullable: true
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+        sequence_number:
+          description: The 1-indexed position of this order within the subscription's billing history.
+          example: 3
+          type: integer
+        total_amount:
+          $ref: '#/components/schemas/amounts'
+      required:
+        - id
+        - subscription_id
+        - transaction_reference
+        - placement_time
+        - status
+        - created_at
+        - updated_at
+        - sequence_number
+      title: Subscription Order
+      type: object
+    subscription_v2_order_list:
+      description: A list of subscription orders.
+      properties:
+        orders:
+          items:
+            $ref: '#/components/schemas/subscription_v2_order'
+          type: array
+      required:
+        - orders
+      title: Subscription Order List
+      type: object
+    subscription_v2_dunning_settings:
+      description: A merchant division's dunning (failed payment recovery) configuration.
+      properties:
+        retry_schedule_hours:
+          description: Hour offsets from the initial payment failure at which Bolt retries the payment. Must be 1-10 strictly increasing, positive values, each at most 2160 (90 days).
+          example:
+            - 24
+            - 72
+            - 168
+            - 336
+          items:
+            type: integer
+          type: array
+        reminder_lead_days:
+          description: Days before a subscription's renewal at which Bolt sends the shopper a reminder. Must be 1-10 unique values between 1 and 90.
+          example:
+            - 30
+            - 7
+            - 3
+          items:
+            type: integer
+          type: array
+        final_action:
+          description: The action Bolt takes on a subscription once the retry schedule is exhausted without a successful payment.
+          enum:
+            - cancel
+            - pause
+          example: cancel
+          type: string
+        sms_enabled:
+          description: Whether Bolt sends SMS reminders and payment-failure notifications to the shopper, in addition to email.
+          example: false
+          type: boolean
+      required:
+        - retry_schedule_hours
+        - reminder_lead_days
+        - final_action
+        - sms_enabled
+      title: Dunning Settings
+      type: object
     account_identifier_status:
       description: The status of the shopper account identifier (email or phone). If the account does not have this identifier, the status is "missing"; If the identifier has been used to receive an OTP code, the status is "verified"; If the identifier has not been used to receive an OTP code, the status is "unverified".
       enum:
@@ -5712,6 +7415,7 @@ components:
         - membership_giftcard
         - subscription_discount
         - rewards_discount
+        - shipping_discount
         - unknown
       example: coupon
       type: string
@@ -7540,7 +9244,7 @@ components:
             url:
               type: string
               description: action URL
-              example: api.bolt.com/v1/payments/12345/finalize
+              example: api.boltapp.com/v1/payments/12345/finalize
             method:
               type: string
               description: action method
@@ -8582,13 +10286,13 @@ components:
         [Read more about the OAuth token endpoint.](/api-bolt/#tag/OAuth)
       flows:
         authorizationCode:
-          authorizationUrl: https://api.bolt.com/v1/oauth/authorize
-          refreshUrl: https://api.bolt.com/v1/oauth/token
+          authorizationUrl: https://api.boltapp.com/v1/oauth/authorize
+          refreshUrl: https://api.boltapp.com/v1/oauth/token
           scopes:
             bolt.account.manage: This scope grants permissions to perform read/edit/delete actions on Bolt Account data
             bolt.account.view: This scope grants permissions to perform read only actions on Bolt Account data
             openid: This scope grants permissions that enable Bolt SSO by granting an id token JWT that stores account data. Not used in v1/account endpoints
-          tokenUrl: https://api.bolt.com/v1/oauth/token
+          tokenUrl: https://api.boltapp.com/v1/oauth/token
       type: oauth2
     X-API-Key:
       description: Admins and Developers can obtain their Bolt API key from the Bolt Merchant Dashboard.
@@ -8713,965 +10417,3 @@ components:
                 $ref: '#/components/schemas/transaction_reference'
             type: object
       description: Void a Transaction
-paths:
-  /v1/account:
-    get:
-      description: Fetch a shopper's account details to pre-fill checkout fields. This request must come from your backend for security purposes, as it requires the use of your private key to authenticate. For PCI compliance, only limited information is returned for each credit card available in the shopper’s wallet.
-      operationId: getAccount
-      parameters:
-        - $ref: '#/components/parameters/x-publishable-key'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/account_details'
-          description: Account Details Fetched
-      security:
-        - OAuth:
-            - bolt.account.manage
-            - bolt.account.view
-          X-API-Key: []
-      summary: Get Account Details
-      tags:
-        - Account
-    post:
-      description: Create a Bolt shopping account.
-      operationId: createAccount
-      parameters:
-        - $ref: '#/components/parameters/x-publishable-key'
-        - $ref: '#/components/parameters/idempotency_key'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/create_account_input'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/account_details'
-          description: Account Created
-      security:
-        - X-API-Key: []
-      summary: Create Bolt Account
-      tags:
-        - Account
-  /v1/account/profile:
-    patch:
-      description: Update the identifiers for a shopper's profile (first name or last name).
-      operationId: updateAccountProfile
-      parameters:
-        - $ref: '#/components/parameters/x-publishable-key'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/update_profile'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/profile_view'
-          description: Profile Updated
-      security:
-        - OAuth:
-            - bolt.account.manage
-          X-API-Key: []
-      summary: Update Profile
-      tags:
-        - Account
-  /v1/account/addresses:
-    post:
-      description: Add an address to a shopper's account address book.
-      operationId: addAddress
-      parameters:
-        - $ref: '#/components/parameters/x-publishable-key'
-        - $ref: '#/components/parameters/idempotency_key'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/address_account'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/address_view_account'
-                  - properties:
-                      default:
-                        type: boolean
-                    type: object
-          description: Address Added Successfully
-      security:
-        - OAuth:
-            - bolt.account.manage
-          X-API-Key: []
-      summary: Add Address
-      tags:
-        - Account
-  /v1/account/addresses/{id}:
-    delete:
-      description: |
-        Deletes an existing address in a shopper's address book.
-      operationId: deleteAddress
-      parameters:
-        - $ref: '#/components/parameters/shopper_address_id_path_param'
-        - $ref: '#/components/parameters/x-publishable-key'
-      responses:
-        '200':
-          description: Address Successfully Deleted
-      security:
-        - OAuth:
-            - bolt.account.manage
-          X-API-Key: []
-      summary: Delete Address
-      tags:
-        - Account
-    post:
-      description: |
-        Replace an existing address in a shopper's address book.
-        These changes delete the existing address and create a new one.
-      operationId: replaceAddress
-      parameters:
-        - $ref: '#/components/parameters/shopper_address_id_path_param'
-        - $ref: '#/components/parameters/x-publishable-key'
-        - $ref: '#/components/parameters/idempotency_key'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/address_account'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/address_view_account'
-                  - properties:
-                      default:
-                        type: boolean
-                    type: object
-          description: Address Updated Successfully
-      security:
-        - OAuth:
-            - bolt.account.manage
-          X-API-Key: []
-      summary: Replace Address
-      tags:
-        - Account
-    put:
-      description: |
-        Edit an existing address in a shopper's address book.
-        This endpoint fully replaces the information for an existing address while retaining the same address ID.
-      operationId: editAddress
-      parameters:
-        - $ref: '#/components/parameters/shopper_address_id_path_param'
-        - $ref: '#/components/parameters/x-publishable-key'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/address_account'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/address_view_account'
-                  - properties:
-                      default:
-                        type: boolean
-                    type: object
-          description: Address Updated Successfully
-      security:
-        - OAuth:
-            - bolt.account.manage
-          X-API-Key: []
-      summary: Edit Address
-      tags:
-        - Account
-  /v1/account/exists:
-    get:
-      description: Check whether an account exists using one of `email`, `phone`, or `sha256_email` as the unique identifier.
-      operationId: detectAccount
-      parameters:
-        - $ref: '#/components/parameters/email'
-        - $ref: '#/components/parameters/sha256_email'
-        - $ref: '#/components/parameters/phone'
-        - $ref: '#/components/parameters/x_publishable_key_required'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/v1_accounts_view'
-          description: Has Bolt Account
-        '422':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/errors_bolt_api_response'
-          description: Missing Query Parameter
-      summary: Detect Account
-      tags:
-        - Account
-      security: []
-  /v1/account/payment_methods:
-    post:
-      description: |
-        Add a payment method to a shopper's Bolt account Wallet. For security purposes, this request must come from your backend because authentication requires the use of your private key.
-
-        **Note**: Before using this API, the credit card details must be tokenized using Bolt's JavaScript library function, which is documented in [Install the Bolt Tokenizer](https://help.bolt.com/developers/references/bolt-tokenizer).
-      operationId: addPaymentMethod
-      parameters:
-        - $ref: '#/components/parameters/x-publishable-key'
-        - $ref: '#/components/parameters/idempotency_key'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-                - $ref: '#/components/schemas/credit_card_account'
-                - properties:
-                    currency:
-                      description: This can be left empty. A 3-digit ISO code for currency that will be used in the credit card authorization.
-                      type: string
-                      example: USD
-                  type: object
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/saved_credit_card_view'
-          description: Payment Method Added
-      security:
-        - OAuth:
-            - bolt.account.manage
-          X-API-Key: []
-      summary: Add Payment Method
-      tags:
-        - Account
-  /v1/account/payment_methods/{payment_method_id}:
-    delete:
-      description: Delete a saved payment method from a shopper's Bolt account Wallet.
-      operationId: deletePaymentMethod
-      parameters:
-        - $ref: '#/components/parameters/shopper_payment_method_id_path_param'
-        - $ref: '#/components/parameters/x-publishable-key'
-      responses:
-        '200':
-          description: Success
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/errors_bolt_api_response'
-          description: Forbidden
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/errors_bolt_api_response'
-          description: Not Found
-      security:
-        - OAuth:
-            - bolt.account.manage
-          X-API-Key: []
-      summary: Delete Payment Method
-      tags:
-        - Account
-  /v1/merchant/callbacks:
-    get:
-      description: Retrieves callbacks URLs for a Bolt merchant division.
-      operationId: getMerchantCallbacks
-      parameters:
-        - $ref: '#/components/parameters/division_id'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/merchant_callbacks_view'
-          description: Merchant Callbacks Retrieved
-        '400':
-          $ref: '#/components/responses/merchant_callbacks_error_400'
-        '403':
-          $ref: '#/components/responses/merchant_callbacks_error_403'
-      security:
-        - X-API-Key: []
-      summary: Get Callback URLs
-      tags:
-        - Configuration
-    post:
-      description: Configure callbacks URLs for a Bolt merchant division. This will store or override only the callback URLs that are specified in the request. Operations are fully transactional.
-      operationId: setMerchantCallbacks
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/merchant_callbacks_input'
-      responses:
-        '200':
-          description: Successfully sets callback URLs. No JSON schema is expected.
-        '400':
-          $ref: '#/components/responses/merchant_callbacks_error_400'
-        '403':
-          $ref: '#/components/responses/merchant_callbacks_error_403'
-        '422':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/errors_bolt_api_response'
-          description: Request did not pass input validation. Check required fields are populated & meet input requirements.
-      security:
-        - X-API-Key: []
-      summary: Set Callback URLs
-      tags:
-        - Configuration
-  /v1/merchant/identifiers:
-    get:
-      description: This endpoint returns the merchant's public ID and the [publishable key](https://help.bolt.com/developers/tools/api-keys/) related to the merchant division.
-      operationId: getMerchantIdentifiers
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/merchant_identifiers_view'
-          description: Merchant Identifiers Retrieved
-        '403':
-          $ref: '#/components/responses/merchant_identifier_error_403'
-      security:
-        - X-API-Key: []
-      summary: Get Merchant Identifiers
-      tags:
-        - Configuration
-  /v1/merchant/orders:
-    post:
-      description: Make a request to this endpoint to create a Bolt order, generate a Bolt order token, and initiate the checkout process. A Bolt order token is required for Bolt orders; see Non-Bolt orders for alternative use cases.
-      operationId: createOrderToken
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/order_create'
-        description: Generate Order Token
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/i_order_view'
-          description: Token Generation Successful
-        '400':
-          $ref: '#/components/responses/order_generate_error_400'
-        '403':
-          $ref: '#/components/responses/order_generate_error_403'
-        '422':
-          $ref: '#/components/responses/order_generate_error_422'
-      security:
-        - X-API-Key: []
-      summary: Create Order Token
-      tags:
-        - Orders
-  /v1/merchant/statement:
-    post:
-      description: Get a pre-signed URL for the requested statement file.
-      operationId: getStatements
-      requestBody:
-        $ref: '#/components/requestBodies/statements_view'
-      responses:
-        '200':
-          $ref: '#/components/responses/statements_view'
-        '403':
-          $ref: '#/components/responses/statements_view_error_403'
-        '404':
-          $ref: '#/components/responses/statements_view_error_404'
-        '422':
-          $ref: '#/components/responses/statements_view_error_422'
-      security:
-        - X-API-Key:
-            - X-API-Key
-      summary: Fetch a Statement
-      tags:
-        - Statements
-  /v1/merchant/track_shipment:
-    post:
-      description: |
-        Send the carrier and order tracking number to Bolt (after a label has been printed). Bolt then uses EasyPost to forward ongoing tracking event updates to the shopper. This request must include **all** items included in the shipment; their references must also match those found in the original cart generation.
-      operationId: trackOrder
-      requestBody:
-        $ref: '#/components/requestBodies/order_track'
-      responses:
-        '200':
-          $ref: '#/components/responses/order_track'
-        '400':
-          $ref: '#/components/responses/order_track_error_400'
-        '422':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/errors_bolt_api_response'
-          description: Generic Error Schema
-      security:
-        - X-API-Key:
-            - X-API-Key
-      summary: Send order tracking details
-      tags:
-        - Orders
-  /v1/merchant/transactions/authorize:
-    post:
-      description: |
-        This endpoint authorizes card payments and has three main use cases:
-        * • Authorize a payment using an unsaved payment method for a guest or logged-in shopper.
-        * • Authorize a payment using a saved payment method for a logged-in shopper.
-        *  • Re-charge a previous transaction using the `credit_card_id` of the transaction.
-      operationId: authorizeTransaction
-      parameters:
-        - $ref: '#/components/parameters/x-publishable-key'
-        - $ref: '#/components/parameters/idempotency_key'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              oneOf:
-                - $ref: '#/components/schemas/merchant_credit_card_authorization'
-                - $ref: '#/components/schemas/merchant_credit_card_authorization_recharge'
-        description: |
-          **Authorize a Transaction**
-          * • `merchant_credit_card_authorization`: For authorizing with a new, unsaved card. This can be for a guest checkout flow, one-time payment, or an existing Bolt shopper.
-          * • `merchant_credit_card_authorization_recharge`: For authorizing a card using a shoppers saved payment methods.
-          * • **Anytime the shopper is paying while logged-in attach their OAuth `access_token` to the request.**
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/i_authorize_result_view'
-          description: Authorization Successful
-      security:
-        - OAuth: []
-          X-API-Key: []
-      summary: Authorize a Card
-      tags:
-        - Transactions
-  /v1/merchant/transactions/capture:
-    post:
-      description: |
-        This captures funds for the designated transaction. A capture can be done for any partial amount or for the total authorized amount.
-
-        Although the response returns the standard `transaction_view` object, only `captures` and either `id` or `reference` are needed.
-      operationId: captureTransaction
-      parameters:
-        - $ref: '#/components/parameters/idempotency_key'
-      requestBody:
-        $ref: '#/components/requestBodies/capture_transaction'
-        description: Capture a Transaction
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/transaction_view'
-          description: Capture Successful
-        '403':
-          $ref: '#/components/responses/transaction_capture_error_403'
-        '404':
-          $ref: '#/components/responses/transaction_capture_error_404'
-        '422':
-          content:
-            application/json:
-              schema:
-                properties:
-                  errors:
-                    items:
-                      properties:
-                        code:
-                          example: 1000001
-                          type: number
-                        field:
-                          example: transaction_id
-                          type: string
-                        message:
-                          example: '`TA8hLkJh4db4JJ` must be a valid public id of type transaction'
-                          type: string
-                      type: object
-                    type: array
-                  result:
-                    type: object
-                type: object
-          description: Unprocessable Entity
-      security:
-        - X-API-Key: []
-      summary: Capture a Transaction
-      tags:
-        - Transactions
-  /v1/merchant/transactions/credit:
-    post:
-      description: This refunds a captured transaction. Refunds can be done for any partial amount or for the total authorized amount. These refunds are processed synchronously and return information about the refunded transaction in the standard `transaction_view` object.
-      operationId: refundTransaction
-      parameters:
-        - $ref: '#/components/parameters/idempotency_key'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/transaction_credit'
-        description: Refund a Transaction
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/transaction_view'
-          description: Refund Successful
-        '422':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/errors_bolt_api_response'
-          description: Generic Error Schema
-      security:
-        - X-API-Key: []
-      summary: Refund a Transaction
-      tags:
-        - Transactions
-  /v1/merchant/transactions/review:
-    post:
-      description: This endpoint is used to manually approve or reject orders for a specified transaction.
-      operationId: reviewTransaction
-      parameters:
-        - $ref: '#/components/parameters/idempotency_key'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/merchant_credit_card_review'
-        description: Review a Transaction
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/transaction_details_view'
-          description: Transaction Details Received
-        '403':
-          $ref: '#/components/responses/transaction_review_error_403'
-        '404':
-          $ref: '#/components/responses/transaction_review_error_404'
-        '422':
-          $ref: '#/components/responses/transaction_review_error_422'
-      security:
-        - X-API-Key: []
-      summary: Review Transaction
-      tags:
-        - Transactions
-  /v1/merchant/transactions/void:
-    post:
-      description: |
-        This voids the authorization for a given transaction. Voids must be completed before the authorization is captured.
-        In the request, either `transaction_id` or `transaction_reference` is required.
-        Although the response returns the standard `transaction_view` object, only `status` and either `id` or `reference` are needed.
-      operationId: voidTransaction
-      parameters:
-        - $ref: '#/components/parameters/idempotency_key'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/credit_card_void'
-        description: Void a Transaction
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/transaction_view'
-          description: Void Successful
-        '403':
-          $ref: '#/components/responses/transaction_void_error_403'
-        '404':
-          $ref: '#/components/responses/transaction_void_error_404'
-      security:
-        - X-API-Key: []
-      summary: Void a Transaction
-      tags:
-        - Transactions
-  /v1/merchant/transactions/{REFERENCE}:
-    get:
-      description: |
-        This allows you to pull the full transaction details for a given transaction.
-
-         **Note**: All objects and fields marked `required` in the Transaction Details response are also **nullable**. This includes any sub-components (objects or fields) also marked `required`.
-      operationId: getTransactionDetails
-      parameters:
-        - $ref: '#/components/parameters/transaction_reference_path_param'
-      responses:
-        '200':
-          $ref: '#/components/responses/transaction_details'
-        '403':
-          $ref: '#/components/responses/transaction_details_error_403'
-        '422':
-          $ref: '#/components/responses/transaction_details_error_422'
-      security:
-        - X-API-Key: []
-      summary: Transaction Details
-      tags:
-        - Transactions
-    patch:
-      description: This allows you to update certain transaction properties post-authorization.
-      operationId: updateTransaction
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/transaction_update_input'
-              description: Update a Transaction
-      parameters:
-        - $ref: '#/components/parameters/transaction_reference_path_param'
-        - $ref: '#/components/parameters/idempotency_key'
-      responses:
-        '200':
-          $ref: '#/components/responses/transaction_details'
-        '403':
-          $ref: '#/components/responses/transaction_details_error_403'
-        '404':
-          $ref: '#/components/responses/transaction_details_error_404'
-      security:
-        - X-API-Key: []
-      summary: Update a Transaction
-      tags:
-        - Transactions
-  /v1/oauth/token:
-    post:
-      description: |
-        Endpoint for receiving access, ID, and refresh tokens from Bolt's OAuth server. 
-
-        To use this endpoint, first use the Authorization Code Request flow by using the `authorization_code` Grant Type (`grant_type`). Then, in the event that you would need a second or subsequent code, use the `refresh_token` value returned from a successful request as the `refresh_token` input value in your subsequent `refresh_token` Grant Type (`grant_type`) request.
-
-         **Reminder - the Content-Type of this request must be application/x-www-form-urlencoded**
-      operationId: OAuthToken
-      parameters:
-        - $ref: '#/components/parameters/x-publishable-key'
-      requestBody:
-        content:
-          application/x-www-form-urlencoded:
-            examples:
-              authorization_code_request:
-                value:
-                  client_id: PUBLISHABLE_KEY_PLACEHOLDER
-                  client_secret: API_KEY_PLACEHOLDER
-                  code: AUTH_CODE_PLACEHOLDER
-                  grant_type: authorization_code
-                  scope: bolt.account.manage+openid
-              refresh_token_request:
-                value:
-                  client_id: PUBLISHABLE_KEY_PLACEHOLDER
-                  client_secret: API_KEY_PLACEHOLDER
-                  grant_type: refresh_token
-                  refresh_token: REFRESH_TOKEN_PLACEHOLDER
-                  scope: bolt.account.view
-            schema:
-              oneOf:
-                - $ref: '#/components/schemas/o_auth_token_input'
-                - $ref: '#/components/schemas/o_auth_token_input_refresh'
-      responses:
-        '200':
-          content:
-            application/json:
-              examples:
-                authorization_code_response:
-                  value:
-                    access_token: $ACCESS_TOKEN
-                    expires_in: 3600
-                    id_token: $ID_TOKEN
-                    refresh_token: $REFRESH_TOKEN
-                    refresh_token_scope: bolt.account.view
-                    scope: bolt.account.manage
-                    token_type: bearer
-                refresh_token_response:
-                  value:
-                    access_token: $NEW_ACCESS_TOKEN
-                    expires_in: 3600
-                    refresh_token: $NEW_REFRESH_TOKEN
-                    refresh_token_scope: bolt.account.view
-                    scope: bolt.account.view
-                    token_type: bearer
-              schema:
-                $ref: '#/components/schemas/o_auth_token_response'
-          description: OAuth token response.
-        '400':
-          $ref: '#/components/responses/oauth_400'
-        '403':
-          $ref: '#/components/responses/oauth_403'
-        '422':
-          $ref: '#/components/responses/oauth_422'
-      summary: OAuth Token Endpoint
-      tags:
-        - OAuth
-  /v1/shipments/mock_bolt_shipping:
-    post:
-      description: This endpoint simulates tracking an order's shipment and is for testing purposes only.
-      operationId: testShipping
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/mock_tracking_input'
-      responses:
-        '200':
-          description: Success - No Details
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/errors_bolt_api_response'
-          description: OrderTrackingTesting Generic Failure
-        '422':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/errors_bolt_api_response'
-          description: Unprocessable Entity
-      security:
-        - X-API-Key: []
-      summary: Test Shipping
-      tags:
-        - Testing
-  /v1/webhooks:
-    get:
-      description: Find webhook configurations belonging to a merchant division. Results are limited to only show webhooks authorized by the X-API-Key.
-      operationId: queryWebhooks
-      parameters:
-        - $ref: '#/components/parameters/division_id'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                properties:
-                  webhooks:
-                    items:
-                      $ref: '#/components/schemas/webhook'
-                    type: array
-          description: Success
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/errors_bolt_api_response'
-          description: BAD REQUEST. Request is malformed or invalid values are detected.
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/errors_bolt_api_response'
-          description: FORBIDDEN. Not authorized to query webhook for this entity.
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/errors_bolt_api_response'
-          description: NOT FOUND. Unable to find webhook.
-      security:
-        - X-API-Key: []
-      summary: Query Webhooks
-      tags:
-        - Webhooks
-    post:
-      description: Create a new webhook to receive notifications from Bolt about various events, such as transaction status. Webhooks must have unique configuration.
-      operationId: createWebhook
-      requestBody:
-        content:
-          application/json:
-            schema:
-              oneOf:
-                - $ref: '#/components/schemas/event_group_create_webhook'
-                - $ref: '#/components/schemas/events_array_create_webhook'
-        description: Webhook that receives notifications.
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                properties:
-                  webhook_id:
-                    $ref: '#/components/schemas/webhook_id'
-                required:
-                  - webhook_id
-                type: object
-          description: Success
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/errors_bolt_api_response'
-          description: BAD REQUEST. Request is malformed or invalid values are detected.
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/errors_bolt_api_response'
-          description: FORBIDDEN. Not authorized to create a webhook for this entity.
-        '422':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/errors_bolt_api_response'
-          description: UNPROCESSABLE ENTITY. Not allowed to receive duplicate notifications. This is to safeguard a webhook listener from receiving duplicate events. Use GET /v1/webhooks and DELETE /v1/webhooks to check for and delete duplicate webhooks.
-      security:
-        - X-API-Key: []
-      summary: Create Bolt Webhook
-      tags:
-        - Webhooks
-  /v1/webhooks/{webhook_id}:
-    delete:
-      description: Delete a Bolt webhook. Provide an authorized X-API-Key to perform this action.
-      operationId: deleteWebhook
-      parameters:
-        - description: Webhook ID
-          in: path
-          name: webhook_id
-          required: true
-          schema:
-            $ref: '#/components/schemas/webhook_id'
-      responses:
-        '200':
-          description: Success
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/errors_bolt_api_response'
-          description: BAD REQUEST. Request is malformed or invalid values are detected.
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/errors_bolt_api_response'
-          description: FORBIDDEN. Not authorized to perform the operation on this resource.
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/errors_bolt_api_response'
-          description: NOT FOUND. Unable to find webhook.
-      security:
-        - X-API-Key: []
-      summary: Delete a Bolt Webhook
-      tags:
-        - Webhooks
-    get:
-      description: Get Webhook information by its Webhook ID. Results only include webhooks authorized by the X-API-Key.
-      operationId: getWebhook
-      parameters:
-        - description: Webhook ID
-          in: path
-          name: webhook_id
-          required: true
-          schema:
-            $ref: '#/components/schemas/webhook_id'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/webhook'
-          description: Success
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/errors_bolt_api_response'
-          description: BAD REQUEST. Request is malformed or invalid values are detected.
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/errors_bolt_api_response'
-          description: FORBIDDEN. Not authorized to perform the operation on this resource.
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/errors_bolt_api_response'
-          description: NOT FOUND. Unable to find webhook.
-      security:
-        - X-API-Key: []
-      summary: Get Webhook
-      tags:
-        - Webhooks
-  /v1/testing/shopper/create:
-    post:
-      description: Create a Bolt shopper account for testing purposes. Available for sandbox use only and the created  account will be recycled after a certain time.
-      operationId: createTestingShopperAccount
-      parameters:
-        - $ref: '#/components/parameters/x-publishable-key'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/testing_account_request'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/testing_account_details'
-          description: Testing Account Created
-      security:
-        - X-API-Key: []
-      summary: Create Testing Shopper Account
-      tags:
-        - Testing
-  /v1/testing/card_token:
-    get:
-      description: This endpoint fetches a new credit card token for Bolt's universal test credit card number `4111 1111 1111 1004`. This is for testing and is available only in sandbox.
-      operationId: getTestCreditCardToken
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  token:
-                    description: The newly generated credit card token.
-                    type: string
-                    example: 7i8322df93jsor663bsf02be798e672afd9360a81d203rc97778ff4bddedertg
-                  expiry:
-                    description: The date at which the token expires. A token must be used within 15 minutes of creation.
-                    type: integer
-                    example: 1671140825305
-                  last4:
-                    description: The last 4 digits of the card number.
-                    type: string
-                    example: '1004'
-                  bin:
-                    description: The credit card bin.
-                    type: string
-                    example: '411111'
-                  network:
-                    description: The credit card network.
-                    type: string
-                    example: visa
-          description: Successfully Fetched Credit Card Token
-      security:
-        - X-API-Key: []
-      summary: Fetch a Test Credit Card Token
-      tags:
-        - Testing
-security:
-  - X-API-Key: []
-  - OAuth:
-      - bolt.account.manage
-      - bolt.account.view

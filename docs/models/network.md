@@ -1,5 +1,13 @@
 # Network
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import Network
+
+value = Network.VISA
+```
+
 
 ## Values
 

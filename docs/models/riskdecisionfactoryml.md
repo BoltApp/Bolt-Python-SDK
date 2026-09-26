@@ -2,6 +2,14 @@
 
 One of the main contributing factors to the fraud decision and score.
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import RiskDecisionFactorYml
+
+value = RiskDecisionFactorYml.ADDRESS_DETAILS
+```
+
 
 ## Values
 

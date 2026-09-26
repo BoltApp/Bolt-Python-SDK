@@ -2,6 +2,14 @@
 
 The type of platform being used for this merchant division.
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import MerchantPlatform
+
+value = MerchantPlatform.NONE
+```
+
 
 ## Values
 
