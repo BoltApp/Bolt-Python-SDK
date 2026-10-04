@@ -62,9 +62,10 @@ from .transaction_timeline_view import (
 )
 from .transaction_type import TransactionType
 from .transaction_view import TransactionView, TransactionViewTypedDict
-from bolt_api_sdk.types import BaseModel
+from bolt_api_sdk.types import BaseModel, UNSET_SENTINEL
 from enum import Enum
 import pydantic
+from pydantic import model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -86,6 +87,22 @@ class TransactionRejectionDetailsTypedDict(TypedDict):
 
 class TransactionRejectionDetails(BaseModel):
     auth_rejection_details: Optional[AuthRejectionDetailsView] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["auth_rejection_details"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class VoidCause(str, Enum):
@@ -286,3 +303,74 @@ class TransactionDetailsView(BaseModel):
 
     void_cause: Optional[VoidCause] = None
     r"""Determines why the transaction was voided."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "amount",
+                "authorization",
+                "capture",
+                "captures",
+                "credit",
+                "date",
+                "from_consumer",
+                "from_credit_card",
+                "id",
+                "indemnification_decision",
+                "indemnification_reason",
+                "last4",
+                "last_viewed_utc",
+                "merchant_division",
+                "merchant_order_number",
+                "order_decision",
+                "processor",
+                "reference",
+                "review_ticket",
+                "risk_insights",
+                "risk_review_status",
+                "risk_score",
+                "splits",
+                "status",
+                "to_consumer",
+                "to_credit_card",
+                "transaction_properties",
+                "type",
+                "void",
+                "view_status",
+                "address_change_request_metadata",
+                "adjust_transactions",
+                "auth_verification_status",
+                "authorization_id",
+                "chargeback_details",
+                "custom_fields",
+                "customer_list_status",
+                "manual_disputes",
+                "order",
+                "refund_transaction_ids",
+                "refund_transactions",
+                "refunded_amount",
+                "source_transaction",
+                "timeline",
+                "transaction_rejection_details",
+                "void_cause",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+try:
+    TransactionDetailsView.model_rebuild()
+except NameError:
+    pass

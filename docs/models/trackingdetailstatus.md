@@ -2,6 +2,14 @@
 
 The transit status of the order being tracked.
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import TrackingDetailStatus
+
+value = TrackingDetailStatus.UNKNOWN
+```
+
 
 ## Values
 

@@ -2,8 +2,15 @@
 
 from __future__ import annotations
 from .address import Address, AddressTypedDict
-from bolt_api_sdk.types import BaseModel
+from bolt_api_sdk.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 from enum import Enum
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -42,6 +49,8 @@ class CreditCardTypedDict(TypedDict):
     r"""Used to indicate the card's priority. '1' indicates primary, while '2' indicates a secondary card."""
     save: NotRequired[bool]
     r"""Determines whether or not the credit card will be saved to the shopper's account. Defaults to `true`."""
+    affirm_vcn_token: NotRequired[Nullable[str]]
+    r"""The checkout token associated with Affirm VCN credit cards."""
 
 
 class CreditCard(BaseModel):
@@ -73,3 +82,33 @@ class CreditCard(BaseModel):
 
     save: Optional[bool] = None
     r"""Determines whether or not the credit card will be saved to the shopper's account. Defaults to `true`."""
+
+    affirm_vcn_token: OptionalNullable[str] = UNSET
+    r"""The checkout token associated with Affirm VCN credit cards."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["billing_address", "priority", "save", "affirm_vcn_token"]
+        )
+        nullable_fields = set(["affirm_vcn_token"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m

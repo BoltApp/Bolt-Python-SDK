@@ -3,6 +3,14 @@
 Used to define which payment processor generated the token for this credit card.
 
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import CardTokenType
+
+value = CardTokenType.VANTIV
+```
+
 
 ## Values
 

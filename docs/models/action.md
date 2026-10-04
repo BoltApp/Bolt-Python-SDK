@@ -1,5 +1,13 @@
 # Action
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import Action
+
+value = Action.SET_PASSWORD
+```
+
 
 ## Values
 
