@@ -1,5 +1,13 @@
 # CheckoutSetup
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import CheckoutSetup
+
+value = CheckoutSetup.SHIPPING_STEP
+```
+
 
 ## Values
 

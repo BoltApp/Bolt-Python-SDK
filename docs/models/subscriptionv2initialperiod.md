@@ -1,0 +1,11 @@
+# SubscriptionV2InitialPeriod
+
+An initial billing period, such as a trial or introductory offer, that differs from the plan's regular frequency.
+
+
+## Fields
+
+| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              | Example                                                                                                  |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `frequency`                                                                                              | *int*                                                                                                    | :heavy_check_mark:                                                                                       | The number of `frequency_unit`s in the initial period.                                                   | 14                                                                                                       |
+| `frequency_unit`                                                                                         | [models.SubscriptionV2InitialPeriodFrequencyUnit](../models/subscriptionv2initialperiodfrequencyunit.md) | :heavy_check_mark:                                                                                       | The unit of time for the initial period's frequency.                                                     | day                                                                                                      |

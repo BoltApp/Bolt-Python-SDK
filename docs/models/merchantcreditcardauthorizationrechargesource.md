@@ -1,5 +1,13 @@
 # MerchantCreditCardAuthorizationRechargeSource
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import MerchantCreditCardAuthorizationRechargeSource
+
+value = MerchantCreditCardAuthorizationRechargeSource.DIRECT_PAYMENTS
+```
+
 
 ## Values
 

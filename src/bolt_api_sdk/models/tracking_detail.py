@@ -4,7 +4,8 @@ from __future__ import annotations
 from bolt_api_sdk.types import BaseModel
 from datetime import datetime
 from enum import Enum
-from typing_extensions import TypedDict
+import pydantic
+from typing_extensions import Annotated, TypedDict
 
 
 class TrackingDetailStatus(str, Enum):
@@ -25,7 +26,7 @@ class TrackingDetailStatus(str, Enum):
 class TrackingDetailTypedDict(TypedDict):
     city: str
     country: str
-    datetime: datetime
+    datetime_: datetime
     message: str
     state: str
     status: TrackingDetailStatus
@@ -38,7 +39,7 @@ class TrackingDetail(BaseModel):
 
     country: str
 
-    datetime: datetime
+    datetime_: Annotated[datetime, pydantic.Field(alias="datetime")]
 
     message: str
 
@@ -48,3 +49,9 @@ class TrackingDetail(BaseModel):
     r"""The transit status of the order being tracked."""
 
     zip: str
+
+
+try:
+    TrackingDetail.model_rebuild()
+except NameError:
+    pass
