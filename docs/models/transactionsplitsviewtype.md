@@ -1,5 +1,13 @@
 # TransactionSplitsViewType
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import TransactionSplitsViewType
+
+value = TransactionSplitsViewType.NET
+```
+
 
 ## Values
 

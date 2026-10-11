@@ -6,8 +6,9 @@ from .i_free_shipping_discount_view import (
     IFreeShippingDiscountView,
     IFreeShippingDiscountViewTypedDict,
 )
-from bolt_api_sdk.types import BaseModel
+from bolt_api_sdk.types import BaseModel, UNSET_SENTINEL
 from enum import Enum
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -22,6 +23,7 @@ class ICartDiscountViewDiscountCategory(str, Enum):
     MEMBERSHIP_GIFTCARD = "membership_giftcard"
     SUBSCRIPTION_DISCOUNT = "subscription_discount"
     REWARDS_DISCOUNT = "rewards_discount"
+    SHIPPING_DISCOUNT = "shipping_discount"
     UNKNOWN = "unknown"
 
 
@@ -57,3 +59,29 @@ class ICartDiscountView(BaseModel):
 
     reference: Optional[str] = None
     r"""Used to define the reference ID associated with the discount available."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "amount",
+                "code",
+                "description",
+                "details_url",
+                "discount_category",
+                "free_shipping",
+                "reference",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

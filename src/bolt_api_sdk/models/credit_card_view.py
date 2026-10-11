@@ -7,7 +7,8 @@ from .card_network import CardNetwork
 from .card_status import CardStatus
 from .card_token_type import CardTokenType
 from .priority import Priority
-from bolt_api_sdk.types import BaseModel
+from bolt_api_sdk.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -91,3 +92,34 @@ class CreditCardView(BaseModel):
     r"""Used to define which payment processor generated the token for this credit card.
 
     """
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "billing_address",
+                "bin",
+                "display_network",
+                "expiration",
+                "icon_asset_path",
+                "id",
+                "last4",
+                "network",
+                "priority",
+                "status",
+                "token",
+                "token_type",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

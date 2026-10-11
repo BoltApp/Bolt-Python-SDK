@@ -13,6 +13,14 @@ The reason code explaining the authorization status.
   * `10` - unsupported_payment_method
 
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import CreditCardAuthorizationReason
+
+value = CreditCardAuthorizationReason.NONE
+```
+
 
 ## Values
 

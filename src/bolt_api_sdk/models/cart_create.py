@@ -10,7 +10,8 @@ from .cart_loyalty_rewards import CartLoyaltyRewards, CartLoyaltyRewardsTypedDic
 from .cart_shipment import CartShipment, CartShipmentTypedDict
 from .fulfillment import Fulfillment, FulfillmentTypedDict
 from .in_store_cart_shipment import InStoreCartShipment, InStoreCartShipmentTypedDict
-from bolt_api_sdk.types import BaseModel
+from bolt_api_sdk.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -91,3 +92,36 @@ class CartCreate(BaseModel):
 
     order_description: Optional[str] = None
     r"""Used optionally to pass additional information like order numbers or other IDs as needed."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "add_ons",
+                "billing_address",
+                "discounts",
+                "fees",
+                "fulfillments",
+                "in_store_cart_shipments",
+                "items",
+                "loyalty_rewards",
+                "shipments",
+                "tax_amount",
+                "cart_url",
+                "display_id",
+                "metadata",
+                "order_description",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

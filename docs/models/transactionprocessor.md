@@ -2,6 +2,14 @@
 
 The processor used. **Nullable** for Transactions Details.
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import TransactionProcessor
+
+value = TransactionProcessor.ADYEN_GATEWAY
+```
+
 
 ## Values
 
