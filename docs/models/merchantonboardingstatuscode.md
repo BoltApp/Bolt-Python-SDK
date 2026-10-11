@@ -1,5 +1,13 @@
 # MerchantOnboardingStatusCode
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import MerchantOnboardingStatusCode
+
+value = MerchantOnboardingStatusCode.NEW_MERCHANT
+```
+
 
 ## Values
 

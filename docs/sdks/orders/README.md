@@ -1,9 +1,8 @@
 # Orders
-(*orders*)
 
 ## Overview
 
-Use the Orders API to interact with the customer's cart throughout the checkout process. Pre-checkout, perform actions such as validating inventory, verifying discounts, and calculating taxes. Post-checkout, share shipping information so your customer can track their order. You'll interact with the [Merchant API](https://help.bolt.com/api-merchant/) to keep the servers in sync with any changes the customer makes to their cart. See our related guide [Create a Bolt Order Token](https://help.bolt.com/products/checkout/how-to-integrate/create-bolt-order-token-new/).
+Use the Orders API to interact with the customer's cart throughout the checkout process. Pre-checkout, perform actions such as validating inventory, verifying discounts, and calculating taxes. Post-checkout, share shipping information so your customer can track their order. You'll interact with the [Merchant API](https://help.boltapp.com/api-merchant/) to keep the servers in sync with any changes the customer makes to their cart. See our related guide [Create a Bolt Order Token](https://help.boltapp.com/products/checkout/how-to-integrate/create-bolt-order-token-new/).
 
 
 ### Available Operations
@@ -53,7 +52,7 @@ with Bolt(
             },
             "discounts": [
                 {
-                    "amount": 100,
+                    "amount": 100.0,
                     "code": "SUMMER10DISCOUNT",
                     "description": "10% off our summer collection",
                     "details_url": "https://boltswagstore.com/SUMMERSALE",
@@ -87,7 +86,7 @@ with Bolt(
                                         "key1": "value1",
                                         "key2": "value2",
                                     },
-                                    price=754,
+                                    price=754.0,
                                 ),
                             ],
                             description="Large tote with Bolt logo.",
@@ -105,7 +104,7 @@ with Bolt(
                             merchant_variant_id="888",
                             name="Bolt Swag Bag",
                             options="Special Edition",
-                            quantity=1,
+                            quantity=1.0,
                             reference="item_100",
                             shipment=models.CartShipment(
                                 carrier="FedEx",
@@ -153,12 +152,12 @@ with Bolt(
                             sku="BOLT-SKU_100",
                             seller_id="seller-1234",
                             tags="tote, blue, linen, eco-friendly",
-                            tax_amount=0,
-                            total_amount=1000,
-                            unit_price=1000,
+                            tax_amount=0.0,
+                            total_amount=1000.0,
+                            unit_price=1000.0,
                             uom="inches",
                             upc="0825764603119",
-                            weight=10,
+                            weight=10.0,
                             weight_unit="pounds",
                         ),
                     ],
@@ -248,7 +247,7 @@ with Bolt(
                             type=models.CartShipmentType.DOOR_DELIVERY,
                         ),
                         description="Pick up in-store at 123 Main St.",
-                        distance=3,
+                        distance=3.0,
                         distance_unit=models.InStoreCartShipmentDistanceUnit.MILE,
                         in_store_pickup_address=models.Address(
                             company="Bolt",
@@ -319,7 +318,7 @@ with Bolt(
                         type=models.CartShipmentType.DOOR_DELIVERY,
                     ),
                     description="Pick up in-store at 123 Main St.",
-                    distance=3,
+                    distance=3.0,
                     distance_unit=models.InStoreCartShipmentDistanceUnit.MILE,
                     in_store_pickup_address=models.Address(
                         company="Bolt",
@@ -358,7 +357,7 @@ with Bolt(
                                 "key1": "value1",
                                 "key2": "value2",
                             },
-                            "price": 754,
+                            "price": 754.0,
                         },
                     ],
                     "description": "Large tote with Bolt logo.",
@@ -376,7 +375,7 @@ with Bolt(
                     "merchant_variant_id": "888",
                     "name": "Bolt Swag Bag",
                     "options": "Special Edition",
-                    "quantity": 1,
+                    "quantity": 1.0,
                     "reference": "item_100",
                     "shipment": {
                         "carrier": "FedEx",
@@ -424,12 +423,12 @@ with Bolt(
                     "sku": "BOLT-SKU_100",
                     "seller_id": "seller-1234",
                     "tags": "tote, blue, linen, eco-friendly",
-                    "tax_amount": 0,
-                    "total_amount": 1000,
-                    "unit_price": 1000,
+                    "tax_amount": 0.0,
+                    "total_amount": 1000.0,
+                    "unit_price": 1000.0,
                     "uom": "inches",
                     "upc": "0825764603119",
-                    "weight": 10,
+                    "weight": 10.0,
                     "weight_unit": "pounds",
                 },
             ],
@@ -483,7 +482,7 @@ with Bolt(
                     "type": models.CartShipmentType.DOOR_DELIVERY,
                 },
             ],
-            "total_amount": 900,
+            "total_amount": 900.0,
             "cart_url": "https://boltswagstore.com/orders/123456765432",
             "currency": "USD",
             "display_id": "displayid_100",
@@ -504,15 +503,15 @@ with Bolt(
             {
                 "seller_id": "seller-1234",
                 "amounts": {
-                    "merchant_subtotal": 5000,
-                    "discount_total": 500,
-                    "shipping_total": 1000,
-                    "tax_total": 400,
-                    "gross_total": 5900,
+                    "merchant_subtotal": 5000.0,
+                    "discount_total": 500.0,
+                    "shipping_total": 1000.0,
+                    "tax_total": 400.0,
+                    "gross_total": 5900.0,
                 },
                 "marketplace_commission_fee": {
-                    "bps": 250,
-                    "flat_cents": 100,
+                    "bps": 250.0,
+                    "flat_cents": 100.0,
                     "metadata": {
                         "plan_type": "pro",
                         "tier": "premium",

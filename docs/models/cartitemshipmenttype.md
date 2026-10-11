@@ -1,5 +1,13 @@
 # CartItemShipmentType
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import CartItemShipmentType
+
+value = CartItemShipmentType.UNKNOWN
+```
+
 
 ## Values
 

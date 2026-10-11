@@ -10,7 +10,7 @@ from typing import Any, Dict, Mapping, Optional, Union
 
 
 class Transactions(BaseSDK):
-    r"""Use the Transactions endpoint to authorize payments when the shopper checks out and handle post authorization actions such as captures and refunds. You can use a shopper's existing saved payment information or tokenize new payment information with the [Bolt Tokenizer](https://help.bolt.com/api-tokenizer/). Bolt Authorize Transaction types fall into one of three categories: a logged-in shopper checking out with a saved payment method, any type of shopper checking out with a new payment method, and a logged-in shopper checking out with a new payment method. The new payment method will be saved to the shopper's account."""
+    r"""Use the Transactions endpoint to authorize payments when the shopper checks out and handle post authorization actions such as captures and refunds. You can use a shopper's existing saved payment information or tokenize new payment information with the [Bolt Tokenizer](https://help.boltapp.com/api-tokenizer/). Bolt Authorize Transaction types fall into one of three categories: a logged-in shopper checking out with a saved payment method, any type of shopper checking out with a new payment method, and a logged-in shopper checking out with a new payment method. The new payment method will be saved to the shopper's account."""
 
     def authorize_transaction(
         self,
@@ -43,7 +43,11 @@ class Transactions(BaseSDK):
         :param security:
         :param x_publishable_key: The publicly viewable identifier used to identify a merchant division. This key is found in the Developer > API section of the Bolt Merchant Dashboard [RECOMMENDED].
         :param idempotency_key: A key created by merchants that ensures `POST` and `PATCH` requests are only performed once. [Read more about Idempotent Requests here](/developers/references/idempotency/).
-        :param request_body: **Authorize a Transaction** * • `merchant_credit_card_authorization`: For authorizing with a new, unsaved card. This can be for a guest checkout flow, one-time payment, or an existing Bolt shopper. * • `merchant_credit_card_authorization_recharge`: For authorizing a card using a shoppers saved payment methods. * • **Anytime the shopper is paying while logged-in attach their OAuth `access_token` to the request.**
+        :param request_body: **Authorize a Transaction**
+            * • `merchant_credit_card_authorization`: For authorizing with a new, unsaved card. This can be for a guest checkout flow, one-time payment, or an existing Bolt shopper.
+            * • `merchant_credit_card_authorization_recharge`: For authorizing a card using a shoppers saved payment methods.
+            * • **Anytime the shopper is paying while logged-in attach their OAuth `access_token` to the request.**
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -83,12 +87,13 @@ class Transactions(BaseSDK):
                 security, models.AuthorizeTransactionSecurity
             ),
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.request_body,
+                request.request_body if request is not None else None,
                 False,
                 True,
                 "json",
                 Optional[models.AuthorizeTransactionRequestBody],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -107,9 +112,11 @@ class Transactions(BaseSDK):
                 operation_id="authorizeTransaction",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(security, models.Security),
+                tags=["Transactions"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -155,7 +162,11 @@ class Transactions(BaseSDK):
         :param security:
         :param x_publishable_key: The publicly viewable identifier used to identify a merchant division. This key is found in the Developer > API section of the Bolt Merchant Dashboard [RECOMMENDED].
         :param idempotency_key: A key created by merchants that ensures `POST` and `PATCH` requests are only performed once. [Read more about Idempotent Requests here](/developers/references/idempotency/).
-        :param request_body: **Authorize a Transaction** * • `merchant_credit_card_authorization`: For authorizing with a new, unsaved card. This can be for a guest checkout flow, one-time payment, or an existing Bolt shopper. * • `merchant_credit_card_authorization_recharge`: For authorizing a card using a shoppers saved payment methods. * • **Anytime the shopper is paying while logged-in attach their OAuth `access_token` to the request.**
+        :param request_body: **Authorize a Transaction**
+            * • `merchant_credit_card_authorization`: For authorizing with a new, unsaved card. This can be for a guest checkout flow, one-time payment, or an existing Bolt shopper.
+            * • `merchant_credit_card_authorization_recharge`: For authorizing a card using a shoppers saved payment methods.
+            * • **Anytime the shopper is paying while logged-in attach their OAuth `access_token` to the request.**
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -195,12 +206,13 @@ class Transactions(BaseSDK):
                 security, models.AuthorizeTransactionSecurity
             ),
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.request_body,
+                request.request_body if request is not None else None,
                 False,
                 True,
                 "json",
                 Optional[models.AuthorizeTransactionRequestBody],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -219,9 +231,11 @@ class Transactions(BaseSDK):
                 operation_id="authorizeTransaction",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(security, models.Security),
+                tags=["Transactions"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -257,6 +271,8 @@ class Transactions(BaseSDK):
 
         Although the response returns the standard `transaction_view` object, only `captures` and either `id` or `reference` are needed.
 
+
+        If set, this operation will use `x_api_key` from the global security.
 
         :param idempotency_key: A key created by merchants that ensures `POST` and `PATCH` requests are only performed once. [Read more about Idempotent Requests here](/developers/references/idempotency/).
         :param capture_transaction_with_reference: Capture a Transaction
@@ -297,12 +313,16 @@ class Transactions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.capture_transaction_with_reference,
+                request.capture_transaction_with_reference
+                if request is not None
+                else None,
                 False,
                 True,
                 "json",
                 Optional[models.CaptureTransactionWithReference],
             ),
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -319,13 +339,15 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="captureTransaction",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Transactions"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["403", "404", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -373,6 +395,8 @@ class Transactions(BaseSDK):
         Although the response returns the standard `transaction_view` object, only `captures` and either `id` or `reference` are needed.
 
 
+        If set, this operation will use `x_api_key` from the global security.
+
         :param idempotency_key: A key created by merchants that ensures `POST` and `PATCH` requests are only performed once. [Read more about Idempotent Requests here](/developers/references/idempotency/).
         :param capture_transaction_with_reference: Capture a Transaction
         :param retries: Override the default retry configuration for this method
@@ -412,12 +436,16 @@ class Transactions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.capture_transaction_with_reference,
+                request.capture_transaction_with_reference
+                if request is not None
+                else None,
                 False,
                 True,
                 "json",
                 Optional[models.CaptureTransactionWithReference],
             ),
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -434,13 +462,15 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="captureTransaction",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Transactions"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["403", "404", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -482,6 +512,8 @@ class Transactions(BaseSDK):
 
         This refunds a captured transaction. Refunds can be done for any partial amount or for the total authorized amount. These refunds are processed synchronously and return information about the refunded transaction in the standard `transaction_view` object.
 
+        If set, this operation will use `x_api_key` from the global security.
+
         :param idempotency_key: A key created by merchants that ensures `POST` and `PATCH` requests are only performed once. [Read more about Idempotent Requests here](/developers/references/idempotency/).
         :param transaction_credit: Refund a Transaction
         :param retries: Override the default retry configuration for this method
@@ -520,12 +552,14 @@ class Transactions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.transaction_credit,
+                request.transaction_credit if request is not None else None,
                 False,
                 True,
                 "json",
                 Optional[models.TransactionCredit],
             ),
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -542,13 +576,15 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="refundTransaction",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Transactions"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -584,6 +620,8 @@ class Transactions(BaseSDK):
         r"""Refund a Transaction
 
         This refunds a captured transaction. Refunds can be done for any partial amount or for the total authorized amount. These refunds are processed synchronously and return information about the refunded transaction in the standard `transaction_view` object.
+
+        If set, this operation will use `x_api_key` from the global security.
 
         :param idempotency_key: A key created by merchants that ensures `POST` and `PATCH` requests are only performed once. [Read more about Idempotent Requests here](/developers/references/idempotency/).
         :param transaction_credit: Refund a Transaction
@@ -623,12 +661,14 @@ class Transactions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.transaction_credit,
+                request.transaction_credit if request is not None else None,
                 False,
                 True,
                 "json",
                 Optional[models.TransactionCredit],
             ),
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -645,13 +685,15 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="refundTransaction",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Transactions"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -691,6 +733,8 @@ class Transactions(BaseSDK):
 
         This endpoint is used to manually approve or reject orders for a specified transaction.
 
+        If set, this operation will use `x_api_key` from the global security.
+
         :param idempotency_key: A key created by merchants that ensures `POST` and `PATCH` requests are only performed once. [Read more about Idempotent Requests here](/developers/references/idempotency/).
         :param merchant_credit_card_review: Review a Transaction
         :param retries: Override the default retry configuration for this method
@@ -729,12 +773,14 @@ class Transactions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.merchant_credit_card_review,
+                request.merchant_credit_card_review if request is not None else None,
                 False,
                 True,
                 "json",
                 Optional[models.MerchantCreditCardReview],
             ),
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -751,13 +797,15 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="reviewTransaction",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Transactions"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["403", "404", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -797,6 +845,8 @@ class Transactions(BaseSDK):
 
         This endpoint is used to manually approve or reject orders for a specified transaction.
 
+        If set, this operation will use `x_api_key` from the global security.
+
         :param idempotency_key: A key created by merchants that ensures `POST` and `PATCH` requests are only performed once. [Read more about Idempotent Requests here](/developers/references/idempotency/).
         :param merchant_credit_card_review: Review a Transaction
         :param retries: Override the default retry configuration for this method
@@ -835,12 +885,14 @@ class Transactions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.merchant_credit_card_review,
+                request.merchant_credit_card_review if request is not None else None,
                 False,
                 True,
                 "json",
                 Optional[models.MerchantCreditCardReview],
             ),
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -857,13 +909,15 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="reviewTransaction",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Transactions"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["403", "404", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -903,6 +957,8 @@ class Transactions(BaseSDK):
         Although the response returns the standard `transaction_view` object, only `status` and either `id` or `reference` are needed.
 
 
+        If set, this operation will use `x_api_key` from the global security.
+
         :param idempotency_key: A key created by merchants that ensures `POST` and `PATCH` requests are only performed once. [Read more about Idempotent Requests here](/developers/references/idempotency/).
         :param credit_card_void: Void a Transaction
         :param retries: Override the default retry configuration for this method
@@ -941,12 +997,14 @@ class Transactions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.credit_card_void,
+                request.credit_card_void if request is not None else None,
                 False,
                 True,
                 "json",
                 Optional[models.CreditCardVoid],
             ),
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -963,13 +1021,15 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="voidTransaction",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Transactions"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["403", "404", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1009,6 +1069,8 @@ class Transactions(BaseSDK):
         Although the response returns the standard `transaction_view` object, only `status` and either `id` or `reference` are needed.
 
 
+        If set, this operation will use `x_api_key` from the global security.
+
         :param idempotency_key: A key created by merchants that ensures `POST` and `PATCH` requests are only performed once. [Read more about Idempotent Requests here](/developers/references/idempotency/).
         :param credit_card_void: Void a Transaction
         :param retries: Override the default retry configuration for this method
@@ -1047,12 +1109,14 @@ class Transactions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.credit_card_void,
+                request.credit_card_void if request is not None else None,
                 False,
                 True,
                 "json",
                 Optional[models.CreditCardVoid],
             ),
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1069,13 +1133,15 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="voidTransaction",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Transactions"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["403", "404", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1112,6 +1178,8 @@ class Transactions(BaseSDK):
         **Note**: All objects and fields marked `required` in the Transaction Details response are also **nullable**. This includes any sub-components (objects or fields) also marked `required`.
 
 
+        If set, this operation will use `x_api_key` from the global security.
+
         :param reference: This is the Bolt transaction reference. (ex. N7Y3-NFKC-VFRF)
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1145,6 +1213,8 @@ class Transactions(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1161,13 +1231,15 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getTransactionDetails",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Transactions"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["403", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1204,6 +1276,8 @@ class Transactions(BaseSDK):
         **Note**: All objects and fields marked `required` in the Transaction Details response are also **nullable**. This includes any sub-components (objects or fields) also marked `required`.
 
 
+        If set, this operation will use `x_api_key` from the global security.
+
         :param reference: This is the Bolt transaction reference. (ex. N7Y3-NFKC-VFRF)
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1237,6 +1311,8 @@ class Transactions(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1253,13 +1329,15 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getTransactionDetails",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Transactions"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["403", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1286,7 +1364,7 @@ class Transactions(BaseSDK):
         reference: str,
         idempotency_key: Optional[str] = None,
         display_id: Optional[str] = None,
-        metadata: Optional[Dict[str, str]] = None,
+        metadata: Optional[Mapping[str, str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1295,6 +1373,8 @@ class Transactions(BaseSDK):
         r"""Update a Transaction
 
         This allows you to update certain transaction properties post-authorization.
+
+        If set, this operation will use `x_api_key` from the global security.
 
         :param reference: This is the Bolt transaction reference. (ex. N7Y3-NFKC-VFRF)
         :param idempotency_key: A key created by merchants that ensures `POST` and `PATCH` requests are only performed once. [Read more about Idempotent Requests here](/developers/references/idempotency/).
@@ -1320,7 +1400,7 @@ class Transactions(BaseSDK):
             idempotency_key=idempotency_key,
             transaction_update_input=models.TransactionUpdateInput(
                 display_id=display_id,
-                metadata=metadata,
+                metadata=utils.unmarshal(metadata, Optional[Dict[str, str]]),
             ),
         )
 
@@ -1338,12 +1418,14 @@ class Transactions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.transaction_update_input,
+                request.transaction_update_input if request is not None else None,
                 False,
                 True,
                 "json",
                 Optional[models.TransactionUpdateInput],
             ),
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1360,13 +1442,15 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="updateTransaction",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Transactions"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["403", "404", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1393,7 +1477,7 @@ class Transactions(BaseSDK):
         reference: str,
         idempotency_key: Optional[str] = None,
         display_id: Optional[str] = None,
-        metadata: Optional[Dict[str, str]] = None,
+        metadata: Optional[Mapping[str, str]] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1402,6 +1486,8 @@ class Transactions(BaseSDK):
         r"""Update a Transaction
 
         This allows you to update certain transaction properties post-authorization.
+
+        If set, this operation will use `x_api_key` from the global security.
 
         :param reference: This is the Bolt transaction reference. (ex. N7Y3-NFKC-VFRF)
         :param idempotency_key: A key created by merchants that ensures `POST` and `PATCH` requests are only performed once. [Read more about Idempotent Requests here](/developers/references/idempotency/).
@@ -1427,7 +1513,7 @@ class Transactions(BaseSDK):
             idempotency_key=idempotency_key,
             transaction_update_input=models.TransactionUpdateInput(
                 display_id=display_id,
-                metadata=metadata,
+                metadata=utils.unmarshal(metadata, Optional[Dict[str, str]]),
             ),
         )
 
@@ -1445,12 +1531,14 @@ class Transactions(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.transaction_update_input,
+                request.transaction_update_input if request is not None else None,
                 False,
                 True,
                 "json",
                 Optional[models.TransactionUpdateInput],
             ),
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -1467,13 +1555,15 @@ class Transactions(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="updateTransaction",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Transactions"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["403", "404", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 

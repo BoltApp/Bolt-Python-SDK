@@ -1,5 +1,13 @@
 # FulfillmentType
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import FulfillmentType
+
+value = FulfillmentType.PHYSICAL_DOOR_DELIVERY
+```
+
 
 ## Values
 
