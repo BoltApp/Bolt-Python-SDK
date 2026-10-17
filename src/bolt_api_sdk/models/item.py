@@ -7,7 +7,8 @@ from .item_shipment_type import ItemShipmentType
 from .metadata_component import MetadataComponent, MetadataComponentTypedDict
 from .total_weight import TotalWeight, TotalWeightTypedDict
 from .type import Type
-from bolt_api_sdk.types import BaseModel
+from bolt_api_sdk.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -168,3 +169,46 @@ class Item(BaseModel):
     upc: Optional[str] = None
 
     weight: Optional[TotalWeight] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "bolt_product_id",
+                "brand",
+                "category",
+                "collections",
+                "color",
+                "customizations",
+                "description",
+                "details_url",
+                "image_url",
+                "isbn",
+                "item_group",
+                "manufacturer",
+                "options",
+                "properties",
+                "shipment_type",
+                "size",
+                "sku",
+                "tags",
+                "tax_amount",
+                "taxable",
+                "type",
+                "uom",
+                "upc",
+                "weight",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

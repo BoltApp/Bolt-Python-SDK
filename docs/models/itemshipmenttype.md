@@ -2,6 +2,14 @@
 
 The shipment type selected by the shopper.
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import ItemShipmentType
+
+value = ItemShipmentType.UNKNOWN
+```
+
 
 ## Values
 

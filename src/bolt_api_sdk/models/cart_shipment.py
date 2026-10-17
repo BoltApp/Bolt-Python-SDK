@@ -3,7 +3,8 @@
 from __future__ import annotations
 from .address import Address, AddressTypedDict
 from .cart_shipment_type import CartShipmentType
-from bolt_api_sdk.types import BaseModel
+from bolt_api_sdk.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -120,3 +121,43 @@ class CartShipment(BaseModel):
 
     type: Optional[CartShipmentType] = None
     r"""The type corresponding to this shipment, if applicable."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "carrier",
+                "cost",
+                "discounted_by_membership",
+                "estimated_delivery_date",
+                "expedited",
+                "package_depth",
+                "package_dimension_unit",
+                "package_height",
+                "package_type",
+                "package_weight_unit",
+                "package_width",
+                "service",
+                "shipping_address",
+                "shipping_address_id",
+                "shipping_method",
+                "signature",
+                "tax_amount",
+                "tax_code",
+                "total_weight",
+                "total_weight_unit",
+                "type",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

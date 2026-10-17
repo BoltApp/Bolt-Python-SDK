@@ -2,6 +2,14 @@
 
 The status of the void request.
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import CreditCardVoidStatus
+
+value = CreditCardVoidStatus.SUCCEEDED
+```
+
 
 ## Values
 

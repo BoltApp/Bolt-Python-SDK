@@ -20,6 +20,7 @@ if TYPE_CHECKING:
     from bolt_api_sdk.oauth import OAuth
     from bolt_api_sdk.orders import Orders
     from bolt_api_sdk.statements import Statements
+    from bolt_api_sdk.subscriptions import Subscriptions
     from bolt_api_sdk.testing import Testing
     from bolt_api_sdk.transactions import Transactions
     from bolt_api_sdk.webhooks import Webhooks
@@ -38,15 +39,15 @@ class Bolt(BaseSDK):
     """
 
     account: "Account"
-    r"""Use the Account endpoint to view and manage customer accounts. Perform actions such as creating an account, updating an address, or adding a payment method. This endpoint is for merchants using the Accounts Package. See our related guide on [Bolt OAuth](https://help.bolt.com/developers/bolt-oauth/).
+    r"""Use the Account endpoint to view and manage customer accounts. Perform actions such as creating an account, updating an address, or adding a payment method. This endpoint is for merchants using the Accounts Package. See our related guide on [Bolt OAuth](https://help.boltapp.com/developers/bolt-oauth/).
 
     """
     configuration: "Configuration"
-    r"""Use this resource to retrieve and set Merchant Callback URLs. Bolt uses these URLs to exchange information with your commerce server. See our related guide [About the Merchant Callback API](https://help.bolt.com/products/checkout/how-to-integrate/merchant-api-new/).
+    r"""Use this resource to retrieve and set Merchant Callback URLs. Bolt uses these URLs to exchange information with your commerce server. See our related guide [About the Merchant Callback API](https://help.boltapp.com/products/checkout/how-to-integrate/merchant-api-new/).
 
     """
     orders: "Orders"
-    r"""Use the Orders API to interact with the customer's cart throughout the checkout process. Pre-checkout, perform actions such as validating inventory, verifying discounts, and calculating taxes. Post-checkout, share shipping information so your customer can track their order. You'll interact with the [Merchant API](https://help.bolt.com/api-merchant/) to keep the servers in sync with any changes the customer makes to their cart. See our related guide [Create a Bolt Order Token](https://help.bolt.com/products/checkout/how-to-integrate/create-bolt-order-token-new/).
+    r"""Use the Orders API to interact with the customer's cart throughout the checkout process. Pre-checkout, perform actions such as validating inventory, verifying discounts, and calculating taxes. Post-checkout, share shipping information so your customer can track their order. You'll interact with the [Merchant API](https://help.boltapp.com/api-merchant/) to keep the servers in sync with any changes the customer makes to their cart. See our related guide [Create a Bolt Order Token](https://help.boltapp.com/products/checkout/how-to-integrate/create-bolt-order-token-new/).
 
     """
     statements: "Statements"
@@ -54,19 +55,23 @@ class Bolt(BaseSDK):
 
     """
     transactions: "Transactions"
-    r"""Use the Transactions endpoint to authorize payments when the shopper checks out and handle post authorization actions such as captures and refunds. You can use a shopper's existing saved payment information or tokenize new payment information with the [Bolt Tokenizer](https://help.bolt.com/api-tokenizer/). Bolt Authorize Transaction types fall into one of three categories: a logged-in shopper checking out with a saved payment method, any type of shopper checking out with a new payment method, and a logged-in shopper checking out with a new payment method. The new payment method will be saved to the shopper's account.
+    r"""Use the Transactions endpoint to authorize payments when the shopper checks out and handle post authorization actions such as captures and refunds. You can use a shopper's existing saved payment information or tokenize new payment information with the [Bolt Tokenizer](https://help.boltapp.com/api-tokenizer/). Bolt Authorize Transaction types fall into one of three categories: a logged-in shopper checking out with a saved payment method, any type of shopper checking out with a new payment method, and a logged-in shopper checking out with a new payment method. The new payment method will be saved to the shopper's account.
 
     """
     o_auth: "OAuth"
-    r"""Use this endpoint to retrieve an OAuth token. Use the token to allow your ecommerce server to make calls to the Account endpoint and create a one-click checkout experience for shoppers. See related guide [Fetch OAuth Token](https://help.bolt.com/products/ignite/api-implementation/endpoints/oauth-guide/).
+    r"""Use this endpoint to retrieve an OAuth token. Use the token to allow your ecommerce server to make calls to the Account endpoint and create a one-click checkout experience for shoppers. See related guide [Fetch OAuth Token](https://help.boltapp.com/products/ignite/api-implementation/endpoints/oauth-guide/).
 
     """
     testing: "Testing"
-    r"""The testing endpoint allows you to test various functionality within Bolt. Create a test credit card to process a test payment in your store. You can also simulate tracking an order’s shipment and programmatically create customer accounts to use as dummy data. See our related guide on [Testing](https://help.bolt.com/developers/production-readiness-guides/test-cards/).
+    r"""The testing endpoint allows you to test various functionality within Bolt. Create a test credit card to process a test payment in your store. You can also simulate tracking an order’s shipment and programmatically create customer accounts to use as dummy data. See our related guide on [Testing](https://help.boltapp.com/developers/production-readiness-guides/test-cards/).
 
     """
     webhooks: "Webhooks"
-    r"""Set up webhooks to notify your backend of events within Bolt. These webhooks can communicate with your OMS or other systems to keep them up to date with Bolt. See our related guide on [Webhooks](https://help.bolt.com/get-started/during-checkout/webhooks/).
+    r"""Set up webhooks to notify your backend of events within Bolt. These webhooks can communicate with your OMS or other systems to keep them up to date with Bolt. See our related guide on [Webhooks](https://help.boltapp.com/get-started/during-checkout/webhooks/).
+
+    """
+    subscriptions: "Subscriptions"
+    r"""Use the Subscriptions endpoint to manage merchant-side recurring subscriptions created through Bolt Charge: list and retrieve subscriptions, cancel or pause/unpause them, view generated orders, and configure dunning (failed payment recovery) settings for a division.
 
     """
     _sub_sdk_map = {
@@ -78,6 +83,7 @@ class Bolt(BaseSDK):
         "o_auth": ("bolt_api_sdk.oauth", "OAuth"),
         "testing": ("bolt_api_sdk.testing", "Testing"),
         "webhooks": ("bolt_api_sdk.webhooks", "Webhooks"),
+        "subscriptions": ("bolt_api_sdk.subscriptions", "Subscriptions"),
     }
 
     def __init__(
@@ -86,8 +92,8 @@ class Bolt(BaseSDK):
             Union[models.Security, Callable[[], models.Security]]
         ] = None,
         server_idx: Optional[int] = None,
-        server_url: Optional[str] = None,
         url_params: Optional[Dict[str, str]] = None,
+        server_url: Optional[str] = None,
         client: Optional[HttpClient] = None,
         async_client: Optional[AsyncHttpClient] = None,
         retry_config: OptionalNullable[RetryConfig] = UNSET,
