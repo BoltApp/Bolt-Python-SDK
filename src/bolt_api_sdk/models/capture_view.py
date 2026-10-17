@@ -3,8 +3,9 @@
 from __future__ import annotations
 from .amount_view import AmountView, AmountViewTypedDict
 from .capture_status import CaptureStatus
-from bolt_api_sdk.types import BaseModel
+from bolt_api_sdk.types import BaseModel, UNSET_SENTINEL
 from enum import Enum
+from pydantic import model_serializer
 from typing import Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -40,6 +41,22 @@ class Split(BaseModel):
     r"""Fee type options. **Nullable** for Transactions Details.
 
     """
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["amount", "type"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class CaptureViewTypedDict(TypedDict):
@@ -77,3 +94,21 @@ class CaptureView(BaseModel):
 
     status: Optional[CaptureStatus] = None
     r"""The status of the capture. **Nullable** for Transactions Details."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["amount", "id", "merchant_event_id", "metadata", "splits", "status"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

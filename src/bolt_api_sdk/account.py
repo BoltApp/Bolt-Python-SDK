@@ -10,7 +10,7 @@ from typing import Any, Mapping, Optional, Union
 
 
 class Account(BaseSDK):
-    r"""Use the Account endpoint to view and manage customer accounts. Perform actions such as creating an account, updating an address, or adding a payment method. This endpoint is for merchants using the Accounts Package. See our related guide on [Bolt OAuth](https://help.bolt.com/developers/bolt-oauth/)."""
+    r"""Use the Account endpoint to view and manage customer accounts. Perform actions such as creating an account, updating an address, or adding a payment method. This endpoint is for merchants using the Accounts Package. See our related guide on [Bolt OAuth](https://help.boltapp.com/developers/bolt-oauth/)."""
 
     def get_account(
         self,
@@ -60,6 +60,7 @@ class Account(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=utils.get_pydantic_model(security, models.GetAccountSecurity),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -78,9 +79,11 @@ class Account(BaseSDK):
                 operation_id="getAccount",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(security, models.Security),
+                tags=["Account"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -143,6 +146,7 @@ class Account(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=utils.get_pydantic_model(security, models.GetAccountSecurity),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -161,9 +165,11 @@ class Account(BaseSDK):
                 operation_id="getAccount",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(security, models.Security),
+                tags=["Account"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -194,6 +200,8 @@ class Account(BaseSDK):
         r"""Create Bolt Account
 
         Create a Bolt shopping account.
+
+        If set, this operation will use `x_api_key` from the global security.
 
         :param x_publishable_key: The publicly viewable identifier used to identify a merchant division. This key is found in the Developer > API section of the Bolt Merchant Dashboard [RECOMMENDED].
         :param idempotency_key: A key created by merchants that ensures `POST` and `PATCH` requests are only performed once. [Read more about Idempotent Requests here](/developers/references/idempotency/).
@@ -235,12 +243,14 @@ class Account(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.create_account_input,
+                request.create_account_input if request is not None else None,
                 False,
                 True,
                 "json",
                 Optional[models.CreateAccountInput],
             ),
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -257,13 +267,15 @@ class Account(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createAccount",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Account"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -294,6 +306,8 @@ class Account(BaseSDK):
         r"""Create Bolt Account
 
         Create a Bolt shopping account.
+
+        If set, this operation will use `x_api_key` from the global security.
 
         :param x_publishable_key: The publicly viewable identifier used to identify a merchant division. This key is found in the Developer > API section of the Bolt Merchant Dashboard [RECOMMENDED].
         :param idempotency_key: A key created by merchants that ensures `POST` and `PATCH` requests are only performed once. [Read more about Idempotent Requests here](/developers/references/idempotency/).
@@ -335,12 +349,14 @@ class Account(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.create_account_input,
+                request.create_account_input if request is not None else None,
                 False,
                 True,
                 "json",
                 Optional[models.CreateAccountInput],
             ),
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -357,13 +373,15 @@ class Account(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createAccount",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Account"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -439,12 +457,13 @@ class Account(BaseSDK):
                 security, models.UpdateAccountProfileSecurity
             ),
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.update_profile,
+                request.update_profile if request is not None else None,
                 False,
                 True,
                 "json",
                 Optional[models.UpdateProfile],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -463,9 +482,11 @@ class Account(BaseSDK):
                 operation_id="updateAccountProfile",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(security, models.Security),
+                tags=["Account"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -541,12 +562,13 @@ class Account(BaseSDK):
                 security, models.UpdateAccountProfileSecurity
             ),
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.update_profile,
+                request.update_profile if request is not None else None,
                 False,
                 True,
                 "json",
                 Optional[models.UpdateProfile],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -565,9 +587,11 @@ class Account(BaseSDK):
                 operation_id="updateAccountProfile",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(security, models.Security),
+                tags=["Account"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -641,12 +665,13 @@ class Account(BaseSDK):
             http_headers=http_headers,
             security=utils.get_pydantic_model(security, models.AddAddressSecurity),
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.address_account,
+                request.address_account if request is not None else None,
                 False,
                 True,
                 "json",
                 Optional[models.AddressAccount],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -665,9 +690,11 @@ class Account(BaseSDK):
                 operation_id="addAddress",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(security, models.Security),
+                tags=["Account"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -741,12 +768,13 @@ class Account(BaseSDK):
             http_headers=http_headers,
             security=utils.get_pydantic_model(security, models.AddAddressSecurity),
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.address_account,
+                request.address_account if request is not None else None,
                 False,
                 True,
                 "json",
                 Optional[models.AddressAccount],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -765,9 +793,11 @@ class Account(BaseSDK):
                 operation_id="addAddress",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(security, models.Security),
+                tags=["Account"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -836,6 +866,7 @@ class Account(BaseSDK):
             accept_header_value="*/*",
             http_headers=http_headers,
             security=utils.get_pydantic_model(security, models.DeleteAddressSecurity),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -854,9 +885,11 @@ class Account(BaseSDK):
                 operation_id="deleteAddress",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(security, models.Security),
+                tags=["Account"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -925,6 +958,7 @@ class Account(BaseSDK):
             accept_header_value="*/*",
             http_headers=http_headers,
             security=utils.get_pydantic_model(security, models.DeleteAddressSecurity),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -943,9 +977,11 @@ class Account(BaseSDK):
                 operation_id="deleteAddress",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(security, models.Security),
+                tags=["Account"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1019,11 +1055,15 @@ class Account(BaseSDK):
         :param door_code: The building door code or community gate code.
         :param name: The given and surname of the person associated with this address.
         :param phone: A phone number following E164 standards, in its globalized format, i.e. prepended with a plus sign.
-        :param region_code: The ISO 3166-2 region code associated with this address.   - * If specified, value must be valid for the `country`.   - * If null, value is inferred from the `region`.
+        :param region_code: The ISO 3166-2 region code associated with this address.
+            - * If specified, value must be valid for the `country`.
+            - * If null, value is inferred from the `region`.
+
         :param street_address2: Any apartment, floor, or unit details.
         :param street_address3: Any additional street address details.
         :param street_address4: Any additional street address details.
-        :param metadata: A key-value pair object that allows users to store arbitrary information associated with an object.  For any individual account object, we allow up to 50 keys. Keys can be up to 40 characters long and values can be up to 500 characters long.  Metadata should not contain any sensitive customer information, like PII (Personally Identifiable Information). For more information about metadata, see our [documentation](https://help.bolt.com/developers/references/embedded-metadata/).
+        :param metadata: A key-value pair object that allows users to store arbitrary information associated with an object. For any individual account object, we allow up to 50 keys. Keys can be up to 40 characters long and values can be up to 500 characters long. Metadata should not contain any sensitive customer information, like PII (Personally Identifiable Information). For more information about metadata, see our [documentation](https://help.boltapp.com/developers/references/embedded-metadata/).
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1082,12 +1122,13 @@ class Account(BaseSDK):
             http_headers=http_headers,
             security=utils.get_pydantic_model(security, models.ReplaceAddressSecurity),
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.address_account,
+                request.address_account if request is not None else None,
                 False,
                 True,
                 "json",
                 Optional[models.AddressAccount],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1106,9 +1147,11 @@ class Account(BaseSDK):
                 operation_id="replaceAddress",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(security, models.Security),
+                tags=["Account"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1182,11 +1225,15 @@ class Account(BaseSDK):
         :param door_code: The building door code or community gate code.
         :param name: The given and surname of the person associated with this address.
         :param phone: A phone number following E164 standards, in its globalized format, i.e. prepended with a plus sign.
-        :param region_code: The ISO 3166-2 region code associated with this address.   - * If specified, value must be valid for the `country`.   - * If null, value is inferred from the `region`.
+        :param region_code: The ISO 3166-2 region code associated with this address.
+            - * If specified, value must be valid for the `country`.
+            - * If null, value is inferred from the `region`.
+
         :param street_address2: Any apartment, floor, or unit details.
         :param street_address3: Any additional street address details.
         :param street_address4: Any additional street address details.
-        :param metadata: A key-value pair object that allows users to store arbitrary information associated with an object.  For any individual account object, we allow up to 50 keys. Keys can be up to 40 characters long and values can be up to 500 characters long.  Metadata should not contain any sensitive customer information, like PII (Personally Identifiable Information). For more information about metadata, see our [documentation](https://help.bolt.com/developers/references/embedded-metadata/).
+        :param metadata: A key-value pair object that allows users to store arbitrary information associated with an object. For any individual account object, we allow up to 50 keys. Keys can be up to 40 characters long and values can be up to 500 characters long. Metadata should not contain any sensitive customer information, like PII (Personally Identifiable Information). For more information about metadata, see our [documentation](https://help.boltapp.com/developers/references/embedded-metadata/).
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1245,12 +1292,13 @@ class Account(BaseSDK):
             http_headers=http_headers,
             security=utils.get_pydantic_model(security, models.ReplaceAddressSecurity),
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.address_account,
+                request.address_account if request is not None else None,
                 False,
                 True,
                 "json",
                 Optional[models.AddressAccount],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1269,9 +1317,11 @@ class Account(BaseSDK):
                 operation_id="replaceAddress",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(security, models.Security),
+                tags=["Account"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1343,11 +1393,15 @@ class Account(BaseSDK):
         :param door_code: The building door code or community gate code.
         :param name: The given and surname of the person associated with this address.
         :param phone: A phone number following E164 standards, in its globalized format, i.e. prepended with a plus sign.
-        :param region_code: The ISO 3166-2 region code associated with this address.   - * If specified, value must be valid for the `country`.   - * If null, value is inferred from the `region`.
+        :param region_code: The ISO 3166-2 region code associated with this address.
+            - * If specified, value must be valid for the `country`.
+            - * If null, value is inferred from the `region`.
+
         :param street_address2: Any apartment, floor, or unit details.
         :param street_address3: Any additional street address details.
         :param street_address4: Any additional street address details.
-        :param metadata: A key-value pair object that allows users to store arbitrary information associated with an object.  For any individual account object, we allow up to 50 keys. Keys can be up to 40 characters long and values can be up to 500 characters long.  Metadata should not contain any sensitive customer information, like PII (Personally Identifiable Information). For more information about metadata, see our [documentation](https://help.bolt.com/developers/references/embedded-metadata/).
+        :param metadata: A key-value pair object that allows users to store arbitrary information associated with an object. For any individual account object, we allow up to 50 keys. Keys can be up to 40 characters long and values can be up to 500 characters long. Metadata should not contain any sensitive customer information, like PII (Personally Identifiable Information). For more information about metadata, see our [documentation](https://help.boltapp.com/developers/references/embedded-metadata/).
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1405,12 +1459,13 @@ class Account(BaseSDK):
             http_headers=http_headers,
             security=utils.get_pydantic_model(security, models.EditAddressSecurity),
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.address_account,
+                request.address_account if request is not None else None,
                 False,
                 True,
                 "json",
                 Optional[models.AddressAccount],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1429,9 +1484,11 @@ class Account(BaseSDK):
                 operation_id="editAddress",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(security, models.Security),
+                tags=["Account"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1503,11 +1560,15 @@ class Account(BaseSDK):
         :param door_code: The building door code or community gate code.
         :param name: The given and surname of the person associated with this address.
         :param phone: A phone number following E164 standards, in its globalized format, i.e. prepended with a plus sign.
-        :param region_code: The ISO 3166-2 region code associated with this address.   - * If specified, value must be valid for the `country`.   - * If null, value is inferred from the `region`.
+        :param region_code: The ISO 3166-2 region code associated with this address.
+            - * If specified, value must be valid for the `country`.
+            - * If null, value is inferred from the `region`.
+
         :param street_address2: Any apartment, floor, or unit details.
         :param street_address3: Any additional street address details.
         :param street_address4: Any additional street address details.
-        :param metadata: A key-value pair object that allows users to store arbitrary information associated with an object.  For any individual account object, we allow up to 50 keys. Keys can be up to 40 characters long and values can be up to 500 characters long.  Metadata should not contain any sensitive customer information, like PII (Personally Identifiable Information). For more information about metadata, see our [documentation](https://help.bolt.com/developers/references/embedded-metadata/).
+        :param metadata: A key-value pair object that allows users to store arbitrary information associated with an object. For any individual account object, we allow up to 50 keys. Keys can be up to 40 characters long and values can be up to 500 characters long. Metadata should not contain any sensitive customer information, like PII (Personally Identifiable Information). For more information about metadata, see our [documentation](https://help.boltapp.com/developers/references/embedded-metadata/).
+
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1565,12 +1626,13 @@ class Account(BaseSDK):
             http_headers=http_headers,
             security=utils.get_pydantic_model(security, models.EditAddressSecurity),
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.address_account,
+                request.address_account if request is not None else None,
                 False,
                 True,
                 "json",
                 Optional[models.AddressAccount],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1589,9 +1651,11 @@ class Account(BaseSDK):
                 operation_id="editAddress",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(security, models.Security),
+                tags=["Account"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1660,6 +1724,7 @@ class Account(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1676,11 +1741,13 @@ class Account(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="detectAccount",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=None,
+                tags=["Account"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1755,6 +1822,7 @@ class Account(BaseSDK):
             user_agent_header="user-agent",
             accept_header_value="application/json",
             http_headers=http_headers,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1771,11 +1839,13 @@ class Account(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="detectAccount",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=None,
+                tags=["Account"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1819,7 +1889,7 @@ class Account(BaseSDK):
 
         Add a payment method to a shopper's Bolt account Wallet. For security purposes, this request must come from your backend because authentication requires the use of your private key.
 
-        **Note**: Before using this API, the credit card details must be tokenized using Bolt's JavaScript library function, which is documented in [Install the Bolt Tokenizer](https://help.bolt.com/developers/references/bolt-tokenizer).
+        **Note**: Before using this API, the credit card details must be tokenized using Bolt's JavaScript library function, which is documented in [Install the Bolt Tokenizer](https://help.boltapp.com/developers/references/bolt-tokenizer).
 
 
         :param security:
@@ -1865,12 +1935,13 @@ class Account(BaseSDK):
                 security, models.AddPaymentMethodSecurity
             ),
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.request_body,
+                request.request_body if request is not None else None,
                 False,
                 True,
                 "json",
                 Optional[models.AddPaymentMethodRequestBody],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1889,9 +1960,11 @@ class Account(BaseSDK):
                 operation_id="addPaymentMethod",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(security, models.Security),
+                tags=["Account"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -1929,7 +2002,7 @@ class Account(BaseSDK):
 
         Add a payment method to a shopper's Bolt account Wallet. For security purposes, this request must come from your backend because authentication requires the use of your private key.
 
-        **Note**: Before using this API, the credit card details must be tokenized using Bolt's JavaScript library function, which is documented in [Install the Bolt Tokenizer](https://help.bolt.com/developers/references/bolt-tokenizer).
+        **Note**: Before using this API, the credit card details must be tokenized using Bolt's JavaScript library function, which is documented in [Install the Bolt Tokenizer](https://help.boltapp.com/developers/references/bolt-tokenizer).
 
 
         :param security:
@@ -1975,12 +2048,13 @@ class Account(BaseSDK):
                 security, models.AddPaymentMethodSecurity
             ),
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.request_body,
+                request.request_body if request is not None else None,
                 False,
                 True,
                 "json",
                 Optional[models.AddPaymentMethodRequestBody],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1999,9 +2073,11 @@ class Account(BaseSDK):
                 operation_id="addPaymentMethod",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(security, models.Security),
+                tags=["Account"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -2072,6 +2148,7 @@ class Account(BaseSDK):
             security=utils.get_pydantic_model(
                 security, models.DeletePaymentMethodSecurity
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2090,9 +2167,11 @@ class Account(BaseSDK):
                 operation_id="deletePaymentMethod",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(security, models.Security),
+                tags=["Account"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["403", "404", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -2169,6 +2248,7 @@ class Account(BaseSDK):
             security=utils.get_pydantic_model(
                 security, models.DeletePaymentMethodSecurity
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2187,9 +2267,11 @@ class Account(BaseSDK):
                 operation_id="deletePaymentMethod",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(security, models.Security),
+                tags=["Account"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["403", "404", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 

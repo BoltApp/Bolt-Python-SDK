@@ -1,9 +1,8 @@
 # Testing
-(*testing*)
 
 ## Overview
 
-The testing endpoint allows you to test various functionality within Bolt. Create a test credit card to process a test payment in your store. You can also simulate tracking an order’s shipment and programmatically create customer accounts to use as dummy data. See our related guide on [Testing](https://help.bolt.com/developers/production-readiness-guides/test-cards/).
+The testing endpoint allows you to test various functionality within Bolt. Create a test credit card to process a test payment in your store. You can also simulate tracking an order’s shipment and programmatically create customer accounts to use as dummy data. See our related guide on [Testing](https://help.boltapp.com/developers/production-readiness-guides/test-cards/).
 
 
 ### Available Operations
@@ -38,7 +37,7 @@ with Bolt(
             {
                 "city": "New York",
                 "country": "USA",
-                "datetime": parse_datetime("2017-07-21T17:32:28Z"),
+                "datetime_": parse_datetime("2017-07-21T17:32:28Z"),
                 "message": "BILLING INFORMATION RECEIVED",
                 "state": "New York",
                 "status": models.TrackingDetailStatus.IN_TRANSIT,
@@ -68,7 +67,7 @@ with Bolt(
 
 ## create_testing_shopper_account
 
-Create a Bolt shopper account for testing purposes. Available for sandbox use only and the created  account will be recycled after a certain time.
+Create a Bolt shopper account for testing purposes. Available for sandbox use only and the created account will be recycled after a certain time.
 
 ### Example Usage
 

@@ -10,7 +10,7 @@ from typing import Any, Mapping, Optional, Union, cast
 
 
 class Webhooks(BaseSDK):
-    r"""Set up webhooks to notify your backend of events within Bolt. These webhooks can communicate with your OMS or other systems to keep them up to date with Bolt. See our related guide on [Webhooks](https://help.bolt.com/get-started/during-checkout/webhooks/)."""
+    r"""Set up webhooks to notify your backend of events within Bolt. These webhooks can communicate with your OMS or other systems to keep them up to date with Bolt. See our related guide on [Webhooks](https://help.boltapp.com/get-started/during-checkout/webhooks/)."""
 
     def query_webhooks(
         self,
@@ -24,6 +24,8 @@ class Webhooks(BaseSDK):
         r"""Query Webhooks
 
         Find webhook configurations belonging to a merchant division. Results are limited to only show webhooks authorized by the X-API-Key.
+
+        If set, this operation will use `x_api_key` from the global security.
 
         :param division_id: The unique ID associated to the merchant's Bolt Account division; Merchants can have different divisions to suit multiple use cases (storefronts, pay-by-link, phone order processing). You can view and switch between these divisions from the Bolt Merchant Dashboard.
         :param retries: Override the default retry configuration for this method
@@ -58,6 +60,8 @@ class Webhooks(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -74,13 +78,15 @@ class Webhooks(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="queryWebhooks",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Webhooks"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "403", "404", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -113,6 +119,8 @@ class Webhooks(BaseSDK):
         r"""Query Webhooks
 
         Find webhook configurations belonging to a merchant division. Results are limited to only show webhooks authorized by the X-API-Key.
+
+        If set, this operation will use `x_api_key` from the global security.
 
         :param division_id: The unique ID associated to the merchant's Bolt Account division; Merchants can have different divisions to suit multiple use cases (storefronts, pay-by-link, phone order processing). You can view and switch between these divisions from the Bolt Merchant Dashboard.
         :param retries: Override the default retry configuration for this method
@@ -147,6 +155,8 @@ class Webhooks(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -163,13 +173,15 @@ class Webhooks(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="queryWebhooks",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Webhooks"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "403", "404", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -205,6 +217,32 @@ class Webhooks(BaseSDK):
 
         Create a new webhook to receive notifications from Bolt about various events, such as transaction status. Webhooks must have unique configuration.
 
+        **Transaction & account events**:
+        * `pending` - The payment pre-authorization was successful, and the transaction is now pending fraud review.
+        * `failed_payment` - The payment failed pre-authorization.
+        * `payment` - An automatic capture transaction passed authorization and fraud review, and the system captured the funds.
+        * `auth` - A manual capture transaction passed authorization and fraud review, and you can begin the capture process.
+        * `rejected_irreversible` - The transaction failed fraud review, with no appeal option available.
+        * `rejected_reversible` - The transaction was flagged during fraud review; a re-review can be requested.
+        * `capture` - A manual capture was successful.
+        * `credit` - The system successfully processed a refund or credit.
+        * `void` - The system successfully voided the transaction.
+        * `newsletter_subscription` - The customer subscribed to the merchant's newsletter.
+        * `risk_insights` - Information about the transaction's risk is available from the fraud review.
+        * `credit_card_deleted` - A customer removed a saved credit card from their account.
+
+        **Subscription events**:
+        * `subscription_created` - A subscription was created from a successful initial transaction.
+        * `subscription_renewed` - A recurring subscription order was placed successfully and the next order was scheduled.
+        * `subscription_canceled` - A subscription was canceled, by the merchant, by the shopper, or automatically (e.g. once its dunning retry schedule is exhausted). Also sent alongside `subscription_ended` when the subscription's configured final dunning action is cancellation.
+        * `subscription_payment_failed` - A scheduled subscription order's payment attempt failed.
+        * `subscription_paused` - A subscription was paused, by the merchant, by the shopper, or automatically once its dunning retry schedule is exhausted (when the configured final dunning action is pausing).
+        * `subscription_unpaused` - A paused subscription was resumed, by the merchant or by the shopper.
+        * `subscription_ended` - A subscription was permanently ended after its dunning retry schedule was exhausted. Sent alongside `subscription_canceled` for this case.
+
+
+        If set, this operation will use `x_api_key` from the global security.
+
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -241,6 +279,8 @@ class Webhooks(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.CreateWebhookRequest
             ),
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -257,13 +297,15 @@ class Webhooks(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createWebhook",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Webhooks"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "403", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -299,6 +341,32 @@ class Webhooks(BaseSDK):
 
         Create a new webhook to receive notifications from Bolt about various events, such as transaction status. Webhooks must have unique configuration.
 
+        **Transaction & account events**:
+        * `pending` - The payment pre-authorization was successful, and the transaction is now pending fraud review.
+        * `failed_payment` - The payment failed pre-authorization.
+        * `payment` - An automatic capture transaction passed authorization and fraud review, and the system captured the funds.
+        * `auth` - A manual capture transaction passed authorization and fraud review, and you can begin the capture process.
+        * `rejected_irreversible` - The transaction failed fraud review, with no appeal option available.
+        * `rejected_reversible` - The transaction was flagged during fraud review; a re-review can be requested.
+        * `capture` - A manual capture was successful.
+        * `credit` - The system successfully processed a refund or credit.
+        * `void` - The system successfully voided the transaction.
+        * `newsletter_subscription` - The customer subscribed to the merchant's newsletter.
+        * `risk_insights` - Information about the transaction's risk is available from the fraud review.
+        * `credit_card_deleted` - A customer removed a saved credit card from their account.
+
+        **Subscription events**:
+        * `subscription_created` - A subscription was created from a successful initial transaction.
+        * `subscription_renewed` - A recurring subscription order was placed successfully and the next order was scheduled.
+        * `subscription_canceled` - A subscription was canceled, by the merchant, by the shopper, or automatically (e.g. once its dunning retry schedule is exhausted). Also sent alongside `subscription_ended` when the subscription's configured final dunning action is cancellation.
+        * `subscription_payment_failed` - A scheduled subscription order's payment attempt failed.
+        * `subscription_paused` - A subscription was paused, by the merchant, by the shopper, or automatically once its dunning retry schedule is exhausted (when the configured final dunning action is pausing).
+        * `subscription_unpaused` - A paused subscription was resumed, by the merchant or by the shopper.
+        * `subscription_ended` - A subscription was permanently ended after its dunning retry schedule was exhausted. Sent alongside `subscription_canceled` for this case.
+
+
+        If set, this operation will use `x_api_key` from the global security.
+
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -335,6 +403,8 @@ class Webhooks(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.CreateWebhookRequest
             ),
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -351,13 +421,15 @@ class Webhooks(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createWebhook",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Webhooks"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "403", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -391,6 +463,8 @@ class Webhooks(BaseSDK):
 
         Delete a Bolt webhook. Provide an authorized X-API-Key to perform this action.
 
+        If set, this operation will use `x_api_key` from the global security.
+
         :param webhook_id: Webhook ID
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -424,6 +498,8 @@ class Webhooks(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -440,13 +516,15 @@ class Webhooks(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="deleteWebhook",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Webhooks"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "403", "404", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -480,6 +558,8 @@ class Webhooks(BaseSDK):
 
         Delete a Bolt webhook. Provide an authorized X-API-Key to perform this action.
 
+        If set, this operation will use `x_api_key` from the global security.
+
         :param webhook_id: Webhook ID
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -513,6 +593,8 @@ class Webhooks(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -529,13 +611,15 @@ class Webhooks(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="deleteWebhook",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Webhooks"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "403", "404", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -568,6 +652,8 @@ class Webhooks(BaseSDK):
         r"""Get Webhook
 
         Get Webhook information by its Webhook ID. Results only include webhooks authorized by the X-API-Key.
+
+        If set, this operation will use `x_api_key` from the global security.
 
         :param webhook_id: Webhook ID
         :param retries: Override the default retry configuration for this method
@@ -602,6 +688,8 @@ class Webhooks(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -618,13 +706,15 @@ class Webhooks(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getWebhook",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Webhooks"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "403", "404", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -657,6 +747,8 @@ class Webhooks(BaseSDK):
         r"""Get Webhook
 
         Get Webhook information by its Webhook ID. Results only include webhooks authorized by the X-API-Key.
+
+        If set, this operation will use `x_api_key` from the global security.
 
         :param webhook_id: Webhook ID
         :param retries: Override the default retry configuration for this method
@@ -691,6 +783,8 @@ class Webhooks(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -707,13 +801,15 @@ class Webhooks(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getWebhook",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Webhooks"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "403", "404", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 

@@ -1,9 +1,8 @@
 # Configuration
-(*configuration*)
 
 ## Overview
 
-Use this resource to retrieve and set Merchant Callback URLs. Bolt uses these URLs to exchange information with your commerce server. See our related guide [About the Merchant Callback API](https://help.bolt.com/products/checkout/how-to-integrate/merchant-api-new/).   
+Use this resource to retrieve and set Merchant Callback URLs. Bolt uses these URLs to exchange information with your commerce server. See our related guide [About the Merchant Callback API](https://help.boltapp.com/products/checkout/how-to-integrate/merchant-api-new/).   
 
 
 ### Available Operations
@@ -111,7 +110,7 @@ with Bolt(
 
 ## get_merchant_identifiers
 
-This endpoint returns the merchant's public ID and the [publishable key](https://help.bolt.com/developers/tools/api-keys/) related to the merchant division.
+This endpoint returns the merchant's public ID and the [publishable key](https://help.boltapp.com/developers/tools/api-keys/) related to the merchant division.
 
 ### Example Usage
 

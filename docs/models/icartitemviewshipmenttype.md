@@ -1,5 +1,13 @@
 # ICartItemViewShipmentType
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import ICartItemViewShipmentType
+
+value = ICartItemViewShipmentType.UNKNOWN
+```
+
 
 ## Values
 
