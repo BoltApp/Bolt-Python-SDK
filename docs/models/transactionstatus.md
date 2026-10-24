@@ -2,6 +2,14 @@
 
 The transaction's status.
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import TransactionStatus
+
+value = TransactionStatus.IN_PROGRESS
+```
+
 
 ## Values
 

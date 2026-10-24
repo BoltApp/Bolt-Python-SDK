@@ -1,6 +1,14 @@
 # ChargebackReasonCode
 
-Bolt's [standardized reason codes](https://help.bolt.com/merchants/references/policies/disputes/dispute-codes/).
+Bolt's [standardized reason codes](https://help.boltapp.com/merchants/references/policies/disputes/dispute-codes/).
+
+## Example Usage
+
+```python
+from bolt_api_sdk.models import ChargebackReasonCode
+
+value = ChargebackReasonCode.AUTHORIZATION_FAILED
+```
 
 
 ## Values

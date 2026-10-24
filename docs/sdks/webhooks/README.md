@@ -1,9 +1,8 @@
 # Webhooks
-(*webhooks*)
 
 ## Overview
 
-Set up webhooks to notify your backend of events within Bolt. These webhooks can communicate with your OMS or other systems to keep them up to date with Bolt. See our related guide on [Webhooks](https://help.bolt.com/get-started/during-checkout/webhooks/).
+Set up webhooks to notify your backend of events within Bolt. These webhooks can communicate with your OMS or other systems to keep them up to date with Bolt. See our related guide on [Webhooks](https://help.boltapp.com/get-started/during-checkout/webhooks/).
 
 
 ### Available Operations
@@ -59,6 +58,30 @@ with Bolt(
 ## create_webhook
 
 Create a new webhook to receive notifications from Bolt about various events, such as transaction status. Webhooks must have unique configuration.
+
+**Transaction & account events**:
+* `pending` - The payment pre-authorization was successful, and the transaction is now pending fraud review.
+* `failed_payment` - The payment failed pre-authorization.
+* `payment` - An automatic capture transaction passed authorization and fraud review, and the system captured the funds.
+* `auth` - A manual capture transaction passed authorization and fraud review, and you can begin the capture process.
+* `rejected_irreversible` - The transaction failed fraud review, with no appeal option available.
+* `rejected_reversible` - The transaction was flagged during fraud review; a re-review can be requested.
+* `capture` - A manual capture was successful.
+* `credit` - The system successfully processed a refund or credit.
+* `void` - The system successfully voided the transaction.
+* `newsletter_subscription` - The customer subscribed to the merchant's newsletter.
+* `risk_insights` - Information about the transaction's risk is available from the fraud review.
+* `credit_card_deleted` - A customer removed a saved credit card from their account.
+
+**Subscription events**:
+* `subscription_created` - A subscription was created from a successful initial transaction.
+* `subscription_renewed` - A recurring subscription order was placed successfully and the next order was scheduled.
+* `subscription_canceled` - A subscription was canceled, by the merchant, by the shopper, or automatically (e.g. once its dunning retry schedule is exhausted). Also sent alongside `subscription_ended` when the subscription's configured final dunning action is cancellation.
+* `subscription_payment_failed` - A scheduled subscription order's payment attempt failed.
+* `subscription_paused` - A subscription was paused, by the merchant, by the shopper, or automatically once its dunning retry schedule is exhausted (when the configured final dunning action is pausing).
+* `subscription_unpaused` - A paused subscription was resumed, by the merchant or by the shopper.
+* `subscription_ended` - A subscription was permanently ended after its dunning retry schedule was exhausted. Sent alongside `subscription_canceled` for this case.
+
 
 ### Example Usage
 

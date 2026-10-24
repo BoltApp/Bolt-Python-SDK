@@ -1,5 +1,13 @@
 # ManualDisputesStatus
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import ManualDisputesStatus
+
+value = ManualDisputesStatus.PENDING
+```
+
 
 ## Values
 

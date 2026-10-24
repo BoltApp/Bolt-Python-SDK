@@ -1,5 +1,13 @@
 # AddPaymentMethodNetwork
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import AddPaymentMethodNetwork
+
+value = AddPaymentMethodNetwork.VISA
+```
+
 
 ## Values
 

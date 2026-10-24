@@ -10,7 +10,7 @@ from typing import Any, Mapping, Optional, Union, cast
 
 
 class Configuration(BaseSDK):
-    r"""Use this resource to retrieve and set Merchant Callback URLs. Bolt uses these URLs to exchange information with your commerce server. See our related guide [About the Merchant Callback API](https://help.bolt.com/products/checkout/how-to-integrate/merchant-api-new/)."""
+    r"""Use this resource to retrieve and set Merchant Callback URLs. Bolt uses these URLs to exchange information with your commerce server. See our related guide [About the Merchant Callback API](https://help.boltapp.com/products/checkout/how-to-integrate/merchant-api-new/)."""
 
     def get_merchant_callbacks(
         self,
@@ -24,6 +24,8 @@ class Configuration(BaseSDK):
         r"""Get Callback URLs
 
         Retrieves callbacks URLs for a Bolt merchant division.
+
+        If set, this operation will use `x_api_key` from the global security.
 
         :param division_id: The unique ID associated to the merchant's Bolt Account division; Merchants can have different divisions to suit multiple use cases (storefronts, pay-by-link, phone order processing). You can view and switch between these divisions from the Bolt Merchant Dashboard.
         :param retries: Override the default retry configuration for this method
@@ -58,6 +60,8 @@ class Configuration(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -74,13 +78,15 @@ class Configuration(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getMerchantCallbacks",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Configuration"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "403", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -113,6 +119,8 @@ class Configuration(BaseSDK):
         r"""Get Callback URLs
 
         Retrieves callbacks URLs for a Bolt merchant division.
+
+        If set, this operation will use `x_api_key` from the global security.
 
         :param division_id: The unique ID associated to the merchant's Bolt Account division; Merchants can have different divisions to suit multiple use cases (storefronts, pay-by-link, phone order processing). You can view and switch between these divisions from the Bolt Merchant Dashboard.
         :param retries: Override the default retry configuration for this method
@@ -147,6 +155,8 @@ class Configuration(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -163,13 +173,15 @@ class Configuration(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getMerchantCallbacks",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Configuration"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "403", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -205,6 +217,8 @@ class Configuration(BaseSDK):
 
         Configure callbacks URLs for a Bolt merchant division. This will store or override only the callback URLs that are specified in the request. Operations are fully transactional.
 
+        If set, this operation will use `x_api_key` from the global security.
+
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -241,6 +255,8 @@ class Configuration(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, True, "json", Optional[models.MerchantCallbacksInput]
             ),
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -257,13 +273,15 @@ class Configuration(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="setMerchantCallbacks",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Configuration"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "403", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -299,6 +317,8 @@ class Configuration(BaseSDK):
 
         Configure callbacks URLs for a Bolt merchant division. This will store or override only the callback URLs that are specified in the request. Operations are fully transactional.
 
+        If set, this operation will use `x_api_key` from the global security.
+
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -335,6 +355,8 @@ class Configuration(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, True, "json", Optional[models.MerchantCallbacksInput]
             ),
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -351,13 +373,15 @@ class Configuration(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="setMerchantCallbacks",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Configuration"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "403", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -388,7 +412,9 @@ class Configuration(BaseSDK):
     ) -> models.MerchantIdentifiersView:
         r"""Get Merchant Identifiers
 
-        This endpoint returns the merchant's public ID and the [publishable key](https://help.bolt.com/developers/tools/api-keys/) related to the merchant division.
+        This endpoint returns the merchant's public ID and the [publishable key](https://help.boltapp.com/developers/tools/api-keys/) related to the merchant division.
+
+        If set, this operation will use `x_api_key` from the global security.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -417,6 +443,8 @@ class Configuration(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -433,13 +461,15 @@ class Configuration(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getMerchantIdentifiers",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Configuration"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["403", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -470,7 +500,9 @@ class Configuration(BaseSDK):
     ) -> models.MerchantIdentifiersView:
         r"""Get Merchant Identifiers
 
-        This endpoint returns the merchant's public ID and the [publishable key](https://help.bolt.com/developers/tools/api-keys/) related to the merchant division.
+        This endpoint returns the merchant's public ID and the [publishable key](https://help.boltapp.com/developers/tools/api-keys/) related to the merchant division.
+
+        If set, this operation will use `x_api_key` from the global security.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -499,6 +531,8 @@ class Configuration(BaseSDK):
             accept_header_value="application/json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -515,13 +549,15 @@ class Configuration(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="getMerchantIdentifiers",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Configuration"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["403", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 

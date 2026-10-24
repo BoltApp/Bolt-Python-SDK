@@ -1,22 +1,46 @@
 # WebhooksType
 
-[Webhook events](https://help.bolt.com/developers/guides/webhooks/#transaction-hook-types) that trigger a notification to the URL.  **Note**:`newsletter_subscription` is only for merchant use cases.
+[Webhook events](https://help.boltapp.com/developers/guides/webhooks/#transaction-hook-types) that trigger a notification to the URL.  **Note**:`newsletter_subscription` is only for merchant use cases.
 
+Subscription events:
+* `subscription_created` - A subscription was created from a successful initial transaction.
+* `subscription_renewed` - A recurring subscription order was placed successfully and the next order was scheduled.
+* `subscription_canceled` - A subscription was canceled, by the merchant, by the shopper, or automatically (e.g. once its dunning retry schedule is exhausted). Also sent alongside `subscription_ended` when the subscription's configured final dunning action is cancellation.
+* `subscription_payment_failed` - A scheduled subscription order's payment attempt failed.
+* `subscription_paused` - A subscription was paused, by the merchant, by the shopper, or automatically once its dunning retry schedule is exhausted (when the configured final dunning action is pausing).
+* `subscription_unpaused` - A paused subscription was resumed, by the merchant or by the shopper.
+* `subscription_ended` - A subscription was permanently ended after its dunning retry schedule was exhausted. Sent alongside `subscription_canceled` for this case.
+
+
+## Example Usage
+
+```python
+from bolt_api_sdk.models import WebhooksType
+
+value = WebhooksType.PAYMENT
+```
 
 
 ## Values
 
-| Name                      | Value                     |
-| ------------------------- | ------------------------- |
-| `PAYMENT`                 | payment                   |
-| `CREDIT`                  | credit                    |
-| `CAPTURE`                 | capture                   |
-| `VOID`                    | void                      |
-| `AUTH`                    | auth                      |
-| `PENDING`                 | pending                   |
-| `REJECTED_IRREVERSIBLE`   | rejected_irreversible     |
-| `REJECTED_REVERSIBLE`     | rejected_reversible       |
-| `FAILED_PAYMENT`          | failed_payment            |
-| `NEWSLETTER_SUBSCRIPTION` | newsletter_subscription   |
-| `RISK_INSIGHTS`           | risk_insights             |
-| `CREDIT_CARD_DELETED`     | credit_card_deleted       |
+| Name                          | Value                         |
+| ----------------------------- | ----------------------------- |
+| `PAYMENT`                     | payment                       |
+| `CREDIT`                      | credit                        |
+| `CAPTURE`                     | capture                       |
+| `VOID`                        | void                          |
+| `AUTH`                        | auth                          |
+| `PENDING`                     | pending                       |
+| `REJECTED_IRREVERSIBLE`       | rejected_irreversible         |
+| `REJECTED_REVERSIBLE`         | rejected_reversible           |
+| `FAILED_PAYMENT`              | failed_payment                |
+| `NEWSLETTER_SUBSCRIPTION`     | newsletter_subscription       |
+| `RISK_INSIGHTS`               | risk_insights                 |
+| `CREDIT_CARD_DELETED`         | credit_card_deleted           |
+| `SUBSCRIPTION_CREATED`        | subscription_created          |
+| `SUBSCRIPTION_RENEWED`        | subscription_renewed          |
+| `SUBSCRIPTION_CANCELED`       | subscription_canceled         |
+| `SUBSCRIPTION_PAYMENT_FAILED` | subscription_payment_failed   |
+| `SUBSCRIPTION_PAUSED`         | subscription_paused           |
+| `SUBSCRIPTION_UNPAUSED`       | subscription_unpaused         |
+| `SUBSCRIPTION_ENDED`          | subscription_ended            |

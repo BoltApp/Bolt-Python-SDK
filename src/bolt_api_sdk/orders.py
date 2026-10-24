@@ -10,7 +10,7 @@ from typing import Any, Mapping, Optional, Union, cast
 
 
 class Orders(BaseSDK):
-    r"""Use the Orders API to interact with the customer's cart throughout the checkout process. Pre-checkout, perform actions such as validating inventory, verifying discounts, and calculating taxes. Post-checkout, share shipping information so your customer can track their order. You'll interact with the [Merchant API](https://help.bolt.com/api-merchant/) to keep the servers in sync with any changes the customer makes to their cart. See our related guide [Create a Bolt Order Token](https://help.bolt.com/products/checkout/how-to-integrate/create-bolt-order-token-new/)."""
+    r"""Use the Orders API to interact with the customer's cart throughout the checkout process. Pre-checkout, perform actions such as validating inventory, verifying discounts, and calculating taxes. Post-checkout, share shipping information so your customer can track their order. You'll interact with the [Merchant API](https://help.boltapp.com/api-merchant/) to keep the servers in sync with any changes the customer makes to their cart. See our related guide [Create a Bolt Order Token](https://help.boltapp.com/products/checkout/how-to-integrate/create-bolt-order-token-new/)."""
 
     def create_order_token(
         self,
@@ -26,6 +26,8 @@ class Orders(BaseSDK):
         r"""Create Order Token
 
         Make a request to this endpoint to create a Bolt order, generate a Bolt order token, and initiate the checkout process. A Bolt order token is required for Bolt orders; see Non-Bolt orders for alternative use cases.
+
+        If set, this operation will use `x_api_key` from the global security.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -63,6 +65,8 @@ class Orders(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, True, "json", Optional[models.OrderCreate]
             ),
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -79,13 +83,15 @@ class Orders(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createOrderToken",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Orders"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "403", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -120,6 +126,8 @@ class Orders(BaseSDK):
         r"""Create Order Token
 
         Make a request to this endpoint to create a Bolt order, generate a Bolt order token, and initiate the checkout process. A Bolt order token is required for Bolt orders; see Non-Bolt orders for alternative use cases.
+
+        If set, this operation will use `x_api_key` from the global security.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -157,6 +165,8 @@ class Orders(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, True, "json", Optional[models.OrderCreate]
             ),
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -173,13 +183,15 @@ class Orders(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="createOrderToken",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Orders"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "403", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -216,6 +228,8 @@ class Orders(BaseSDK):
         Send the carrier and order tracking number to Bolt (after a label has been printed). Bolt then uses EasyPost to forward ongoing tracking event updates to the shopper. This request must include **all** items included in the shipment; their references must also match those found in the original cart generation.
 
 
+        If set, this operation will use `x_api_key` from the global security.
+
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -252,6 +266,8 @@ class Orders(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, True, "json", Optional[models.OrderTrackRequestBody]
             ),
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -268,13 +284,15 @@ class Orders(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="trackOrder",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Orders"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -310,6 +328,8 @@ class Orders(BaseSDK):
 
         Send the carrier and order tracking number to Bolt (after a label has been printed). Bolt then uses EasyPost to forward ongoing tracking event updates to the shopper. This request must include **all** items included in the shipment; their references must also match those found in the original cart generation.
 
+
+        If set, this operation will use `x_api_key` from the global security.
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -347,6 +367,8 @@ class Orders(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, True, "json", Optional[models.OrderTrackRequestBody]
             ),
+            allow_empty_value=None,
+            allowed_fields=["x_api_key"],
             timeout_ms=timeout_ms,
         )
 
@@ -363,13 +385,15 @@ class Orders(BaseSDK):
                 config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="trackOrder",
-                oauth2_scopes=[],
+                oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Orders"],
+                extensions=None,
             ),
             request=req,
-            error_status_codes=["400", "422", "4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
