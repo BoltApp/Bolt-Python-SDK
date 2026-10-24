@@ -6,6 +6,14 @@ The merchant's status:
   * `3` - Offboarding
 
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import MerchantStatus
+
+value = MerchantStatus.ONE
+```
+
 
 ## Values
 

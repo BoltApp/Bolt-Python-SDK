@@ -14,12 +14,11 @@ from typing import List, Optional
 
 class ErrorsBoltAPIResponseData(BaseModel):
     errors: Optional[List[models_error_bolt_api.ErrorBoltAPI]] = None
-
     result: Optional[models_request_result.RequestResult] = None
     r"""Custom-defined Bolt result object."""
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class ErrorsBoltAPIResponse(BoltError):
     data: ErrorsBoltAPIResponseData = field(hash=False)
 

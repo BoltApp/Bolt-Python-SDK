@@ -10,11 +10,10 @@ from typing import Optional
 
 class ErrorsOauthServerResponseData(BaseModel):
     error: Optional[str] = None
-
     error_description: Optional[str] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class ErrorsOauthServerResponse(BoltError):
     r"""Invalid request to OAuth Token."""
 

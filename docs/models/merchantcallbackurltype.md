@@ -2,6 +2,14 @@
 
 Bolt merchant division callback URL type
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import MerchantCallbackURLType
+
+value = MerchantCallbackURLType.OAUTH_REDIRECT
+```
+
 
 ## Values
 
