@@ -5,8 +5,9 @@ from .merchant_division_logo_view import (
     MerchantDivisionLogoView,
     MerchantDivisionLogoViewTypedDict,
 )
-from bolt_api_sdk.types import BaseModel
+from bolt_api_sdk.types import BaseModel, UNSET_SENTINEL
 from enum import Enum
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -139,3 +140,60 @@ class MerchantDivisionSummaryView(BaseModel):
 
     merchant_password_login_url: Optional[str] = None
     r"""(Optional) Link shoppers can use to log into a merchant store via the Bolt SSO modal."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "account_page_url",
+                "api_base_domain_url",
+                "base_domain_url",
+                "confirmation_redirect_url",
+                "create_order_url",
+                "debug_url",
+                "description",
+                "display_name",
+                "get_account_url",
+                "shopper_custom_fields_updated_url",
+                "hook_type",
+                "hook_url",
+                "id",
+                "is_universal_merchant_api",
+                "is_webhooks_v2",
+                "logo",
+                "logo_dashboard",
+                "merchant_id",
+                "mobile_app_domain_url",
+                "oauth_logout_url",
+                "oauth_redirect_url",
+                "platform",
+                "plugin_config_url",
+                "privacy_policy_url",
+                "product_info_url",
+                "public_id",
+                "remote_apiurl",
+                "shipping_and_tax_url",
+                "shipping_url",
+                "status",
+                "tax_url",
+                "terms_of_service_url",
+                "universal_merchant_api_url",
+                "update_cart_url",
+                "use_async_refunds_amazon_pay",
+                "use_async_refunds_paypal",
+                "validate_additional_account_data_url",
+                "merchant_password_login_url",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

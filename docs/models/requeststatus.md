@@ -1,5 +1,13 @@
 # RequestStatus
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import RequestStatus
+
+value = RequestStatus.REVIEWED
+```
+
 
 ## Values
 

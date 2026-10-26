@@ -1,5 +1,13 @@
 # CartDiscountDiscountCategory
 
+## Example Usage
+
+```python
+from bolt_api_sdk.models import CartDiscountDiscountCategory
+
+value = CartDiscountDiscountCategory.COUPON
+```
+
 
 ## Values
 
@@ -14,4 +22,5 @@
 | `MEMBERSHIP_GIFTCARD`   | membership_giftcard     |
 | `SUBSCRIPTION_DISCOUNT` | subscription_discount   |
 | `REWARDS_DISCOUNT`      | rewards_discount        |
+| `SHIPPING_DISCOUNT`     | shipping_discount       |
 | `UNKNOWN`               | unknown                 |

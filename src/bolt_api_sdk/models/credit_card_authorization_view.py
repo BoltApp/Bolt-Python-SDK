@@ -3,8 +3,9 @@
 from __future__ import annotations
 from .credit_card_authorization_reason import CreditCardAuthorizationReason
 from .credit_card_authorization_status import CreditCardAuthorizationStatus
-from bolt_api_sdk.types import BaseModel
+from bolt_api_sdk.types import BaseModel, UNSET_SENTINEL
 from enum import Enum
+from pydantic import model_serializer
 from typing import Dict, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -154,3 +155,30 @@ class CreditCardAuthorizationView(BaseModel):
     * `3` - error
 
     """
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "auth",
+                "avs_response",
+                "cvv_response",
+                "merchant_event_id",
+                "metadata",
+                "processor",
+                "reason",
+                "status",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

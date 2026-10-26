@@ -11,11 +11,10 @@ from typing import List, Optional
 
 class UnprocessableEntityErrorData(BaseModel):
     errors: Optional[List[models_capturetransactionop.Error]] = None
-
     result: Optional[models_capturetransactionop.Result] = None
 
 
-@dataclass(frozen=True)
+@dataclass(unsafe_hash=True)
 class UnprocessableEntityError(BoltError):
     r"""Unprocessable Entity"""
 
